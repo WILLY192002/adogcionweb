@@ -1,0 +1,164 @@
+*{
+  margin: 0;
+  padding: 0;
+  outline: 0;
+}
+
+body{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #FFF;
+}
+
+.container, .log_option{
+  width: 50%;
+  background-color: #f1fcfb;
+  border-radius: 7px;
+  text-align: center;
+  padding: 5vh 5vh  0 5vh;
+  border: solid;
+  border-color: #48d1cc;
+  border-width: 1px;
+}
+
+.cont_form form .contColum {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.cont_form form .contColum .form-floating{
+  flex-basis: calc(45% - 10px); 
+  margin-bottom: 20px;
+}
+
+.mostarContrasenia {
+  display: flex;
+  justify-content: left;
+  padding: 10px 0;
+}
+
+.cont_form form .contColum .form-floating .mostarContrasenia input{
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.container header{
+  font-family: 'Jua', sans-serif;
+  color: #062b2d;
+  font-size: 25px;
+  font-weight: 400;
+  margin: 0 0 30px 0;
+}
+
+.container .cont_form{
+  width: 100%;
+  overflow: hidden;
+}
+
+.cont_form form{
+  display: flex;
+  width: 300%;
+}
+
+.cont_form form .pagina{
+  width: 33%;
+  padding: 5px;
+  transition: margin-left 0.3s ease-in-out;
+}
+
+.cont_form form .pagina .titulo{
+  text-align: left;
+  font-size: larger;
+  font-family: 'Jua', sans-serif;
+  padding-left: 20px;
+  color: #062b2d;
+}
+
+
+.cont_form form .pagina .btns{
+display: flex;
+}
+
+.cont_form form .pagina .btns button{
+  width: 100%;
+  height: calc(100% + 5px);
+  margin: 5px;
+  font-size: 17px;
+}
+
+.btn-personalized {
+  background-color: #1cb0ad; 
+  color: #FFF; 
+  font-family: 'Jua', sans-serif;
+  font-size: medium;
+}
+
+.btn-personalized:hover {
+  background-color: #138e8e; 
+  color: #FFF;
+}
+
+.href-personalized {
+  color:#147071;
+}
+
+.container .progress_bar{
+  display: flex;
+  margin: 40px 0; 
+  
+}
+
+.container .progress_bar .step{
+  text-align: center;
+  width: 100%;
+  
+}
+
+.progress_bar .step{
+  font-family: 'Jua', sans-serif;
+  font-size: 17px;
+  font-weight: 300;
+  color: black;
+  margin-bottom: 8px;
+  position: relative;
+}
+
+.progress_bar .step .num {
+  position: relative;
+  width: 25px;
+  height: 25px; 
+  border: 2px solid #000;
+  border-radius: 50%;
+  display: inline-block;
+  font-weight: 300;
+  font-size: 17px;
+}
+
+.progress_bar .step .num.activate{
+  border-color: #9df898;
+  background-color: #9df898;
+}
+
+.log_option{
+  margin-top: 30px;
+  text-align: center;
+  border-color: #48d1cc;
+}
+
+.log_option h3{
+  font-family: 'Jua', sans-serif;
+  font-size: large;
+}
+
+
+input:invalid {
+  border: 2px dashed #ba1a1a;
+}
+
+input:valid {
+  border: 2px solid #CBCBCB;
+}
