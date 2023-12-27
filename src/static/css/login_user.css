@@ -1,0 +1,85 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #FFF;
+}
+
+.form-msg{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-msg h1{
+  font-family: 'Jua', sans-serif;
+  color: #062b2d;
+}
+
+.form-signin, .reg_option {
+  width: 100%;
+  max-width: 330px;
+  padding: 1rem;
+  margin: auto;
+  border-radius: 5%;
+  border: solid;
+  border-width: 1px;
+  background-color: #f1fcfb;
+  border-color: #48d1cc;
+  color: #062b2d;
+}
+
+.reg_option{
+  margin-top: 30px;
+  text-align: center;
+}
+
+.reg_option h3{
+  font-family: 'Jua', sans-serif;
+  font-size: medium;
+}
+
+.content {
+  width: 100%;
+  max-width: 330px; 
+  padding: 1rem;
+  margin: auto;
+}
+
+.form-signin, .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.btn-personalized {
+  background-color: #1cb0ad; 
+  color: #FFF; 
+  font-family: 'Jua', sans-serif;
+  font-size: medium;
+}
+
+.btn-personalized:hover {
+  background-color: #138e8e; 
+  color: #FFF;
+}
+
+.href-personalized {
+  color:#147071;
+}
