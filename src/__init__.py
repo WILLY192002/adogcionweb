@@ -9,4 +9,7 @@ app = Flask(__name__)
 def init_app(config):
     # Configuration
     app.config.from_object(config)
+
+    app.register_blueprint(RegisterAdoptionCenter.main, url_prefix='/register/adoption_center/')
+    app.register_blueprint(LoginUser.main, url_prefix='/login')
     return app
