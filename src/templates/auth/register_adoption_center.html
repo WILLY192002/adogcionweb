@@ -1,0 +1,190 @@
+{% extends './base.html' %}
+
+{% block title %}Registro de usuario{% endblock %}
+
+{% block customCSS%}
+<link rel="stylesheet" href="{{url_for('static', filename = 'css/register_adoption_center.css')}}">
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+  <header>REGISTRO DE USUARIOS</header>
+  <div class="progress_bar">
+    <div class="step">
+      <p>Datos Personales</p>
+      <div class="num">
+        <span>1</span>
+      </div>
+    </div>
+    <div class="step">
+      <p>Datos albergue</p>
+      <div class="num">
+        <span>2</span>
+      </div>
+    </div>
+    <div class="step">
+      <p>Datos de registro</p>
+      <div class="num">
+        <span>3</span>
+      </div>
+    </div>
+  </div>
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      {% for message in messages %}
+      <div class = "alert alert-primary alert-dismissible" role = "alert">
+        <strong>{{ message }}</strong>
+        <button class="btn-close" data-bs-dismiss="alert" aria-label = "Close"></button>
+      </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith%}
+
+  <div class="cont_form">
+    <form action="/register/adoption_center/" method="POST" id="formRegister" class="formRegister">
+      <!--PAGINA 1-->
+      <div class="pagina pag1">
+        <div class="titulo">Informacion personal</div>
+        <div class="contColum">
+          <div class="form-floating campo">
+            <input type="text" class="form-control needs-validation" name="first_name" placeholder="nombre1" id="nombre1" required>
+            <label for="floatingInput" id="jlNombre1">Primer nombre*</label>
+
+          </div>
+          <div class="form-floating campo">
+            <input type="text" class="form-control" name="middle_name" placeholder="nombre2" id="nombre2">
+            <label for="floatingInput" id="jlNombre2">Segundo nombre</label>
+          </div>
+          <div class="form-floating campo">
+            <input type="text" class="form-control" name="first_surname" placeholder="apellido1" id="apellido1" required>
+            <label for="floatingInput" id="jlApellido1">Primer apellido*</label>
+          </div>
+          <div class="form-floating campo">
+            <input type="text" class="form-control" name="second_lastname" placeholder="apellido2" id="apellido2">
+            <label for="floatingInput" id="jlApellido2">Segundo apellido</label>
+          </div>
+          <div class="form-floating campo">
+            <select class="form-select form" name="identification_type" id="tipoDoc">
+              <option disabled value="0">Seleccione tipo de documento*</option>
+              <option value="CEDULA DE CIUDADANIA">Cedula de ciudadania</option>
+            </select>
+          </div>
+          <div class="form-floating campo">
+            <input type="number" class="form-control" name="identification_number" placeholder="Gustavo" id="numeroDoc" required>
+            <label for="floatingInput" id="jlNumDoc">Numero de documento*</label>
+          </div>
+          <div class="form-floating campo">
+            <input type="number" class="form-control" name="contact" placeholder="Gustavo" id="telefono">
+            <label for="floatingInput" id="jlContactoP">Telefono de contacto</label>
+          </div>
+          
+          <div class="form-floating campo">
+            <input type="text" class="form-control" name="department" placeholder="Nombre1" id="departamento">
+            <label for="floatingInput" id="jlDepartamento">Departamento</label>
+          </div>
+          <div class="form-floating campo">
+            <input type="text" class="form-control" name="city" placeholder="Nombre1" id="ciudad">
+            <label for="floatingInput" id="jlCiudad">Ciudad</label>
+          </div>
+        </div>
+
+
+
+
+        <div class="btns ">
+          <button class="btn btn-personalized w-100 py-2 sigPag2">Siguiente</button>
+        </div>
+      </div>
+
+      <!--PAGINA 2-->
+      <div class="pagina">
+        <div class="titulo">Informacion del albergue</div>
+
+        <div class="contColum">
+          <div class="form-floating campo">
+            <input type="text" class="form-control" name="adoptionCenter_name" placeholder="Nombre1" id="nombreAlb" required>
+            <label for="floatingInput">Nombre albergue / fundación*</label>
+          </div>
+          <div class="form-floating campo">
+            <input type="number" class="form-control" name="adoptionCenter_nit">
+            <label for="floatingInput">N.I.T</label>
+          </div>
+          <div class="form-floating campo">
+            <input type="number" class="form-control" name="adoptionCenter_contact" placeholder="Gustavo" id="contactoAlb">
+            <label for="floatingInput">Numero de contacto*</label>
+          </div>
+          <!-- <div class="form-floating campo">
+            <input type="text" class="form-control" name="direccionAlb" placeholder="Nombre1" id="direccionAlb">
+            <label for="floatingInput">Direccion</label>
+          </div> -->
+          <div class="form-floating campo">
+            <input type="text" class="form-control" name="adoptionCenter_department" placeholder="Nombre1" id="departamentoAlb">
+            <label for="floatingInput">Departamento</label>
+          </div>
+          <div class="form-floating campo">
+            <input type="text" class="form-control" name="adoptionCenter_city" placeholder="Nombre1" id="ciudadAlb">
+            <label for="floatingInput">Ciudad</label>
+          </div>
+
+        </div>
+        <!-- <div class = "MediosPago">
+          <div class="titulo">Medios de ayuda</div>
+        </div> -->
+        <div class="btns">
+          <button class="btn btn-personalized w-100 py-2 antPag1">Volver</button>
+          <button class="btn btn-personalized w-100 py-2 sigPag3">Siguiente</button>
+        </div>
+
+      </div>
+
+      <!--PAGINA 3-->
+      <div class="pagina" >
+        <div class=" titulo">Creditos del albergue</div>
+        <div class="contColum" >
+          <div class="form-floating campo">
+            <input type="email" class="form-control" name="access_email" placeholder="Nombre1" id="CorreoAlb" required>
+            <label for="floatingInput">Correo eletronico*</label>
+          </div>
+          <div class="form-floating campo">
+            <input type="email" class="form-control" name="confirmCorreo" placeholder="Nombre1" id="correoConf" required>
+            <label for="floatingInput">Confirme correo eletronico*</label>
+          </div>
+          <div class="form-floating campo">
+            <input type="password" class="form-control" name="access_password" placeholder="Nombre1" required
+              id="contrasenaAlb" value="123Lapopo">
+            <label for="floatingInput">Escriba una contraseña*</label>
+            <div class="mostarContrasenia">
+              <input class="form-check-input" type="checkbox"  id="flexCheckDefault">
+              <label class="form-check-label" for="flexCheckDefault">
+                Mostrar contraseña
+              </label>
+            </div>
+          </div>
+          <div class="form-floating campo">
+            <input type="password" class="form-control" name="ConfirmContraseña" placeholder="Nombre1" id="contraConf" required value="123Lapopo">
+            <label for="floatingInput">Confirme contraseña*</label>
+          </div>
+        </div>
+        <div class="btns">
+          <button class="btn btn-personalized w-100 py-2 antPag2">Volver</button>
+          <button class="btn btn-personalized w-100 py-2 finalizar">Enviar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<div class = "log_option">
+  <h3>¿Ya tienes cuenta? 
+    <a href="/login" class="href-personalized">
+      <strong>Inicia sesion aqui</strong></h3>
+    </a>
+  <h3>O puedes volver al<a href="/home" class="href-personalized"><strong> inicio</strong></a></h3>
+</div>
+
+{% endblock %}
+{% block customJS%}
+<script src="/static/js/register_adoption_center.js"></script>
+{% endblock %}
