@@ -45,13 +45,13 @@ def loginUser():
         id_natural_person = UsertypeService.getUserTypeByName("UT-NATURAL_PERSON").id
         if new_access.user_type_id == id_adoption_center:
           login_user(AdoptioncenterService.getAdoptionCenterByAccessId(new_access.id))
-          
+          return redirect(url_for('home_adoption_center.homeAdoptionCenter'))
         elif new_access.user_type_id == id_natural_person:
           login_user(NaturalpersonService.getNaturalPersonByAccessId(new_access.id))
         else:
           flash("Ha ocurrido un error al iniciar sesion, vuelva a intentarlo mas tarde...")
           return redirect(request.referrer)
-        return redirect(url_for('home_adoption_center.homeAdoptionCenter'))
+        
       
     else:
       flash("Error en la contraseña o el usuario")
