@@ -12,6 +12,8 @@ from src.services.AdoptioncenterService import AdoptioncenterService
 from src.services.AccessService import AccessService
 from src.services.UsertypeService import UsertypeService
 
+
+
 main = Blueprint('register_adoption_center',__name__)
 
 @main.route('/', methods = ['GET', 'POST'])
@@ -80,5 +82,6 @@ def registerAdoptionCenter():
     return 'XD'
 
   else:
+
     return render_template('auth/register_adoption_center.html')
 

@@ -1,4 +1,6 @@
-class AdoptionCenter:
+from flask_login import UserMixin
+
+class AdoptionCenter(UserMixin):
     def __init__(self, id, person_id, access_id, photo, name, description, nit, contact, address, city, department):
         self.id = id
         self.person_id = person_id

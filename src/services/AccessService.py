@@ -44,6 +44,22 @@ class AccessService():
       raise Exception(message)
   
   @classmethod
+  def getAccessById(self, id):
+    try:
+      conexion = get_connection()
+      cursor = conexion.cursor()
+      sql = f"SELECT * FROM access WHERE id = {id}"
+      cursor.execute(sql)
+      row = cursor.fetchone()
+      if row != None:
+        return Access(row[0],row[1],None,row[3],row[4])
+      else:
+        return False
+    except Exception as ex:
+      message = f"An error occurred while consulting an access {ex}"
+      raise Exception(message)
+  
+  @classmethod
   def verifyUser(self, access):
     try:
       conexion = get_connection()

@@ -1,4 +1,5 @@
 from src.database.mysql_db import get_connection
+from src.models.Adoptioncenter import AdoptionCenter
 class AdoptioncenterService():
   @classmethod
   def addNewAdoptionCenter(self, Adoptioncenter):
@@ -17,4 +18,20 @@ class AdoptioncenterService():
       return "A new adoption center has been successfully added"
     except Exception as ex:
       message = f"Error when adding a new adoption center {ex}"
+      raise Exception(message)
+    
+  @classmethod
+  def getAdoptionCenterByAccessId(self, access_id):
+    try:
+      conexion = get_connection()
+      cursor = conexion.cursor()
+      sql = f"SELECT * FROM adoptioncenter WHERE access_id = {access_id}"
+      cursor.execute(sql)
+      row = cursor.fetchone()
+      if row != None:
+        return AdoptionCenter(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8],row[9],row[10])
+      else:
+        return False
+    except Exception as ex:
+      message = f"An error occurred while consulting an Adoption Center by Access {ex}"
       raise Exception(message)
