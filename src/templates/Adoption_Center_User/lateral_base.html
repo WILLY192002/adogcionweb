@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}{% endblock %}</title>
+  <link rel="stylesheet" href={{url_for('static', filename='css/User_Adoption_Center/lateral_base.css' )}} />
+
+  <!--Bootstrap-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+  <!-- Boxicons CSS -->
+  <link flex href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+
+  {% block customCSS%}
+  {% endblock %}
+</head>
+
+<body>
+  <nav class="sidebar locked">
+    <div class="logo_items flex">
+      <span class="app_name">ADOGCION</span>
+    </div>
+
+    <div class="menu_container">
+      <div class="menu_items">
+        <ul class="menu_item">
+          {% if current_user.is_authenticated %}
+          <li class="item">
+            <a href="{{ url_for('perfil', nombre = current_user.nombre, id = current_user.get_id())}}"
+              class="link flex">
+              <i class="bx bxs-user"></i>
+              <span>Perfil</span>
+            </a>
+          </li>
+          <li class="item">
+            <a href="/home" class="link flex">
+              <i class="bx bxs-home-heart"></i>
+              <span>Inicio</span>
+            </a>
+          </li>
+          <li class="item">
+            <a href="/mis_animales" class="link flex">
+              <i class="bx bxs-dog"></i>
+              <span>Mis animales</span>
+            </a>
+          </li>
+          <li class="item">
+            <a href="{{ url_for('publicar', nombre = current_user.nombre, id = current_user.get_id())}}"
+              class="link flex">
+              <i class="bx bxs-cloud-upload"></i>
+              <span>Publicar</span>
+            </a>
+          </li>
+          <li class="item">
+            <a href="{{url_for('logout')}}" class="link flex">
+              <i class="bx bxs-log-out"></i>
+              <span>Cerrar Sesión</span>
+            </a>
+          </li>
+          {% else %}
+          <li class="item">
+            <a href="/login" class="link flex">
+              <i class="bx bx-user"></i>
+              <span>Inicia Sesión</span>
+            </a>
+          </li>
+          <li class="item">
+            <a href="/register" class="link flex">
+              <i class="bx bxs-pencil"></i>
+              <span>Registrate</span>
+            </a>
+          </li>
+          <li class="item">
+            <a href="/home" class="link flex">
+              <i class="bx bxs-home-heart"></i>
+              <span>Inicio</span>
+            </a>
+          </li>
+          <li class="item">
+            <a href="#" class="link flex" data-bs-toggle="modal" data-bs-target="#ModalRequest">
+              <i class="bx bxs-cloud-upload"></i>
+              <span>Publicar</span>
+            </a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+  {% block body %}
+  {% endblock %}
+
+  <form action='/home' method="POST" id="createPublication">
+    <!--Primer Modal, solicitud información-->
+    <div class="modal-lg modal" id="ModalRequest" tabindex="-1" aria-labelledby="exampleModalCenterTitle"
+      style="display: none;" aria-modal="true" role="dialog">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalCenterTitle">¿Quién eres?</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="contenedor-pub-comunidad text-center">
+              <div class="row row-cols-2">
+                <input type="hidden" name="form_id" value="infoRequest"><!--IDENTIFICADOR FORM-->
+                <div class="col col-md-6">
+                  <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Primer Nombre*" aria-label="PrimerNombre"
+                      name="primerNombre">
+                  </div>
+                </div>
+                <div class="col col-md-6">
+                  <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Segundo Nombre" aria-label="SegundoNombre"
+                      name="segundoNombre">
+                  </div>
+                </div>
+                <div class="col col-md-6">
+                  <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Primer Apellido*" aria-label="PrimerApellido"
+                      name="primerApellido">
+                  </div>
+                </div>
+                <div class="col col-md-6">
+                  <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Segundo Apellido" aria-label="SegundoApellido"
+                      name="segundoApellido">
+                  </div>
+                </div>
+                <div class="col col-md-6">
+                  <div class="input-group mb-3">
+                    <select class="form-select" aria-label="Tipo de Documento" name="tipoDocumento">
+                      <option selected value="">Tipo de Documento</option>
+                      <option value="CEDULA DE CIUDADANIA">Cedula de Ciudadania</option>
+                      <option value="CEDULA EXTRANJERIA">Cedula Extranjeria</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col col-md-6">
+                  <div class="input-group mb-3">
+                    <input type="number" class="form-control" placeholder="Número Documento*"
+                      aria-label="numeroDocumento" name="numeroDocumento">
+                  </div>
+                </div>
+                <div class="col col-md-6">
+                  <div class="input-group mb-3">
+                    <input type="number" class="form-control" placeholder="Teléfono" aria-label="telefono"
+                      name="telefono">
+                  </div>
+                </div>
+                <div class="col col-md-6">
+                  <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Departamento" aria-label="departamento"
+                      name="departamento">
+                  </div>
+                </div>
+                <div class="col col-md-6">
+                  <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Ciudad" aria-label="ciudad" name="ciudad">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" id="nextButton" class="btn btn-primary" data-bs-toggle="modal"
+              data-bs-target="#ModalCreate">Siguiente</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Modal Creación Publicación-->
+    <div class="modal-lg modal" id="ModalCreate" tabindex="-1" aria-labelledby="exampleModalCenterTitle"
+      style="display: none;" aria-modal="true" role="dialog">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalCenterTitle">Crear Publicación</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="contenedor-pub-comunidad text-center">
+              <div class="col mb-3">
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" placeholder="Titulo / Asunto*" aria-label="TituloPublicacion"
+                    name="TituloPublicacion">
+                </div>
+              </div>
+              <div class="input-group mb-3">
+                <textarea id="textPublicacion" class="form-control" aria-label="Publicación" name="publicacion"
+                  placeholder="Escribe algo..."></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <div class="contenedor-pub-comunidad">
+              <div class="row justify-content-between">
+                <div class="col-8">
+                  <button type="button" class="btn btn-secondary" id="uploadButton">
+                    <i class="bx bxs-image"></i>
+                  </button>
+                  <input type="file" id="fileInput" style="display: none;">
+                  <input type="hidden" id="hiddenFile" name="hiddenFile"><!--URL IMAGEN-->
+
+                </div>
+                <div class="col-2">
+                  <button id="submitButton" type="submit" class="btn btn-primary" disabled>Publicar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  {% block modal %}
+  {% endblock %}
+
+
+
+
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/static/js/User_Adoption_Center/lateral_base.js"></script>
+  {% block customJS%}
+  {% endblock %}
+
+</body>
+
+
+</html>
