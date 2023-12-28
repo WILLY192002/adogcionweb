@@ -1,4 +1,5 @@
-class Access:
+from flask_login import UserMixin
+class Access(UserMixin):
     def __init__(self, id, email, password, user_type_id, is_activate):
         self.id = id
         self.email = email

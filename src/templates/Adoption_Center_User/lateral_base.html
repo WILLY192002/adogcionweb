@@ -34,52 +34,52 @@
         <ul class="menu_item">
           {% if current_user.is_authenticated %}
           <li class="item">
-            <a href="{{ url_for('perfil', nombre = current_user.nombre, id = current_user.get_id())}}"
+            <a href="#"
               class="link flex">
               <i class="bx bxs-user"></i>
               <span>Perfil</span>
             </a>
           </li>
           <li class="item">
-            <a href="/home" class="link flex">
+            <a href="#" class="link flex">
               <i class="bx bxs-home-heart"></i>
               <span>Inicio</span>
             </a>
           </li>
           <li class="item">
-            <a href="/mis_animales" class="link flex">
+            <a href="#" class="link flex">
               <i class="bx bxs-dog"></i>
               <span>Mis animales</span>
             </a>
           </li>
           <li class="item">
-            <a href="{{ url_for('publicar', nombre = current_user.nombre, id = current_user.get_id())}}"
+            <a href="#"
               class="link flex">
               <i class="bx bxs-cloud-upload"></i>
               <span>Publicar</span>
             </a>
           </li>
           <li class="item">
-            <a href="{{url_for('logout')}}" class="link flex">
+            <a href="/logout" class="link flex">
               <i class="bx bxs-log-out"></i>
               <span>Cerrar Sesión</span>
             </a>
           </li>
           {% else %}
           <li class="item">
-            <a href="/login" class="link flex">
+            <a href="#" class="link flex">
               <i class="bx bx-user"></i>
               <span>Inicia Sesión</span>
             </a>
           </li>
           <li class="item">
-            <a href="/register" class="link flex">
+            <a href="#" class="link flex">
               <i class="bx bxs-pencil"></i>
               <span>Registrate</span>
             </a>
           </li>
           <li class="item">
-            <a href="/home" class="link flex">
+            <a href="#" class="link flex">
               <i class="bx bxs-home-heart"></i>
               <span>Inicio</span>
             </a>
