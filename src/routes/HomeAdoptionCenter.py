@@ -9,5 +9,7 @@ def homeAdoptionCenter():
   if request.method == 'POST':
     return 'FALTA PONER LOS POST'
   else:
-    print("ID Actual:", current_user.get_id())
-    return render_template('Adoption_Center_User/post/home_adoption_center.html')
+    My_categories = None
+    My_topics = None
+    My_publications = None
+    return render_template('Adoption_Center_User/post/home_adoption_center.html',)
