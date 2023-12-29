@@ -19,7 +19,7 @@ class CategoryService():
           out_category.append(Category(category[0],category[1]))
           return out_category
       else:
-        return None
+        return False
     except Exception as ex:
       message = f"An error occurred while consulting Categories {ex}"
       raise Exception(message)

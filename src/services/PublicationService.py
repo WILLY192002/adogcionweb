@@ -19,7 +19,7 @@ class PublicationService():
           out_publication.append(Publication(pub[0],pub[1],pub[2],None, None,pub[3],pub[4],pub[5],pub[6],pub[7]))
           return out_publication
       else:
-        return None
+        return False
     except Exception as ex:
       message = f"An error occurred while consulting Topics {ex}"
       raise Exception(message)

@@ -29,6 +29,7 @@
           </button>
         </div>
       </div>
+      {%if categories%}
       <div id="filter_animal_div" class="selectFiltros">
         <div class="filtros_Tema-categoria">
           <div class="labelFiltro">
@@ -42,6 +43,7 @@
               {% endfor %}
             </select>
           </div>
+          {%if topics%}
           <div class="filtro-tema">
             <select disabled id="selectTema" class="form-select" aria-label="Filtrar por tema" name="filtroTema">
               <option selected disabled>Tema</option>
@@ -50,8 +52,10 @@
               {% endfor %}
             </select>
           </div>
+          {%endif%}
         </div>
       </div>
+      {%endif%}
     </form>
   </div>
   <div class="filtros_Comunidad-fundacion">
@@ -80,6 +84,7 @@
   </div>
 
   <div class="contenedorHistorialPubs">
+    {%if publications%}
     {% for publication in publications%}
     <div class="contenedorHistorias">
       <div class="encabezadoHistoria">
@@ -108,6 +113,7 @@
 
     </div>
     {% endfor %}
+    {%endif%}
   </div>
 
 </div>

@@ -19,7 +19,7 @@ class TopicService():
           out_topic.append(Topic(topic[0],topic[1], topic[2]))
           return out_topic
       else:
-        return None
+        return False
     except Exception as ex:
       message = f"An error occurred while consulting Topics {ex}"
       raise Exception(message)
