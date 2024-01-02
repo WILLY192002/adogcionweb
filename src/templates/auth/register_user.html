@@ -3,31 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bienvenid@</title>
+  <title>Bienvenido</title>
+  <!-- CSS -->
+  <link rel="stylesheet" href="{{url_for('static', filename = 'css/register_user.css')}}">
 </head>
 <body>
   <div class="principal_container">
     <div class="container_message">
       <div class="container_adogcion">
         <div class="container_img_adogcion">
-          <img>
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHqQ-l6pUliuDg1KU46LXJl9oVvdiTFlaLJw&usqp=CAU">
         </div>
-        <div class="container_slogan_adogcion">
+        <div class="container_name_adogcion">
           <h1>Adogcion</h1>
         </div>
       </div>
       <div class="container_description">
         <p>Bienvenido a Adogcion, una red donde las personas compartimos el mismo amor por los animalitos, 
           aquí encontrarás desde centros de adopcion ya sea para adoptar mascotas o ayudar a la causa, 
-          hasta personas con las que compartirás sobre temás en común sobre estos animalitos. 
-          ¡Animate! a ser parte de esta familia </p>
+          hasta personas con las que compartirás sobre temás en común sobre estos animalitos.</p>
+          <br>
+        <p><strong>¡Animate a ser parte de esta familia!</strong></p>
       </div>
       <div class="container_user_register">
-        <div>
-          <h3>Centro adopcion</h3>
+        <div class="container_user_type">
+          <a class="btn btn-personalized" href="#">
+            <i class='bx bxs-home-heart'></i> Fundaciones
+          </a>
         </div>
-        <div>
-          <h3>Persona natural</h3>
+        <div class="container_user_type">
+          <a class="btn btn-personalized" href="#">
+            <i class='bx bxs-book-heart'></i> Comunidad
+          </a>
         </div>
       </div>
     </div>
