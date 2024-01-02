@@ -18,7 +18,7 @@
 
 <body>
   <div class="container">
-    <header>REGISTRO DE CENTRO DE ADOPCION</header>
+    <header>REGISTRO COMO PERSONA</header>
     <div class="progress_bar">
       <div class="step">
         <p>Datos Personales</p>
@@ -32,12 +32,12 @@
           <span>2</span>
         </div>
       </div>
-      <div class="step">
+      <!-- <div class="step">
         <p>Datos de registro</p>
         <div class="num">
           <span>3</span>
         </div>
-      </div>
+      </div> -->
     </div>
     {% with messages = get_flashed_messages() %}
     {% if messages %}
@@ -51,7 +51,7 @@
     {% endwith%}
 
     <div class="cont_form">
-      <form action="/register/adoption_center/" method="POST" id="formRegister" class="formRegister">
+      <form action="/register/natural_person" method="POST" id="formRegister" class="formRegister">
         <!--PAGINA 1-->
         <div class="pagina pag1">
           <div class="titulo">Informacion personal</div>
@@ -110,7 +110,7 @@
         </div>
 
         <!--PAGINA 2-->
-        <div class="pagina">
+        <!-- <div class="pagina">
           <div class="titulo">Informacion del albergue</div>
 
           <div class="contColum">
@@ -128,10 +128,7 @@
                 id="contactoAlb">
               <label for="floatingInput">Numero de contacto*</label>
             </div>
-            <!-- <div class="form-floating campo">
-              <input type="text" class="form-control" name="direccionAlb" placeholder="Nombre1" id="direccionAlb">
-              <label for="floatingInput">Direccion</label>
-            </div> -->
+            
             <div class="form-floating campo">
               <input type="text" class="form-control" name="adoptionCenter_department" placeholder="Nombre1"
                 id="departamentoAlb">
@@ -143,19 +140,16 @@
             </div>
 
           </div>
-          <!-- <div class = "MediosPago">
-            <div class="titulo">Medios de ayuda</div>
-          </div> -->
           <div class="btns">
             <button class="btn btn-personalized w-100 py-2 antPag1">Volver</button>
             <button class="btn btn-personalized w-100 py-2 sigPag3">Siguiente</button>
           </div>
 
-        </div>
+        </div> -->
 
-        <!--PAGINA 3-->
+        <!--PAGINA 2-->
         <div class="pagina">
-          <div class=" titulo">Creditos del albergue</div>
+          <div class=" titulo">Creditos de la persona</div>
           <div class="contColum">
             <div class="form-floating campo">
               <input type="email" class="form-control" name="access_email" placeholder="Nombre1" id="CorreoAlb"
@@ -205,5 +199,5 @@
     crossorigin="anonymous"></script>
 </body>
 
-<script src="/static/js/register_adoption_center.js"></script>
+<script src="/static/js/register_natural_person.js"></script>
 </html>

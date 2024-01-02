@@ -6,6 +6,7 @@ from .routes import LoginUser
 from .routes import LogoutUser
 from .routes import HomeAdoptionCenter
 from .routes import RegisterUser
+from .routes import RegisterNaturalPerson
 
 from .routes.LoginUser import LoginManagerApp
 
@@ -22,5 +23,6 @@ def init_app(config):
     app.register_blueprint(LoginUser.main, url_prefix='/login')
     app.register_blueprint(LogoutUser.main, url_prefix='/logout')
     app.register_blueprint(HomeAdoptionCenter.main, url_prefix='/home/adoption_center')
+    app.register_blueprint(RegisterNaturalPerson.main, url_prefix='/register/natural_person')
     app.register_blueprint(RegisterUser.main, url_prefix='/register')
     return app
