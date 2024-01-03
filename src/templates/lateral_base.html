@@ -36,7 +36,7 @@
           {% if current_user.is_authenticated %}
             {% if current_user.user_type_name == "UT-ADOPTION_CENTER"%}
             <li class="item">
-              <a href="#"
+              <a href="/view/profile={{current_user.id}}/adoption_center={{current_user.name}}"
                 class="link flex">
                 <i class="bx bxs-user"></i>
                 <span>Perfil</span>

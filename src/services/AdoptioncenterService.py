@@ -29,9 +29,25 @@ class AdoptioncenterService():
       cursor.execute(sql)
       row = cursor.fetchone()
       if row != None:
-        return AdoptionCenter(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8],row[9],row[10])
+        return AdoptionCenter(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8],row[9],row[10], row[11])
       else:
         return False
     except Exception as ex:
       message = f"An error occurred while consulting an Adoption Center by Access {ex}"
+      raise Exception(message)
+  
+  @classmethod
+  def getAdoptionCenterById(self, id):
+    try:
+      conexion = get_connection()
+      cursor = conexion.cursor()
+      sql = f"SELECT * FROM adoptioncenter WHERE id = {id}"
+      cursor.execute(sql)
+      row = cursor.fetchone()
+      if row != None:
+        return AdoptionCenter(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8],row[9],row[10], row[11])
+      else:
+        return False
+    except Exception as ex:
+      message = f"An error occurred while consulting an Adoption Center by id {ex}"
       raise Exception(message)

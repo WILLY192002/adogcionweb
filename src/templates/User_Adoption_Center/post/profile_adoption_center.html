@@ -1,0 +1,245 @@
+{% extends 'lateral_base.html' %}
+
+{% block customCSS%}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{{url_for('static', filename = 'css/perfil.css')}}">
+
+{% endblock %}
+
+
+<!-- unitest, nosetest -->
+{% block body %}
+<div class="contenedor">
+  <form class="contPrincipal" action="#" method="POST">
+    <!-- Seccion 1 -->
+    <div class="seccion1">
+      <input type="hidden" name="form_id" value="edit_info">
+      <div class="contfotoAlb">
+        <input type="hidden" id="hiddenField" name="hiddenField"><!--URL IMAGEN-->
+        <img id="preview" src="{{user_information.photo}}" alt="">
+      </div>
+      <div class = "uploadFoto">
+        <input type="file" id="subirFoto" name="foto">
+      </div>
+      <div class="infoAlb">
+        <div class="infoCampo">
+          <textarea readonly id="nombreAlb" class="form-control" name = "name" rows="1" oninput="this.style.height = '';this.style.height = this.scrollHeight + 'px'">{{user_information.name}}</textarea>
+        </div>
+        <div class="infoCampo texto">
+          <textarea readonly id="descripAlb" class="form-control" name = "description" oninput="this.style.height = '';this.style.height = this.scrollHeight + 'px'">{{user_information.description}}</textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Seccion 2 -->
+    <div class="seccion2">
+      <div class="infogeneral">
+        <div class="encabezadoInfo">
+          <div class="tituloSec">
+            <label>INFORMACION DEL ALBERGUE</label>
+          </div>
+          {% if current_user.is_authenticated and (current_user.id == user_information.id) %}
+          <div class = "btns">
+            <button id="btn_guardar" class="btn btn-personalized" style="display: none;">Guardar</button>
+            <button id="btn_edit" class="btn" onclick="toggleStyles(event)"><i id="icon_cog" class='bx bxs-cog'></i></button>
+          </div>
+          {% endif %}
+        </div>
+        <div class="contInfGen">
+          <div class="infGenUno">
+            <div class="columnaIzq">
+              <div class="infocampo">
+                <label>Departamento:</label>
+                <input readonly id="departAlb"  class="form-control" name = "department" type="text" value="{{user_information.department}}">
+              </div>
+              <div class="infocampo">
+                <label>Llamanos:</label>
+                <input readonly id="contactoAlb" class="form-control" name = "contact"  type="text" value="{{user_information.contact}}">
+              </div>
+              <div class="infocampo">
+                <label>Nos encuentras en: </label>
+                <input readonly id="direccionAlb" class="form-control" name = "address" type="text" value="{{user_information.address}}">
+              </div>
+              <div class="infocampo">
+                <label>Ver en Google Maps: </label>
+                <a href="{{user_information.googlemaps}}" target="_blank">{{user_information.googlemaps}}</a>
+                
+              </div>
+            </div>
+            <div class="columnaDer">
+              <div class="infocampo">
+                <label>Ciudad: </label>
+                <input readonly id="ciudadAlb" class="form-control" name = "city" type="text" value="{{user_information.city}}">
+              </div>
+              <div class="infocampo">
+                <label>Envianos un E-mail:</label>
+                <input readonly type="text" class="form-control" value="{{user_information.email}}">
+              </div>
+              <div class="infocampo">
+                <label>Nit: </label>
+                <input readonly id="nitAlb" class="form-control" name = "nit" type="text" value="{{user_information.nit}}">
+              </div>
+            </div>
+          </div>
+          <div class="infGenDos">
+            <div class = "contInfDos">
+              <div class="encInfDos">
+                <div class = "encabezadoMedioAyuda">
+                  <label>¿Como nos puedes ayudar?</label>
+                </div>
+                {% if current_user.is_authenticated and (current_user.id == user_information.id)  %}
+                <div id = "href_editP" class = "href_editP" style="display: none;">
+                  <a href="#">Editar infomación completa</a>
+                </div>
+                {% endif%}
+                
+              </div>
+              <div class = "infocampo texto">
+                <textarea readonly id = "MediosAyuda" name = "PaymentOptions" rows={{PaymentOptions[0]}}>{{PaymentOptions[1]}}</textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  </form>
+
+  
+
+  <!-- PARTE DE LAS PUBLICACIONES -->
+  <div class = contPublicacion>
+    <div class = "contPestanas">
+      <div class="pestana">
+        <a class="href-personalized" href="#">
+          <strong>General</strong>
+        </a>
+      </div>
+      <div class="pestana">
+        <a class="href-personalized" href="#">
+          <strong>Adoptar</strong>
+        </a>
+      </div>
+      {% for category in categories %}
+        <div class="pestana">
+          <a class="href-personalized" href="#">
+            <strong>{{category.nombre}}</strong>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="vistaPublicacion">
+      {%if actuallySeccion != "Adoptar" and actuallySeccion != "General"%}
+      <form class = "contFiltro" action="/fundacion_{{user_information.nombre}}.{{user_information.id}}/perfil/{{actuallySeccion}}/FiltrarPor=Todo"  method="POST">
+        <div class="row justify-content-md-center row-cols-6">
+          <div class="col col-6 mt-3 mb-3">
+            <input type="hidden" name="form_id" value="filter_animal"><!--IDENTIFICADOR FORM-->
+            <select class="form-select" aria-label="Filtrar por tema" name="Temafiltro">
+              <option disabled selected >Filtrar por Todo</option>
+              {%for topic in topics %}
+              <option value={{topic.id}}>{{topic.name}}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="col col-md-auto mt-3 mb-3">
+            <button class="btn btn-outline-personalized" type="submit">
+              <i class='bx bx-search'></i> Buscar
+            </button>
+          </div>
+        </div>
+      </form>
+      {%elif actuallySeccion == "Adoptar"%}
+      <form ation='mis_animales' method="POST">
+        <div class="row justify-content-md-center row-cols-3">
+          <div class="col-6 mt-3 mb-3">
+            <input type="hidden" name="form_id" value="filter_animal-adoption"><!--IDENTIFICADOR FORM-->
+            <input type="text" class="form-control" placeholder="Buscar animales" aria-label="Buscar animales" name="barraFilter" id="barraFilter">
+          </div>
+          <div class="col col-md-auto mt-3 mb-3">
+            <button id="botonFiltrar" class="btn btn-outline-personalized" type="button">
+              <i class='bx bx-filter'></i> Filtrar
+            </button>
+          </div>
+          <div class="col col-md-auto mt-3 mb-3">
+            <button class="btn btn-outline-personalized" type="submit">
+              <i class='bx bx-search'></i> Buscar
+            </button>
+          </div>
+        </div>
+        <div id="filter_animal_div" style="display: none;">
+          <div class="row justify-content-md-center">
+            <div class="col-8 text-start">
+              <p>Filtrar por:</p>
+            </div>
+          </div>
+          <div class="row justify-content-md-center">
+            <div class="col-2 mb-3">
+              <select class="form-select animalFilter" aria-label="Filtrar por especie" name="especieFilter">
+                <option selected value="">Especie</option>
+                <option value="Perro">Perro</option>
+                <option value="Gato">Gato</option>
+                <option value="Conejo">Conejo</option>
+                <option value="Hamster">Hamster</option>
+              </select>
+            </div>
+            <div class="col-2 mb-3">
+              <select class="form-select animalFilter" aria-label="Filtrar por sexo" name="sexoFilter">
+                <option selected value="">Sexo</option>
+                <option value="Macho">Macho</option>
+                <option value="Hembra">Hembra</option>
+              </select>
+            </div>
+            <div class="col-2 mb-3">
+              <select class="form-select animalFilter" aria-label="Filtrar por tamaño" name="tamanioFilter">
+                <option selected value="">Tamaño</option>
+                <option value="Pequeño">Pequeño (0-20cm)</option>
+                <option value="Mediano">Mediano (21-50cm)</option>
+                <option value="Grande">Grande (51-80cm)</option>
+                <option value="Gigante">Gigante (>81cm)</option>
+              </select>
+            </div>
+            <div class="col-2 mb-3">
+              <select class="form-select animalFilter" aria-label="Filtrar por edad" name="edadFilter">
+                <option selected value="">Edad</option>
+                <option value="1">0 - 3</option>
+                <option value="2">4 - 7</option>
+                <option value="3">8 - 11</option>
+                <option value="4">12 - 15</option>
+                <option value="5"> >16</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </form> 
+      {%endif%}
+      <div class = "secPublicaciones">
+        {%for publication in publications%}
+        <div id = "publicacion" class="publicacion">
+          <div class="miniaturaPublic">
+            <img src="{{publication.photo}}" alt="" border="0" onerror="this.style.display='none'"/>
+          </div>
+          <div class="tituloPublic">
+            <p><strong>{{publication.title}}</strong></p>
+          </div>
+          <div class = "descripcionPublic">
+            <textarea rows = 5 readonly>{{publication.description}}</textarea>
+          </div>
+          {%if publication.topic_id == topic_adopted_id %}
+          <div id = "cont-btn-adoptar" class="btn-adoptar btn-adoptar-ocultar" >
+            <a class="btn btn-personalized" target="_blank" href="mailto:{{user_information.email}}?subject=ADOPCION RESPONSABLE&body=Hola!, estoy interesado en adoptar a {{publication.title}}, que tiene las siguientes caracteristicas: {{publication.description}}. /// AGREGA MAS INFORMACION SOBRE TI /// ">
+              <i class='bx bxs-donate-heart'></i> Adoptar
+            </a>
+          </div>
+          {%endif%}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block customJS%}
+<script src="/static/js/perfil.js"></script>
+{% endblock %}

@@ -49,7 +49,8 @@ def registerAdoptionCenter():
     adoptionCenter_description = None
     adoptionCenter_nit = request.form['adoptionCenter_nit'] 
     adoptionCenter_contact = request.form['adoptionCenter_contact'] 
-    adoptionCenter_address = None 
+    adoptionCenter_address = None
+    adoptionCenter_googlemaps = None
     adoptionCenter_city = request.form['adoptionCenter_city'].capitalize() 
     adoptionCenter_department = request.form['adoptionCenter_department'].capitalize()
 
@@ -59,7 +60,7 @@ def registerAdoptionCenter():
                         person_city,person_department)
     new_adoption_center = AdoptionCenter(adoptionCenter_id,adoptionCenter_person_id,adoptionCenter_access_id,
                                         adoptionCenter_photo,adoptionCenter_name,adoptionCenter_description,adoptionCenter_nit,
-                                        adoptionCenter_contact,adoptionCenter_address,adoptionCenter_city,adoptionCenter_department)
+                                        adoptionCenter_contact,adoptionCenter_address,adoptionCenter_googlemaps,adoptionCenter_city,adoptionCenter_department)
     
     #INSERT NEW ACCESS IN DATA BASE
     if not AccessService.getAccessByEmail(new_access.email):
