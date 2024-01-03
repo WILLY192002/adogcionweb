@@ -98,9 +98,20 @@
                 {% endif%}
                 
               </div>
-              <div class = "infocampo texto">
-                <textarea readonly id = "MediosAyuda" name = "PaymentOptions" rows={{PaymentOptions[0]}}>{{PaymentOptions[1]}}</textarea>
+              {%if PaymentOptions%}
+              <div class="infocampo">
+                {%for paymentOption in PaymentOptions%}
+                <h6>*. {{PaymentOption.name_paymentoption}}:{{PaymentOption.number}}</h6>
+                {%endfor%}
               </div>
+              {%else%}
+              <div class="infocampo">
+                <h6>¡Apoyanos divulgando!</h6>
+              </div>
+              {%endif%}
+              <!-- <div class = "infocampo texto">
+                <textarea readonly id = "MediosAyuda" name = "PaymentOptions" rows={{PaymentOptions[0]}}>{{PaymentOptions[1]}}</textarea>
+              </div> -->
             </div>
           </div>
         </div>
@@ -249,5 +260,5 @@
 {% endblock %}
 
 {% block customJS%}
-<script src="/static/js/perfil.js"></script>
+<script src="/static/js/User_Adoption_Center/profile_adoption_center.js"></script>
 {% endblock %}
