@@ -18,15 +18,17 @@ LoginManagerApp = LoginManager()
 @LoginManagerApp.user_loader
 def load_user(access_id):
   new_access = AccessService.getAccessById(access_id) 
-  id_adoption_center = UsertypeService.getUserTypeByName("UT-ADOPTION_CENTER").id
-  id_natural_person = UsertypeService.getUserTypeByName("UT-NATURAL_PERSON").id
-  if new_access.user_type_id == id_adoption_center:
+  id_adoption_center = UsertypeService.getUserTypeByName("UT-ADOPTION_CENTER")
+  id_natural_person = UsertypeService.getUserTypeByName("UT-NATURAL_PERSON")
+  if new_access.user_type_id == id_adoption_center.id:
     Access_adoptionCenter = AdoptioncenterService.getAdoptionCenterByAccessId(new_access.id)
-    Access_adoptionCenter.user_type_id = id_adoption_center
+    Access_adoptionCenter.user_type_id = id_adoption_center.id
+    Access_adoptionCenter.user_type_name = id_adoption_center.name
     return Access_adoptionCenter
-  elif new_access.user_type_id == id_natural_person:
+  elif new_access.user_type_id == id_natural_person.id:
     Access_NaturalPerson = NaturalpersonService.getNaturalPersonByAccessId(new_access.id)
-    Access_NaturalPerson.user_type_id = id_natural_person
+    Access_NaturalPerson.user_type_id = id_natural_person.id
+    Access_NaturalPerson.user_type_name = id_natural_person.name
     return Access_NaturalPerson
 
 @main.route('/', methods = ['GET', 'POST'])

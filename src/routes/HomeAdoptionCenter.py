@@ -19,4 +19,4 @@ def homeAdoptionCenter():
     My_topics = TopicService.getAllTopics()
     id_adoption_center = UsertypeService.getUserTypeByName("UT-ADOPTION_CENTER").id
     My_publications = PublicationService.getAllPublicationByUserType(id_adoption_center)
-    return render_template('User_Adoption_Center/post/home_adoption_center.html',categories = My_categories,topics = My_topics, publications = My_publications)
+    return render_template('User_Adoption_Center/post/home.html',categories = My_categories,topics = My_topics, publications = My_publications)

@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href={{url_for('static', filename='css/lateral_base_adoptionC.css' )}} />
+  <link rel="stylesheet" href={{url_for('static', filename='css/lateral_base.css' )}} />
   {% block customCSS%}
   
   {% endblock %}
@@ -34,38 +34,47 @@
       <div class="menu_items">
         <ul class="menu_item">
           {% if current_user.is_authenticated %}
-          <li class="item">
-            <a href="#"
-              class="link flex">
-              <i class="bx bxs-user"></i>
-              <span>Perfil</span>
-            </a>
-          </li>
-          <li class="item">
-            <a href="#" class="link flex">
-              <i class="bx bxs-home-heart"></i>
-              <span>Inicio</span>
-            </a>
-          </li>
-          <li class="item">
-            <a href="#" class="link flex">
-              <i class="bx bxs-dog"></i>
-              <span>Mis animales</span>
-            </a>
-          </li>
-          <li class="item">
-            <a href="#"
-              class="link flex">
-              <i class="bx bxs-cloud-upload"></i>
-              <span>Publicar</span>
-            </a>
-          </li>
-          <li class="item">
-            <a href="/logout" class="link flex">
-              <i class="bx bxs-log-out"></i>
-              <span>Cerrar Sesión</span>
-            </a>
-          </li>
+            {% if current_user.user_type_name == "UT-ADOPTION_CENTER"%}
+            <li class="item">
+              <a href="#"
+                class="link flex">
+                <i class="bx bxs-user"></i>
+                <span>Perfil</span>
+              </a>
+            </li>
+            <li class="item">
+              <a href="#" class="link flex">
+                <i class="bx bxs-home-heart"></i>
+                <span>Inicio</span>
+              </a>
+            </li>
+            <li class="item">
+              <a href="#" class="link flex">
+                <i class="bx bxs-dog"></i>
+                <span>Mis animales</span>
+              </a>
+            </li>
+            <li class="item">
+              <a href="#"
+                class="link flex">
+                <i class="bx bxs-cloud-upload"></i>
+                <span>Publicar</span>
+              </a>
+            </li>
+            <li class="item">
+              <a href="/logout" class="link flex">
+                <i class="bx bxs-log-out"></i>
+                <span>Cerrar Sesión</span>
+              </a>
+            </li>
+            {% elif current_user.user_type_name == "UT-NATURAL_PERSON"%}
+            <li class="item">
+              <a href="/logout" class="link flex">
+                <i class="bx bxs-log-out"></i>
+                <span>Cerrar Sesión</span>
+              </a>
+            </li>
+            {%endif%}
           {% else %}
           <li class="item">
             <a href="/login" class="link flex">
