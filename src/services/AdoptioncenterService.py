@@ -51,3 +51,26 @@ class AdoptioncenterService():
     except Exception as ex:
       message = f"An error occurred while consulting an Adoption Center by id {ex}"
       raise Exception(message)
+  
+  @classmethod
+  def updateAdoptionCenter(self, id, Adoptioncenter):
+    try:
+      conexion = get_connection()
+      cursor = conexion.cursor()
+      new_Adoptioncenter = Adoptioncenter.__dict__
+      new_Adoptioncenter.pop("id")
+      new_Adoptioncenter = {key: value for key, value in new_Adoptioncenter.items() if value is not None}
+      fields = []
+      for key, value in new_Adoptioncenter.items():
+          if isinstance(value, str):
+              fields.append(f'{key} = "{value}"')
+          else:
+              fields.append(f'{key} = {value}')
+      fieldsUpdate = ', '.join(fields)
+      sql = f"UPDATE adoptioncenter SET {fieldsUpdate} WHERE id = {id}"
+      cursor.execute(sql)
+      conexion.commit()
+      return "An update in adoption center has been successfully"
+    except Exception as ex:
+      message = f"Error when update a adoption center {ex}"
+      raise Exception(message)
