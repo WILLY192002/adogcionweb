@@ -1,0 +1,314 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+body{
+  background-color: #FFF;
+}
+
+.contenedor{
+  position: fixed;
+  top: 0;
+  height: 100%;
+  transform: translate(200px);
+  width: calc(100% - 200px); 
+  overflow: auto;
+}
+
+/* -------------------------------------------------------*/
+/* Contenedor principal, seccion información de albergue*/
+.contPrincipal{
+  margin: 1% 3% 1% 3%;
+  display: flex; 
+}
+
+/* -------------------------------------------------------*/
+/* Contenedor seccion1, Foto perfil, nombre y descripción albergue*/
+.seccion1{
+  margin: 1%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/*  Foto perfil */
+.contfotoAlb {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contfotoAlb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Nombre y descripción albergue*/
+.infoAlb{
+  margin-top: 5%;
+  max-height: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.infoCampo{
+  display: flex;
+  justify-content: center;
+  resize: both;
+  padding: 2% 0 2% 0;
+  margin-bottom: 2%;
+}
+
+#nombreAlb{
+  font-family: "Jua", sans-serif;
+  font-size: 25px;
+}
+
+.infoCampo textarea{
+  width: 250px;
+  text-align: center;
+  resize: none;
+  border: none;
+  background: none;
+  cursor: default; 
+  outline: none;
+}
+
+.texto textarea {
+  overflow: hidden;
+  resize: none;
+  width: 100%;
+  max-height: 250px;
+}
+/* -------------------------------------------------------*/
+/* Contenedor seccion2, Información del albergue*/
+.seccion2{
+  margin: 1%;
+  width: 100%;
+}
+
+.infogeneral{
+  width: 100%;
+}
+
+.contInfGen{ 
+  width: 100%;
+}
+
+/* Titulo seccion 2*/
+.encabezadoInfo{
+  display: flex;
+  justify-content: space-between;
+}
+
+.tituloSec{
+  margin-bottom: 2%; 
+}
+
+.tituloSec label{
+  font-family: 'Jua', sans-serif;
+  font-weight: 300;
+  font-size: larger;
+}
+
+/* Botones conjuto editar*/
+.btns{
+  margin-bottom: 2%;
+  display: flex;
+}
+
+.btns button{
+  width: 100px;
+  margin: 0 1% 0 1%;
+}
+
+#icon_cog{
+  font-size: 25px;
+}
+
+/* -------------------------------------------------------*/
+/* Informacion general 1 y 2*/
+.infGenUno {
+  display: flex;
+  width: 100%;
+}
+
+.columnaIzq{
+  width: 100%;
+  margin-right: 3%;
+}
+
+.columnaDer{
+  width: 100%;
+  margin-left: 3%;
+}
+
+.infocampo {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5%;
+}
+
+.infocampo textarea{
+  resize: none;
+  border: none;
+  background: none;
+  cursor: default; 
+  outline: none;
+}
+
+.infocampo label{
+  font-family: 'Jua', sans-serif;
+  font-weight: 300;
+  font-size: medium;
+  color: #000;
+}
+
+.form-control{
+  font-size: medium;
+  background: none;
+  border: none;
+  cursor: default;  
+  outline: none;
+}
+
+.encInfDos{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1%;
+}
+
+.encabezadoMedioAyuda label{
+  font-family: 'Jua', sans-serif;
+  font-weight: 300;
+  font-size: medium;
+  color: #000;
+}
+
+.btn-personalized {
+  background-color: #1cb0ad;
+  color: #FFF; 
+  font-family: 'Jua', sans-serif;
+  font-size: medium;
+}
+
+.btn-personalized:hover {
+  background-color: #138e8e;
+  color: #FFF;
+}
+/* -------------------------------------------------------*/
+/*  Editar Perfil */
+/* Subir foto*/
+.uploadFoto{
+  width: 100%;
+}
+
+.uploadFoto input{
+  width: 100%;
+  display: none;
+}
+
+
+/* -------------------------------------------------------*/
+/*  Tipos publicaciones */
+.contPestanas{
+  border-top: solid;
+  border-width: 1.5px;
+  border-color: #062b2d;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.href-personalized {
+  color:#1cb0ad;
+  text-decoration: none;
+}
+
+.href-personalized strong {
+  font-family: 'Jua', sans-serif;
+  font-size: larger;
+}
+
+.href-personalized:hover{
+  color: #138e8e;
+}
+/* -------------------------------------------------------*/
+/*  Filtro publicaciones */
+.form-select{
+  border-color: #48d1cc;
+  font-size: medium;
+  color: #000;
+  background-color: #f1fcfb;
+}
+
+.btn-outline-personalized {
+  border-color: #147071;
+  font-family: 'Jua', sans-serif;
+  font-size: medium;
+  color: #147071;
+}
+
+.btn-outline-personalized:hover {
+  background-color: #f1fcfb;
+  border-color: #147071;
+  color: #147071;
+}
+/* -------------------------------------------------------*/
+/*  Publicaciones */
+.publicacion{
+  /* border: solid purple; */
+  margin: 1%;
+}
+
+.descripcionPublic{
+  width: 100%;
+}
+.secPublicaciones{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  
+}
+
+.descripcionPublic textarea{
+  width: 100%;
+  resize: none;
+  border: none;
+  background: none;
+  cursor: default; 
+  outline: none;
+  max-height: auto;
+  overflow: auto;
+  font-size: smaller;
+}
+.miniaturaPublic{
+  display: flex;
+  justify-content: center;
+}
+.miniaturaPublic img{
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.btn-adoptar-mostrar{
+  /* border: solid; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-adoptar-ocultar{
+  visibility: hidden;
+  /* display: none; */
+}
+/*

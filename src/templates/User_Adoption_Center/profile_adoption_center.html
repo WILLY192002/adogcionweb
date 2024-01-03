@@ -2,7 +2,7 @@
 
 {% block customCSS%}
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="{{url_for('static', filename = 'css/perfil.css')}}">
+<link rel="stylesheet" href="{{url_for('static', filename = 'css/User_Adoption_Center/profile_adoption_center.css')}}">
 
 {% endblock %}
 
@@ -56,15 +56,19 @@
                 <label>Llamanos:</label>
                 <input readonly id="contactoAlb" class="form-control" name = "contact"  type="text" value="{{user_information.contact}}">
               </div>
+              {%if user_information.address%}
               <div class="infocampo">
                 <label>Nos encuentras en: </label>
                 <input readonly id="direccionAlb" class="form-control" name = "address" type="text" value="{{user_information.address}}">
               </div>
+              {%endif%}
+              {%if user_information.googlemaps%}
               <div class="infocampo">
                 <label>Ver en Google Maps: </label>
                 <a href="{{user_information.googlemaps}}" target="_blank">{{user_information.googlemaps}}</a>
                 
               </div>
+              {%endif%}
             </div>
             <div class="columnaDer">
               <div class="infocampo">
@@ -120,6 +124,7 @@
           <strong>Adoptar</strong>
         </a>
       </div>
+      {%if categories%}
       {% for category in categories %}
         <div class="pestana">
           <a class="href-personalized" href="#">
@@ -127,9 +132,10 @@
           </a>
         </div>
       {% endfor %}
+      {%endif%}
     </div>
     <div class="vistaPublicacion">
-      {%if actuallySeccion != "Adoptar" and actuallySeccion != "General"%}
+      {%if actuallySeccion != "Adoptar" and actuallySeccion != "General" and topics%}
       <form class = "contFiltro" action="/fundacion_{{user_information.nombre}}.{{user_information.id}}/perfil/{{actuallySeccion}}/FiltrarPor=Todo"  method="POST">
         <div class="row justify-content-md-center row-cols-6">
           <div class="col col-6 mt-3 mb-3">
@@ -213,6 +219,7 @@
       </form> 
       {%endif%}
       <div class = "secPublicaciones">
+        {%if publications%}
         {%for publication in publications%}
         <div id = "publicacion" class="publicacion">
           <div class="miniaturaPublic">
@@ -233,6 +240,7 @@
           {%endif%}
         </div>
         {% endfor %}
+        {%endif%}
       </div>
     </div>
   </div>
