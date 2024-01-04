@@ -17,7 +17,7 @@ class CategoryService():
       if row != None:
         for category in row:
           out_category.append(Category(category[0],category[1]))
-          return out_category
+        return out_category
       else:
         return False
     except Exception as ex:

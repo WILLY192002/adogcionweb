@@ -20,16 +20,16 @@ main = Blueprint('view_profile_adoption_center',__name__)
 @main.route('/view/profile=<id>/adoption_center=<name>', methods = ['GET', 'POST'])
 def viewProfileAdoptionCenter(id,name):
   if request.method == 'POST':
-    if current_user.is_authenticated:
+    if current_user.is_authenticated and current_user.get_id() == id:
       adoption_center_name = request.form['name'].capitalize() if request.form['name'] != '' else None
       adoption_center_description = request.form['description'].capitalize() if request.form['description'] != '' else None
       adoption_center_department = request.form['department'].capitalize() if request.form['department'] != '' else None
       adoption_center_city = request.form['city'].capitalize() if request.form['city'] != '' else None
       adoption_center_contact = request.form['contact'] if request.form['contact'] != '' else None
       
-      photo = request.form['hiddenField']
+      photo = request.form['hiddenField'] if request.form['hiddenField'] != '' else None
       upload_photo = ImageService.upload_image_to_imgbb(photo)
-      adoption_center_photo = upload_photo['data']['url'] if photo != '' else None
+      adoption_center_photo = upload_photo['data']['url'] if photo else None
 
       #Model adoption center with update fields
       update_adoption_center = AdoptionCenter(None, None, None, adoption_center_photo,adoption_center_name,
@@ -38,7 +38,7 @@ def viewProfileAdoptionCenter(id,name):
       AdoptioncenterService.updateAdoptionCenter(current_user.get_id(),update_adoption_center)
       return redirect(url_for('view_profile_adoption_center.viewProfileAdoptionCenter', name = current_user.name, id = current_user.get_id()))
     else:
-      return redirect(url_for('view_profile_adoption_center.viewProfileAdoptionCenter', name = name, id = id))
+      return render_template('auth/no_authorized.html')
   else:
     #INFORMATION PROFILE
     user_information = AdoptioncenterService.getAdoptionCenterById(id)
@@ -66,6 +66,7 @@ def viewProfileAdoptionCenter(id,name):
 @main.route('/edit_information/profile=<id>/adoption_center=<name>', methods = ['GET', 'POST'])
 def editProfileAdoptionCenter(id, name):
   if request.method == 'POST':
+    if current_user.is_authenticated and current_user.get_id() == id: 
       #Adoption Center information
       adoption_center_name = request.form['name'].capitalize() if request.form['name'] != '' else None
       adoption_center_description = request.form['description'].capitalize() if request.form['description'] != '' else None
@@ -73,9 +74,9 @@ def editProfileAdoptionCenter(id, name):
       adoption_center_city = request.form['city'].capitalize() if request.form['city'] != '' else None
       adoption_center_contact = request.form['contact'] if request.form['contact'] != '' else None
 
-      photo = request.form['hiddenField']
+      photo = request.form['hiddenField'] if request.form['hiddenField'] != '' else None
       upload_photo = ImageService.upload_image_to_imgbb(photo)
-      adoption_center_photo = upload_photo['data']['url'] if photo != '' else None
+      adoption_center_photo = upload_photo['data']['url'] if photo else None
 
       checkAddress = request.form.get('checkAddress')
       check_generate_link = request.form.get('check-generate-link')
@@ -136,16 +137,21 @@ def editProfileAdoptionCenter(id, name):
         Paymentoption_AdoptioncenterService.insertPaymentOptionAdoptionCenter(new_PaymentOptionAdoptionCenter)
       
       return redirect(url_for('view_profile_adoption_center.viewProfileAdoptionCenter', name = current_user.name, id = current_user.get_id()))
+    else:
+      return render_template('auth/no_authorized.html')
   else:
-    user_information = AdoptioncenterService.getAdoptionCenterById(current_user.get_id())
-    access_user_information = AccessService.getAccessById(user_information.access_id)
-    user_information.user_type_id = access_user_information.user_type_id
-    user_information.email = access_user_information.email
+    if current_user.is_authenticated and current_user.get_id() == id:
+      user_information = AdoptioncenterService.getAdoptionCenterById(current_user.get_id())
+      access_user_information = AccessService.getAccessById(user_information.access_id)
+      user_information.user_type_id = access_user_information.user_type_id
+      user_information.email = access_user_information.email
 
-    paymentOptions_registered = Paymentoption_AdoptioncenterService.getPaymentOptionAdoptionCenter(current_user.get_id())
-    paymentOptions_NoRegistered = PaymentoptionService.getNoPaymentOptionAdoptionCenter(current_user.get_id())
-    
-    return render_template('User_Adoption_Center/post/edit_profile.html', 
-                          user_information = user_information,
-                          paymentOptions_registered = paymentOptions_registered,
-                          paymentOptions_NoRegistered = paymentOptions_NoRegistered)
+      paymentOptions_registered = Paymentoption_AdoptioncenterService.getPaymentOptionAdoptionCenter(current_user.get_id())
+      paymentOptions_NoRegistered = PaymentoptionService.getNoPaymentOptionAdoptionCenter(current_user.get_id())
+      
+      return render_template('User_Adoption_Center/post/edit_profile.html', 
+                            user_information = user_information,
+                            paymentOptions_registered = paymentOptions_registered,
+                            paymentOptions_NoRegistered = paymentOptions_NoRegistered)
+    else:
+      return render_template('auth/no_authorized.html')
