@@ -1,15 +1,18 @@
 {% extends 'lateral_base.html' %}
 
+{% block title %}
+Editar perfil
+{% endblock %}
 
 {% block customCSS%}
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="{{url_for('static', filename = 'css/editPerfil.css')}}">
+<link rel="stylesheet" href="{{url_for('static', filename = 'css/User_Adoption_Center/post/edit_profile.css')}}">
 
 {% endblock %}
 
 {% block body %}
 <div class="contenedor">
-  <form class="contPrincipal" action="#"
+  <form class="contPrincipal" action="/edit_information/profile={{current_user.get_id()}}/adoption_center={{current_user.name}}"
     method="POST">
     <!-- Seccion 1 -->
     <div class="seccion1">
@@ -24,11 +27,11 @@
       <div class="infoAlb">
         <div class="infoCampo">
           <textarea id="nombreAlb" class="form-control" name="name" rows="1"
-            oninput="this.style.height = '';this.style.height = this.scrollHeight + 'px'">{{user_information.nombre}}</textarea>
+            oninput="this.style.height = '';this.style.height = this.scrollHeight + 'px'">{{user_information.name}}</textarea>
         </div>
         <div class="infoCampo texto">
           <textarea id="descripAlb" class="form-control" name="description"
-            oninput="this.style.height = '';this.style.height = this.scrollHeight + 'px'">{{user_information.descripcion}}</textarea>
+            oninput="this.style.height = '';this.style.height = this.scrollHeight + 'px'">{{user_information.description}}</textarea>
         </div>
       </div>
     </div>
@@ -186,12 +189,12 @@
                     {% for paymentOption in paymentOptions_registered %}
                     <div class="Opcion">
                       <div class="nombreOpcion">
-                        <input data-target="mpr_{{paymentOption.mediopago_id}}" class="form-check-input check-input-mdr"
-                          type="checkbox" name="paymentOptions_registered_id" value={{paymentOption.mediopago_id}}>{{paymentOption.nombreMP}}
+                        <input data-target="mpr_{{paymentOption.paymentoption_id}}" class="form-check-input check-input-mdr"
+                          type="checkbox" name="paymentOptions_registered_id" value={{paymentOption.paymentoption_id}}>{{paymentOption.name_paymentoption}}
                       </div>
                       <div class="valorOpcion infocampo">
-                        <input disabled id="mpr_{{paymentOption.mediopago_id}}" class="form-control"
-                          name="paymentOptions_registered_number" type="text" value={{paymentOption.numero}}>
+                        <input disabled id="mpr_{{paymentOption.paymentoption_id}}" class="form-control"
+                          name="paymentOptions_registered_number" type="text" value={{paymentOption.number}}>
                       </div>
                     </div>
                     {% endfor %}
@@ -209,7 +212,7 @@
                     <div class="Opcion">
                       <div class="nombreOpcion">
                         <input data-target="mpnr_{{paymentOption.id}}" class="form-check-input check-input-mdNr"
-                          type="checkbox" name="paymentOptions_NoRegistered_id" value={{paymentOption.id}}>{{paymentOption.nombre}}
+                          type="checkbox" name="paymentOptions_NoRegistered_id" value={{paymentOption.id}}>{{paymentOption.name}}
                       </div>
                       <div class="valorOpcion infocampo">
                         <input required disabled id="mpnr_{{paymentOption.id}}" class="form-control"

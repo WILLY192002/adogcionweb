@@ -1,0 +1,359 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+body{
+  background-color: #FFF;
+}
+
+.contenedor{
+  position: fixed;
+  top: 0;
+  height: 100%;
+  transform: translate(200px);
+  width: calc(100% - 200px); 
+  overflow: auto;
+}
+
+/* -------------------------------------------------------*/
+/* Contenedor principal, seccion información de albergue*/
+.contPrincipal{
+  margin: 1% 3% 1% 3%;
+  display: flex; 
+  /* border: solid fuchsia; */
+}
+
+/* -------------------------------------------------------*/
+/* Contenedor seccion1, Foto perfil, nombre y descripción albergue*/
+.seccion1{
+  margin: 1%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: column;
+  /* border: pink solid; */
+  
+}
+
+/*  Foto perfil */
+.contfotoAlb {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contfotoAlb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Nombre y descripción albergue*/
+.infoAlb{
+  margin-top: 5%;
+  max-height: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.infoCampo{
+  display: flex;
+  justify-content: center;
+  resize: both;
+  padding: 2% 0 2% 0;
+  margin-bottom: 2%;
+}
+
+#nombreAlb{
+  font-family: "Jua", sans-serif;
+  font-size: 25px;
+}
+
+.infoCampo textarea{
+  width: 250px;
+  text-align: center;
+  resize: none;
+  border: 1px solid #48d1cc;
+  background: #FFF;
+  cursor: text; 
+  outline: none;
+  overflow: hidden;
+  resize: none;
+  max-height: 250px;
+}
+
+/* .texto textarea {
+  overflow: hidden;
+  resize: none;
+  width: 100%;
+  max-height: 250px;
+} */
+/* -------------------------------------------------------*/
+/* Contenedor seccion2, Información del albergue*/
+.seccion2{
+  margin: 1%;
+  width: 100%;
+  /* border: red solid; */
+}
+
+.infogeneral{
+  width: 100%;
+  /* border: blue solid; */
+}
+
+.contInfGen{ 
+  width: 100%;
+  /* border: yellowgreen solid; */
+}
+
+/* Titulo seccion 2*/
+.encabezadoInfo{
+  display: flex;
+  justify-content: space-between;
+}
+
+.tituloSec{
+  margin-bottom: 2%; 
+}
+
+.tituloSec label{
+  font-family: 'Jua', sans-serif;
+  font-weight: 300;
+  font-size: larger;
+}
+
+/* Botones conjuto editar*/
+.btns{
+  margin-bottom: 2%;
+  display: flex;
+}
+
+.btns button{
+  width: 100px;
+  margin: 0 1% 0 1%;
+}
+
+#icon_cog{
+  font-size: 25px;
+}
+
+/* -------------------------------------------------------*/
+/* Informacion general 1 y 2*/
+.infGenUno {
+  display: flex;
+  width: 100%;
+  /* border: yellow solid; */
+}
+
+.columnaIzq{
+  width: 100%;
+  margin-right: 3%;
+}
+
+.columnaDer{
+  width: 100%;
+  margin-left: 3%;
+}
+
+.infocampo {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2%;
+}
+
+.infocampo input {
+  border: 1px solid #48d1cc;
+  background: #FFF;
+  cursor: text; 
+}
+.infocampo input:disabled {
+  background: #cef9f4;
+}
+
+
+.infocampo label{
+  font-family: 'Jua', sans-serif;
+  font-weight: 300;
+  font-size: medium;
+  color: #000;
+}
+
+.form-control{
+  font-size: medium;
+  background: none;
+  border: none;
+  cursor: default;  
+  outline: none;
+}
+
+.encInfDos{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1%;
+}
+
+.uploadFoto{
+  width: 100%;
+}
+
+.uploadFoto input{
+  width: 100%;
+}
+
+/* /////SECCION UBICACION */
+.infoUbicacion{
+  /* border: solid purple; */
+  width: 100%;
+}
+
+.check-inf-ubicacion{
+  /* border: solid; */
+  width: 100%;
+}
+
+.form-ubicacion{
+  width: 100%;
+  /* border: green solid; */
+}
+
+.encabezado-Ubicacion{
+  /* border: blue solid; */
+  width: 100%;
+}
+
+.contenedor-campos-ubicacion{
+  /* border: magenta solid; */
+  width: 100%;
+  display: grid;
+  grid-template-columns: 20% 15% 20% 5% 40%  ;
+}
+
+.cont-generar-link{
+  width: 100%;
+  /* border: slateblue dashed; */
+}
+
+.generar-link{
+  width: 100%;
+  /* border: yellow dashed; */
+}
+
+/* .encabezado-generar-link{
+  border: solid;
+} */
+
+.encabezado-generar-link label{
+  font-family: 'Jua', sans-serif;
+  font-weight: 300;
+  font-size: medium;
+  color: #000;
+}
+
+/* .check-link{
+  border: violet solid;
+} */
+
+/* .link-google-maps{
+  border: turquoise solid;
+}
+
+.Alternativa-link-google{
+  border: goldenrod solid;
+} */
+
+.encabezado-alt-link-google-maps{
+  display: grid;
+  grid-template-rows: min-content min-content min-content min-content min-content;
+  /* border: sandybrown solid; */
+}
+
+.informacion-cuadra{
+  display: grid;
+  grid-template-columns: 45% 10% 45%;
+}
+
+
+
+.infMedioPAgo{
+  margin-top: 2%;
+  /* border: solid; */
+}
+
+.encInfDos label{
+  font-family: 'Jua', sans-serif;
+  font-weight: 300;
+  font-size: large;
+  color: #000;
+}
+
+.opcionesMedioPago{
+  margin-top: 2%;
+  /* border: solid green; */
+}
+
+.encabezadoMediosPagoRegistrados, .encabezadoMediosPagoNoRegistrados{
+  margin-bottom: 2%;
+  /* border: yellow solid; */
+}
+
+.encabezadoMediosPagoRegistrados label, .encabezadoMediosPagoNoRegistrados label{
+  font-family: 'Jua', sans-serif;
+  font-weight: 300;
+  font-size: large;
+  color: #000;
+}
+
+.opcionesMP{
+  /* border: teal solid; */
+  margin-bottom: 4%;
+  border-bottom: solid 1px;
+}
+
+
+.Opcion{
+  display: flex;
+  /* border: dashed purple; */
+  height: 100%;
+  width: 100%;
+}
+
+.nombreOpcion{
+  width: calc(100%/3);
+  /* border: #410002 solid; */
+}
+
+.valorOpcion{
+  width: 80%;
+  height: 100%;
+  /* border: tomato solid; */
+}
+
+.seccionBtns{
+  /* border: solid goldenrod; */
+  display: flex;
+  justify-content: center;
+
+}
+
+.btn-personalized {
+  background-color: #1cb0ad; 
+  color: #FFF; 
+  font-family: 'Jua', sans-serif;
+  font-size: medium;
+}
+
+.btn-personalized:hover {
+  background-color: #138e8e;
+  color: #FFF;
+}
+
+.btn-personalized:disabled { 
+  background-color: #9df2e9;
+  color: #147071; 
+}

@@ -9,6 +9,7 @@ from src.services.PublicationService import PublicationService
 from src.services.paymentoption_adoptioncenterService import Paymentoption_AdoptioncenterService
 from src.services.AccessService import AccessService
 from src.services.ImageService import ImageService
+from src.services.PaymentoptionService import PaymentoptionService
 
 #models
 from src.models.Adoptioncenter import AdoptionCenter
@@ -141,8 +142,9 @@ def editProfileAdoptionCenter(id, name):
     user_information.user_type_id = access_user_information.user_type_id
     user_information.email = access_user_information.email
 
-    paymentOptions_registered = False
-    paymentOptions_NoRegistered = False
+    paymentOptions_registered = Paymentoption_AdoptioncenterService.getPaymentOptionAdoptionCenter(current_user.get_id())
+    paymentOptions_NoRegistered = PaymentoptionService.getNoPaymentOptionAdoptionCenter(current_user.get_id())
+    print("TAMAÑO:", len(paymentOptions_NoRegistered))
     return render_template('User_Adoption_Center/post/edit_profile.html', user_information = user_information,
                           paymentOptions_registered = paymentOptions_registered,
                           paymentOptions_NoRegistered = paymentOptions_NoRegistered)

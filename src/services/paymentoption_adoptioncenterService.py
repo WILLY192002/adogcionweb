@@ -23,9 +23,9 @@ class Paymentoption_AdoptioncenterService():
       else:
         return False
     except Exception as ex:
-      message = f"An error occurred while consulting payment options adoption center {ex}"
+      message = f"An error occurred while consulting payment options registered by adoption center {ex}"
       raise Exception(message)
-    
+
   @classmethod
   def deletePaymentOptionAdoptionCenter(self,adoptioncenter_id, paymentoption_id):
     try:
