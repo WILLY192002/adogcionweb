@@ -19,7 +19,7 @@ class Paymentoption_AdoptioncenterService():
       if rows!= None:
         for payOptionAdopt in rows:
           out_paymentoptions.append(PaymentOptionAdoptionCenter(payOptionAdopt[0], payOptionAdopt[1], payOptionAdopt[2],payOptionAdopt[3],payOptionAdopt[4]))
-          return out_paymentoptions
+        return out_paymentoptions
       else:
         return False
     except Exception as ex:
@@ -44,7 +44,9 @@ class Paymentoption_AdoptioncenterService():
     try:
       conexion = get_connection()
       cursor = conexion.cursor()
-      sql = f"UPDATE paymentoption_adoptioncenter SET number = {new_number} WHERE adoptioncenter_id = {adoptioncenter_id} AND paymentoption_id = {paymentoption_id};"
+      print("Update:", type(adoptioncenter_id))
+      sql = f"UPDATE paymentoption_adoptioncenter SET number_payment = {new_number} WHERE adoptioncenter_id = {adoptioncenter_id} AND paymentoption_id = {paymentoption_id};"
+      print(sql)
       cursor.execute(sql)
       conexion.commit()
       return True
@@ -57,12 +59,14 @@ class Paymentoption_AdoptioncenterService():
     try:
       conexion = get_connection()
       cursor = conexion.cursor()
+      print("XD:",type(paymentoption_adoptioncenter.adoptioncenter_id))
       new_paymentoption_adoptioncenter = paymentoption_adoptioncenter.__dict__
       new_paymentoption_adoptioncenter.pop("id")
       new_paymentoption_adoptioncenter = {key: value for key, value in new_paymentoption_adoptioncenter.items() if value is not None}
       columns = ', '.join(new_paymentoption_adoptioncenter.keys())
       values = ', '.join("'" + str(valor) + "'" if isinstance(valor, str) else str(valor) for valor in new_paymentoption_adoptioncenter.values())
-      sql = f"INSERT INTO paymentoption_adoptioncenter ({columns}) VALUES ({values})"
+      sql = f"INSERT INTO paymentoption_adoptioncenter ({columns}) VALUES ({values});"
+      print(sql)
       cursor.execute(sql)
       conexion.commit()
       return "A new payment option adoption center has been successfully added"

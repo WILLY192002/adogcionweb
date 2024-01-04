@@ -106,7 +106,7 @@ Perfil
               {%if PaymentOptions%}
               <div class="infocampo">
                 {%for paymentOption in PaymentOptions%}
-                <h6>*. {{PaymentOption.name_paymentoption}}:{{PaymentOption.number}}</h6>
+                <h6>*. {{paymentOption.name_paymentoption}}: {{paymentOption.number_payment}}</h6>
                 {%endfor%}
               </div>
               {%else%}

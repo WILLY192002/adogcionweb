@@ -194,7 +194,7 @@ Editar perfil
                       </div>
                       <div class="valorOpcion infocampo">
                         <input disabled id="mpr_{{paymentOption.paymentoption_id}}" class="form-control"
-                          name="paymentOptions_registered_number" type="text" value={{paymentOption.number}}>
+                          name="paymentOptions_registered_number" type="text" value={{paymentOption.number_payment}}>
                       </div>
                     </div>
                     {% endfor %}
@@ -241,6 +241,6 @@ Editar perfil
 {% endblock %}
 
 {% block customJS%}
-<!-- <script src="/static/js/editPerfil.js"></script> -->
+<script src="/static/js/User_Adoption_Center/post/edit_profile.js"></script>
 
 {% endblock %}

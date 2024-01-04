@@ -123,17 +123,17 @@ def editProfileAdoptionCenter(id, name):
         if number_paymentOptions_registered_selected[i] == '':
           # Delete_paymentOption.append(Alb_MedPago(0,current_user.get_id(),paymentOptions_registered_selected[i],"",""))
           # Paymentoption_AdoptioncenterService.eliminarMedioPagoAlb(db,current_user.get_id(),paymentOptions_registered_selected[i])
-          Paymentoption_AdoptioncenterService.deletePaymentOptionAdoptionCenter(current_user.get_id(),paymentOptions_registered_selected[i])
+          Paymentoption_AdoptioncenterService.deletePaymentOptionAdoptionCenter(current_user.get_id(),int(paymentOptions_registered_selected[i]))
         else:
           # Update_paymentOption.append(Alb_MedPago(0,current_user.get_id(),paymentOptions_registered_selected[i],number_paymentOptions_registered_selected[i],""))
           # Paymentoption_AdoptioncenterService.actualizarMedPagosAlb(db,current_user.get_id(),paymentOptions_registered_selected[i],number_paymentOptions_registered_selected[i])
-          Paymentoption_AdoptioncenterService.updatePaymentOptionAdoptionCenter(current_user.get_id(),paymentOptions_registered_selected[i],number_paymentOptions_registered_selected[i])
+          Paymentoption_AdoptioncenterService.updatePaymentOptionAdoptionCenter(current_user.get_id(),int(paymentOptions_registered_selected[i]),number_paymentOptions_registered_selected[i])
 
       for i in range(len(paymentOptions_Noregistered_selected)):
         # Insert_paymentOption.append(Alb_MedPago(0,current_user.get_id(),paymentOptions_Noregistered_selected[i],number_paymentOptions_Noregistered_selected[i],""))
-        PaymentOptionAdoptionCenter(None, paymentOptions_Noregistered_selected[i],current_user.get_id(),number_paymentOptions_Noregistered_selected[i])
+        new_PaymentOptionAdoptionCenter = PaymentOptionAdoptionCenter(None, int(paymentOptions_Noregistered_selected[i]),int(current_user.get_id()),number_paymentOptions_Noregistered_selected[i])
         # Paymentoption_AdoptioncenterService.insertarMedPagosAlb(db,current_user.get_id(),paymentOptions_Noregistered_selected[i],number_paymentOptions_Noregistered_selected[i])
-        Paymentoption_AdoptioncenterService.insertPaymentOptionAdoptionCenter()
+        Paymentoption_AdoptioncenterService.insertPaymentOptionAdoptionCenter(new_PaymentOptionAdoptionCenter)
       
       return redirect(url_for('view_profile_adoption_center.viewProfileAdoptionCenter', name = current_user.name, id = current_user.get_id()))
   else:
@@ -144,7 +144,8 @@ def editProfileAdoptionCenter(id, name):
 
     paymentOptions_registered = Paymentoption_AdoptioncenterService.getPaymentOptionAdoptionCenter(current_user.get_id())
     paymentOptions_NoRegistered = PaymentoptionService.getNoPaymentOptionAdoptionCenter(current_user.get_id())
-    print("TAMAÑO:", len(paymentOptions_NoRegistered))
-    return render_template('User_Adoption_Center/post/edit_profile.html', user_information = user_information,
+    
+    return render_template('User_Adoption_Center/post/edit_profile.html', 
+                          user_information = user_information,
                           paymentOptions_registered = paymentOptions_registered,
                           paymentOptions_NoRegistered = paymentOptions_NoRegistered)
