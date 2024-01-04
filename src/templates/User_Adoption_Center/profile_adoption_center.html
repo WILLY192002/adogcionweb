@@ -98,7 +98,7 @@ Perfil
                 </div>
                 {% if current_user.is_authenticated and (current_user.id == user_information.id)  %}
                 <div id = "href_editP" class = "href_editP" style="display: none;">
-                  <a href="#">Editar infomación completa</a>
+                  <a href="/edit_information/profile=current_user.get_id()/adoption_center=current_user.name">Editar infomación completa</a>
                 </div>
                 {% endif%}
                 

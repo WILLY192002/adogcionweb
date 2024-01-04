@@ -12,7 +12,6 @@ class AdoptioncenterService():
       columns = ', '.join(new_Adoptioncenter.keys())
       values = ', '.join("'" + str(valor) + "'" if isinstance(valor, str) else str(valor) for valor in new_Adoptioncenter.values())
       sql = f"INSERT INTO adoptioncenter ({columns}) VALUES ({values})"
-      print(sql)
       cursor.execute(sql)
       conexion.commit()
       return "A new adoption center has been successfully added"
