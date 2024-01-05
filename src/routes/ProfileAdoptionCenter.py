@@ -11,10 +11,13 @@ from src.services.AccessService import AccessService
 from src.services.ImageService import ImageService
 from src.services.PaymentoptionService import PaymentoptionService
 from src.services.TopicService import TopicService
+from src.services.AnimalService import AnimalService 
+from src.services.SpeciesService import SpeciesService 
 
 #models
 from src.models.Adoptioncenter import AdoptionCenter
 from src.models.Paymentoption_Adoptioncenter import PaymentOptionAdoptionCenter
+from src.models.Publication import Publication
 
 main = Blueprint('view_profile_adoption_center',__name__)
 
@@ -62,6 +65,118 @@ def viewProfileAdoptionCenter(id,name):
                            actuallySeccion = actuallySeccion, 
                            PaymentOptions = PaymentOptions, 
                            topic_adopted_id = topic_adopted_id)
+
+@main.route('/view/profile=<id>/adoption_center/<name>/adopt_animals', methods = ['GET', 'POST'])
+def viewProfileAdoptAnimals(id,name):
+  #INFORMATION PROFILE
+  user_information = AdoptioncenterService.getAdoptionCenterById(id)
+  access_user_information = AccessService.getAccessById(user_information.access_id)
+  user_information.user_type_id = access_user_information.user_type_id
+  user_information.email = access_user_information.email
+  topic_adopted_id = 0
+
+  categories = CategoryService.getAllCategories()
+  species = SpeciesService.getAllSpecies()
+  topics = False
+  actuallySeccion = "Adoptar"
+  PaymentOptions = Paymentoption_AdoptioncenterService.getPaymentOptionAdoptionCenter(id)
+
+  if request.method == 'POST':
+    filter_search = request.form.get('filter_search') if request.form.get('filter_search') != '' else None
+    filter_specie = request.form.get('filter_specie') if request.form.get('filter_specie') != '' else None
+    filter_sex = request.form.get('filter_sex') if request.form.get('filter_sex') != '' else None
+    filter_size = request.form.get('filter_size') if request.form.get('filter_size') != '' else None
+    filter_age = request.form.get('filter_age') if request.form.get('filter_age') != '' else None
+    print(filter_search,"--",filter_specie,"--",filter_sex,"--",filter_size,"--",filter_age,"--",)
+
+    No_adopted_animals = AnimalService.getNoAdoptedAnimalsFilter(user_information.id,filter_search,filter_specie,filter_sex,filter_size,filter_age)
+    publications = []
+    for animal in No_adopted_animals:
+      description = "*.Raza: "+animal.breed_name+"\n"+"*.Edad: "+str(animal.age)+"\n"+"*.Tamaño: "+animal.size+"\n"
+      publications.append(Publication(None,topic_adopted_id, user_information.access_id, None, None, animal.photo, animal.name, description,None,True))
+
+    return render_template('User_Adoption_Center/profile_adoption_center.html',
+                            user_information=user_information, 
+                            publications = publications, 
+                            categories = categories, 
+                            species = species,
+                            topics = topics, 
+                            actuallySeccion = actuallySeccion, 
+                            PaymentOptions = PaymentOptions, 
+                            topic_adopted_id = topic_adopted_id)
+    
+  else: 
+    #PUBLICATIONS, CATEGORIES, ACTUALLY SECCION
+    No_adopted_animals = AnimalService.getNoAdoptedAnimals(id)
+    publications = []
+    for animal in No_adopted_animals:
+      description = "*.Raza: "+animal.breed_name+"\n"+"*.Edad: "+str(animal.age)+"\n"+"*.Tamaño: "+animal.size+"\n"
+      publications.append(Publication(None,topic_adopted_id, user_information.access_id, None, None, animal.photo, animal.name, description,None,True))
+    
+    return render_template('User_Adoption_Center/profile_adoption_center.html',
+                            user_information=user_information, 
+                            publications = publications, 
+                            categories = categories, 
+                            species = species,
+                            topics = topics, 
+                            actuallySeccion = actuallySeccion, 
+                            PaymentOptions = PaymentOptions, 
+                            topic_adopted_id = topic_adopted_id)
+
+@main.route('/view/profile=<id>/adoption_center/<name>/filterby=<string:category>', methods = ['GET', 'POST'])
+def viewProfileAdoptionCenterByCategory(id, name, category):
+  if request.method == 'POST':
+    filter_topic = request.form.get('filter_topic') if request.form.get('filter_topic') != None else False
+    if filter_topic:
+      return redirect(url_for('view_profile_adoption_center.viewProfileAdoptionCenterByTopic', id = id , name = name, category = category, topic = filter_topic))
+    else:
+      return redirect(request.referrer)
+  else:
+    #INFORMATION PROFILE
+    user_information = AdoptioncenterService.getAdoptionCenterById(id)
+    access_user_information = AccessService.getAccessById(user_information.access_id)
+    user_information.user_type_id = access_user_information.user_type_id
+    user_information.email = access_user_information.email
+
+    #PUBLICATIONS, CATEGORIES, ACTUALLY SECCION
+    publications = PublicationService.getAllPublicationByCategoryId(category,user_information.access_id)
+    categories = CategoryService.getAllCategories()
+    topics = TopicService.getAllTopicByCategory(category)
+    actuallySeccion = category
+    PaymentOptions = Paymentoption_AdoptioncenterService.getPaymentOptionAdoptionCenter(id)
+    topic_adopted_id = 0
+    return render_template('User_Adoption_Center/profile_adoption_center.html',
+                           user_information=user_information, 
+                           publications = publications, 
+                           categories = categories, 
+                           topics = topics, 
+                           actuallySeccion = actuallySeccion, 
+                           PaymentOptions = PaymentOptions, 
+                           topic_adopted_id = topic_adopted_id)
+
+@main.route('/view/profile=<id>/adoption_center/<name>/filterby=<string:category>/topic=<string:topic>', methods = ['GET'])
+def viewProfileAdoptionCenterByTopic(id, name, category,topic):
+  #INFORMATION PROFILE
+  user_information = AdoptioncenterService.getAdoptionCenterById(id)
+  access_user_information = AccessService.getAccessById(user_information.access_id)
+  user_information.user_type_id = access_user_information.user_type_id
+  user_information.email = access_user_information.email
+
+  #PUBLICATIONS, CATEGORIES, ACTUALLY SECCION
+  publications = PublicationService.getAllPublicationByTopic(user_information.access_id,topic)
+  categories = CategoryService.getAllCategories()
+  topics = TopicService.getAllTopicByCategory(category)
+  actuallySeccion = category
+  PaymentOptions = Paymentoption_AdoptioncenterService.getPaymentOptionAdoptionCenter(id)
+  topic_adopted_id = 0
+  return render_template('User_Adoption_Center/profile_adoption_center.html',
+                          user_information=user_information, 
+                          publications = publications, 
+                          categories = categories, 
+                          topics = topics, 
+                          actuallySeccion = actuallySeccion, 
+                          PaymentOptions = PaymentOptions, 
+                          topic_adopted_id = topic_adopted_id)
 
 @main.route('/edit_information/profile=<id>/adoption_center/<name>', methods = ['GET', 'POST'])
 def editProfileAdoptionCenter(id, name):
@@ -145,31 +260,17 @@ def editProfileAdoptionCenter(id, name):
                             paymentOptions_NoRegistered = paymentOptions_NoRegistered)
     else:
       return render_template('auth/no_authorized.html')
-    
-@main.route('/view/profile=<id>/adoption_center/<name>/filterby=<string:category>', methods = ['GET', 'POST'])
-def viewProfileAdoptionCenterByCategory(id, name, category):
-  if request.method == 'POST':
-    return 'Falta poner post en filtro por categoria'
-  else:
-    #INFORMATION PROFILE
-    user_information = AdoptioncenterService.getAdoptionCenterById(id)
-    access_user_information = AccessService.getAccessById(user_information.access_id)
-    user_information.user_type_id = access_user_information.user_type_id
-    user_information.email = access_user_information.email
 
-    #PUBLICATIONS, CATEGORIES, ACTUALLY SECCION
-    publications = PublicationService.getAllPublicationByCategoryId(category,user_information.access_id)
-    categories = CategoryService.getAllCategories()
-    topics = TopicService.getAllTopicByCategory(category)
-    actuallySeccion = category
-    PaymentOptions = Paymentoption_AdoptioncenterService.getPaymentOptionAdoptionCenter(id)
-    topic_adopted_id = 0
-    return render_template('User_Adoption_Center/profile_adoption_center.html',
-                           user_information=user_information, 
-                           publications = publications, 
-                           categories = categories, 
-                           topics = topics, 
-                           actuallySeccion = actuallySeccion, 
-                           PaymentOptions = PaymentOptions, 
-                           topic_adopted_id = topic_adopted_id)
 
+
+
+
+# form_id = request.form['form_id']
+#     if form_id == 'filter_adoption_seccion':
+#       barraFilter = request.form['filter_search']
+#       especieFilter = request.form['filter_specie']
+#       sexoFilter = request.form['filter_sex']
+#       tamanioFilter = request.form['filter_size']
+#       edadFilter = request.form['filter_age']
+      
+#       return 'xd'

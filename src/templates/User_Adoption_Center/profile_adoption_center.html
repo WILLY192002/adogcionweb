@@ -131,12 +131,12 @@ Perfil
   <div class = contPublicacion>
     <div class = "contPestanas">
       <div class="pestana">
-        <a class="href-personalized" href="#">
+        <a class="href-personalized" href="/view/profile={{user_information.id}}/adoption_center/{{user_information.name}}">
           <strong>General</strong>
         </a>
       </div>
       <div class="pestana">
-        <a class="href-personalized" href="#">
+        <a class="href-personalized" href="/view/profile={{user_information.id}}/adoption_center/{{user_information.name}}/adopt_animals">
           <strong>Adoptar</strong>
         </a>
       </div>
@@ -152,11 +152,11 @@ Perfil
     </div>
     <div class="vistaPublicacion">
       {%if actuallySeccion != "Adoptar" and actuallySeccion != "General" and topics%}
-      <form class = "contFiltro" action="/fundacion_{{user_information.nombre}}.{{user_information.id}}/perfil/{{actuallySeccion}}/FiltrarPor=Todo"  method="POST">
+      <form class = "contFiltro" action="/view/profile={{user_information.id}}/adoption_center/{{user_information.name}}/filterby={{actuallySeccion}}"  method="POST">
         <div class="row justify-content-md-center row-cols-6">
           <div class="col col-6 mt-3 mb-3">
             <input type="hidden" name="form_id" value="filter_animal"><!--IDENTIFICADOR FORM-->
-            <select class="form-select" aria-label="Filtrar por tema" name="Temafiltro">
+            <select class="form-select" aria-label="Filtrar por tema" name="filter_topic">
               <option disabled selected >Filtrar por Todo</option>
               {%for topic in topics %}
               <option value={{topic.id}}>{{topic.name}}</option>
@@ -171,11 +171,11 @@ Perfil
         </div>
       </form>
       {%elif actuallySeccion == "Adoptar"%}
-      <form ation='mis_animales' method="POST">
+      <form ation='/view/profile={{user_information.id}}/adoption_center/{{user_information.name}}/adopt_animals' method="POST">
         <div class="row justify-content-md-center row-cols-3">
           <div class="col-6 mt-3 mb-3">
-            <input type="hidden" name="form_id" value="filter_animal-adoption"><!--IDENTIFICADOR FORM-->
-            <input type="text" class="form-control" placeholder="Buscar animales" aria-label="Buscar animales" name="barraFilter" id="barraFilter">
+            <input type="hidden" name="form_id" value="filter_adoption_seccion"><!--IDENTIFICADOR FORM-->
+            <input type="text" class="form-control" placeholder="Buscar animales" aria-label="Buscar animales" name="filter_search" id="barraFilter">
           </div>
           <div class="col col-md-auto mt-3 mb-3">
             <button id="botonFiltrar" class="btn btn-outline-personalized" type="button">
@@ -196,24 +196,23 @@ Perfil
           </div>
           <div class="row justify-content-md-center">
             <div class="col-2 mb-3">
-              <select class="form-select animalFilter" aria-label="Filtrar por especie" name="especieFilter">
-                <option selected value="">Especie</option>
-                <option value="Perro">Perro</option>
-                <option value="Gato">Gato</option>
-                <option value="Conejo">Conejo</option>
-                <option value="Hamster">Hamster</option>
+              <select class="form-select animalFilter" aria-label="Filtrar por especie" name="filter_specie">
+                <option selected disabled>Especie</option>
+                {%for specie in species %}
+                <option value={{specie.id}}>{{specie.name}}</option>
+                {% endfor %}
               </select>
             </div>
             <div class="col-2 mb-3">
-              <select class="form-select animalFilter" aria-label="Filtrar por sexo" name="sexoFilter">
-                <option selected value="">Sexo</option>
+              <select class="form-select animalFilter" aria-label="Filtrar por sexo" name="filter_sex">
+                <option selected disabled>Sexo</option>
                 <option value="Macho">Macho</option>
                 <option value="Hembra">Hembra</option>
               </select>
             </div>
             <div class="col-2 mb-3">
-              <select class="form-select animalFilter" aria-label="Filtrar por tamaño" name="tamanioFilter">
-                <option selected value="">Tamaño</option>
+              <select class="form-select animalFilter" aria-label="Filtrar por tamaño" name="filter_size">
+                <option selected disabled>Tamaño</option>
                 <option value="Pequeño">Pequeño (0-20cm)</option>
                 <option value="Mediano">Mediano (21-50cm)</option>
                 <option value="Grande">Grande (51-80cm)</option>
@@ -221,8 +220,8 @@ Perfil
               </select>
             </div>
             <div class="col-2 mb-3">
-              <select class="form-select animalFilter" aria-label="Filtrar por edad" name="edadFilter">
-                <option selected value="">Edad</option>
+              <select class="form-select animalFilter" aria-label="Filtrar por edad" name="filter_age">
+                <option selected disabled>Edad</option>
                 <option value="1">0 - 3</option>
                 <option value="2">4 - 7</option>
                 <option value="3">8 - 11</option>
