@@ -10,6 +10,7 @@ from src.services.paymentoption_adoptioncenterService import Paymentoption_Adopt
 from src.services.AccessService import AccessService
 from src.services.ImageService import ImageService
 from src.services.PaymentoptionService import PaymentoptionService
+from src.services.TopicService import TopicService
 
 #models
 from src.models.Adoptioncenter import AdoptionCenter
@@ -17,7 +18,7 @@ from src.models.Paymentoption_Adoptioncenter import PaymentOptionAdoptionCenter
 
 main = Blueprint('view_profile_adoption_center',__name__)
 
-@main.route('/view/profile=<id>/adoption_center=<name>', methods = ['GET', 'POST'])
+@main.route('/view/profile=<id>/adoption_center/<name>', methods = ['GET', 'POST'])
 def viewProfileAdoptionCenter(id,name):
   if request.method == 'POST':
     if current_user.is_authenticated and current_user.get_id() == id:
@@ -62,8 +63,7 @@ def viewProfileAdoptionCenter(id,name):
                            PaymentOptions = PaymentOptions, 
                            topic_adopted_id = topic_adopted_id)
 
-
-@main.route('/edit_information/profile=<id>/adoption_center=<name>', methods = ['GET', 'POST'])
+@main.route('/edit_information/profile=<id>/adoption_center/<name>', methods = ['GET', 'POST'])
 def editProfileAdoptionCenter(id, name):
   if request.method == 'POST':
     if current_user.is_authenticated and current_user.get_id() == id: 
@@ -116,24 +116,14 @@ def editProfileAdoptionCenter(id, name):
       number_paymentOptions_Noregistered_selected = request.form.getlist('paymentOptions_NoRegistered_number')
 
       #SEPARAR LOS MEDIOS DE PAGO QUE SERÁN ELIMINADOS DE LOS QUE SERÁN ACTUALIZADOS / INSERTADOS
-      Insert_paymentOption = []
-      Delete_paymentOption = []
-      Update_paymentOption = []
-      
       for i in range(len(paymentOptions_registered_selected)):
         if number_paymentOptions_registered_selected[i] == '':
-          # Delete_paymentOption.append(Alb_MedPago(0,current_user.get_id(),paymentOptions_registered_selected[i],"",""))
-          # Paymentoption_AdoptioncenterService.eliminarMedioPagoAlb(db,current_user.get_id(),paymentOptions_registered_selected[i])
           Paymentoption_AdoptioncenterService.deletePaymentOptionAdoptionCenter(current_user.get_id(),int(paymentOptions_registered_selected[i]))
         else:
-          # Update_paymentOption.append(Alb_MedPago(0,current_user.get_id(),paymentOptions_registered_selected[i],number_paymentOptions_registered_selected[i],""))
-          # Paymentoption_AdoptioncenterService.actualizarMedPagosAlb(db,current_user.get_id(),paymentOptions_registered_selected[i],number_paymentOptions_registered_selected[i])
           Paymentoption_AdoptioncenterService.updatePaymentOptionAdoptionCenter(current_user.get_id(),int(paymentOptions_registered_selected[i]),number_paymentOptions_registered_selected[i])
 
       for i in range(len(paymentOptions_Noregistered_selected)):
-        # Insert_paymentOption.append(Alb_MedPago(0,current_user.get_id(),paymentOptions_Noregistered_selected[i],number_paymentOptions_Noregistered_selected[i],""))
         new_PaymentOptionAdoptionCenter = PaymentOptionAdoptionCenter(None, int(paymentOptions_Noregistered_selected[i]),int(current_user.get_id()),number_paymentOptions_Noregistered_selected[i])
-        # Paymentoption_AdoptioncenterService.insertarMedPagosAlb(db,current_user.get_id(),paymentOptions_Noregistered_selected[i],number_paymentOptions_Noregistered_selected[i])
         Paymentoption_AdoptioncenterService.insertPaymentOptionAdoptionCenter(new_PaymentOptionAdoptionCenter)
       
       return redirect(url_for('view_profile_adoption_center.viewProfileAdoptionCenter', name = current_user.name, id = current_user.get_id()))
@@ -155,3 +145,31 @@ def editProfileAdoptionCenter(id, name):
                             paymentOptions_NoRegistered = paymentOptions_NoRegistered)
     else:
       return render_template('auth/no_authorized.html')
+    
+@main.route('/view/profile=<id>/adoption_center/<name>/filterby=<string:category>', methods = ['GET', 'POST'])
+def viewProfileAdoptionCenterByCategory(id, name, category):
+  if request.method == 'POST':
+    return 'Falta poner post en filtro por categoria'
+  else:
+    #INFORMATION PROFILE
+    user_information = AdoptioncenterService.getAdoptionCenterById(id)
+    access_user_information = AccessService.getAccessById(user_information.access_id)
+    user_information.user_type_id = access_user_information.user_type_id
+    user_information.email = access_user_information.email
+
+    #PUBLICATIONS, CATEGORIES, ACTUALLY SECCION
+    publications = PublicationService.getAllPublicationByCategoryId(category,user_information.access_id)
+    categories = CategoryService.getAllCategories()
+    topics = TopicService.getAllTopicByCategory(category)
+    actuallySeccion = category
+    PaymentOptions = Paymentoption_AdoptioncenterService.getPaymentOptionAdoptionCenter(id)
+    topic_adopted_id = 0
+    return render_template('User_Adoption_Center/profile_adoption_center.html',
+                           user_information=user_information, 
+                           publications = publications, 
+                           categories = categories, 
+                           topics = topics, 
+                           actuallySeccion = actuallySeccion, 
+                           PaymentOptions = PaymentOptions, 
+                           topic_adopted_id = topic_adopted_id)
+

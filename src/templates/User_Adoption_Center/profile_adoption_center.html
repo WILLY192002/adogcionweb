@@ -15,7 +15,7 @@ Perfil
 <!-- unitest, nosetest -->
 {% block body %}
 <div class="contenedor">
-  <form class="contPrincipal" action="/view/profile={{current_user.get_id()}}/adoption_center={{current_user.name}}" method="POST">
+  <form class="contPrincipal" action="/view/profile={{current_user.get_id()}}/adoption_center/{{current_user.name}}" method="POST">
     <!-- Seccion 1 -->
     <div class="seccion1">
       <input type="hidden" name="form_id" value="edit_info">
@@ -98,7 +98,7 @@ Perfil
                 </div>
                 {% if current_user.is_authenticated and (current_user.id == user_information.id)  %}
                 <div id = "href_editP" class = "href_editP" style="display: none;">
-                  <a href="/edit_information/profile={{current_user.get_id()}}/adoption_center={{current_user.name}}">Editar infomación completa</a>
+                  <a href="/edit_information/profile={{current_user.get_id()}}/adoption_center/{{current_user.name}}">Editar infomación completa</a>
                 </div>
                 {% endif%}
                 
@@ -143,7 +143,7 @@ Perfil
       {%if categories%}
       {% for category in categories %}
         <div class="pestana">
-          <a class="href-personalized" href="#">
+          <a class="href-personalized" href="/view/profile={{user_information.id}}/adoption_center/{{user_information.name}}/filterby={{category.id}}">
             <strong>{{category.name}}</strong>
           </a>
         </div>
