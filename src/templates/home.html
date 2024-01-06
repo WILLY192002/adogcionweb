@@ -12,11 +12,11 @@
 
 <div class="container text-center">
   <div class="filtrosVistasHome">
-    <form action='home' method="POST" class="formfiltros">
+    <form action='/home/adoption_center' method="POST" class="formfiltros">
       <div class="opcionFiltros">
         <div class="barraFiltro">
           <input type="hidden" name="form_id" value="filter_home"><!--IDENTIFICADOR FORM-->
-          <input type="text" class="form-control" placeholder="Buscar" aria-label="Buscar" name="barraBusquedaFilter"
+          <input type="text" class="form-control" placeholder="Buscar" aria-label="Buscar" name="filter_search"
             id="barraBusquedaFilter">
         </div>
         <div class="filtro-btn">
@@ -37,7 +37,7 @@
             <label>Filtrar por:</label>
           </div>
           <div class="filtro-categoria">
-            <select id="selectCategorias" class="form-select" aria-label="Filtrar por categoria" name="filtroCategoria">
+            <select id="selectCategorias" class="form-select" aria-label="Filtrar por categoria" name="filter_category">
               <option selected disabled>Categoria</option>
               {%for category in categories %}
               <option value={{category.id}}>{{category.name}}</option>
@@ -46,7 +46,7 @@
           </div>
           {%if topics%}
           <div class="filtro-tema">
-            <select disabled id="selectTema" class="form-select" aria-label="Filtrar por tema" name="filtroTema">
+            <select id="selectTema" class="form-select" aria-label="Filtrar por tema" name="filter_topic">
               <option selected disabled>Tema</option>
               {%for topic in topics %}
               <option value={{topic.id}} class="{{topic.category_id}}">{{topic.name}}</option>
@@ -72,12 +72,12 @@
         </button>
       </div> -->
       <div class="col col-md-4 d-grid gap-2">
-        <a class="btn btn-personalized" href="#">
+        <a class="btn btn-personalized" href="/home/adoption_center">
           <i class='bx bxs-home-heart'></i> Fundaciones
         </a>
       </div>
       <div class="col col-md-4 d-grid gap-2">
-        <a class="btn btn-personalized" href="#">
+        <a class="btn btn-personalized" href="/home/community">
           <i class='bx bxs-book-heart'></i> Comunidad
         </a>
       </div>

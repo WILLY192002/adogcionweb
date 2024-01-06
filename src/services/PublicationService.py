@@ -6,11 +6,23 @@ from src.models.Publication import Publication
 
 class PublicationService():
   @classmethod
-  def getAllPublicationByUserType(self, user_type_id):
+  def getAllPublicationByAdoptionCenter(self, filter_search, filter_topic, filter_category):
     try:
       conexion = get_connection()
       cursor = conexion.cursor()
-      sql = f"SELECT p.*, ac.photo, ac.name FROM publication p JOIN access a ON p.access_id = a.id JOIN adoptioncenter ac ON a.id = ac.access_id WHERE a.user_type_id = {user_type_id} AND p.is_activate = 1 ORDER BY date DESC;"
+      sql = """SELECT p.*, ac.photo, ac.name FROM publication p JOIN access a ON p.access_id = a.id 
+      JOIN adoptioncenter ac ON a.id = ac.access_id
+      WHERE p.is_activate = 1"""
+      if filter_search != None:
+        sql += f" AND ac.name LIKE '%{filter_search}%'"
+      if filter_topic != None:
+        sql += f' AND p.topic_id = {filter_topic}'
+      if filter_category != None and filter_topic == None:
+        sql += ' AND ('
+        sql += ' OR'.join((' p.topic_id = ' + str(x.id)) for x in filter_category)
+        sql += ') '
+
+      sql += ' ORDER BY date DESC;'
       cursor.execute(sql)
       row = cursor.fetchall()
       out_publication = []
@@ -24,6 +36,8 @@ class PublicationService():
       message = f"An error occurred while consulting publications by user type {ex}"
       raise Exception(message)
   
+  
+
   @classmethod
   def getAllPublicationByAccessId(self, access_id):
     try:

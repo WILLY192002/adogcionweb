@@ -17,7 +17,7 @@ class TopicService():
       if row != None:
         for topic in row:
           out_topic.append(Topic(topic[0],topic[1], topic[2]))
-          return out_topic
+        return out_topic
       else:
         return False
     except Exception as ex:

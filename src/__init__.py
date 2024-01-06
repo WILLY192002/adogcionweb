@@ -27,7 +27,7 @@ def init_app(config):
     app.register_blueprint(LoginUser.main, url_prefix='/login')
     app.register_blueprint(LogoutUser.main, url_prefix='/logout')
 
-    app.register_blueprint(HomeAdoptionCenter.main, url_prefix='/home/adoption_center')
+    app.register_blueprint(HomeAdoptionCenter.main)
     
     app.register_blueprint(ProfileAdoptionCenter.main)
 
