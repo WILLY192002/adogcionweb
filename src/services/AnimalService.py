@@ -52,7 +52,7 @@ class AnimalService():
       WHERE is_adopted = false AND adoptioncenter_id = {adoptioncenter_id}"""
 
       if filter_search != None:
-        sql += f" AND (animal.name LIKE '{filter_search}')"
+        sql += f" AND (animal.name LIKE '%{filter_search}%')"
       if filter_specie != None:
         sql += f" AND species.id = '{filter_specie}'"
       if filter_Sex != None:

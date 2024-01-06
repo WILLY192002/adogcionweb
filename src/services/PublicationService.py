@@ -10,13 +10,13 @@ class PublicationService():
     try:
       conexion = get_connection()
       cursor = conexion.cursor()
-      sql = f"SELECT p.* FROM publication p JOIN access a ON p.access_id = a.id WHERE a.user_type_id = {user_type_id} AND p.is_activate = 1 ORDER BY date DESC;"
+      sql = f"SELECT p.*, ac.photo, ac.name FROM publication p JOIN access a ON p.access_id = a.id JOIN adoptioncenter ac ON a.id = ac.access_id WHERE a.user_type_id = {user_type_id} AND p.is_activate = 1 ORDER BY date DESC;"
       cursor.execute(sql)
       row = cursor.fetchall()
       out_publication = []
       if row != None:
         for pub in row:
-          out_publication.append(Publication(pub[0],pub[1],pub[2],None, None,pub[3],pub[4],pub[5],pub[6],pub[7]))
+          out_publication.append(Publication(pub[0],pub[1],pub[2],pub[3],pub[4],pub[5],pub[6],pub[7], pub[8], pub[9]))
         return out_publication
       else:
         return False
@@ -35,7 +35,7 @@ class PublicationService():
       out_publication = []
       if row != None:
         for pub in row:
-          out_publication.append(Publication(pub[0],pub[1],pub[2],None, None,pub[3],pub[4],pub[5],pub[6],pub[7]))
+          out_publication.append(Publication(pub[0],pub[1],pub[2],pub[3],pub[4],pub[5],pub[6],pub[7]))
         return out_publication
       else:
         return False
@@ -56,7 +56,7 @@ class PublicationService():
       out_publication = []
       if row != None:
         for pub in row:
-          out_publication.append(Publication(pub[0],pub[1],pub[2],None, None,pub[3],pub[4],pub[5],pub[6],pub[7]))
+          out_publication.append(Publication(pub[0],pub[1],pub[2],pub[3],pub[4],pub[5],pub[6],pub[7]))
         return out_publication
       else:
         return False
@@ -75,7 +75,7 @@ class PublicationService():
       out_publication = []
       if row != None:
         for pub in row:
-          out_publication.append(Publication(pub[0],pub[1],pub[2],None, None,pub[3],pub[4],pub[5],pub[6],pub[7]))
+          out_publication.append(Publication(pub[0],pub[1],pub[2],pub[3],pub[4],pub[5],pub[6],pub[7]))
         return out_publication
       else:
         return False
