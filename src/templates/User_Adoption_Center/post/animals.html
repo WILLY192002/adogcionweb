@@ -1,0 +1,159 @@
+{% extends './lateral_base.html' %}
+
+{% block title %}Mis animales{% endblock %}
+
+{% block customCSS %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href={{url_for('static', filename = 'css/User_Adoption_Center/post/animals.css')}} />
+{% endblock %}
+
+{% block body %}
+<div class="container text-center">
+  
+  <form ation='mis_animales' method="POST">
+    <div class="row justify-content-md-center row-cols-3">
+      <div class="col-6 mt-3 mb-3">
+        <input type="hidden" name="form_id" value="filter_animal"><!--IDENTIFICADOR FORM-->
+        <input type="text" class="form-control" placeholder="Buscar animales" aria-label="Buscar animales" name="barraFilter" id="barraFilter">
+      </div>
+      <div class="col col-md-auto mt-3 mb-3">
+        <button id="botonFiltrar" class="btn btn-outline-personalized" type="button">
+          <i class='bx bx-filter'></i> Filtrar
+        </button>
+      </div>
+      <div class="col col-md-auto mt-3 mb-3">
+        <button class="btn btn-outline-personalized" type="submit">
+          <i class='bx bx-search'></i> Buscar
+        </button>
+      </div>
+    </div>
+    <div id="filter_animal_div" style="display: none;">
+      <div class="row justify-content-md-center">
+        <div class="col-8 text-start">
+          <p>Filtrar por:</p>
+        </div>
+      </div>
+      <div class="row justify-content-md-center">
+        <div class="col-2 mb-3">
+          <select class="form-select animalFilter" aria-label="Filtrar por especie" name="especieFilter">
+            <option selected value="">Especie</option>
+            <option value="Perro">Perro</option>
+            <option value="Gato">Gato</option>
+            <option value="Conejo">Conejo</option>
+            <option value="Hamster">Hamster</option>
+          </select>
+        </div>
+        <div class="col-2 mb-3">
+          <select class="form-select animalFilter" aria-label="Filtrar por sexo" name="sexoFilter">
+            <option selected value="">Sexo</option>
+            <option value="Macho">Macho</option>
+            <option value="Hembra">Hembra</option>
+          </select>
+        </div>
+        <div class="col-2 mb-3">
+          <select class="form-select animalFilter" aria-label="Filtrar por tamaño" name="tamanioFilter">
+            <option selected value="">Tamaño</option>
+            <option value="Pequeño">Pequeño (0-20cm)</option>
+            <option value="Mediano">Mediano (21-50cm)</option>
+            <option value="Grande">Grande (51-80cm)</option>
+            <option value="Gigante">Gigante (>81cm)</option>
+          </select>
+        </div>
+        <div class="col-2 mb-3">
+          <select class="form-select animalFilter" aria-label="Filtrar por edad" name="edadFilter">
+            <option selected value="">Edad</option>
+            <option value="1">0 - 3</option>
+            <option value="2">4 - 7</option>
+            <option value="3">8 - 11</option>
+            <option value="4">12 - 15</option>
+            <option value="5"> >16</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </form>    
+  <div class="row justify-content-md-center">
+    <div class="col-8 mb-3 d-grid gap-2">
+      <a class="btn btn-personalized" href="/upload_animal">
+        <i class='bx bxs-dog'></i> Nuevo Animal
+      </a>
+    </div>
+  </div>
+
+  <!--Card Animales Registrados-->
+  <div class="row justify-content-md-center">
+    {%if noAdoptedAnimals%}
+    <h1>Animales sin adoptar</h1>
+    {%for animal in noAdoptedAnimals%}
+    <div class="col col-md-auto">
+      <div class="card" style="width: 18rem;">
+        <img src="{{animal.photo}}" class="card-img-top" alt="{{animal.name}}">
+        <div class="card-body">
+          <h5 class="card-title">{{animal.name}}</h5>
+          <p>• Especie: {{animal.species}}</p>
+          <p>• Edad: {{animal.age}}</p>
+          <p>• Tamaño: {{animal.size}}</p>
+          <div class="card-body">
+            <button id="open-btn-{{animal.id}}" class="btn btn-personalized" type="button" data-bs-toggle="modal" data-bs-target="#Modal3"
+              data-idanimal="{{animal.id}}"
+              data-fotografia="{{animal.photo}}"
+              data-nombre="{{animal.name}}"
+              data-edad="{{animal.age}}"
+              data-sexo="{{animal.sex}}"
+              data-raza="{{animal.breed_id}}"
+              data-tamanio="{{animal.size}}"
+              data-peso="{{animal.weight}}">
+              <i class='bx bx-book-open'></i> Abrir
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor%}
+    {%endif%}
+  </div>
+
+  <div class="row justify-content-md-center" style="margin-top: 2%;">
+    {%if AdoptedAnimals%}
+    <h1>Animales adoptados</h1>
+    {%for animal in AdoptedAnimals%}
+    <div class="col col-md-auto">
+      <div class="card" style="width: 18rem;">
+        <img src="{{animal.fotografia}}" class="card-img-top" alt="{{animal.Nombre}}">
+        <div class="card-body">
+          <h5 class="card-title">{{animal.nombre}}</h5>
+          <p>• Especie: {{animal.especie}}</p>
+          <p>• Edad: {{animal.edad}}</p>
+          <p>• Tamaño: {{animal.tamanio}}</p>
+          <div class="card-body">
+            <button id="open-btn-{{animal.id}}" class="btn btn-personalized" type="button" data-bs-toggle="modal" data-bs-target="#Modal3"
+              data-idanimal="{{animal.id}}"
+              data-fotografia="{{animal.fotografia}}"
+              data-nombre="{{animal.nombre}}"
+              data-edad="{{animal.edad}}"
+              data-especie="{{animal.especie}}"
+              data-sexo="{{animal.sexo}}"
+              data-raza="{{animal.raza}}"
+              data-tamanio="{{animal.tamanio}}"
+              data-peso="{{animal.peso}}"
+              data-estado_medico="{{animal.estado_Medico}}">
+              <i class='bx bx-book-open'></i> Abrir
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor%}
+    {%endif%}
+  </div>
+</div>  
+{% endblock %}
+
+{% block modal %}
+  {% include "User_Adoption_Center/modal.html" %}
+{% endblock %}
+
+{% block customJS%}
+
+<script src="/static/js/User_Adoption_Center/post/animals.js"></script>
+{% endblock %}

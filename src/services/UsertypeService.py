@@ -39,3 +39,47 @@ class UsertypeService():
       raise Exception(message)
     finally:
       conexion.close()
+  
+  @classmethod
+  def verifyUserTypeAdoptionCenter(self, user_type_id):
+    try:
+      conexion = get_connection()
+      cursor = conexion.cursor()
+      user_type_name = 'UT-ADOPTION_CENTER'
+      sql = f"SELECT * FROM usertype WHERE name = '{user_type_name}'"
+      cursor.execute(sql)
+      row = cursor.fetchone()
+      if row != None:
+        if user_type_id == UserType(row[0],row[1]).id:
+          return True
+        else:
+          return False
+      else:
+        return False
+    except Exception as ex:
+      message = f"An error occurred while consulting an usertype 'Adoption Center' {ex}"
+      raise Exception(message)
+    finally:
+      conexion.close()
+  
+  @classmethod
+  def verifyUserTypeNatrualPerson(self, user_type_id):
+    try:
+      conexion = get_connection()
+      cursor = conexion.cursor()
+      user_type_name = 'UT-NATURAL_PERSON'
+      sql = f"SELECT * FROM usertype WHERE name = '{user_type_name}'"
+      cursor.execute(sql)
+      row = cursor.fetchone()
+      if row != None:
+        if user_type_id == UserType(row[0],row[1]).id:
+          return True
+        else:
+          return False
+      else:
+        return False
+    except Exception as ex:
+      message = f"An error occurred while consulting an usertype 'Natural Person' {ex}"
+      raise Exception(message)
+    finally:
+      conexion.close()

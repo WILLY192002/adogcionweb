@@ -46,7 +46,7 @@
           </div>
           {%if topics%}
           <div class="filtro-tema">
-            <select id="selectTema" class="form-select" aria-label="Filtrar por tema" name="filter_topic">
+            <select id="selectTema" class="form-select" aria-label="Filtrar por tema" name="filter_topic" disabled>
               <option selected disabled>Tema</option>
               {%for topic in topics %}
               <option value={{topic.id}} class="{{topic.category_id}}">{{topic.name}}</option>

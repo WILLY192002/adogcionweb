@@ -1,0 +1,157 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+body{
+  background-color: #FFF;
+}
+
+.card-img-top {
+  object-fit: cover;
+  height: 300px; 
+}
+
+.card-body p {
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+.card-title{
+  font-family: "Jua", sans-serif;
+  font-weight: bold;
+  font-size: x-large;
+}
+
+.btn-personalized {
+  background-color: #1cb0ad; 
+  color: #FFF; 
+  font-family: 'Jua', sans-serif;
+  font-size: medium;
+}
+
+.btn-personalized:hover {
+  background-color: #138e8e;
+  color: #FFF;
+}
+
+.btn-personalized:disabled { 
+  background-color: #9df2e9;
+  color: #147071; 
+}
+
+.btn-outline-personalized {
+  border-color: #147071;
+  font-family: 'Jua', sans-serif;
+  font-size: medium;
+  color: #147071;
+}
+
+.btn-outline-personalized:hover {
+  background-color: #f1fcfb;
+  border-color: #147071;
+  color: #147071;
+}
+
+#barraFilter{
+  border-color: #147071;
+  font-size: medium;
+  color: #000;
+}
+
+/*modal carga foto*/
+.modal-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#modaltitle, #modaltitle2, #modaltitle3{
+  font-weight: bold;
+  color: #001f25;
+}
+
+#foto {
+  display: none !important;
+}
+
+.label-input {
+  height: 200px;
+  width: 100%; 
+  border: 1px dashed #16494b;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-family: 'Jua', sans-serif;
+  font-weight: bold;
+  font-size: x-large;
+  color: #16494b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.label-input:hover{
+  color: #062b2d;
+  border: 1px dashed #062b2d;
+}
+
+/*Modal captura de formulario nuevo animal*/
+.newAnimal, .editAnimal, .animalFilter {
+  border-color: #147071;
+  font-size: medium;
+  color: #000;
+}
+
+.newAnimal::placeholder{
+  color: #000;
+}
+
+.input-group-text, .newAnimal:disabled {
+  background-color: #f1fcfb;
+}
+/*Modal editar animales*/
+.input-group-text {
+  width: 9rem;
+  border-color: #147071;
+}
+
+.btn-secondary-personalized {
+  background-color: #e04242; 
+  color: #FFF; 
+  font-family: 'Jua', sans-serif;
+  font-size: medium;
+}
+
+.btn-secondary-personalized:hover {
+  background-color: #cf3333;
+  color: #FFF;
+}
+
+.btn-secondary-personalized:active {
+  background-color: #ad2828;
+  color: #FFF;
+}
+
+.btn-personalized-save {
+  background-color: #37924c; 
+  color: #FFF; 
+  font-family: 'Jua', sans-serif;
+  font-size: medium;
+}
+
+.btn-personalized-save:hover {
+  background-color: #27743a;
+  color: #FFF;
+}
+
+.btn-personalized-save:active {
+  background-color: #1f5d30;
+  color: #FFF;
+}
+
+.text-start p{
+  color: #000;
+  font-weight: bold;
+}
+
+

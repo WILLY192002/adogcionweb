@@ -1,0 +1,160 @@
+<!--Primer Modal Cagar foto-->
+<div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="exampleModalCenterTitle" style="display: none;" aria-modal="true" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="modaltitle">Registrar Animal</h1>
+      </div>
+      <div class="modal-body">
+        <label for="foto" class="label-input">Seleccione una foto:</label>
+        <input type="file" id="foto" name="foto">
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<!--Segundo Modal Formulario subir animal-->
+<div class="modal-xl modal" id="Modal2" tabindex="-1" aria-labelledby="exampleModalCenterTitle" style="display: none;" aria-modal="true" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="modaltitle2">Registrar Animal</h1>
+      </div>
+      <form action='mis_animales' method="POST">
+        <div class="modal-body input-group">
+          <div class="container">
+            <div class="row">
+              <div class="col col-md-auto">
+                <input type="hidden" name="form_id" value="add_animal">
+                <input type="hidden" id="hiddenField" name="hiddenField"><!--URL IMAGEN-->
+                <input type="hidden" id="IdHidden" name="IdHidden" value="{{current_user.id}}">
+                <img id="preview" src="" alt="" style="width: 400px; height: 400px;">
+              </div>
+              <div class="col col-md-6">
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control newAnimal" placeholder="Nombre" aria-label="Nombre" name="animal_name">
+                </div>
+                <div class="input-group mb-3">
+                  <input type="number" class="form-control newAnimal" placeholder="Edad" aria-label="Edad" name="animal_age">
+                </div>
+                <div class="input-group mb-3">
+                  <select class="form-select newAnimal" aria-label="Especie" id="especieSelect" onchange="checkEspecie()" name="animal_specie">
+                    <option selected disabled>Especie</option>
+                    {%for specie in species %}
+                    <option value={{specie.id}}>{{specie.name}}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="input-group mb-3">
+                  <select class="form-select newAnimal" aria-label="Especie" id="especieSelect" onchange="checkEspecie()" name="animal_breed">
+                    <option selected disabled>Raza</option>
+                    {%for breed in breeds %}
+                    <option value={{breed.id}}>{{breed.name}}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="input-group mb-3">
+                  <select class="form-select newAnimal" aria-label="Especie" id="sexoSelect" name="sexo">
+                    <option selected disabled>Sexo</option>
+                    <option value="Macho">Macho</option>
+                    <option value="Hembra">Hembra</option>
+                  </select>
+                </div>
+                <div class="input-group mb-3">
+                  <select class="form-select newAnimal" aria-label="Tamaño" id="tamanioSelect" name="tamanio">
+                    <option selected disabled>Tamaño</option>
+                    <option value="Pequeño">Pequeño (0-20cm)</option>
+                    <option value="Mediano">Mediano (21-50cm)</option>
+                    <option value="Grande">Grande (51-80cm)</option>
+                    <option value="Gigante">Gigante (>81cm)</option>
+                  </select>
+                </div>
+                <div class="input-group mb-3">
+                  <input type="number" class="form-control newAnimal" placeholder="Peso (kg)" aria-label="Peso (kg)" name="animal_weight">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary-personalized" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-personalized-save">Guardar</button>
+        </div>  
+      </form>  
+    </div>
+  </div>
+</div>
+
+<!--Tercer Modal Editar Animales-->
+<div class="modal-xl modal" id="Modal3" tabindex="-1" aria-labelledby="exampleModalCenterTitle" style="display: none;" aria-modal="true" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="modaltitle3">EDITAR INFORMACION</h1>
+        <!-- <input class="modal-title fs-5" id="modaltitle3" name="nombre"> -->
+      </div>
+      <form action='mis_animales' method="POST">
+        <div class="modal-body input-group">
+          <div class="container">
+            <div class="row">
+              <div class="col col-md-auto">
+                <input type="hidden" name="form_id" value="edit_animal"><!--IDENTIFICADOR FORM-->
+                <input type="hidden" id="idAnimal" name="animalid">
+                <img id="fotografia" src="" alt="" style="width: 400px; height: 400px;">
+              </div>
+              <div class="col col-md-6">
+                <div class="input-group mb-3">
+                  <span class="input-group-text">Nombre</span>
+                  <input type="text" id="nombre" class="form-control editAnimal" placeholder="nombre" aria-label="nombre" name="nombre">
+                </div>
+                <div class="input-group mb-3">
+                  <span class="input-group-text">Edad</span>
+                  <input type="number" id="edad" class="form-control editAnimal" placeholder="Edad" aria-label="Edad" name="edad">
+                </div>
+                <div class="input-group mb-3">
+                  <span class="input-group-text">Especie</span>
+                  <input type="text" id="especie" class="form-control editAnimal" placeholder="Especie" aria-label="Especie" name="especie" readonly>
+                </div>
+                <div class="input-group mb-3">
+                  <span class="input-group-text">Sexo</span>
+                  <input type="text" id="sexo" class="form-control editAnimal" placeholder="Sexo" aria-label="Sexo" name="sexo" readonly>
+                </div>
+                <div class="input-group mb-3">
+                  <span class="input-group-text">Raza</span>
+                  <input type="text" id="raza" class="form-control editAnimal" placeholder="Raza" aria-label="Raza" name="raza">
+                </div>
+                <div class="input-group mb-3">
+                  <span class="input-group-text">Tamaño</span>
+                  <input type="text" id="tamanio" class="form-control editAnimal" placeholder="Tamaño" aria-label="Tamaño" name="Tamanio" readonly>
+                </div>
+                <div class="input-group mb-3">
+                  <span class="input-group-text">Peso (kg)</span>
+                  <input type="number" id="pesoEdit" class="form-control editAnimal" placeholder="Peso" aria-label="Peso (kg)" name="pesoEdit">
+                </div>
+                <div class="input-group mb-3">
+                  <span class="input-group-text">Estado Medico</span>
+                  <textarea id="estado_medico" class="form-control editAnimal" aria-label="Estado Medico" name="estado_medicoEdit"></textarea>
+                </div>
+                <div class="input-group mb-3">
+                  <span class="input-group-text">Estado</span>
+                  <select class="form-select" aria-label="Filtrar por tema" name="estadoEdit" id = "estado">
+                    <option disabled selected>Estado del animal</option>
+                    <option value="0">Adoptado</option>
+                    <option value="1">No adoptado</option>
+                    
+                  </select>
+                  <!-- <input type="number" id="pesoEdit" class="form-control editAnimal" placeholder="Peso" aria-label="Peso (kg)" name="pesoEdit"> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary-personalized" data-bs-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-personalized-save">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

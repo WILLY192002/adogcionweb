@@ -13,6 +13,7 @@ from src.services.PaymentoptionService import PaymentoptionService
 from src.services.TopicService import TopicService
 from src.services.AnimalService import AnimalService 
 from src.services.SpeciesService import SpeciesService 
+from src.services.UsertypeService import UsertypeService
 
 #models
 from src.models.Adoptioncenter import AdoptionCenter
@@ -24,7 +25,7 @@ main = Blueprint('view_profile_adoption_center',__name__)
 @main.route('/view/profile=<id>/adoption_center/<name>', methods = ['GET', 'POST'])
 def viewProfileAdoptionCenter(id,name):
   if request.method == 'POST':
-    if current_user.is_authenticated and current_user.get_id() == id:
+    if current_user.is_authenticated and current_user.get_id() == id and UsertypeService.verifyUserTypeAdoptionCenter(current_user.user_type_id):
       adoption_center_name = request.form['name'].capitalize() if request.form['name'] != '' else None
       adoption_center_description = request.form['description'].capitalize() if request.form['description'] != '' else None
       adoption_center_department = request.form['department'].capitalize() if request.form['department'] != '' else None
@@ -182,7 +183,7 @@ def viewProfileAdoptionCenterByTopic(id, name, category,topic):
 @main.route('/edit_information/profile=<id>/adoption_center/<name>', methods = ['GET', 'POST'])
 def editProfileAdoptionCenter(id, name):
   if request.method == 'POST':
-    if current_user.is_authenticated and current_user.get_id() == id: 
+    if current_user.is_authenticated and UsertypeService.verifyUserTypeAdoptionCenter(current_user.user_type_id): 
       #Adoption Center information
       adoption_center_name = request.form['name'].capitalize() if request.form['name'] != '' else None
       adoption_center_description = request.form['description'].capitalize() if request.form['description'] != '' else None
@@ -246,7 +247,7 @@ def editProfileAdoptionCenter(id, name):
     else:
       return render_template('auth/no_authorized.html')
   else:
-    if current_user.is_authenticated and current_user.get_id() == id:
+    if current_user.is_authenticated and UsertypeService.verifyUserTypeAdoptionCenter(current_user.user_type_id):
       user_information = AdoptioncenterService.getAdoptionCenterById(current_user.get_id())
       access_user_information = AccessService.getAccessById(user_information.access_id)
       user_information.user_type_id = access_user_information.user_type_id
@@ -254,7 +255,7 @@ def editProfileAdoptionCenter(id, name):
 
       paymentOptions_registered = Paymentoption_AdoptioncenterService.getPaymentOptionAdoptionCenter(current_user.get_id())
       paymentOptions_NoRegistered = PaymentoptionService.getNoPaymentOptionAdoptionCenter(current_user.get_id())
-      
+      print('XXDXDXDXD')
       return render_template('User_Adoption_Center/post/edit_profile.html', 
                             user_information = user_information,
                             paymentOptions_registered = paymentOptions_registered,
