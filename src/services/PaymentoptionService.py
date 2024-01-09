@@ -25,3 +25,5 @@ class PaymentoptionService():
     except Exception as ex:
       message = f"An error occurred while consulting payment options adoption center {ex}"
       raise Exception(message)
+    finally:
+      conexion.close()

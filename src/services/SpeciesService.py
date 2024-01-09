@@ -20,3 +20,5 @@ class SpeciesService():
     except Exception as ex:
       message = f"An error occurred while consulting species {ex}"
       raise Exception(message)
+    finally:
+      conexion.close()

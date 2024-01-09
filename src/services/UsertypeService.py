@@ -19,6 +19,8 @@ class UsertypeService():
     except Exception as ex:
       message = f"Error when adding a new usertype {ex}"
       raise Exception(message)
+    finally:
+      conexion.close()
 
   @classmethod
   def getUserTypeByName(self, name):
@@ -35,3 +37,5 @@ class UsertypeService():
     except Exception as ex:
       message = f"An error occurred while consulting an usertype {ex}"
       raise Exception(message)
+    finally:
+      conexion.close()

@@ -35,6 +35,8 @@ class PublicationService():
     except Exception as ex:
       message = f"An error occurred while consulting publications by user type {ex}"
       raise Exception(message)
+    finally:
+      conexion.close()
   
   
 
@@ -56,6 +58,8 @@ class PublicationService():
     except Exception as ex:
       message = f"An error occurred while consulting publications by access {ex}"
       raise Exception(message)
+    finally:
+      conexion.close()
     
   @classmethod
   def getAllPublicationByCategoryId(self, category_id, access_id):
@@ -77,6 +81,8 @@ class PublicationService():
     except Exception as ex:
       message = f"An error occurred while consulting publications by category{ex}"
       raise Exception(message)
+    finally:
+      conexion.close()
   
   @classmethod
   def getAllPublicationByTopic(self, access_id, topic_id):
@@ -96,3 +102,5 @@ class PublicationService():
     except Exception as ex:
       message = f"An error occurred while consulting publications by topic {ex}"
       raise Exception(message)
+    finally:
+      conexion.close()

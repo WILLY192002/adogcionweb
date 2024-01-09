@@ -23,6 +23,8 @@ class TopicService():
     except Exception as ex:
       message = f"An error occurred while consulting Topics {ex}"
       raise Exception(message)
+    finally:
+      conexion.close()
   
   @classmethod
   def getTopicByName(self, name):
@@ -39,6 +41,8 @@ class TopicService():
     except Exception as ex:
       message = f"An error occurred while consulting a Topic {ex}"
       raise Exception(message)
+    finally:
+      conexion.close()
   
   @classmethod
   def getAllTopicByCategory(self, category_id):
@@ -58,3 +62,5 @@ class TopicService():
     except Exception as ex:
       message = f"An error occurred while consulting Topics {ex}"
       raise Exception(message)
+    finally:
+      conexion.close()

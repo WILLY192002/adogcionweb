@@ -23,6 +23,8 @@ class CategoryService():
     except Exception as ex:
       message = f"An error occurred while consulting Categories {ex}"
       raise Exception(message)
+    finally:
+      conexion.close()
   
   @classmethod
   def getCategoryByName(self, name):
@@ -39,3 +41,5 @@ class CategoryService():
     except Exception as ex:
       message = f"An error occurred while consulting a Category {ex}"
       raise Exception(message)
+    finally:
+      conexion.close()

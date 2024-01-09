@@ -35,3 +35,5 @@ class NaturalpersonService():
     except Exception as ex:
       message = f"An error occurred while consulting an NaturalPerson by Access {ex}"
       raise Exception(message)
+    finally:
+      conexion.close()

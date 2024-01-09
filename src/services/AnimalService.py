@@ -18,6 +18,8 @@ class AnimalService():
     except Exception as ex:
       message = f"Error when adding a new animal to adoption center {ex}"
       raise Exception(message)
+    finally:
+      conexion.close()
   
   @classmethod
   def getNoAdoptedAnimals(self, adoptioncenter_id):
@@ -40,6 +42,8 @@ class AnimalService():
     except Exception as ex:
       message = f"An error occurred while consulting a No adopted Animals by adoption center {ex}"
       raise Exception(message)
+    finally:
+      conexion.close()
   
   @classmethod
   def getNoAdoptedAnimalsFilter(self, adoptioncenter_id, filter_search, filter_specie, filter_Sex, filter_size, filter_age):
@@ -84,6 +88,8 @@ class AnimalService():
     except Exception as ex:
       message = f"An error occurred while consulting a No adopted Animals by adoption center and filters {ex}"
       raise Exception(message)
+    finally:
+      conexion.close()
 
   @classmethod
   def getAdoptedAnimals(self, adoptioncenter_id):
@@ -103,6 +109,8 @@ class AnimalService():
     except Exception as ex:
       message = f"An error occurred while consulting an adopted Animals by adoption center {ex}"
       raise Exception(message)
+    finally:
+      conexion.close()
     
   @classmethod
   def updateAnimalInformation(self,animal):
@@ -127,3 +135,5 @@ class AnimalService():
     except Exception as ex:
       message = f"Error when update an animal {ex}"
       raise Exception(message)
+    finally:
+      conexion.close()

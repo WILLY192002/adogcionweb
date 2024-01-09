@@ -26,6 +26,8 @@ class AccessService():
     except Exception as ex:
       message = f"Error when adding a new access {ex}"
       raise Exception(message)
+    finally:
+      conexion.close()
 
   @classmethod
   def getAccessByEmail(self, email):
@@ -42,6 +44,8 @@ class AccessService():
     except Exception as ex:
       message = f"An error occurred while consulting an access {ex}"
       raise Exception(message)
+    finally:
+      conexion.close()
   
   @classmethod
   def getAccessById(self, id):
@@ -58,6 +62,8 @@ class AccessService():
     except Exception as ex:
       message = f"An error occurred while consulting an access {ex}"
       raise Exception(message)
+    finally:
+      conexion.close()
   
   @classmethod
   def verifyUser(self, access):
@@ -81,3 +87,5 @@ class AccessService():
     except Exception as ex:
       message = f"Error when checking user {ex}"
       raise Exception(message)
+    finally:
+      conexion.close()

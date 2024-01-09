@@ -25,6 +25,8 @@ class Paymentoption_AdoptioncenterService():
     except Exception as ex:
       message = f"An error occurred while consulting payment options registered by adoption center {ex}"
       raise Exception(message)
+    finally:
+      conexion.close()
 
   @classmethod
   def deletePaymentOptionAdoptionCenter(self,adoptioncenter_id, paymentoption_id):
@@ -38,6 +40,8 @@ class Paymentoption_AdoptioncenterService():
     except Exception as ex:
       message = f"An error occurred while deleting payment options from adoption center {ex}"
       raise Exception(message)
+    finally:
+      conexion.close()
   
   @classmethod
   def updatePaymentOptionAdoptionCenter(self,adoptioncenter_id, paymentoption_id, new_number):
@@ -53,6 +57,8 @@ class Paymentoption_AdoptioncenterService():
     except Exception as ex:
       message = f"An error occurred while updating payment options from adoption center {ex}"
       raise Exception(message)
+    finally:
+      conexion.close()
   
   @classmethod
   def insertPaymentOptionAdoptionCenter(self,paymentoption_adoptioncenter):
@@ -73,3 +79,5 @@ class Paymentoption_AdoptioncenterService():
     except Exception as ex:
       message = f"An error occurred while adding payment options to adoption center {ex}"
       raise Exception(message)
+    finally:
+      conexion.close()

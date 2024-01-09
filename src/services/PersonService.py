@@ -34,3 +34,5 @@ class PersonService():
     except Exception as ex:
       message = f"An error occurred while consulting a person by identification number{ex}"
       raise Exception(message)
+    finally:
+      conexion.close()

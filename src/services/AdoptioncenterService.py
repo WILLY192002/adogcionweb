@@ -18,6 +18,8 @@ class AdoptioncenterService():
     except Exception as ex:
       message = f"Error when adding a new adoption center {ex}"
       raise Exception(message)
+    finally:
+      conexion.close()
     
   @classmethod
   def getAdoptionCenterByAccessId(self, access_id):
@@ -34,6 +36,8 @@ class AdoptioncenterService():
     except Exception as ex:
       message = f"An error occurred while consulting an Adoption Center by Access {ex}"
       raise Exception(message)
+    finally:
+      conexion.close()
   
   @classmethod
   def getAdoptionCenterById(self, id):
@@ -50,6 +54,8 @@ class AdoptioncenterService():
     except Exception as ex:
       message = f"An error occurred while consulting an Adoption Center by id {ex}"
       raise Exception(message)
+    finally:
+      conexion.close()
   
   @classmethod
   def updateAdoptionCenter(self, id, Adoptioncenter):
@@ -73,3 +79,5 @@ class AdoptioncenterService():
     except Exception as ex:
       message = f"Error when update a adoption center {ex}"
       raise Exception(message)
+    finally:
+      conexion.close()
