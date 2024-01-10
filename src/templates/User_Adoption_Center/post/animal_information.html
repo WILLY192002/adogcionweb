@@ -13,6 +13,7 @@
 {% block body %}
 <div class="container">
   <form class="animal_form" action="/upload_animal" method="POST">
+    <!-- Informacion basica del animal -->
     <div class="container_basic_information">
       <div class="container_animal_photo">
         <input type="hidden" id="hiddenField" name="urlImage"><!--URL IMAGEN-->
@@ -70,13 +71,14 @@
         </div>
       </div>
     </div>
+    <!-- Operaciones del animal -->
     <div class="container_animal_operation">
       <div class="container_title_seccion">
         <h1>Operacion realizadas</h1>
       </div>
       <div class="container_animal_seccion">
         {%if operations%}
-          <select class="form-select" aria-label="Default select example" id="operations_select" onchange="updateSelection()">
+          <select class="form-select" aria-label="Default select example" id="operations_select" onchange="updateSelection('operations_select','operations_added')">
             <option selected disabled>operaciones ...</option>
             {%for operation in operations%}
             <option value="{{operation.id}}">{{operation.name}}</option>
@@ -87,12 +89,48 @@
       <div class="container_options_added input" id="operations_added">
 
       </div>
-
-      <div>
+<!-- Falta terminarlo -->
+      {%if operations_animal%}
+      <div class="container_operations_animal input">
+        {%for operation_animal in operations_animal%}
+        <div class="input">
+          <input type="text" class="form-control" placeholder="Nombre" aria-label="" name="animal_name">
+        </div>
+        {%endfor%}
+      </div>
+      {%endif%}
+      
+    </div>
+    <!-- Enfermedades del animal -->
+    <div class="container_animal_disease">
+      <div class="container_title_seccion">
+        <h1>Enfermedades que ha tenido</h1>
+      </div>
+      <div class="container_animal_seccion">
+        {%if diseases%}
+          <select class="form-select" aria-label="Default select example" id="disease_select" onchange="updateSelection('disease_select','disease_added')">
+            <option selected disabled>Enfermedades ...</option>
+            {%for disease in diseases%}
+            <option value="{{disease.id}}">{{disease.name}}</option>
+            {%endfor%}
+          </select>
+        {%endif%}
+      </div>
+      <div class="container_options_added input" id="disease_added">
 
       </div>
+      <!-- Falta por terminar -->
+      {%if diseases_animal%}
+      <div class="container_operations_animal input">
+        {%for disease_animal in diseases_animal%}
+        <div class="input">
+          <input type="text" class="form-control" placeholder="Nombre" aria-label="" name="animal_name">
+        </div>
+        {%endfor%}
+      </div>
+      {%endif%}
+      
     </div>
-
 
 
     <div class="btn_send_form">

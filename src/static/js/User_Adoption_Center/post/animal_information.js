@@ -48,8 +48,8 @@ species.addEventListener("change", function (e) {
 
 
 ////////////////////////Operations
-function updateSelection() {
-  var selectElement = document.getElementById("operations_select");
+function updateSelection(select_id, Container_id) {
+  var selectElement = document.getElementById(select_id);
   var selectedValue = selectElement.value;
   var selectedText = selectElement.options[selectElement.selectedIndex].text;
   // Verificar si ya existe un label para evitar duplicados
@@ -90,7 +90,7 @@ function updateSelection() {
   divElement.appendChild(removeButton);
 
   // Agregar el label y el botón al contenedor
-  var container = document.getElementById("operations_added");
+  var container = document.getElementById(Container_id);
   container.appendChild(divElement);
   
 }

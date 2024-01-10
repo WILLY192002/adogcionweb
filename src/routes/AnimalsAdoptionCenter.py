@@ -8,6 +8,7 @@ from src.services.UsertypeService import UsertypeService
 from src.services.ImageService import ImageService
 from src.services.OperationService import OperationService
 from src.services.operation_animalService import Operation_AnimalService
+from src.services.DiseaseService import DiseaseService
 
 
 from src.models.Animal import Animal
@@ -61,10 +62,16 @@ def uploadAnimalAdoptionCenter():
       breeds = BreedService.getAllBreeds()
       species = SpeciesService.getAllSpecies()
       operations = OperationService.getAllOperations()
+      diseases = DiseaseService.getAllDiseases()
+      operations_animal = False
+      diseases_animal = False
       return render_template('User_Adoption_Center/post/animal_information.html', 
                             title = titlename,
                             breeds = breeds,
                             species = species,
-                            operations = operations)
+                            operations = operations,
+                            operations_animal = operations_animal,
+                            diseases = diseases,
+                            diseases_animal = diseases_animal)
     else:
       return render_template('auth/no_authorized.html')
