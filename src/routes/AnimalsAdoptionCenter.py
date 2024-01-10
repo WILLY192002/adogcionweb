@@ -6,6 +6,8 @@ from src.services.SpeciesService import SpeciesService
 from src.services.BreedService import BreedService
 from src.services.UsertypeService import UsertypeService
 from src.services.ImageService import ImageService
+from src.services.OperationService import OperationService
+
 
 from src.models.Animal import Animal
 
@@ -52,9 +54,11 @@ def uploadAnimalAdoptionCenter():
       titlename = 'Nuevo animal'
       breeds = BreedService.getAllBreeds()
       species = SpeciesService.getAllSpecies()
+      operations = OperationService.getAllOperations()
       return render_template('User_Adoption_Center/post/animal_information.html', 
                             title = titlename,
                             breeds = breeds,
-                            species = species)
+                            species = species,
+                            operations = operations)
     else:
       return render_template('auth/no_authorized.html')

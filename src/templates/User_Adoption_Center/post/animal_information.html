@@ -70,6 +70,31 @@
         </div>
       </div>
     </div>
+    <div class="container_animal_operation">
+      <div class="container_title_seccion">
+        <h1>Operacion realizadas</h1>
+      </div>
+      <div class="container_animal_seccion">
+        {%if operations%}
+          <select class="form-select" aria-label="Default select example" id="operations_select">
+            <option selected disabled>operaciones ...</option>
+            {%for operation in operations%}
+            <option value="{{operation.id}}">{{operation.name}}</option>
+            {%endfor%}
+          </select>
+        {%endif%}
+      </div>
+      <div class="container_options_added" id="operations_added">
+
+      </div>
+
+      <div>
+
+      </div>
+    </div>
+
+
+
     <div class="btn_send_form">
       <button class="btn btn-personalized">
         <i class='bx bx-save'></i> Guardar Cambios

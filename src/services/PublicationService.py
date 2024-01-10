@@ -10,7 +10,7 @@ class PublicationService():
     try:
       conexion = get_connection()
       cursor = conexion.cursor()
-      sql = """SELECT p.*, ac.photo, ac.name FROM publication p JOIN access a ON p.access_id = a.id 
+      sql = """SELECT p.*, ac.photo, ac.name, ac.id FROM publication p JOIN access a ON p.access_id = a.id 
       JOIN adoptioncenter ac ON a.id = ac.access_id
       WHERE p.is_activate = 1"""
       if filter_search != None:
@@ -28,7 +28,7 @@ class PublicationService():
       out_publication = []
       if row != None:
         for pub in row:
-          out_publication.append(Publication(pub[0],pub[1],pub[2],pub[3],pub[4],pub[5],pub[6],pub[7], pub[8], pub[9]))
+          out_publication.append(Publication(pub[0],pub[1],pub[2],pub[3],pub[4],pub[5],pub[6],pub[7], pub[8], pub[9],pub[10]))
         return out_publication
       else:
         return False
