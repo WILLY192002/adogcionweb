@@ -19,6 +19,8 @@ class NaturalpersonService():
     except Exception as ex:
       message = f"Error when adding a new natural person {ex}"
       raise Exception(message)
+    finally:
+      conexion.close()
     
   @classmethod
   def getNaturalPersonByAccessId(self, access_id):

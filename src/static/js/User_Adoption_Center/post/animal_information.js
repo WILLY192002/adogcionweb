@@ -48,7 +48,7 @@ species.addEventListener("change", function (e) {
 
 
 ////////////////////////Operations
-function updateSelection(select_id, Container_id) {
+function updateSelection(select_id, Container_id, type) {
   var selectElement = document.getElementById(select_id);
   var selectedValue = selectElement.value;
   var selectedText = selectElement.options[selectElement.selectedIndex].text;
@@ -66,7 +66,7 @@ function updateSelection(select_id, Container_id) {
   var idlabelElement = document.createElement("input");
   idlabelElement.value = selectedValue;
   idlabelElement.type = "hidden";
-  idlabelElement.name = "operation_id";
+  idlabelElement.name = type+"_id";
 
   // Crear un label con el texto de la opción seleccionada
   var labelElement = document.createElement("label");

@@ -9,6 +9,9 @@ from src.services.ImageService import ImageService
 from src.services.OperationService import OperationService
 from src.services.operation_animalService import Operation_AnimalService
 from src.services.DiseaseService import DiseaseService
+from src.services.disease_animalService import Disease_AnimalService
+from src.services.VaccineService import VaccineService
+from src.services.vaccine_animalService import Vaccine_AnimalService
 
 
 from src.models.Animal import Animal
@@ -50,9 +53,17 @@ def uploadAnimalAdoptionCenter():
       AnimalService.addNewAnimal(new_animal)
       new_animal.id = AnimalService.getLastAnimalAddedByName(animal_name, current_user.get_id()).id
 
+      #Animal Operations Selected
+      operations = request.form.getlist('operation_id')
+      Operation_AnimalService.addNewOperation_Animal(new_animal.id,operations)
 
-      operaciones = request.form.getlist('operation_id')
-      Operation_AnimalService.addNewOperation_Animal(new_animal.id,operaciones)
+      #Animal Disease Selected
+      diseases = request.form.getlist('disease_id')
+      Disease_AnimalService.addNewDisease_Animal(new_animal.id,diseases)
+
+      #Animal Vaccine Selected
+      vaccines = request.form.getlist('vaccine_id')
+      Vaccine_AnimalService.addNewVaccine_Animal(new_animal.id,vaccines)
       return redirect(url_for('animals_adoption_center.animalsAdoptionCenter'))
     else:
       return render_template('auth/no_authorized.html')
@@ -63,15 +74,13 @@ def uploadAnimalAdoptionCenter():
       species = SpeciesService.getAllSpecies()
       operations = OperationService.getAllOperations()
       diseases = DiseaseService.getAllDiseases()
-      operations_animal = False
-      diseases_animal = False
+      vaccines = VaccineService.getAllVaccine()
       return render_template('User_Adoption_Center/post/animal_information.html', 
                             title = titlename,
                             breeds = breeds,
                             species = species,
                             operations = operations,
-                            operations_animal = operations_animal,
                             diseases = diseases,
-                            diseases_animal = diseases_animal)
+                            vaccines = vaccines)
     else:
       return render_template('auth/no_authorized.html')

@@ -21,9 +21,11 @@ class Operation_AnimalService():
         sql += insertions+';'
         cursor.execute(sql)
         conexion.commit()
-        return "A new operation animal has been successfully added"
+        return "A new animal operation has been successfully added"
       else:
         return True
     except Exception as ex:
-      message = f"Error when adding a new natural person {ex}"
+      message = f"Error when adding a new animal operation{ex}"
       raise Exception(message)
+    finally:
+      conexion.close()
