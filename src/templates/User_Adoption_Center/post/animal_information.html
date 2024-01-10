@@ -76,7 +76,7 @@
       </div>
       <div class="container_animal_seccion">
         {%if operations%}
-          <select class="form-select" aria-label="Default select example" id="operations_select">
+          <select class="form-select" aria-label="Default select example" id="operations_select" onchange="updateSelection()">
             <option selected disabled>operaciones ...</option>
             {%for operation in operations%}
             <option value="{{operation.id}}">{{operation.name}}</option>
@@ -84,7 +84,7 @@
           </select>
         {%endif%}
       </div>
-      <div class="container_options_added" id="operations_added">
+      <div class="container_options_added input" id="operations_added">
 
       </div>
 

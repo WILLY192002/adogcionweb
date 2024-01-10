@@ -35,7 +35,7 @@ class AnimalService():
       out_animals = []
       if rows != None:
         for row in rows:
-          out_animals.append(Animal(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8],row[9],row[10], row[11], row[12]))
+          out_animals.append(Animal(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8],row[9],row[10], row[11], row[12], row[13]))
         return out_animals
       else:
         return False
@@ -81,7 +81,7 @@ class AnimalService():
       out_animals = []
       if rows != None:
         for row in rows:
-          out_animals.append(Animal(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8],row[9],row[10],row[11],row[12]))
+          out_animals.append(Animal(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8],row[9],row[10],row[11],row[12],row[13]))
         return out_animals
       else:
         return False
@@ -102,7 +102,7 @@ class AnimalService():
       out_animals = []
       if rows != None:
         for row in rows:
-          out_animals.append(Animal(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8],row[9],row[10]))
+          out_animals.append(Animal(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8],row[9],row[10],row[11]))
         return out_animals
       else:
         return False
@@ -134,6 +134,24 @@ class AnimalService():
       return "An update in animal has been successfully"
     except Exception as ex:
       message = f"Error when update an animal {ex}"
+      raise Exception(message)
+    finally:
+      conexion.close()
+  
+  @classmethod
+  def getLastAnimalAddedByName(self, name,adoptioncenter_id):
+    try:
+      conexion = get_connection()
+      cursor = conexion.cursor()
+      sql = f"SELECT * FROM animal WHERE name = '{name}' AND adoptioncenter_id = {adoptioncenter_id} ORDER BY upload DESC LIMIT 1;"
+      cursor.execute(sql)
+      row = cursor.fetchone()
+      if row != None:
+        return Animal(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8],row[9],row[10],row[11])
+      else:
+        return False
+    except Exception as ex:
+      message = f"An error occurred while consulting a last animal added by adoption center and name {ex}"
       raise Exception(message)
     finally:
       conexion.close()

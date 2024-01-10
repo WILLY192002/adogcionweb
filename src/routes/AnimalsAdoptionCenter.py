@@ -7,6 +7,7 @@ from src.services.BreedService import BreedService
 from src.services.UsertypeService import UsertypeService
 from src.services.ImageService import ImageService
 from src.services.OperationService import OperationService
+from src.services.operation_animalService import Operation_AnimalService
 
 
 from src.models.Animal import Animal
@@ -43,9 +44,14 @@ def uploadAnimalAdoptionCenter():
       animal_diet = None
       animal_is_adopted = False
 
-      new_animal = Animal(None, current_user.get_id(), Animal_photo, animal_name, animal_breed, 
-                          animal_sex, animal_age, animal_size, animal_weight,animal_diet,animal_is_adopted)
+      new_animal = Animal(None, current_user.get_id(), Animal_photo, animal_name,animal_breed, 
+                          animal_sex, animal_age, animal_size, animal_weight,animal_diet,None,animal_is_adopted)
       AnimalService.addNewAnimal(new_animal)
+      new_animal.id = AnimalService.getLastAnimalAddedByName(animal_name, current_user.get_id()).id
+
+
+      operaciones = request.form.getlist('operation_id')
+      Operation_AnimalService.addNewOperation_Animal(new_animal.id,operaciones)
       return redirect(url_for('animals_adoption_center.animalsAdoptionCenter'))
     else:
       return render_template('auth/no_authorized.html')

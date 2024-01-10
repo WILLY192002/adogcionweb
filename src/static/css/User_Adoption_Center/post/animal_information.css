@@ -98,3 +98,33 @@ body{
   justify-content: center;
   border: violet solid;
 }
+
+/* OPERATIONS */
+
+.container_animal_operation{
+  border: #138e8e solid;
+  width: 100%;
+  height: 100%;
+}
+
+.container_animal_seccion{
+  border: orange solid;
+  margin: 1%;
+  width: 98%;
+}
+
+.container_options_added{
+  border: solid;
+  display: flex;
+  flex-direction: column;
+}
+
+.option_added{
+  border: blue solid;
+  width: 100%;
+  height: 100%;
+}
+
+.option_added label{
+  width: 40%;
+}

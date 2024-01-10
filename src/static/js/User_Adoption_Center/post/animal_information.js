@@ -39,9 +39,60 @@ species.addEventListener("change", function (e) {
   if (specieseleccionada) {
     var x = ""
     Array.from(breed.options).forEach(option => {
-      x = x + option.classList 
+      x = x + option.classList
       const breedSeleccionado = option.classList.contains(specieseleccionada);
       option.style.display = breedSeleccionado ? "block" : "none";
     });
   }
 })
+
+
+////////////////////////Operations
+function updateSelection() {
+  var selectElement = document.getElementById("operations_select");
+  var selectedValue = selectElement.value;
+  var selectedText = selectElement.options[selectElement.selectedIndex].text;
+  // Verificar si ya existe un label para evitar duplicados
+  if (document.getElementById(selectedText+"_"+selectedValue)) {
+    return;
+  }
+
+  // Crear un div que tendrá cada opcion
+  var divElement = document.createElement("div");
+  divElement.classList.add("option_added");
+  
+
+  // Crear un label con el texto de la opción seleccionada
+  var idlabelElement = document.createElement("input");
+  idlabelElement.value = selectedValue;
+  idlabelElement.type = "hidden";
+  idlabelElement.name = "operation_id";
+
+  // Crear un label con el texto de la opción seleccionada
+  var labelElement = document.createElement("label");
+  labelElement.textContent = selectedText;
+
+  // Crear un botón para eliminar la opción seleccionada
+  var removeButton = document.createElement("button");
+  removeButton.textContent = "Quitar";
+  removeButton.onclick = function() {
+      // Eliminar el label y el botón al hacer clic
+      divElement.remove();
+      // idlabelElement.remove();
+      // labelElement.remove();
+      // removeButton.remove();
+      // Restaurar el valor predeterminado en el select
+      selectElement.value = "";
+  };
+
+  divElement.appendChild(idlabelElement);
+  divElement.appendChild(labelElement);
+  divElement.appendChild(removeButton);
+
+  // Agregar el label y el botón al contenedor
+  var container = document.getElementById("operations_added");
+  container.appendChild(divElement);
+  
+}
+
+
