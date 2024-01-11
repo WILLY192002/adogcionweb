@@ -8,10 +8,10 @@ class Operation_AnimalService():
   @classmethod
   def addNewOperation_Animal(self, animal_id, operation_list):
     try:
+      
+      conexion = get_connection()
+      cursor = conexion.cursor()
       if operation_list:
-        conexion = get_connection()
-        cursor = conexion.cursor()
-        
         sql = f"INSERT INTO operation_animal (operation_id, animal_id) VALUES "
         Values = []
         for operation_id in operation_list:

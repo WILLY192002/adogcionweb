@@ -122,24 +122,25 @@
     {%for animal in AdoptedAnimals%}
     <div class="col col-md-auto">
       <div class="card" style="width: 18rem;">
-        <img src="{{animal.fotografia}}" class="card-img-top" alt="{{animal.Nombre}}">
+        <img src="{{animal.photo}}" class="card-img-top" alt="{{animal.name}}">
         <div class="card-body">
-          <h5 class="card-title">{{animal.nombre}}</h5>
-          <p>• Especie: {{animal.especie}}</p>
-          <p>• Edad: {{animal.edad}}</p>
-          <p>• Tamaño: {{animal.tamanio}}</p>
+          <h5 class="card-title">{{animal.name}}</h5>
+          <p><strong>• Sexo:</strong> {{animal.sex}}</p>
+          <p><strong>• Raza:</strong> {{animal.breed_name}}</p>
+          <p><strong>• Edad:</strong> {{animal.age}} (años)</p>
+          <p><strong>• Tamaño:</strong> {{animal.size}}</p>
+          
           <div class="card-body">
             <button id="open-btn-{{animal.id}}" class="btn btn-personalized" type="button" data-bs-toggle="modal" data-bs-target="#Modal3"
               data-idanimal="{{animal.id}}"
-              data-fotografia="{{animal.fotografia}}"
-              data-nombre="{{animal.nombre}}"
-              data-edad="{{animal.edad}}"
-              data-especie="{{animal.especie}}"
-              data-sexo="{{animal.sexo}}"
-              data-raza="{{animal.raza}}"
-              data-tamanio="{{animal.tamanio}}"
-              data-peso="{{animal.peso}}"
-              data-estado_medico="{{animal.estado_Medico}}">
+              data-animal_photo="{{animal.photo}}"
+              data-animal_name="{{animal.name}}"
+              data-animal_age="{{animal.age}}"
+              data-animal_sex="{{animal.sex}}"
+              data-animal_breed_name="{{animal.breed_name}}"
+              data-animal_size="{{animal.size}}"
+              data-animal_weight="{{animal.weight}}"
+              data-animal_diet="{{animal.diet}}">
               <i class='bx bx-book-open'></i> Abrir
             </button>
           </div>

@@ -8,10 +8,10 @@ class Vaccine_AnimalService():
   @classmethod
   def addNewVaccine_Animal(self, animal_id, vaccine_list):
     try:
+      
+      conexion = get_connection()
+      cursor = conexion.cursor()
       if vaccine_list:
-        conexion = get_connection()
-        cursor = conexion.cursor()
-        
         sql = f"INSERT INTO vaccine_animal (vaccine_id, animal_id) VALUES "
         Values = []
         for vaccine_id in vaccine_list:

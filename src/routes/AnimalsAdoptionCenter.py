@@ -21,11 +21,20 @@ main = Blueprint('animals_adoption_center',__name__)
 @main.route('/view/animals', methods = ['GET', 'POST'])
 def animalsAdoptionCenter():
   if request.method == 'POST':
-    return 'Hay que poner post en view animals'
+    if current_user.is_authenticated and UsertypeService.verifyUserTypeAdoptionCenter(current_user.user_type_id):
+      animal_id = request.form['animalid']
+      animal_is_adopted = int(request.form.get('animal_is_adopted'))
+      print("Entró post", animal_id, animal_is_adopted, bool(animal_is_adopted))
+      update_animal = Animal(animal_id, None, None, None,None, None, None, None, None, None, None, bool(animal_is_adopted))
+      AnimalService.updateAnimalInformation(update_animal)
+      return redirect(request.referrer)
+    else:
+      return render_template('auth/no_authorized.html')
   else:
     if current_user.is_authenticated and UsertypeService.verifyUserTypeAdoptionCenter(current_user.user_type_id):
       noAdoptedAnimals = AnimalService.getNoAdoptedAnimals(current_user.get_id())
       AdoptedAnimals = AnimalService.getAdoptedAnimals(current_user.get_id())
+      print("Animales: ", len(AdoptedAnimals))
       return render_template('User_Adoption_Center/post/animals.html', noAdoptedAnimals = noAdoptedAnimals,
                             AdoptedAnimals = AdoptedAnimals)
     else:
@@ -45,7 +54,7 @@ def uploadAnimalAdoptionCenter():
       animal_sex = request.form.get('animal_sex')
       animal_size = request.form.get('animal_size')
       animal_weight = request.form['animal_weight'] if request.form['animal_weight'] != '' else None
-      animal_diet = None
+      animal_diet = request.form['animal_diet'].capitalize() if request.form['animal_diet'] != '' else None
       animal_is_adopted = False
 
       new_animal = Animal(None, current_user.get_id(), Animal_photo, animal_name,animal_breed, 
@@ -76,6 +85,31 @@ def uploadAnimalAdoptionCenter():
       diseases = DiseaseService.getAllDiseases()
       vaccines = VaccineService.getAllVaccine()
       return render_template('User_Adoption_Center/post/animal_information.html', 
+                            animal = False,
+                            title = titlename,
+                            breeds = breeds,
+                            species = species,
+                            operations = operations,
+                            diseases = diseases,
+                            vaccines = vaccines)
+    else:
+      return render_template('auth/no_authorized.html')
+    
+@main.route('/editAnimal/<string:animal_id>', methods = ['GET', 'POST'])
+def editAnimalAdoptionCenter(animal_id):
+  if request.method == 'POST':
+    return 'poner post en editar animal completo'
+  else:
+    if current_user.is_authenticated and UsertypeService.verifyUserTypeAdoptionCenter(current_user.user_type_id):
+      titlename = 'Editar animal'
+      breeds = BreedService.getAllBreeds()
+      species = SpeciesService.getAllSpecies()
+      operations = OperationService.getAllOperations()
+      diseases = DiseaseService.getAllDiseases()
+      vaccines = VaccineService.getAllVaccine()
+      animal_edit = AnimalService.getAnimalById(animal_id, current_user.get_id())
+      return render_template('User_Adoption_Center/post/animal_information.html', 
+                            animal = animal_edit,
                             title = titlename,
                             breeds = breeds,
                             species = species,

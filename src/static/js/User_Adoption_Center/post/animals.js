@@ -60,8 +60,11 @@ function checkEspecie() {
 //Capturar información para "abrir"
 $(document).ready(function() {
   $('[id^="open-btn-"]').click(function() {
+    var rutaActual = $('#ref_edit_animal').attr('href');
+    var nuevaRuta = rutaActual + $(this).data('idanimal');
     // Llena los campos del formulario con los datos del animal
     $('#idAnimal').val($(this).data('idanimal'))
+    $('#ref_edit_animal').attr('href', nuevaRuta);
     $('#animal_photo').attr('src', $(this).data('animal_photo'));
     $('#animal_name').val($(this).data('animal_name'));
     $('#animal_age').val($(this).data('animal_age'));

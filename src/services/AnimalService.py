@@ -12,6 +12,7 @@ class AnimalService():
       columns = ', '.join(new_Animal.keys())
       values = ', '.join("'" + str(valor) + "'" if isinstance(valor, str) else str(valor) for valor in new_Animal.values())
       sql = f"INSERT INTO animal ({columns}) VALUES ({values})"
+      print(sql)
       cursor.execute(sql)
       conexion.commit()
       return "A new animal has been successfully added to adoption center"
@@ -135,6 +136,7 @@ class AnimalService():
               fields.append(f'{key} = {value}')
       fieldsUpdate = ', '.join(fields)
       sql = f"UPDATE animal SET {fieldsUpdate} WHERE id = {id}"
+      print(sql)
       cursor.execute(sql)
       conexion.commit()
       return "An update in animal has been successfully"
@@ -158,6 +160,26 @@ class AnimalService():
         return False
     except Exception as ex:
       message = f"An error occurred while consulting a last animal added by adoption center and name {ex}"
+      raise Exception(message)
+    finally:
+      conexion.close()
+
+  @classmethod
+  def getAnimalById(self, animal_id, adoptioncenter_id):
+    try:
+      conexion = get_connection()
+      cursor = conexion.cursor()
+      # sql = f"SELECT * FROM animal WHERE id = {animal_id} AND adoptioncenter_id = {adoptioncenter_id}"
+      sql = f"""SELECT a.*, b.name AS breed_name FROM animal a LEFT JOIN breed b ON a.breed_id = b.id 
+      WHERE a.id = {animal_id} AND adoptioncenter_id = {adoptioncenter_id};"""
+      cursor.execute(sql)
+      row = cursor.fetchone()
+      if row != None:
+        return Animal(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8],row[9],row[10],row[11], row[12])
+      else:
+        return False
+    except Exception as ex:
+      message = f"An error occurred while consulting an animal by id {ex}"
       raise Exception(message)
     finally:
       conexion.close()

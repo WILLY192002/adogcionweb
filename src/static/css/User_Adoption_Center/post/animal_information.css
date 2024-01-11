@@ -99,9 +99,15 @@ body{
   border: violet solid;
 }
 
+.container_animal_diet{
+  border: magenta solid;
+  width: 100%;
+  height: 100%;
+}
+
 /* OPERATIONS */
 
-.container_animal_operation, .container_animal_disease{
+.container_animal_operation, .container_animal_disease, .container_animal_vaccine{
   border: #138e8e solid;
   width: 100%;
   height: 100%;
