@@ -10,7 +10,7 @@
 {% block body %}
 <div class="container text-center">
   
-  <form ation='mis_animales' method="POST">
+  <form action='#' method="POST">
     <div class="row justify-content-md-center row-cols-3">
       <div class="col-6 mt-3 mb-3">
         <input type="hidden" name="form_id" value="filter_animal"><!--IDENTIFICADOR FORM-->
@@ -90,19 +90,22 @@
         <img src="{{animal.photo}}" class="card-img-top" alt="{{animal.name}}">
         <div class="card-body">
           <h5 class="card-title">{{animal.name}}</h5>
-          <p>• Especie: {{animal.species}}</p>
-          <p>• Edad: {{animal.age}}</p>
-          <p>• Tamaño: {{animal.size}}</p>
+          <p><strong>• Sexo:</strong> {{animal.sex}}</p>
+          <p><strong>• Raza:</strong> {{animal.breed_name}}</p>
+          <p><strong>• Edad:</strong> {{animal.age}} (años)</p>
+          <p><strong>• Tamaño:</strong> {{animal.size}}</p>
+          
           <div class="card-body">
             <button id="open-btn-{{animal.id}}" class="btn btn-personalized" type="button" data-bs-toggle="modal" data-bs-target="#Modal3"
               data-idanimal="{{animal.id}}"
-              data-fotografia="{{animal.photo}}"
-              data-nombre="{{animal.name}}"
-              data-edad="{{animal.age}}"
-              data-sexo="{{animal.sex}}"
-              data-raza="{{animal.breed_id}}"
-              data-tamanio="{{animal.size}}"
-              data-peso="{{animal.weight}}">
+              data-animal_photo="{{animal.photo}}"
+              data-animal_name="{{animal.name}}"
+              data-animal_age="{{animal.age}}"
+              data-animal_sex="{{animal.sex}}"
+              data-animal_breed_name="{{animal.breed_name}}"
+              data-animal_size="{{animal.size}}"
+              data-animal_weight="{{animal.weight}}"
+              data-animal_diet="{{animal.diet}}">
               <i class='bx bx-book-open'></i> Abrir
             </button>
           </div>

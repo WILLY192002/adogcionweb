@@ -94,52 +94,52 @@
         <h1 class="modal-title fs-5" id="modaltitle3">EDITAR INFORMACION</h1>
         <!-- <input class="modal-title fs-5" id="modaltitle3" name="nombre"> -->
       </div>
-      <form action='mis_animales' method="POST">
+      <form action='/view/animals' method="POST">
         <div class="modal-body input-group">
           <div class="container">
             <div class="row">
               <div class="col col-md-auto">
                 <input type="hidden" name="form_id" value="edit_animal"><!--IDENTIFICADOR FORM-->
                 <input type="hidden" id="idAnimal" name="animalid">
-                <img id="fotografia" src="" alt="" style="width: 400px; height: 400px;">
+                <img id="animal_photo" src="" alt="" style="width: 400px; height: 400px;">
               </div>
               <div class="col col-md-6">
                 <div class="input-group mb-3">
                   <span class="input-group-text">Nombre</span>
-                  <input type="text" id="nombre" class="form-control editAnimal" placeholder="nombre" aria-label="nombre" name="nombre">
+                  <input type="text" id="animal_name" class="form-control editAnimal" placeholder="nombre" aria-label="nombre" name="animal_name" readonly>
                 </div>
                 <div class="input-group mb-3">
                   <span class="input-group-text">Edad</span>
-                  <input type="number" id="edad" class="form-control editAnimal" placeholder="Edad" aria-label="Edad" name="edad">
+                  <input type="number" id="animal_age" class="form-control editAnimal" placeholder="Edad" aria-label="Edad" name="animal_age" readonly>
                 </div>
-                <div class="input-group mb-3">
+                <!-- <div class="input-group mb-3">
                   <span class="input-group-text">Especie</span>
-                  <input type="text" id="especie" class="form-control editAnimal" placeholder="Especie" aria-label="Especie" name="especie" readonly>
-                </div>
+                  <input type="text" id="especie" class="form-control editAnimal" placeholder="Raza" aria-label="Especie" name="especie" readonly>
+                </div> -->
                 <div class="input-group mb-3">
                   <span class="input-group-text">Sexo</span>
-                  <input type="text" id="sexo" class="form-control editAnimal" placeholder="Sexo" aria-label="Sexo" name="sexo" readonly>
+                  <input type="text" id="animal_sex" class="form-control editAnimal" placeholder="Sexo" aria-label="Sexo" name="animal_sex" readonly>
                 </div>
                 <div class="input-group mb-3">
                   <span class="input-group-text">Raza</span>
-                  <input type="text" id="raza" class="form-control editAnimal" placeholder="Raza" aria-label="Raza" name="raza">
+                  <input type="text" id="animal_breed_name" class="form-control editAnimal" placeholder="Raza" aria-label="Raza" name="animal_breed_name" readonly>
                 </div>
                 <div class="input-group mb-3">
                   <span class="input-group-text">Tamaño</span>
-                  <input type="text" id="tamanio" class="form-control editAnimal" placeholder="Tamaño" aria-label="Tamaño" name="Tamanio" readonly>
+                  <input type="text" id="animal_size" class="form-control editAnimal" placeholder="Tamaño" aria-label="Tamaño" name="animal_size" readonly>
                 </div>
                 <div class="input-group mb-3">
                   <span class="input-group-text">Peso (kg)</span>
-                  <input type="number" id="pesoEdit" class="form-control editAnimal" placeholder="Peso" aria-label="Peso (kg)" name="pesoEdit">
+                  <input type="number" id="animal_weight" class="form-control editAnimal" placeholder="Peso" aria-label="Peso (kg)" name="animal_weight" readonly>
                 </div>
                 <div class="input-group mb-3">
-                  <span class="input-group-text">Estado Medico</span>
-                  <textarea id="estado_medico" class="form-control editAnimal" aria-label="Estado Medico" name="estado_medicoEdit"></textarea>
+                  <span class="input-group-text">Dieta</span>
+                  <textarea id="animal_diet" class="form-control editAnimal" aria-label="diet" name="animal_diet" readonly></textarea>
                 </div>
                 <div class="input-group mb-3">
                   <span class="input-group-text">Estado</span>
-                  <select class="form-select" aria-label="Filtrar por tema" name="estadoEdit" id = "estado">
-                    <option disabled selected>Estado del animal</option>
+                  <select class="form-select editAnimal" aria-label="Filtrar por tema" name="estadoEdit" id = "estado" style="cursor: pointer;">
+                    <option disabled selected>Pulsa para cambiar estado ...</option>
                     <option value="0">Adoptado</option>
                     <option value="1">No adoptado</option>
                     

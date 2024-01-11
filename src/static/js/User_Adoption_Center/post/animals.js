@@ -62,15 +62,14 @@ $(document).ready(function() {
   $('[id^="open-btn-"]').click(function() {
     // Llena los campos del formulario con los datos del animal
     $('#idAnimal').val($(this).data('idanimal'))
-    $('#fotografia').attr('src', $(this).data('fotografia'));
-    $('#nombre').val($(this).data('nombre'));
-    $('#edad').val($(this).data('edad'));
-    $('#especie').val($(this).data('especie'));
-    $('#sexo').val($(this).data('sexo'));
-    $('#raza').val($(this).data('raza'));
-    $('#tamanio').val($(this).data('tamanio'));
-    $('#pesoEdit').val($(this).data('peso'));
-    $('#estado_medico').val($(this).data('estado_medico'));
+    $('#animal_photo').attr('src', $(this).data('animal_photo'));
+    $('#animal_name').val($(this).data('animal_name'));
+    $('#animal_age').val($(this).data('animal_age'));
+    $('#animal_sex').val($(this).data('animal_sex'));
+    $('#animal_breed_name').val($(this).data('animal_breed_name'));
+    $('#animal_size').val($(this).data('animal_size'));
+    $('#animal_weight').val($(this).data('animal_weight'));
+    $('#animal_diet').val($(this).data('animal_diet'));
   });
 });
 
