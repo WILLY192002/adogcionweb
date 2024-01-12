@@ -95,54 +95,56 @@ def uploadAnimalAdoptionCenter():
 @main.route('/editAnimal/<string:animal_id>', methods = ['GET', 'POST'])
 def editAnimalAdoptionCenter(animal_id):
   if request.method == 'POST':
-    
-    photo = request.form['urlImage'] if request.form['urlImage'] != '' else None
-    upload_photo = ImageService.upload_image_to_imgbb(photo)
-    Animal_photo = upload_photo['data']['url'] if photo else None
-    
-    animal_name = request.form['animal_name'].capitalize() if request.form['animal_name'] != '' else None
-    animal_age = request.form['animal_age'] if request.form['animal_age'] != '' else None
-    animal_breed = request.form.get('animal_breed')
-    animal_sex = request.form.get('animal_sex')
-    animal_size = request.form.get('animal_size')
-    animal_weight = request.form['animal_weight'] if request.form['animal_weight'] != '' else None
-    animal_diet = request.form['animal_diet'].capitalize() if request.form['animal_diet'] != '' else None
-    animal_is_adopted = request.form.get('animal_is_adopted') if request.form.get('animal_is_adopted') != '' else None
-    print("XD:-",animal_is_adopted,"-", type(animal_is_adopted))
-    new_animal = Animal(None, None, Animal_photo, animal_name,animal_breed, 
-                          animal_sex, animal_age, animal_size, animal_weight,animal_diet,None,animal_is_adopted)
-    
-    AnimalService.updateAnimalInformation(animal_id,new_animal)
-    #Animal Operations added
-    operationsAdded = request.form.getlist('operation_id')
-    Operation_AnimalService.addNewOperation_Animal(animal_id,operationsAdded)
+    if current_user.is_authenticated and UsertypeService.verifyUserTypeAdoptionCenter(current_user.user_type_id):
+      photo = request.form['urlImage'] if request.form['urlImage'] != '' else None
+      upload_photo = ImageService.upload_image_to_imgbb(photo)
+      Animal_photo = upload_photo['data']['url'] if photo else None
+      
+      animal_name = request.form['animal_name'].capitalize() if request.form['animal_name'] != '' else None
+      animal_age = request.form['animal_age'] if request.form['animal_age'] != '' else None
+      animal_breed = request.form.get('animal_breed')
+      animal_sex = request.form.get('animal_sex')
+      animal_size = request.form.get('animal_size')
+      animal_weight = request.form['animal_weight'] if request.form['animal_weight'] != '' else None
+      animal_diet = request.form['animal_diet'].capitalize() if request.form['animal_diet'] != '' else None
+      animal_is_adopted = request.form.get('animal_is_adopted') if request.form.get('animal_is_adopted') != '' else None
+      print("XD:-",animal_is_adopted,"-", type(animal_is_adopted))
+      new_animal = Animal(None, None, Animal_photo, animal_name,animal_breed, 
+                            animal_sex, animal_age, animal_size, animal_weight,animal_diet,None,animal_is_adopted)
+      
+      AnimalService.updateAnimalInformation(animal_id,new_animal)
+      #Animal Operations added
+      operationsAdded = request.form.getlist('operation_id')
+      Operation_AnimalService.addNewOperation_Animal(animal_id,operationsAdded)
 
-    #Animal Operations deleted
-    operationsDelete = request.form.getlist('deleted_operation')
-    Operation_AnimalService.deleteOperation_Animal(animal_id,operationsDelete)
-
-
-
-    #Animal Disease Selected
-    diseasesAdded = request.form.getlist('disease_id')
-    Disease_AnimalService.addNewDisease_Animal(animal_id,diseasesAdded)
-    print("Disease_Added: ",diseasesAdded)
-    
-    #Animal disease deleted
-    diseasesDelete = request.form.getlist('deleted_disease')
-    Disease_AnimalService.deleteDisease_Animal(animal_id,diseasesDelete)
+      #Animal Operations deleted
+      operationsDelete = request.form.getlist('deleted_operation')
+      Operation_AnimalService.deleteOperation_Animal(animal_id,operationsDelete)
 
 
 
-    #Animal Vaccine Selected
-    vaccinesAdded = request.form.getlist('vaccine_id')
-    Vaccine_AnimalService.addNewVaccine_Animal(animal_id, vaccinesAdded)
-    
-    #Animal vaccine deleted
-    vaccinesDelete = request.form.getlist('deleted_vaccine')
-    Vaccine_AnimalService.deleteVaccine_Animal(animal_id,vaccinesDelete)
+      #Animal Disease Selected
+      diseasesAdded = request.form.getlist('disease_id')
+      Disease_AnimalService.addNewDisease_Animal(animal_id,diseasesAdded)
+      print("Disease_Added: ",diseasesAdded)
+      
+      #Animal disease deleted
+      diseasesDelete = request.form.getlist('deleted_disease')
+      Disease_AnimalService.deleteDisease_Animal(animal_id,diseasesDelete)
 
-    return redirect(url_for('animals_adoption_center.animalsAdoptionCenter'))
+
+
+      #Animal Vaccine Selected
+      vaccinesAdded = request.form.getlist('vaccine_id')
+      Vaccine_AnimalService.addNewVaccine_Animal(animal_id, vaccinesAdded)
+      
+      #Animal vaccine deleted
+      vaccinesDelete = request.form.getlist('deleted_vaccine')
+      Vaccine_AnimalService.deleteVaccine_Animal(animal_id,vaccinesDelete)
+
+      return redirect(url_for('animals_adoption_center.animalsAdoptionCenter'))
+    else:
+      return render_template('auth/no_authorized.html')
   else:
     if current_user.is_authenticated and UsertypeService.verifyUserTypeAdoptionCenter(current_user.user_type_id):
       breeds = BreedService.getAllBreeds()

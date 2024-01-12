@@ -10,6 +10,7 @@ from .routes import RegisterNaturalPerson
 from .routes import ProfileAdoptionCenter
 from .routes import indexRoute
 from .routes import AnimalsAdoptionCenter
+from .routes import PublicationAdoptionCenter
 
 from .routes.LoginUser import LoginManagerApp
 
@@ -36,6 +37,8 @@ def init_app(config):
     app.register_blueprint(ProfileAdoptionCenter.main)
 
     app.register_blueprint(AnimalsAdoptionCenter.main)
+
+    app.register_blueprint(PublicationAdoptionCenter.main)
 
 
     

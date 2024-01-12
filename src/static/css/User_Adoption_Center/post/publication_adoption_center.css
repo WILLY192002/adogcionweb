@@ -1,0 +1,256 @@
+.contenedor{
+  position: fixed;
+  top: 0;
+  height: 100%;
+  transform: translate(200px);
+  width: calc(100% - 200px); 
+  /* border: solid; */
+}
+
+.contNuevaPub{
+  width: 100%;
+  height: 100%;
+  /* border: red solid ; */
+}
+
+.encabezadoNuevaPub{
+  width: 100%;
+  height: 8%;
+  border-bottom: double 5px;
+  /* border: blueviolet solid ; */
+}
+
+.tituloNuevaPub{
+  width: 100%;
+  height: 100%;
+  /* border: blue solid ; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tituloNuevaPub label{
+  font-weight: bold;
+  font-size: x-large;
+  color: #062b2d;
+}
+
+.cuerpoNuevaPub{
+  margin-top: 1%;
+  width: 100%;
+  height: 90%;
+  /* border: green solid ; */
+}
+
+.contInfo{
+  width: 100%;
+  height: 100%;
+  /* border: yellow solid ; */
+  display: flex;
+}
+
+.contFoto{
+  width: 40%;
+  height: 98%;
+  border: black dashed 1px;
+  border-radius: 5%;
+}
+
+.contFoto img{
+  width: 96%;
+  height: auto;
+  max-height: calc(100% - 200px);
+  margin: 2%;
+  border-radius: 5%;
+}
+
+
+#subirFoto {
+  display: none !important;
+}
+
+.label-input {
+  width: 96%; 
+  border: 1px solid #16494b;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-family: 'Jua', sans-serif;
+  font-weight: bold;
+  font-size: x-large;
+  color: #16494b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 2% 0 2%;
+}
+
+.label-input:hover{
+  color: #062b2d;
+  border: 1px dashed #062b2d;
+}
+
+.contcampos{
+  width: 60%;
+  overflow: auto;
+  /* border: brown solid ; */
+}
+
+.titulo{
+  height: 15%;
+  max-height: 20%;
+  display: grid;
+  grid-template-rows: 1fr 2fr;
+  /* border: springgreen solid ; */
+}
+
+.TitlelabelCampo{
+  width: 98%;
+  margin-left: 2%;
+  /* border: purple solid; */
+}
+
+.TitlelabelCampo label{
+  font-family: "Jua", sans-serif;
+  font-weight: bold;
+  font-size: larger;
+}
+
+.inputCampo{
+  width: 97%;
+  /* border: chocolate solid ; */
+  margin-left: 3%;
+}
+
+.inputCampo input{
+  width: 98%;
+  height: 100%;
+}
+
+.descripcion{
+  width: 100%;
+  height: 35%;
+  max-height: 40%;
+  display: grid;
+  grid-template-rows: 1fr 3fr;
+  /* border: turquoise solid ; */
+  margin-top: 2%;
+}
+
+.DeslabelCampo{
+  width: 98%;
+  margin-left: 2%;
+  /* border: purple solid ; */
+  
+}
+
+.DeslabelCampo label{
+  font-family: "Jua", sans-serif;
+  font-weight: bold;
+  font-size: larger;
+}
+
+.inputTextA{
+  width: 97%;
+  margin-left: 3%;
+  height: 100%;
+  /* border: #106d20 solid ; */
+}
+
+.inputTextA textarea{
+  width: 98%;
+  height: 100%;
+}
+
+.filtros{
+  /* border: yellow solid ; */
+  margin-top: 2%;
+}
+
+.TemaLabel{
+  width: 98%;
+  margin-left: 2%;
+  /* border: purple solid; */
+}
+
+.TemaLabel label{
+  font-family: "Jua", sans-serif;
+  font-weight: bold;
+  font-size: larger;
+}
+
+.cont_Inf_Temas{
+  /* border: solid; */
+  display: flex;
+}
+
+.infoTema{
+  width: 68%;
+  margin-left: 2%;
+  /* border: blue solid ; */
+}
+
+.infoTema p{
+  font-family: "Jua", sans-serif;
+  font-weight: 400;
+  font-size: medium;
+}
+
+.selectTemas{
+  /* border: orange solid; */
+  width: 28%;
+}
+
+.botones{
+  /* border: red solid; */
+  margin-top: 2%;
+  display: flex;
+  justify-content: center;
+}
+
+.form-check-input:checked {
+  border-color: #65e3db;
+  background-color: #9df2e9;
+}
+
+.btn-personalized {
+  background-color: #1cb0ad; 
+  color: #FFF; 
+  font-family: 'Jua', sans-serif;
+  font-size: medium;
+}
+
+.btn-personalized:hover {
+  background-color: #138e8e;
+  color: #FFF;
+}
+
+.btn-personalized:disabled { 
+  color: #9df2e9; 
+}
+
+.contenedor-nuevo-animal{
+  width: 98%;
+  margin-left: 2%;
+  border: black dashed 1px;
+}
+
+
+
+.contactos{
+  /* border: green solid ; */
+  margin-top: 2%;
+}
+
+.encabezadoContactos{
+  margin-left: 2%;
+}
+
+.encabezadoContactos label{
+  font-family: "Jua", sans-serif;
+  font-weight: bold;
+  font-size: larger;
+}
+
+.checkcontactos{
+  margin-left: 2%;
+}

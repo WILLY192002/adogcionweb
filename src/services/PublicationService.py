@@ -6,6 +6,26 @@ from src.models.Publication import Publication
 
 class PublicationService():
   @classmethod
+  def addNewPublication(self, publication):
+    try:
+      conexion = get_connection()
+      cursor = conexion.cursor()
+      new_publication = publication.__dict__
+      new_publication.pop("id")
+      new_publication = {key: value for key, value in new_publication.items() if value is not None}
+      columns = ', '.join(new_publication.keys())
+      values = ', '.join("'" + str(valor) + "'" if isinstance(valor, str) else str(valor) for valor in new_publication.values())
+      sql = f"INSERT INTO publication ({columns}) VALUES ({values})"
+      cursor.execute(sql)
+      conexion.commit()
+      return "A new publication has been successfully added"
+    except Exception as ex:
+      message = f"Error when adding a new publication center {ex}"
+      raise Exception(message)
+    finally:
+      conexion.close()
+
+  @classmethod
   def getAllPublicationByAdoptionCenter(self, filter_search, filter_topic, filter_category):
     try:
       conexion = get_connection()
