@@ -53,12 +53,12 @@ class AnimalService():
     try:
       conexion = get_connection()
       cursor = conexion.cursor()
-      # sql = f"""SELECT animal.*, breed.name, species.name FROM animal 
-      # JOIN breed ON breed.id = animal.breed_id 
-      # JOIN species ON breed.species_id = species.id  
+      sql = f"""SELECT animal.*, breed.name, species.name FROM animal 
+      JOIN breed ON breed.id = animal.breed_id 
+      JOIN species ON breed.species_id = species.id  
+      WHERE is_adopted = false AND adoptioncenter_id = {adoptioncenter_id}"""
+      # sql = f"""SELECT a.*, b.name AS breed_name FROM animal a LEFT JOIN breed b ON a.breed_id = b.id 
       # WHERE is_adopted = false AND adoptioncenter_id = {adoptioncenter_id}"""
-      sql = f"""SELECT a.*, b.name AS breed_name FROM animal a LEFT JOIN breed b ON a.breed_id = b.id 
-      WHERE is_adopted = false AND adoptioncenter_id = {adoptioncenter_id};"""
 
       if filter_search != None:
         sql += f" AND (animal.name LIKE '%{filter_search}%')"
@@ -86,7 +86,7 @@ class AnimalService():
       out_animals = []
       if rows != None:
         for row in rows:
-          out_animals.append(Animal(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8],row[9],row[10],row[11],row[12],row[13]))
+          out_animals.append(Animal(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8],row[9],row[10],row[11],row[12]))
         return out_animals
       else:
         return False

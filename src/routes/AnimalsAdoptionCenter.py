@@ -84,7 +84,7 @@ def uploadAnimalAdoptionCenter():
       operations = OperationService.getAllOperations()
       diseases = DiseaseService.getAllDiseases()
       vaccines = VaccineService.getAllVaccine()
-      return render_template('User_Adoption_Center/post/animal_information.html', 
+      return render_template('User_Adoption_Center/post/upload_animal.html', 
                             animal = False,
                             title = titlename,
                             breeds = breeds,
@@ -98,6 +98,25 @@ def uploadAnimalAdoptionCenter():
 @main.route('/editAnimal/<string:animal_id>', methods = ['GET', 'POST'])
 def editAnimalAdoptionCenter(animal_id):
   if request.method == 'POST':
+    animal_name = request.form['animal_name'].capitalize() if request.form['animal_name'] != '' else None
+    animal_age = request.form['animal_age'] if request.form['animal_age'] != '' else None
+    animal_breed = request.form.get('animal_breed')
+    animal_sex = request.form.get('animal_sex')
+    animal_size = request.form.get('animal_size')
+    animal_weight = request.form['animal_weight'] if request.form['animal_weight'] != '' else None
+    animal_diet = request.form['animal_diet'].capitalize() if request.form['animal_diet'] != '' else None
+    animal_is_adopted = False
+
+    print(animal_name)
+    print(animal_age)
+    print(animal_breed)
+    print(animal_sex)
+    print(animal_size)
+    print(animal_weight)
+    print(animal_diet)
+    print(animal_is_adopted)
+
+
     return 'poner post en editar animal completo'
   else:
     if current_user.is_authenticated and UsertypeService.verifyUserTypeAdoptionCenter(current_user.user_type_id):

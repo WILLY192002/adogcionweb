@@ -6,151 +6,11 @@
 
 {% block customCSS%}
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="{{url_for('static', filename = 'css/User_Adoption_Center/post/animal_information.css')}}">
+<link rel="stylesheet" href="{{url_for('static', filename = 'css/User_Adoption_Center/post/upload_animal.css')}}">
 
 {% endblock %}
 
 {% block body %}
-
-{%if animal%}
-<div class="container">
-  <form class="animal_form" action="/upload_animal" method="POST">
-    <!-- Informacion basica del animal -->
-    <div class="container_basic_information">
-      <div class="container_animal_photo">
-        <input type="hidden" id="hiddenField" name="urlImage"><!--URL IMAGEN-->
-        <div class="container_photo">
-          <img id="preview" src="{{animal.photo}}" alt="">
-        </div>
-        <div class="uploadphoto">
-          <input type="file" id="subirFoto" name="photo_selected" style="display: none;">
-        </div>
-      </div>
-      <div class="container_animal_information">
-        <div class="container_title_seccion">
-          <h1>Editar información de {{animal.name}}</h1>
-        </div>
-        <div class="input">
-          <input type="text" class="form-control" placeholder="Nombre" aria-label="" name="animal_name" value="{{animal.name}}">
-        </div>
-        <div class="input">
-          <input type="number" class="form-control" placeholder="Edad" aria-label="" name="animal_age" value="{{animal.age}}">
-        </div>
-        <div class="input">
-          <select class="form-select" aria-label="" id="animal_specie"  name="animal_specie">
-            <option selected disabled>Seleccione especie ...</option>
-            {%for specie in species %}
-            <option value={{specie.id}}>{{specie.name}}</option>
-            {% endfor %}
-          </select>
-        </div>
-        <div class="input">
-          <select class="form-select" aria-label="" id="animal_breed" name="animal_breed" disabled>
-            <option selected disabled>{{animal.breed_name}}</option>
-            {%for breed in breeds %}
-            <option value={{breed.id}} class="{{breed.species_id}}">{{breed.name}}</option>
-            {% endfor %}
-          </select>
-        </div>
-        <div class="input">
-          <select class="form-select" aria-label="" name="animal_sex">
-            <option selected disabled style="display: none;">{{animal.sex}}</option>
-            <option value="Macho">Macho</option>
-            <option value="Hembra">Hembra</option>
-          </select>
-        </div>
-        <div class="input">
-          <select class="form-select" aria-label="" name="animal_size">
-            <option selected disabled style="display: none;">{{animal.size}}</option>
-            <option value="Pequeño">Pequeño (0-20cm)</option>
-            <option value="Mediano">Mediano (21-50cm)</option>
-            <option value="Grande">Grande (51-80cm)</option>
-            <option value="Gigante">Gigante (>81cm)</option>
-          </select>
-        </div>
-        <div class="input">
-          <input type="number" class="form-control" placeholder="Peso (kg)" aria-label="Peso (kg)" name="animal_weight" value="{{animal.weight}}">
-        </div>
-      </div>
-    </div>
-    <div class="container_animal_diet">
-      <div class="container_title_seccion">
-        <h1>Dieta del animal</h1>
-        <p>Agrega en esta sección los alimentos que, estrictamente <strong>debe o no</strong> comer el animal</p>
-      </div>
-      <div class="input">
-        <textarea class="form-control" name="animal_diet" rows="4" placeholder="Agrega aquí observaciones importantes ...">{{animal.diet}}</textarea>
-      </div>
-    </div>
-    <!-- Operaciones del animal -->
-    <div class="container_animal_operation">
-      <div class="container_title_seccion">
-        <h1>Operacion realizadas</h1>
-      </div>
-      <div class="container_animal_seccion">
-        {%if operations%}
-          <select class="form-select" aria-label="Default select example" id="operations_select" onchange="updateSelection('operations_select','operations_added', 'operation')">
-            <option selected disabled>operaciones ...</option>
-            {%for operation in operations%}
-            <option value="{{operation.id}}">{{operation.name}}</option>
-            {%endfor%}
-          </select>
-        {%endif%}
-      </div>
-      <div class="container_options_added input" id="operations_added">
-
-      </div>      
-    </div>
-
-    <!-- Enfermedades del animal -->
-    <div class="container_animal_disease">
-      <div class="container_title_seccion">
-        <h1>Enfermedades que ha tenido</h1>
-      </div>
-      <div class="container_animal_seccion">
-        {%if diseases%}
-          <select class="form-select" aria-label="Default select example" id="disease_select" onchange="updateSelection('disease_select','disease_added', 'disease')">
-            <option selected disabled>Enfermedades ...</option>
-            {%for disease in diseases%}
-            <option value="{{disease.id}}">{{disease.name}}</option>
-            {%endfor%}
-          </select>
-        {%endif%}
-      </div>
-      <div class="container_options_added input" id="disease_added">
-
-      </div>
-    </div>
-
-    <!-- Vacunas del animal -->
-    <div class="container_animal_vaccine">
-      <div class="container_title_seccion">
-        <h1>Vacunas aplicadas</h1>
-      </div>
-      <div class="container_animal_seccion">
-        {%if vaccines%}
-          <select class="form-select" aria-label="Default select example" id="vaccine_select" onchange="updateSelection('vaccine_select','vaccine_added', 'vaccine')">
-            <option selected disabled>Vacunas ...</option>
-            {%for vaccine in vaccines%}
-            <option value="{{vaccine.id}}">{{vaccine.name}}</option>
-            {%endfor%}
-          </select>
-        {%endif%}
-      </div>
-      <div class="container_options_added input" id="vaccine_added">
-
-      </div>
-    </div>
-
-
-    <div class="btn_send_form">
-      <button class="btn btn-personalized">
-        <i class='bx bx-save'></i> Guardar Cambios
-      </button>
-    </div>
-  </form>
-</div>
-{%else%}
 <div class="container">
   <form class="animal_form" action="/upload_animal" method="POST">
     <!-- Informacion basica del animal -->
@@ -289,10 +149,10 @@
     </div>
   </form>
 </div>
-{%endif%}
+
 {% endblock %}
 
 {% block customJS%}
-<script src="/static/js/User_Adoption_Center/post/animal_information.js"></script>
+<script src="/static/js/User_Adoption_Center/post/upload_animal.js"></script>
 
 {% endblock %}
