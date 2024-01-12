@@ -47,28 +47,35 @@ species.addEventListener("change", function (e) {
 })
 
 
-////////////////////////Operations
+////////////////////////Operations, diseases, vaccine
 function updateSelection(select_id, Container_id, type) {
   var selectElement = document.getElementById(select_id);
   var selectedValue = selectElement.value;
   var selectedText = selectElement.options[selectElement.selectedIndex].text;
   // Verificar si ya existe un label para evitar duplicados
   if (document.getElementById(type+"_"+selectedValue)) {
-    alert('¡Ya está registrada!');
+    var temporal = document.getElementById('div_'+type+'_'+selectedValue)
+    if (temporal.style.display == 'none'){
+      temporal.style.display = 'block';
+      document.getElementById(type+"_"+selectedValue).name = type+"_"+selectedValue;
+    }else{
+      alert('Ya está registrada');
+    }
+    
     return;
   }
 
   // Crear un div que tendrá cada opcion
   var divElement = document.createElement("div");
   divElement.classList.add("option_added");
-  divElement.id = type+"_"+selectedValue;
-  
+  divElement.id = 'div_'+type+"_"+selectedValue;
 
   // Crear un label con el texto de la opción seleccionada
   var idlabelElement = document.createElement("input");
   idlabelElement.value = selectedValue;
   idlabelElement.type = "hidden";
   idlabelElement.name = type+"_id";
+  idlabelElement.id = type+"_"+selectedValue;
 
   // Crear un label con el texto de la opción seleccionada
   var labelElement = document.createElement("label");
@@ -95,6 +102,18 @@ function updateSelection(select_id, Container_id, type) {
   var container = document.getElementById(Container_id);
   container.appendChild(divElement);
   
+}
+
+
+//////////delete operations, diseases, vaccines
+function changeName(input_id, div_id, type,event) {
+  event.preventDefault();
+  var inputSelected = document.getElementById(input_id)
+  inputSelected.name = 'deleted_'+type
+
+  var divSelected = document.getElementById(div_id)
+  divSelected.style.display = 'none'
+
 }
 
 

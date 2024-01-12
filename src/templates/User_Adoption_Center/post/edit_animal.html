@@ -1,7 +1,7 @@
 {% extends 'lateral_base.html' %}
 
 {% block title %}
-{{title}}
+Editar animal
 {% endblock %}
 
 {% block customCSS%}
@@ -32,15 +32,17 @@
         </div>
         <div class="input">
           <label for="">Nombre</label>
-          <input type="text" class="form-control" placeholder="Nombre" aria-label="" name="animal_name" value="{{animal.name}}">
+          <input type="text" class="form-control" placeholder="Nombre" aria-label="" name="animal_name"
+            value="{{animal.name}}">
         </div>
         <div class="input">
           <label for="">Edad</label>
-          <input type="number" class="form-control" placeholder="Edad" aria-label="" name="animal_age" value="{{animal.age}}">
+          <input type="number" class="form-control" placeholder="Edad" aria-label="" name="animal_age"
+            value="{{animal.age}}">
         </div>
         <div class="input">
           <label for="">Especie</label>
-          <select class="form-select" aria-label="" id="animal_specie"  name="animal_specie">
+          <select class="form-select" aria-label="" id="animal_specie" name="animal_specie">
             <option selected disabled style="display: none;">Seleccione especie ...</option>
             {%for specie in species %}
             <option value={{specie.id}}>{{specie.name}}</option>
@@ -76,7 +78,17 @@
         </div>
         <div class="input">
           <label for="">Peso</label>
-          <input type="number" class="form-control" placeholder="Peso (kg)" aria-label="Peso (kg)" name="animal_weight" value="{{animal.weight}}">
+          <input type="number" class="form-control" placeholder="Peso (kg)" aria-label="Peso (kg)" name="animal_weight"
+            value="{{animal.weight}}">
+        </div>
+        <div class="input">
+          <label for="">Estado</label>
+          <select class="form-select editAnimal" aria-label="Filtrar por tema" name="animal_is_adopted" id="estado"
+            style="cursor: pointer;">
+            <option disabled selected value = "6">Pulsa para cambiar estado ...</option>
+            <option value='1'>Adoptado</option>
+            <option value='0'>No adoptado</option>
+          </select>
         </div>
       </div>
     </div>
@@ -86,8 +98,9 @@
         <h1>Dieta del animal</h1>
         <p>Agrega en esta sección los alimentos que, estrictamente <strong>debe o no</strong> comer el animal</p>
       </div>
-      <div class="input">
-        <textarea class="form-control" name="animal_diet" rows="4" placeholder="Agrega aquí observaciones importantes ...">{{animal.diet}}</textarea>
+      <div class="input_diet">
+        <textarea class="form-control" name="animal_diet" rows="4"
+          placeholder="Agrega aquí observaciones importantes ...">{{animal.diet}}</textarea>
       </div>
     </div>
     <!-- Operaciones del animal -->
@@ -97,17 +110,31 @@
       </div>
       <div class="container_animal_seccion">
         {%if operations%}
-          <select class="form-select" aria-label="Default select example" id="operations_select" onchange="updateSelection('operations_select','operations_added', 'operation')">
-            <option selected disabled>operaciones ...</option>
-            {%for operation in operations%}
-            <option value="{{operation.id}}">{{operation.name}}</option>
-            {%endfor%}
-          </select>
+        <select class="form-select" aria-label="Default select example" id="operations_select"
+          onchange="updateSelection('operations_select','operations_added', 'operation')">
+          <option selected disabled>operaciones ...</option>
+          {%for operation in operations%}
+          <option value="{{operation.id}}">{{operation.name}}</option>
+          {%endfor%}
+        </select>
         {%endif%}
       </div>
       <div class="container_options_added input" id="operations_added">
 
-      </div>      
+      </div>
+      <div class="container_options_register input" id="operations_register">
+        {%if operations_recorded%}
+        {%for operation_recorded in operations_recorded%}
+        <div class="option_added" id="div_operation_{{operation_recorded.id}}">
+          <input type="hidden" value="{{operation_recorded.id}}" name="operation_{{operation_recorded.id}}"
+            id="operation_{{operation_recorded.id}}">
+          <label>{{operation_recorded.name}}</label>
+          <button
+            onclick="changeName('operation_{{operation_recorded.id}}','div_operation_{{operation_recorded.id}}', 'operation',event)">Quitar</button>
+        </div>
+        {%endfor%}
+        {%endif%}
+      </div>
     </div>
 
     <!-- Enfermedades del animal -->
@@ -117,16 +144,30 @@
       </div>
       <div class="container_animal_seccion">
         {%if diseases%}
-          <select class="form-select" aria-label="Default select example" id="disease_select" onchange="updateSelection('disease_select','disease_added', 'disease')">
-            <option selected disabled>Enfermedades ...</option>
-            {%for disease in diseases%}
-            <option value="{{disease.id}}">{{disease.name}}</option>
-            {%endfor%}
-          </select>
+        <select class="form-select" aria-label="Default select example" id="disease_select"
+          onchange="updateSelection('disease_select','disease_added', 'disease')">
+          <option selected disabled>Enfermedades ...</option>
+          {%for disease in diseases%}
+          <option value="{{disease.id}}">{{disease.name}}</option>
+          {%endfor%}
+        </select>
         {%endif%}
       </div>
       <div class="container_options_added input" id="disease_added">
 
+      </div>
+      <div class="container_options_register input" id="diseases_register">
+        {%if diseases_recorded%}
+        {%for disease_recorded in diseases_recorded%}
+        <div class="option_added" id="div_disease_{{disease_recorded.id}}">
+          <input type="hidden" value="{{disease_recorded.id}}" name="disease_{{disease_recorded.id}}"
+            id="disease_{{disease_recorded.id}}">
+          <label>{{disease_recorded.name}}</label>
+          <button
+            onclick="changeName('disease_{{disease_recorded.id}}','div_disease_{{disease_recorded.id}}','disease' ,event)">Quitar</button>
+        </div>
+        {%endfor%}
+        {%endif%}
       </div>
     </div>
 
@@ -137,16 +178,31 @@
       </div>
       <div class="container_animal_seccion">
         {%if vaccines%}
-          <select class="form-select" aria-label="Default select example" id="vaccine_select" onchange="updateSelection('vaccine_select','vaccine_added', 'vaccine')">
-            <option selected disabled>Vacunas ...</option>
-            {%for vaccine in vaccines%}
-            <option value="{{vaccine.id}}">{{vaccine.name}}</option>
-            {%endfor%}
-          </select>
+        <select class="form-select" aria-label="Default select example" id="vaccine_select"
+          onchange="updateSelection('vaccine_select','vaccine_added', 'vaccine')">
+          <option selected disabled>Vacunas ...</option>
+          {%for vaccine in vaccines%}
+          <option value="{{vaccine.id}}">{{vaccine.name}}</option>
+          {%endfor%}
+        </select>
         {%endif%}
       </div>
       <div class="container_options_added input" id="vaccine_added">
 
+      </div>
+
+      <div class="container_options_register input" id="vaccines_register">
+        {%if vaccines_recorded%}
+        {%for vaccine_recorded in vaccines_recorded%}
+        <div class="option_added" id="div_vaccine_{{vaccine_recorded.id}}">
+          <input type="hidden" value="{{vaccine_recorded.id}}" name="vaccine_{{vaccine_recorded.id}}"
+            id="vaccine_{{vaccine_recorded.id}}">
+          <label>{{vaccine_recorded.name}}</label>
+          <button
+            onclick="changeName('vaccine_{{vaccine_recorded.id}}','div_vaccine_{{vaccine_recorded.id}}','vaccine' ,event)">Quitar</button>
+        </div>
+        {%endfor%}
+        {%endif%}
       </div>
     </div>
 

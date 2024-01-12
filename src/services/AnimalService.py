@@ -120,11 +120,10 @@ class AnimalService():
       conexion.close()
     
   @classmethod
-  def updateAnimalInformation(self,animal):
+  def updateAnimalInformation(self,id_animal,animal):
     try:
       conexion = get_connection()
       cursor = conexion.cursor()
-      id = animal.id
       new_Animal = animal.__dict__
       new_Animal.pop("id")
       new_Animal = {key: value for key, value in new_Animal.items() if value is not None}
@@ -135,7 +134,7 @@ class AnimalService():
           else:
               fields.append(f'{key} = {value}')
       fieldsUpdate = ', '.join(fields)
-      sql = f"UPDATE animal SET {fieldsUpdate} WHERE id = {id}"
+      sql = f"UPDATE animal SET {fieldsUpdate} WHERE id = {id_animal}"
       print(sql)
       cursor.execute(sql)
       conexion.commit()
