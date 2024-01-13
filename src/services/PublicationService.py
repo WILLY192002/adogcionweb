@@ -30,8 +30,8 @@ class PublicationService():
     try:
       conexion = get_connection()
       cursor = conexion.cursor()
-      sql = """SELECT p.*, ac.photo, ac.name, ac.id FROM publication p JOIN access a ON p.access_id = a.id 
-      JOIN adoptioncenter ac ON a.id = ac.access_id
+      sql = """SELECT p.*, ac.photo, ac.name, ac.id FROM publication p
+      JOIN adoptioncenter ac ON p.access_id = ac.access_id
       WHERE p.is_activate = 1"""
       if filter_search != None:
         sql += f" AND ac.name LIKE '%{filter_search}%'"
@@ -53,12 +53,33 @@ class PublicationService():
       else:
         return False
     except Exception as ex:
-      message = f"An error occurred while consulting publications by user type {ex}"
+      message = f"An error occurred while consulting publications by adoption center {ex}"
       raise Exception(message)
     finally:
       conexion.close()
   
-  
+  @classmethod
+  def getAllPublicationByNaturalPerson(self):
+    try:
+      conexion = get_connection()
+      cursor = conexion.cursor()
+      sql = """SELECT p.*, np.photo, np.name, np.person_id FROM publication p 
+      JOIN naturalperson np ON p.access_id = np.access_id 
+      WHERE p.is_activate = 1 ORDER BY date DESC;"""
+      cursor.execute(sql)
+      row = cursor.fetchall()
+      out_publication = []
+      if row != None:
+        for pub in row:
+          out_publication.append(Publication(pub[0],pub[1],pub[2],pub[3],pub[4],pub[5],pub[6],pub[7], pub[8], pub[9],pub[10]))
+        return out_publication
+      else:
+        return False
+    except Exception as ex:
+      message = f"An error occurred while consulting publications by natural person {ex}"
+      raise Exception(message)
+    finally:
+      conexion.close()
 
   @classmethod
   def getAllPublicationByAccessId(self, access_id):

@@ -83,6 +83,5 @@ def homeCommunity():
   else:
     My_categories = False
     My_topics = False
-    id_natural_person = UsertypeService.getUserTypeByName("UT-NATURAL_PERSON").id
-    My_publications = PublicationService.getAllPublicationByAdoptionCenter(None,None, None)
+    My_publications = PublicationService.getAllPublicationByNaturalPerson()
     return render_template('home.html',categories = My_categories,topics = My_topics, publications = My_publications)

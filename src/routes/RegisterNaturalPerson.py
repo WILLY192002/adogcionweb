@@ -44,12 +44,13 @@ def registerAdoptionCenter():
     naturalPerson_access_id = None
     naturalPerson_person_id = None
     naturalPerson_photo = None
+    naturalPerson_name = person_first_name + " " +person_first_surname
 
     new_access = Access(access_id, access_email, access_password, access_user_type_id, access_is_activate)
     new_person = Person(person_id, person_first_name, person_middle_name, person_first_surname, 
                         person_second_lastname,person_identification_type, person_identification_number, person_contact,
                         person_city,person_department)
-    new_natural_person = NaturalPerson(naturalPerson_id, naturalPerson_access_id, naturalPerson_person_id, naturalPerson_photo)
+    new_natural_person = NaturalPerson(naturalPerson_id, naturalPerson_access_id, naturalPerson_person_id, naturalPerson_photo,naturalPerson_name)
     
     
     #INSERT NEW ACCESS IN DATA BASE
@@ -65,8 +66,9 @@ def registerAdoptionCenter():
       PersonService.addNewPerson(new_person)
       new_natural_person.person_id = PersonService.getPersonByIdentificationNumber(new_person.identification_number).id
     else:
-      new_natural_person.person_id = PersonService.getPersonByIdentificationNumber(new_person.identification_number).id
-    
+      person_recorded = PersonService.getPersonByIdentificationNumber(new_person.identification_number)
+      new_natural_person.person_id = person_recorded.id
+      new_natural_person.name = person_recorded.first_name + " " + person_recorded.first_surname
     #INSERT NEW ADOPTION CENTER IN DATA BASE
     NaturalpersonService.addNewNaturalPerson(new_natural_person)
 

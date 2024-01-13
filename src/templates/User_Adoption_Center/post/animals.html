@@ -10,10 +10,10 @@
 {% block body %}
 <div class="container text-center">
   
-  <form action='#' method="POST">
+  <!-- <form action='#' method="POST">
     <div class="row justify-content-md-center row-cols-3">
       <div class="col-6 mt-3 mb-3">
-        <input type="hidden" name="form_id" value="filter_animal"><!--IDENTIFICADOR FORM-->
+        <input type="hidden" name="form_id" value="filter_animal">
         <input type="text" class="form-control" placeholder="Buscar animales" aria-label="Buscar animales" name="barraFilter" id="barraFilter">
       </div>
       <div class="col col-md-auto mt-3 mb-3">
@@ -71,7 +71,68 @@
         </div>
       </div>
     </div>
-  </form>    
+  </form>     -->
+  <form action='/view/animals/filter' method="POST">
+    <div class="row justify-content-md-center row-cols-3">
+      <div class="col-6 mt-3 mb-3">
+        <input type="hidden" name="form_id" value="filter_adoption_seccion"><!--IDENTIFICADOR FORM-->
+        <input type="text" class="form-control" placeholder="Buscar animales" aria-label="Buscar animales" name="filter_search" id="barraFilter">
+      </div>
+      <div class="col col-md-auto mt-3 mb-3">
+        <button id="botonFiltrar" class="btn btn-outline-personalized" type="button">
+          <i class='bx bx-filter'></i> Filtrar
+        </button>
+      </div>
+      <div class="col col-md-auto mt-3 mb-3">
+        <button class="btn btn-outline-personalized" type="submit">
+          <i class='bx bx-search'></i> Buscar
+        </button>
+      </div>
+    </div>
+    <div id="filter_animal_div" style="display: none;">
+      <div class="row justify-content-md-center">
+        <div class="col-8 text-start">
+          <p>Filtrar por:</p>
+        </div>
+      </div>
+      <div class="row justify-content-md-center">
+        <div class="col-2 mb-3">
+          <select class="form-select animalFilter" aria-label="Filtrar por especie" name="filter_specie">
+            <option selected disabled>Especie</option>
+            {%for specie in species %}
+            <option value={{specie.id}}>{{specie.name}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-2 mb-3">
+          <select class="form-select animalFilter" aria-label="Filtrar por sexo" name="filter_sex">
+            <option selected disabled>Sexo</option>
+            <option value="Macho">Macho</option>
+            <option value="Hembra">Hembra</option>
+          </select>
+        </div>
+        <div class="col-2 mb-3">
+          <select class="form-select animalFilter" aria-label="Filtrar por tamaño" name="filter_size">
+            <option selected disabled>Tamaño</option>
+            <option value="Pequeño">Pequeño (0-20cm)</option>
+            <option value="Mediano">Mediano (21-50cm)</option>
+            <option value="Grande">Grande (51-80cm)</option>
+            <option value="Gigante">Gigante (>81cm)</option>
+          </select>
+        </div>
+        <div class="col-2 mb-3">
+          <select class="form-select animalFilter" aria-label="Filtrar por edad" name="filter_age">
+            <option selected disabled>Edad</option>
+            <option value="1">0 - 3</option>
+            <option value="2">4 - 7</option>
+            <option value="3">8 - 11</option>
+            <option value="4">12 - 15</option>
+            <option value="5"> >16</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </form> 
   <div class="row justify-content-md-center">
     <div class="col-8 mb-3 d-grid gap-2">
       <a class="btn btn-personalized" href="/upload_animal">

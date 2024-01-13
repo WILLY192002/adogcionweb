@@ -12,6 +12,7 @@ from src.services.DiseaseService import DiseaseService
 from src.services.disease_animalService import Disease_AnimalService
 from src.services.VaccineService import VaccineService
 from src.services.vaccine_animalService import Vaccine_AnimalService
+from src.services.AdoptioncenterService import AdoptioncenterService
 
 
 from src.models.Animal import Animal
@@ -32,13 +33,42 @@ def animalsAdoptionCenter():
       return render_template('auth/no_authorized.html')
   else:
     if current_user.is_authenticated and UsertypeService.verifyUserTypeAdoptionCenter(current_user.user_type_id):
+      user_information = AdoptioncenterService.getAdoptionCenterById(current_user.get_id())
+      species = SpeciesService.getAllSpecies()
       noAdoptedAnimals = AnimalService.getNoAdoptedAnimals(current_user.get_id())
       AdoptedAnimals = AnimalService.getAdoptedAnimals(current_user.get_id())
       print("Animales: ", len(AdoptedAnimals))
       return render_template('User_Adoption_Center/post/animals.html', noAdoptedAnimals = noAdoptedAnimals,
-                            AdoptedAnimals = AdoptedAnimals)
+                            AdoptedAnimals = AdoptedAnimals,species = species ,user_information = user_information)
     else:
       return render_template('auth/no_authorized.html')
+  
+@main.route('/view/animals/filter', methods = ['GET', 'POST'])
+def viewAnimalsFilter():
+  if request.method == 'POST':
+    filter_search = request.form.get('filter_search') if request.form.get('filter_search') != '' else None
+    filter_specie = request.form.get('filter_specie') if request.form.get('filter_specie') != '' else None
+    filter_sex = request.form.get('filter_sex') if request.form.get('filter_sex') != '' else None
+    filter_size = request.form.get('filter_size') if request.form.get('filter_size') != '' else None
+    filter_age = request.form.get('filter_age') if request.form.get('filter_age') != '' else None
+
+    user_information = AdoptioncenterService.getAdoptionCenterById(current_user.get_id())
+    species = SpeciesService.getAllSpecies()
+    noAdoptedAnimals = AnimalService.getNoAdoptedAnimalsFilter(current_user.get_id(),filter_search,filter_specie,filter_sex,filter_size,filter_age)
+    AdoptedAnimals = AnimalService.getAdoptedAnimalsFilter(current_user.get_id(),filter_search,filter_specie,filter_sex,filter_size,filter_age)
+    return render_template('User_Adoption_Center/post/animals.html', noAdoptedAnimals = noAdoptedAnimals,
+                            AdoptedAnimals = AdoptedAnimals, species = species,user_information = user_information)
+  else:
+    if current_user.is_authenticated and UsertypeService.verifyUserTypeAdoptionCenter(current_user.user_type_id):
+      user_information = AdoptioncenterService.getAdoptionCenterById(current_user.get_id())
+      species = SpeciesService.getAllSpecies()
+      noAdoptedAnimals = AnimalService.getNoAdoptedAnimals(current_user.get_id())
+      AdoptedAnimals = AnimalService.getAdoptedAnimals(current_user.get_id())
+      return render_template('User_Adoption_Center/post/animals.html', noAdoptedAnimals = noAdoptedAnimals,
+                            AdoptedAnimals = AdoptedAnimals , species = species,user_information = user_information)
+    else:
+      return render_template('auth/no_authorized.html')
+
   
 @main.route('/upload_animal', methods = ['GET', 'POST'])
 def uploadAnimalAdoptionCenter():
