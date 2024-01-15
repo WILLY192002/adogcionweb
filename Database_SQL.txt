@@ -59,9 +59,9 @@ CREATE TABLE `person` (
 CREATE TABLE `naturalperson`(
 `id` int PRIMARY KEY AUTO_INCREMENT,
 `person_id` int NOT NULL,
-`access_id` int NOT NULL),
+`access_id` int NOT NULL,
 `photo` VARCHAR(255),
-`name` VARCHAR(100) NOT NULL;
+`name` VARCHAR(100) NOT NULL);
 
 
 CREATE TABLE `animal` (
@@ -86,8 +86,8 @@ CREATE TABLE `species` (
 
 CREATE TABLE `breed` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL UNIQUE
-  `breed_id` int NOT NULL,
+  `name` varchar(100) NOT NULL UNIQUE,
+  `species_id` int NOT NULL
 );
 
 CREATE TABLE `operation` (
