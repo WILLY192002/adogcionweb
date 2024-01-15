@@ -31,7 +31,7 @@ class NaturalpersonService():
       cursor.execute(sql)
       row = cursor.fetchone()
       if row != None:
-        return NaturalPerson(row[0],row[1],row[2], None)
+        return NaturalPerson(row[0],row[1],row[2],row[3],row[4])
       else:
         return False
     except Exception as ex:

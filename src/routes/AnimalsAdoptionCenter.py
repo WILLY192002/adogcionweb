@@ -25,7 +25,6 @@ def animalsAdoptionCenter():
     if current_user.is_authenticated and UsertypeService.verifyUserTypeAdoptionCenter(current_user.user_type_id):
       animal_id = request.form['animalid']
       animal_is_adopted = int(request.form.get('animal_is_adopted'))
-      print("Entró post", animal_id, animal_is_adopted, bool(animal_is_adopted))
       update_animal = Animal(animal_id, None, None, None,None, None, None, None, None, None, None, bool(animal_is_adopted))
       AnimalService.updateAnimalInformation(animal_id,update_animal)
       return redirect(request.referrer)
@@ -37,7 +36,6 @@ def animalsAdoptionCenter():
       species = SpeciesService.getAllSpecies()
       noAdoptedAnimals = AnimalService.getNoAdoptedAnimals(current_user.get_id())
       AdoptedAnimals = AnimalService.getAdoptedAnimals(current_user.get_id())
-      print("Animales: ", len(AdoptedAnimals))
       return render_template('User_Adoption_Center/post/animals.html', noAdoptedAnimals = noAdoptedAnimals,
                             AdoptedAnimals = AdoptedAnimals,species = species ,user_information = user_information)
     else:
