@@ -1,0 +1,187 @@
+#Create database adogcionweb
+
+#use adogcionweb
+
+
+CREATE TABLE `access` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `user_type_id` int NOT NULL,
+  `is_activate` boolean NOT NULL
+);
+
+CREATE TABLE `usertype` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL UNIQUE
+);
+
+CREATE TABLE `adoptioncenter` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `person_id` int NOT NULL,
+  `access_id` int NOT NULL,
+  `photo` varchar(255),
+  `name` varchar(100) NOT NULL,
+  `description` TEXT,
+  `nit` varchar(50),
+  `contact` varchar(50),
+  `address` varchar(100),
+  `googlemaps` varchar(100),
+  `city` varchar(100),
+  `department` varchar(100)
+);
+
+CREATE TABLE `paymentoption` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL UNIQUE
+);
+
+CREATE TABLE `paymentoption_adoptioncenter` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `paymentoption_id` int NOT NULL,
+  `adoptioncenter_id` int NOT NULL,
+  `number_payment` varchar(50) NOT NULL
+);
+
+CREATE TABLE `person` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `first_name` varchar(100) NOT NULL,
+  `middle_name` varchar(100),
+  `first_surname` varchar(100) NOT NULL,
+  `second_lastname` varchar(100),
+  `identification_type` varchar(50) NOT NULL,
+  `identification_number` varchar(50) NOT NULL,
+  `contact` varchar(50),
+  `city` varchar(100),
+  `department` varchar(100)
+);
+
+CREATE TABLE `naturalperson`(
+`id` int PRIMARY KEY AUTO_INCREMENT,
+`person_id` int NOT NULL,
+`access_id` int NOT NULL),
+`photo` VARCHAR(255),
+`name` VARCHAR(100) NOT NULL;
+
+
+CREATE TABLE `animal` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `adoptioncenter_id` int NOT NULL,
+  `photo` varchar(255),
+  `name` varchar(100) NOT NULL,
+  `breed_id` int NOT NULL,
+  `sex` varchar(50) NOT NULL,
+  `age` int,
+  `size` varchar(50) NOT NULL,
+  `weight` decimal(10,2),
+  `observation` TEXT,
+  `is_adopted` boolean NOT NULL,
+  `upload` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE `species` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL UNIQUE
+);
+
+CREATE TABLE `breed` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL UNIQUE
+  `breed_id` int NOT NULL,
+);
+
+CREATE TABLE `operation` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL UNIQUE,
+  `description` TEXT
+);
+
+CREATE TABLE `disease` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `name` varchar(100),
+  `description` TEXT
+);
+
+CREATE TABLE `vaccine` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `name` varchar(100),
+  `description` TEXT
+);
+
+CREATE TABLE `operation_animal` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `operation_id` int,
+  `animal_id` int
+);
+
+CREATE TABLE `disease_animal` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `disease_id` int,
+  `animal_id` int
+);
+
+CREATE TABLE `vaccine_animal` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `vaccine_id` int,
+  `animal_id` int
+);
+
+CREATE TABLE `publication` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `topic_id` int,
+  `access_id` int,
+  `photo` varchar(255),
+  `title` varchar(100),
+  `description` TEXT,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `is_activate` boolean
+);
+
+CREATE TABLE `topic` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `category_id` int,
+  `name` varchar(50)
+);
+
+CREATE TABLE `category` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `name` varchar(50)
+);
+
+ALTER TABLE `access` ADD FOREIGN KEY (`user_type_id`) REFERENCES `usertype` (`id`);
+
+ALTER TABLE `adoptioncenter` ADD FOREIGN KEY (`person_id`) REFERENCES `person` (`id`);
+
+ALTER TABLE `adoptioncenter` ADD FOREIGN KEY (`access_id`) REFERENCES `access` (`id`);
+
+ALTER TABLE `paymentoption_adoptioncenter` ADD FOREIGN KEY (`paymentoption_id`) REFERENCES `paymentoption` (`id`);
+
+ALTER TABLE `paymentoption_adoptioncenter` ADD FOREIGN KEY (`adoptioncenter_id`) REFERENCES `adoptioncenter` (`id`);
+
+ALTER TABLE `naturalperson` ADD FOREIGN KEY (`person_id`) REFERENCES `person` (`id`);
+
+ALTER TABLE `naturalperson` ADD FOREIGN KEY (`access_id`) REFERENCES `access` (`id`);
+
+ALTER TABLE `animal` ADD FOREIGN KEY (`adoptioncenter_id`) REFERENCES `adoptioncenter` (`id`);
+
+ALTER TABLE `animal` ADD FOREIGN KEY (`breed_id`) REFERENCES `breed` (`id`);
+
+ALTER TABLE `breed` ADD FOREIGN KEY (`species_id`) REFERENCES `species` (`id`);
+
+ALTER TABLE `operation_animal` ADD FOREIGN KEY (`operation_id`) REFERENCES `operation` (`id`);
+
+ALTER TABLE `operation_animal` ADD FOREIGN KEY (`animal_id`) REFERENCES `animal` (`id`);
+
+ALTER TABLE `disease_animal` ADD FOREIGN KEY (`disease_id`) REFERENCES `disease` (`id`);
+
+ALTER TABLE `disease_animal` ADD FOREIGN KEY (`animal_id`) REFERENCES `animal` (`id`);
+
+ALTER TABLE `vaccine_animal` ADD FOREIGN KEY (`vaccine_id`) REFERENCES `vaccine` (`id`);
+
+ALTER TABLE `vaccine_animal` ADD FOREIGN KEY (`animal_id`) REFERENCES `animal` (`id`);
+
+ALTER TABLE `publication` ADD FOREIGN KEY (`access_id`) REFERENCES `access` (`id`);
+
+ALTER TABLE `publication` ADD FOREIGN KEY (`topic_id`) REFERENCES `topic` (`id`);
+
+ALTER TABLE `topic` ADD FOREIGN KEY (`category_id`) REFERENCES `category` (`id`);

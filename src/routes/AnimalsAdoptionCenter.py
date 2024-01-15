@@ -82,11 +82,11 @@ def uploadAnimalAdoptionCenter():
       animal_sex = request.form.get('animal_sex')
       animal_size = request.form.get('animal_size')
       animal_weight = request.form['animal_weight'] if request.form['animal_weight'] != '' else None
-      animal_diet = request.form['animal_diet'].capitalize() if request.form['animal_diet'] != '' else None
+      animal_observation = request.form['animal_observation'].capitalize() if request.form['animal_observation'] != '' else None
       animal_is_adopted = False
 
       new_animal = Animal(None, current_user.get_id(), Animal_photo, animal_name,animal_breed, 
-                          animal_sex, animal_age, animal_size, animal_weight,animal_diet,None,animal_is_adopted)
+                          animal_sex, animal_age, animal_size, animal_weight,animal_observation,None,animal_is_adopted)
       AnimalService.addNewAnimal(new_animal)
       new_animal.id = AnimalService.getLastAnimalAddedByName(animal_name, current_user.get_id()).id
 
@@ -134,11 +134,11 @@ def editAnimalAdoptionCenter(animal_id):
       animal_sex = request.form.get('animal_sex')
       animal_size = request.form.get('animal_size')
       animal_weight = request.form['animal_weight'] if request.form['animal_weight'] != '' else None
-      animal_diet = request.form['animal_diet'].capitalize() if request.form['animal_diet'] != '' else None
+      animal_observation = request.form['animal_observation'].capitalize() if request.form['animal_observation'] != '' else None
       animal_is_adopted = request.form.get('animal_is_adopted') if request.form.get('animal_is_adopted') != '' else None
       print("XD:-",animal_is_adopted,"-", type(animal_is_adopted))
       new_animal = Animal(None, None, Animal_photo, animal_name,animal_breed, 
-                            animal_sex, animal_age, animal_size, animal_weight,animal_diet,None,animal_is_adopted)
+                            animal_sex, animal_age, animal_size, animal_weight,animal_observation,None,animal_is_adopted)
       
       AnimalService.updateAnimalInformation(animal_id,new_animal)
       #Animal Operations added

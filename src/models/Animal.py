@@ -1,5 +1,5 @@
 class Animal:
-    def __init__(self, id, adoptioncenter_id, photo, name, breed_id, sex, age, size, weight, diet, upload ,is_adopted, breed_name = None, species_name = None):
+    def __init__(self, id, adoptioncenter_id, photo, name, breed_id, sex, age, size, weight, observation, upload ,is_adopted, breed_name = None, species_name = None):
         self.id = id
         self.adoptioncenter_id = adoptioncenter_id
         self.photo = photo
@@ -9,7 +9,7 @@ class Animal:
         self.age = age
         self.size = size
         self.weight = weight
-        self.diet = diet
+        self.observation = observation
         self.upload = upload
         self.is_adopted = is_adopted
         self.breed_name = breed_name
