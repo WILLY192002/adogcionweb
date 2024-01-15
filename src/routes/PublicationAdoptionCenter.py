@@ -37,6 +37,6 @@ def publicationAdoptionCenter():
   else:
     if current_user.is_authenticated and UsertypeService.verifyUserTypeAdoptionCenter(current_user.user_type_id):
       topics = TopicService.getAllTopics()
-      return render_template('User_Adoption_Center/post/publication_adoption_center.html', topics=topics)
+      return render_template('publication.html', topics=topics)
     else:
       return render_template('auth/no_authorized.html')
