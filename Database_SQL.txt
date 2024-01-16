@@ -188,5 +188,66 @@ ALTER TABLE `publication` ADD FOREIGN KEY (`topic_id`) REFERENCES `topic` (`id`)
 ALTER TABLE `topic` ADD FOREIGN KEY (`category_id`) REFERENCES `category` (`id`);
 
 INSERT INTO adogcionweb.usertype (name) VALUE ('UT-ADOPTION_CENTER')
-
 INSERT INTO adogcionweb.usertype (name) VALUE ('UT-NATURAL_PERSON')
+
+INSERT INTO adogcionweb.species (name) VALUES ('Perro');
+INSERT INTO adogcionweb.species (name) VALUES ('Conejo');
+INSERT INTO adogcionweb.species (name) VALUES ('Gato');
+INSERT INTO adogcionweb.species (name) VALUES ('Hamster');
+
+INSERT INTO adogcionweb.breed (name, species_id) values ('Siamés', 3);
+INSERT INTO adogcionweb.breed (name, species_id) values ('Ragdoll', 3);
+INSERT INTO adogcionweb.breed (name, species_id) values ('Poodle', 1);
+INSERT INTO adogcionweb.breed (name, species_id) values ('Persa', 3);
+INSERT INTO adogcionweb.breed (name, species_id) values ('Maine Coon', 3);
+INSERT INTO adogcionweb.breed (name, species_id) values ('Labrador Retriever', 1);
+INSERT INTO adogcionweb.breed (name, species_id) values ('German Shepherd', 1);
+INSERT INTO adogcionweb.breed (name, species_id) values ('Criollo', 1);
+INSERT INTO adogcionweb.breed (name, species_id) values ('Bulldog', 1);
+INSERT INTO adogcionweb.breed (name, species_id) values ('Bengalí', 3);
+INSERT INTO adogcionweb.breed (name, species_id) values ('Beagle', 1);
+
+INSERT INTO adogcionweb.category (name) values ('Ayudas');
+INSERT INTO adogcionweb.category (name) values ('Noticias');
+INSERT INTO adogcionweb.category (name) values ('Actividades');
+
+INSERT INTO adogcionweb.topic (category_id, name) VALUES (1, 'Comidas');
+INSERT INTO adogcionweb.topic (category_id, name) VALUES (1, 'Medicamentos');
+INSERT INTO adogcionweb.topic (category_id, name) VALUES (1, 'Apadrinamientos');
+INSERT INTO adogcionweb.topic (category_id, name) VALUES (2, 'Animales perdidos');
+INSERT INTO adogcionweb.topic (category_id, name) VALUES (2, 'Animales encontrados');
+INSERT INTO adogcionweb.topic (category_id, name) VALUES (3, 'Nuevos eventos');
+INSERT INTO adogcionweb.topic (category_id, name) VALUES (2, 'Nueva noticia');
+
+INSERT INTO adogcionweb.vaccine (id, name, description) VALUES (1,	'Vacuna contra el Moquillo',	'Protege contra el virus del moquillo canino.');
+INSERT INTO adogcionweb.vaccine (id, name, description) VALUES (2,	'Vacuna contra el Parvovirus Canino',	'Previene la infección por parvovirus en perros.');
+INSERT INTO adogcionweb.vaccine (id, name, description) VALUES (3,	'Vacuna contra la Hepatitis Canina',	'Brinda protección contra la hepatitis infecciosa canina.');
+INSERT INTO adogcionweb.vaccine (id, name, description) VALUES (4,	'Vacuna contra la Tos de las Perreras',	'Protege contra la traqueobronquitis canina.');
+INSERT INTO adogcionweb.vaccine (id, name, description) VALUES (5,	'Vacuna contra la Rabia',	'Prevención contra la rabia en perros.');
+INSERT INTO adogcionweb.vaccine (id, name, description) VALUES (6,	'Vacuna contra el Herpesvirus Felino',	'Protege contra el herpesvirus felino, una causa del resfriado en gatos.');
+INSERT INTO adogcionweb.vaccine (id, name, description) VALUES (7,	'Vacuna contra el Calicivirus Felino',	'Previene el calicivirus felino, otra causa del resfriado felino.');
+INSERT INTO adogcionweb.vaccine (id, name, description) VALUES (8,	'Vacuna contra la Panleucopenia Felina',	'Ofrece protección contra la panleucopenia felina, similar al parvovirus canino.');
+INSERT INTO adogcionweb.vaccine (id, name, description) VALUES (9,	'Vacuna contra la Leucemia Felina',	'Protege contra el virus de la leucemia felina en gatos que salen al exterior.');
+
+INSERT INTO adogcionweb.disease (id, name, description) VALUES (1, 'Parvovirus Canino', 'Enfermedad viral altamente contagiosa en cachorros.');
+INSERT INTO adogcionweb.disease (id, name, description) VALUES (2, 'Moquillo Canino', 'Enfermedad viral con síntomas respiratorios y neurológicos.');
+INSERT INTO adogcionweb.disease (id, name, description) VALUES (3, 'Enfermedad de Lyme', 'Enfermedad bacteriana transmitida por garrapatas.');
+INSERT INTO adogcionweb.disease (id, name, description) VALUES (4, 'Leptospirosis', 'Infección bacteriana que afecta los riñones y otros órganos.');
+INSERT INTO adogcionweb.disease (id, name, description) VALUES (5, 'Rinotraqueítis Felina', 'Infección viral respiratoria causada por herpesvirus felino.');
+INSERT INTO adogcionweb.disease (id, name, description) VALUES (6, 'Leucemia Felina', 'Enfermedad viral que afecta el sistema inmunológico.');
+INSERT INTO adogcionweb.disease (id, name, description) VALUES (7, 'Panleucopenia Felina', 'Enfermedad viral también conocida como parvovirus felino.');
+INSERT INTO adogcionweb.disease (id, name, description) VALUES (8, 'Síndrome del Hámster Húmedo', 'Enfermedad con hinchazón abdominal y pelaje mojado.');
+INSERT INTO adogcionweb.disease (id, name, description) VALUES (9, 'Tumor Mamario en Hámsters Hembra', 'Desarrollo de tumores mamarios en hámsters hembra.');
+INSERT INTO adogcionweb.disease (id, name, description) VALUES (10, 'Mixomatosis', 'Enfermedad viral en conejos con hinchazón facial y ocular.');
+
+INSERT INTO adogcionweb.operation (id, name, description) VALUES (1, 'Esterilización/esterilización',	'Cirugía para controlar la reproducción.');
+INSERT INTO adogcionweb.operation (id, name, description) VALUES (2, 'Cirugía de tejidos blandos',	'Incluye la extirpación de tumores o corrección de heridas.');
+INSERT INTO adogcionweb.operation (id, name, description) VALUES (3, 'Cirugía ortopédica',	'Para reparar huesos, articulaciones o ligamentos.');
+INSERT INTO adogcionweb.operation (id, name, description) VALUES (4, 'Cirugía dental',	'Extracciones de dientes, tratamiento de enfermedades periodontales, etc.');
+INSERT INTO adogcionweb.operation (id, name, description) VALUES (5, 'Cirugía de emergencia',	'Intervenciones quirúrgicas en casos de lesiones graves o emergencias médicas.');
+INSERT INTO adogcionweb.operation (id, name, description) VALUES (6, 'Cirugía oftálmica',	'Tratamiento de problemas oculares, como cataratas.');
+INSERT INTO adogcionweb.operation (id, name, description) VALUES (7, 'Cirugía reconstructiva',	'Para corregir malformaciones o lesiones.');
+INSERT INTO adogcionweb.operation (id, name, description) VALUES (8, 'Cirugía de las vías respiratorias',	'Para abordar problemas como las estenosis nasales.');
+INSERT INTO adogcionweb.operation (id, name, description) VALUES (9, 'Cirugía de oído',	'Para tratar infecciones crónicas u otros problemas.');
+INSERT INTO adogcionweb.operation (id, name, description) VALUES (10, 'Cirugía neurológica',	'Para abordar problemas en el sistema nervioso.');
+INSERT INTO adogcionweb.operation (id, name, description) VALUES (11, 'Cirugía de extremidades',	'Para tratar problemas en extremidades del animal.');
