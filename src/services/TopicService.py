@@ -10,7 +10,7 @@ class TopicService():
     try:
       conexion = get_connection()
       cursor = conexion.cursor()
-      sql = f"SELECT * FROM topic"
+      sql = f"SELECT id, category_id, name FROM topic"
       cursor.execute(sql)
       row = cursor.fetchall()
       out_topic = []
@@ -31,7 +31,7 @@ class TopicService():
     try:
       conexion = get_connection()
       cursor = conexion.cursor()
-      sql = f"SELECT * FROM topic WHERE name = {name}"
+      sql = f"SELECT id, category_id, name FROM topic WHERE name = {name}"
       cursor.execute(sql)
       row = cursor.fetchone()
       if row != None :
@@ -49,7 +49,7 @@ class TopicService():
     try:
       conexion = get_connection()
       cursor = conexion.cursor()
-      sql = f"SELECT * FROM topic WHERE category_id = {category_id}"
+      sql = f"SELECT id, category_id, name FROM topic WHERE category_id = {category_id}"
       cursor.execute(sql)
       row = cursor.fetchall()
       out_topic = []

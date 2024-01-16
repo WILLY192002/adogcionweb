@@ -10,7 +10,7 @@ class CategoryService():
     try:
       conexion = get_connection()
       cursor = conexion.cursor()
-      sql = f"SELECT * FROM category"
+      sql = f"SELECT id, name FROM category"
       cursor.execute(sql)
       row = cursor.fetchall()
       out_category = []
@@ -31,7 +31,7 @@ class CategoryService():
     try:
       conexion = get_connection()
       cursor = conexion.cursor()
-      sql = f"SELECT * FROM category WHERE name = {name}"
+      sql = f"SELECT id, name FROM category WHERE name = {name}"
       cursor.execute(sql)
       row = cursor.fetchone()
       if row != None :

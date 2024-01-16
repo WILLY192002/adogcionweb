@@ -10,7 +10,9 @@ class Paymentoption_AdoptioncenterService():
     try:
       conexion = get_connection()
       cursor = conexion.cursor()
-      sql = f"""SELECT PayOptAdopt.*, PayOpt.name FROM paymentoption_adoptioncenter PayOptAdopt JOIN 
+      
+      sql = f"""SELECT PayOptAdopt.id, PayOptAdopt.paymentoption_id, PayOptAdopt.adoptioncenter_id, 
+      PayOptAdopt.number_payment, PayOpt.name FROM paymentoption_adoptioncenter PayOptAdopt JOIN 
       paymentoption PayOpt ON PayOptAdopt.paymentoption_id = PayOpt.id WHERE PayOptAdopt.adoptioncenter_id = {adoptioncenter_id};
 """
       cursor.execute(sql)

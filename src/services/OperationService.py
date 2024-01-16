@@ -10,7 +10,7 @@ class OperationService():
     try:
       conexion = get_connection()
       cursor = conexion.cursor()
-      sql = f"SELECT * FROM operation"
+      sql = f"SELECT id, name, description FROM operation"
       cursor.execute(sql)
       rows = cursor.fetchall()
       out_operation = []

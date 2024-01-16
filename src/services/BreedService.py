@@ -7,7 +7,7 @@ class BreedService():
     try:
       conexion = get_connection()
       cursor = conexion.cursor()
-      sql = f"SELECT * FROM breed"
+      sql = f"SELECT id, name, species_id FROM breed"
       cursor.execute(sql)
       rows = cursor.fetchall()
       out_breeds = []
@@ -28,7 +28,7 @@ class BreedService():
     try:
       conexion = get_connection()
       cursor = conexion.cursor()
-      sql = f"SELECT * FROM breed WHERE species_id = {species_id}"
+      sql = f"SELECT id, name, species_id FROM breed WHERE species_id = {species_id}"
       cursor.execute(sql)
       rows = cursor.fetchall()
       out_breeds = []

@@ -26,7 +26,7 @@ class AdoptioncenterService():
     try:
       conexion = get_connection()
       cursor = conexion.cursor()
-      sql = f"SELECT * FROM adoptioncenter WHERE access_id = {access_id}"
+      sql = f"SELECT id, person_id, access_id, photo, name, description, nit, contact, address, googlemaps, city, department FROM adoptioncenter WHERE access_id = {access_id}"
       cursor.execute(sql)
       row = cursor.fetchone()
       if row != None:
@@ -44,7 +44,7 @@ class AdoptioncenterService():
     try:
       conexion = get_connection()
       cursor = conexion.cursor()
-      sql = f"SELECT * FROM adoptioncenter WHERE id = {id}"
+      sql = f"SELECT id, person_id, access_id, photo, name, description, nit, contact, address, googlemaps, city, department FROM adoptioncenter WHERE id = {id}"
       cursor.execute(sql)
       row = cursor.fetchone()
       if row != None:

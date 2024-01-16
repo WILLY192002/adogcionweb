@@ -27,7 +27,7 @@ class NaturalpersonService():
     try:
       conexion = get_connection()
       cursor = conexion.cursor()
-      sql = f"SELECT * FROM naturalperson WHERE access_id = {access_id}"
+      sql = f"SELECT id, person_id, access_id, photo, name FROM naturalperson WHERE access_id = {access_id}"
       cursor.execute(sql)
       row = cursor.fetchone()
       if row != None:
@@ -36,6 +36,24 @@ class NaturalpersonService():
         return False
     except Exception as ex:
       message = f"An error occurred while consulting an NaturalPerson by Access {ex}"
+      raise Exception(message)
+    finally:
+      conexion.close()
+  
+  @classmethod
+  def getNaturalPersonById(self, id):
+    try:
+      conexion = get_connection()
+      cursor = conexion.cursor()
+      sql = f"SELECT id, person_id, access_id, photo, name FROM naturalperson WHERE id = {id}"
+      cursor.execute(sql)
+      row = cursor.fetchone()
+      if row != None:
+        return NaturalPerson(row[0],row[1],row[2],row[3],row[4])
+      else:
+        return False
+    except Exception as ex:
+      message = f"An error occurred while consulting a Natural person by id {ex}"
       raise Exception(message)
     finally:
       conexion.close()

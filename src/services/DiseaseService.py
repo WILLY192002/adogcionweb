@@ -10,7 +10,7 @@ class DiseaseService():
     try:
       conexion = get_connection()
       cursor = conexion.cursor()
-      sql = f"SELECT * FROM disease"
+      sql = f"SELECT id, name, description FROM disease"
       cursor.execute(sql)
       rows = cursor.fetchall()
       out_disease = []

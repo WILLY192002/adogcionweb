@@ -27,7 +27,7 @@ class UsertypeService():
     try:
       conexion = get_connection()
       cursor = conexion.cursor()
-      sql = f"SELECT * FROM usertype WHERE name = '{name}'"
+      sql = f"SELECT id, name FROM usertype WHERE name = '{name}'"
       cursor.execute(sql)
       row = cursor.fetchone()
       if row != None:
@@ -46,7 +46,7 @@ class UsertypeService():
       conexion = get_connection()
       cursor = conexion.cursor()
       user_type_name = 'UT-ADOPTION_CENTER'
-      sql = f"SELECT * FROM usertype WHERE name = '{user_type_name}'"
+      sql = f"SELECT id, name FROM usertype WHERE name = '{user_type_name}'"
       cursor.execute(sql)
       row = cursor.fetchone()
       if row != None:
@@ -68,7 +68,7 @@ class UsertypeService():
       conexion = get_connection()
       cursor = conexion.cursor()
       user_type_name = 'UT-NATURAL_PERSON'
-      sql = f"SELECT * FROM usertype WHERE name = '{user_type_name}'"
+      sql = f"SELECT id, name FROM usertype WHERE name = '{user_type_name}'"
       cursor.execute(sql)
       row = cursor.fetchone()
       if row != None:

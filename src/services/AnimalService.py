@@ -27,11 +27,9 @@ class AnimalService():
     try:
       conexion = get_connection()
       cursor = conexion.cursor()
-      # sql = f"""SELECT animal.*, breed.name, species.name FROM animal 
-      # JOIN breed ON breed.id = animal.breed_id 
-      # JOIN species ON breed.species_id = species.id  
-      # WHERE is_adopted = false AND adoptioncenter_id = {adoptioncenter_id}"""
-      sql = f"""SELECT a.*, b.name AS breed_name FROM animal a LEFT JOIN breed b ON a.breed_id = b.id 
+      
+      sql = f"""SELECT a.id, a.adoptioncenter_id, a.photo, a.name, a.breed_id, a.sex, a.age, a.size, a.weight, 
+      a.observation, a.is_adopted, a.upload, b.name AS breed_name FROM animal a LEFT JOIN breed b ON a.breed_id = b.id 
       WHERE is_adopted = false AND adoptioncenter_id = {adoptioncenter_id};"""
       cursor.execute(sql)
       rows = cursor.fetchall()
@@ -53,8 +51,9 @@ class AnimalService():
     try:
       conexion = get_connection()
       cursor = conexion.cursor()
-      sql = f"""SELECT animal.*, breed.name, species.name FROM animal 
-      JOIN breed ON breed.id = animal.breed_id 
+      sql = f"""SELECT a.id, a.adoptioncenter_id, a.photo, a.name, a.breed_id, a.sex, a.age, a.size, a.weight, 
+      a.observation, a.is_adopted, a.upload, breed.name, species.name FROM animal a
+      JOIN breed ON breed.id = a.breed_id 
       JOIN species ON breed.species_id = species.id  
       WHERE is_adopted = false AND adoptioncenter_id = {adoptioncenter_id}"""
       # sql = f"""SELECT a.*, b.name AS breed_name FROM animal a LEFT JOIN breed b ON a.breed_id = b.id 
@@ -102,7 +101,8 @@ class AnimalService():
       conexion = get_connection()
       cursor = conexion.cursor()
       # sql = f"SELECT * FROM animal WHERE is_adopted = true AND adoptioncenter_id = {adoptioncenter_id}"
-      sql = f"""SELECT a.*, b.name AS breed_name FROM animal a LEFT JOIN breed b ON a.breed_id = b.id 
+      sql = f"""SELECT a.id, a.adoptioncenter_id, a.photo, a.name, a.breed_id, a.sex, a.age, a.size, a.weight, 
+      a.observation, a.is_adopted, a.upload, b.name AS breed_name FROM animal a LEFT JOIN breed b ON a.breed_id = b.id 
       WHERE is_adopted = true AND adoptioncenter_id = {adoptioncenter_id};"""
       cursor.execute(sql)
       rows = cursor.fetchall()
@@ -124,8 +124,9 @@ class AnimalService():
     try:
       conexion = get_connection()
       cursor = conexion.cursor()
-      sql = f"""SELECT animal.*, breed.name, species.name FROM animal 
-      JOIN breed ON breed.id = animal.breed_id 
+      sql = f"""SELECT a.id, a.adoptioncenter_id, a.photo, a.name, a.breed_id, a.sex, a.age, a.size, a.weight, 
+      a.observation, a.is_adopted, a.upload, breed.name, species.name FROM animal a
+      JOIN breed ON breed.id = a.breed_id 
       JOIN species ON breed.species_id = species.id  
       WHERE is_adopted = true AND adoptioncenter_id = {adoptioncenter_id}"""
       # sql = f"""SELECT a.*, b.name AS breed_name FROM animal a LEFT JOIN breed b ON a.breed_id = b.id 
@@ -198,7 +199,7 @@ class AnimalService():
     try:
       conexion = get_connection()
       cursor = conexion.cursor()
-      sql = f"SELECT * FROM animal WHERE name = '{name}' AND adoptioncenter_id = {adoptioncenter_id} ORDER BY upload DESC LIMIT 1;"
+      sql = f"SELECT a.id, a.adoptioncenter_id, a.photo, a.name, a.breed_id, a.sex, a.age, a.size, a.weight, a.observation, a.is_adopted, a.upload FROM animal a WHERE name = '{name}' AND adoptioncenter_id = {adoptioncenter_id} ORDER BY upload DESC LIMIT 1;"
       cursor.execute(sql)
       row = cursor.fetchone()
       if row != None:
@@ -217,7 +218,8 @@ class AnimalService():
       conexion = get_connection()
       cursor = conexion.cursor()
       # sql = f"SELECT * FROM animal WHERE id = {animal_id} AND adoptioncenter_id = {adoptioncenter_id}"
-      sql = f"""SELECT a.*, b.name AS breed_name FROM animal a LEFT JOIN breed b ON a.breed_id = b.id 
+      sql = f"""SELECT a.id, a.adoptioncenter_id, a.photo, a.name, a.breed_id, a.sex, a.age, a.size, a.weight, 
+      a.observation, a.is_adopted, a.upload, b.name AS breed_name FROM animal a LEFT JOIN breed b ON a.breed_id = b.id 
       WHERE a.id = {animal_id} AND adoptioncenter_id = {adoptioncenter_id};"""
       cursor.execute(sql)
       row = cursor.fetchone()

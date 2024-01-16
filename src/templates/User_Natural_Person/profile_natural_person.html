@@ -19,7 +19,8 @@ Perfil
     <!-- FOTOGRAFÍA Y NOMBRE -->
     <div class="container_photo_name">
       <div class="container_photo">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjFkn9BNFAcHtEC_qqB6dgvYE3HXXTGooTv9m0lxXCMA&s" alt="">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjFkn9BNFAcHtEC_qqB6dgvYE3HXXTGooTv9m0lxXCMA&s"
+          alt="">
       </div>
       <div class="container_name">
         <h2>PRUEBANDO</h2>
@@ -27,13 +28,34 @@ Perfil
     </div>
     <!-- DESCRIPCION DE LA PERSONA  -->
     <div class="container_description">
-      <div class="container_boton">
-        <a href="">BOTON</a>
+      <div class="container_boton_label">
+        <h4>Sobre mi</h4>
+        <a href="#"><i id="icon_cog" class='bx bxs-cog'></i></a>
       </div>
-      <div class="">
+      <div class="container_description_textarea">
         <textarea name="" id="" cols="30" rows="10"></textarea>
       </div>
     </div>
+  </div>
+
+  <div class="container_publications">
+    {%if publications%}
+    {%for publication in publications%}
+    <div id="publication_{{publication.id}}" class="type_publication">
+      <div class="miniture_publication">
+        <img src="{{publication.photo}}" alt="" border="0" onerror="this.style.display='none'" />
+      </div>
+      <div class="title_publication">
+        <p><strong>{{publication.title}}</strong></p>
+      </div>
+      <div class="description_publication">
+        <textarea rows=5 readonly>{{publication.description}}</textarea>
+      </div>
+    </div>
+    {% endfor %}
+    {%endif%}
+
+
   </div>
 </div>
 {% endblock %}
