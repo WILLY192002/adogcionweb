@@ -17,7 +17,7 @@ from src.services.NaturalpersonService import NaturalpersonService
 main = Blueprint('register_natural_person',__name__)
 
 @main.route('/', methods = ['GET', 'POST'])
-def registerAdoptionCenter():
+def registerNaturalPerson():
   if request.method == 'POST':
     #ACCESS INFORMATION
     access_id = None

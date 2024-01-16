@@ -185,3 +185,7 @@ ALTER TABLE `publication` ADD FOREIGN KEY (`access_id`) REFERENCES `access` (`id
 ALTER TABLE `publication` ADD FOREIGN KEY (`topic_id`) REFERENCES `topic` (`id`);
 
 ALTER TABLE `topic` ADD FOREIGN KEY (`category_id`) REFERENCES `category` (`id`);
+
+INSERT INTO adogcionweb.usertype (name) VALUE ('UT-ADOPTION_CENTER')
+
+INSERT INTO adogcionweb.usertype (name) VALUE ('UT-NATURAL_PERSON')

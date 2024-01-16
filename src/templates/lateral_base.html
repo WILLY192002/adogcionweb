@@ -69,6 +69,13 @@
             </li>
             {% elif current_user.user_type_name == "UT-NATURAL_PERSON"%}
             <li class="item">
+              <a href="/view/profile={{current_user.id}}/natural_person/{{current_user.name}}"
+                class="link flex">
+                <i class="bx bxs-user"></i>
+                <span>Perfil</span>
+              </a>
+            </li>
+            <li class="item">
               <a href="/logout" class="link flex">
                 <i class="bx bxs-log-out"></i>
                 <span>Cerrar Sesión</span>
