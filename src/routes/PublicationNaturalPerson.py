@@ -9,35 +9,26 @@ from src.services.PublicationService import PublicationService
 
 from src.models.Publication import Publication
 
-main = Blueprint('publication_adoption_center',__name__)
+main = Blueprint('publication_natural_person',__name__)
 
-@main.route('/publication_adoption_center', methods = ['GET', 'POST'])
-def publicationAdoptionCenter():
+@main.route('/publication_natural_person', methods = ['GET', 'POST'])
+def publicationNaturalPerson():
   if request.method == 'POST':
       photo = request.form['urlImage'] if request.form['urlImage'] != '' else None
       upload_photo = ImageService.upload_image_to_imgbb(photo)
+      
       publication_photo = upload_photo['data']['url'] if photo else None
-
-      publication_topic = request.form.get('publication_topic')
       publication_title = request.form['publication_title'].capitalize() if request.form['publication_title'] != '' else None  
       publication_description = request.form['publication_description'].capitalize() if request.form['publication_description'] != '' else None 
-      add_payment_options = request.form.get('payments_option')
-
-
-      if add_payment_options != None:
-        payments_option = Paymentoption_AdoptioncenterService.getPaymentOptionAdoptionCenter(current_user.get_id())
-        publication_description += ("\n\nNos puedes ayudar mediante: ")
-        for payment_option in payments_option:
-          publication_description += ("\n*. "+payment_option.name_paymentoption+": "+payment_option.number_payment)
       
-      new_publication = Publication(None,publication_topic,current_user.access_id,publication_photo,
+      new_publication = Publication(None,None,current_user.access_id,publication_photo,
                                     publication_title,publication_description,None,True)
       PublicationService.addNewPublication(new_publication)
-      return redirect(url_for('view_profile_adoption_center.viewProfileAdoptionCenter', name = current_user.name, id = current_user.get_id()))
+      return redirect(url_for('view_profile_natural_person.viewProfileNaturalPerson', name = current_user.name, id = current_user.get_id()))
   else:
-    if current_user.is_authenticated and UsertypeService.verifyUserTypeAdoptionCenter(current_user.user_type_id):
-      topics = TopicService.getAllTopics()
-      visible = True
+    if current_user.is_authenticated and UsertypeService.verifyUserTypeNatrualPerson(current_user.user_type_id):
+      topics = False
+      visible = False
       return render_template('publication.html', topics=topics, visible = visible)
     else:
       return render_template('auth/no_authorized.html')

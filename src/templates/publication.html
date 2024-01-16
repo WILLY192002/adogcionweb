@@ -49,6 +49,7 @@ Publicar
                 placeholder="Ejemplo: Necesitamos medicamentos para este animal que fue encontraado"></textarea>
             </div>
           </div>
+          {%if visible and topics%}
           <div class="filtros">
             <div class="TemaLabel">
               <label>Tema:</label>
@@ -69,7 +70,9 @@ Publicar
             </div>
 
           </div>
+          {%endif%}
 
+          {%if visible%}
           <div class="contactos">
             <div class="encabezadoContactos">
               <label>¿Desea incluir sus medios por donde le pueden colaborar?</label>
@@ -82,6 +85,8 @@ Publicar
               </div>
             </div>
           </div>
+          {%endif%}
+
           <div class="botones">
             <button class="btn btn-personalized">
               <i class='bx bxs-dog'></i> Subir nueva publicacion

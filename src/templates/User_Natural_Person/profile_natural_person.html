@@ -18,12 +18,19 @@ Perfil
   <div class="profile_container">
     <!-- FOTOGRAFÍA Y NOMBRE -->
     <div class="container_photo_name">
+      {%if user_information.photo == None%}
       <div class="container_photo">
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjFkn9BNFAcHtEC_qqB6dgvYE3HXXTGooTv9m0lxXCMA&s"
           alt="">
       </div>
+      {%else%}
+      <div class="container_photo">
+        <img src="{{user_information.photo}}"
+          alt="">
+      </div>
+      {%endif%}
       <div class="container_name">
-        <h2>PRUEBANDO</h2>
+        <h2>{{user_information.name}}</h2>
       </div>
     </div>
     <!-- DESCRIPCION DE LA PERSONA  -->
@@ -33,7 +40,7 @@ Perfil
         <a href="#"><i id="icon_cog" class='bx bxs-cog'></i></a>
       </div>
       <div class="container_description_textarea">
-        <textarea name="" id="" cols="30" rows="10"></textarea>
+        <textarea name="" id="" cols="30" rows="10">{{user_information.description}}</textarea>
       </div>
     </div>
   </div>

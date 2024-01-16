@@ -27,11 +27,11 @@ class NaturalpersonService():
     try:
       conexion = get_connection()
       cursor = conexion.cursor()
-      sql = f"SELECT id, person_id, access_id, photo, name FROM naturalperson WHERE access_id = {access_id}"
+      sql = f"SELECT id, person_id, access_id, photo, name, description FROM naturalperson WHERE access_id = {access_id}"
       cursor.execute(sql)
       row = cursor.fetchone()
       if row != None:
-        return NaturalPerson(row[0],row[1],row[2],row[3],row[4])
+        return NaturalPerson(row[0],row[1],row[2],row[3],row[4], row[5])
       else:
         return False
     except Exception as ex:
@@ -45,11 +45,11 @@ class NaturalpersonService():
     try:
       conexion = get_connection()
       cursor = conexion.cursor()
-      sql = f"SELECT id, person_id, access_id, photo, name FROM naturalperson WHERE id = {id}"
+      sql = f"SELECT id, person_id, access_id, photo, name, description FROM naturalperson WHERE id = {id}"
       cursor.execute(sql)
       row = cursor.fetchone()
       if row != None:
-        return NaturalPerson(row[0],row[1],row[2],row[3],row[4])
+        return NaturalPerson(row[0],row[1],row[2],row[3],row[4], row[5])
       else:
         return False
     except Exception as ex:
