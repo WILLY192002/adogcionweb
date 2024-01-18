@@ -1,0 +1,78 @@
+<meta charset="UTF-8">
+<hr />
+<h1 style="text-align: center;">{{animal_name}}</h1>
+<hr />
+<table style="width: 100%; border-collapse: collapse; border-style: none; height: 285px;" border="0">
+<tbody>
+<tr style="height: 285px;">
+<td style="width: 38.6562%; border-style: none; height: 285px;"><img src="{{animal_photo}}" width="350" height="350" /></td>
+<td style="width: 61.3438%; border-style: none; height: 285px;">
+<table style="width: 100%; border-collapse: collapse; border-style: none;" border="1" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td style="width: 100%; border-style: none;">
+<ul>
+<li>
+<p>Edad: {{animal_age}}</p>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td style="width: 100%; border-style: none;">
+<ul>
+<li>Especie: {{animal_specie}} {{animal_breed}}</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td style="width: 100%; border-style: none;">
+<ul>
+<li>Sexo: {{animal_sex}}</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td style="width: 100%; border-style: none;">
+<ul>
+<li>Tamaño: {{animal_size}}</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td style="width: 100%; border-style: none;">
+<ul>
+<li>Peso: {{animal_weight}}</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Observaciones del animal</h3>
+<hr />
+<p>{{animal_observation}}</p>
+<br/>
+<br/>
+<h3>Operaciones</h3>
+<hr />
+<p>{% for operacion in operaciones %}</p>
+<p>{{ operacion }}</p>
+<p>{% endfor %}</p>
+<br/>
+<br/>
+<h3>Enfermedades</h3>
+<hr />
+<p>{% for enfermedad in enfermedades %}</p>
+<p>{{ enfermedad }}</p>
+<p>{% endfor %}</p>
+<br/>
+<br/>
+<h3>Vacunas</h3>
+<hr />
+<p>{% for vacuna in vacunas %}</p>
+<p>{{ vacuna }}</p>
+<p>{% endfor %}</p>

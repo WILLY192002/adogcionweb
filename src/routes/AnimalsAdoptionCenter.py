@@ -17,6 +17,8 @@ from src.services.AdoptioncenterService import AdoptioncenterService
 
 from src.models.Animal import Animal
 
+from src.utils.generate_report import generar_reporte
+
 main = Blueprint('animals_adoption_center',__name__)
 
 @main.route('/view/animals', methods = ['GET', 'POST'])
@@ -136,7 +138,6 @@ def editAnimalAdoptionCenter(animal_id):
       animal_weight = request.form['animal_weight'] if request.form['animal_weight'] != '' else None
       animal_observation = request.form['animal_observation'].capitalize() if request.form['animal_observation'] != '' else None
       animal_is_adopted = request.form.get('animal_is_adopted') if request.form.get('animal_is_adopted') != '' else None
-      print("XD:-",animal_is_adopted,"-", type(animal_is_adopted))
       new_animal = Animal(None, None, Animal_photo, animal_name,animal_breed, 
                             animal_sex, animal_age, animal_size, animal_weight,animal_observation,None,animal_is_adopted)
       
@@ -202,3 +203,25 @@ def editAnimalAdoptionCenter(animal_id):
                             vaccines_recorded = vaccines_recorded)
     else:
       return render_template('auth/no_authorized.html')
+
+@main.route('/view/animals/generate_report', methods = ['POST'])
+def generate_report():
+  animal_id = request.form['animal_id']
+  
+  # animal info
+  animal_edit = AnimalService.getAnimalById(animal_id, current_user.get_id())
+  breedAndSpecie = BreedService.getBreedsAndSpecieName(animal_edit.breed_id)
+  
+  # animal Operations
+  operations_recorded = Operation_AnimalService.getOperationByAnimalId(animal_id)
+
+  #animal diseases
+  diseases_recorded = Disease_AnimalService.getDiseaseByAnimalId(animal_id)
+
+  #animal vaccine
+  vaccines_recorded = Vaccine_AnimalService.getVaccineByAnimalId(animal_id)
+
+  generar_reporte(animal_edit, operations_recorded, diseases_recorded, vaccines_recorded, breedAndSpecie)
+
+  flash("Reporte generado")
+  return redirect(request.referrer)

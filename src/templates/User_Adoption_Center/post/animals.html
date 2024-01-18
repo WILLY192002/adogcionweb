@@ -169,6 +169,12 @@
               data-animal_observation="{{animal.observation}}">
               <i class='bx bx-book-open'></i> Abrir
             </button>
+            <form action="/view/animals/generate_report" method="POST">
+              <input type="hidden" name="animal_id" value="{{ animal.id }}">
+              <button class="btn btn-personalized mt-2" type="submit" data-bs-toggle="modal">
+                <i class="bx bxs-info-circle"></i>Descargar Reporte
+              </button>
+            </form>
           </div>
         </div>
       </div>

@@ -4,5 +4,5 @@ import pymysql
 def get_connection():
     return pymysql.connect(host='localhost',
                                 user='root',
-                                password='1234',
+                                password='123lapopo123',
                                 db='adogcionweb')
