@@ -57,3 +57,28 @@ class NaturalpersonService():
       raise Exception(message)
     finally:
       conexion.close()
+
+  @classmethod
+  def updateNaturalPerson(self, id, naturalPerson):
+    try:
+      conexion = get_connection()
+      cursor = conexion.cursor()
+      new_naturalPerson = naturalPerson.__dict__
+      new_naturalPerson.pop("id")
+      new_naturalPerson = {key: value for key, value in new_naturalPerson.items() if value is not None}
+      fields = []
+      for key, value in new_naturalPerson.items():
+          if isinstance(value, str):
+              fields.append(f'{key} = "{value}"')
+          else:
+              fields.append(f'{key} = {value}')
+      fieldsUpdate = ', '.join(fields)
+      sql = f"UPDATE naturalperson SET {fieldsUpdate} WHERE id = {id}"
+      cursor.execute(sql)
+      conexion.commit()
+      return "An update in natural person has been successfully"
+    except Exception as ex:
+      message = f"Error when update a natural person {ex}"
+      raise Exception(message)
+    finally:
+      conexion.close()

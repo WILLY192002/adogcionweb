@@ -44,10 +44,22 @@ body{
 }
 
 .container_photo img{
+
   max-width: 200px;
   width: 100%;
   height: auto;
+  max-height: 200px;
   border-radius: 10%;
+}
+
+.uploadphoto{
+  width: 100%;
+  display: none;
+}
+
+.uploadphoto input{
+  width: 100%;
+  display: none;
 }
 
 .container_name{
@@ -59,10 +71,11 @@ body{
   border: purple solid;
 }
 
-.container_name h2{
+.container_name h4{
   font-family: 'Jua', sans-serif;
   font-weight: 100;
-  font-size: xx-large;
+  font-size: x-large;
+  border: none;
 }
 
 /* descripcion */
@@ -86,13 +99,26 @@ body{
   font-size: x-large ;
 }
 
-.container_boton_label a{
-  width: 5%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-decoration: none;
+.container_boton_label button{
+  width: 100px;
+  margin: 0 1% 0 1%;
   border: solid;
+}
+
+.btns_edit_save{
+  display: flex;
+}
+
+.btn-personalized {
+  background-color: #1cb0ad;
+  color: #FFF; 
+  font-family: 'Jua', sans-serif;
+  font-size: medium;
+}
+
+.btn-personalized:hover {
+  background-color: #138e8e;
+  color: #FFF;
 }
 
 .container_boton_label a i{
@@ -111,7 +137,13 @@ body{
 .container_description_textarea textarea{
   width: 95%;
   height: 90%;
-  border-color: black;
+  border: none;
+  background: none;
+  cursor: default; 
+  outline: none;
+  max-height: auto;
+  overflow: auto;
+  resize: none;
 }
 
 

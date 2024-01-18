@@ -4,6 +4,9 @@ from flask_login import current_user
 from src.services.PublicationService import PublicationService
 from src.services.NaturalpersonService import NaturalpersonService
 from src.services.AccessService import AccessService
+from src.services.UsertypeService import UsertypeService
+
+from src.models.NaturalPerson import NaturalPerson
 
 main = Blueprint('view_profile_natural_person',__name__)
 
@@ -11,7 +14,13 @@ main = Blueprint('view_profile_natural_person',__name__)
 
 def viewProfileNaturalPerson(id,name):
   if request.method == 'POST':
-    return 'metodo post'
+    if current_user.is_authenticated and UsertypeService.verifyUserTypeNatrualPerson(current_user.user_type_id) and current_user.get_id() == id:
+      naturalperson_description = request.form['naturalperson_description'].capitalize() if request.form['naturalperson_description'] != '' else 'Sin descripción'
+      new_natural_person = NaturalPerson(None,None,None,None,None,naturalperson_description)
+      NaturalpersonService.updateNaturalPerson(current_user.get_id(), new_natural_person)
+      return redirect(request.referrer)
+    else:
+      return render_template('auth/no_authorized.html')
   else:
     #INFORMATION PROFILE
     user_information = NaturalpersonService.getNaturalPersonById(id)
