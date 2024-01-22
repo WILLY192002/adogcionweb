@@ -12,6 +12,7 @@ from .routes import indexRoute
 from .routes import AnimalsAdoptionCenter
 from .routes import PublicationAdoptionCenter
 from .routes import PublicationNaturalPerson
+from .routes import ProfileAnimal
 
 #NATURAL PERSON 
 from .routes import ProfileNaturalPerson
@@ -52,6 +53,10 @@ def init_app(config):
 
     app.register_blueprint(PublicationNaturalPerson.main)
 
+
+    # Animal
+
+    app.register_blueprint(ProfileAnimal.main)
 
 
 

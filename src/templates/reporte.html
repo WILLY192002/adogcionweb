@@ -60,19 +60,19 @@
 <h3>Operaciones</h3>
 <hr />
 <p>{% for operacion in operaciones %}</p>
-<p>{{ operacion }}</p>
+<p>{{ operacion|safe }}</p>
 <p>{% endfor %}</p>
 <br/>
 <br/>
 <h3>Enfermedades</h3>
 <hr />
 <p>{% for enfermedad in enfermedades %}</p>
-<p>{{ enfermedad }}</p>
+<p>{{ enfermedad|safe }}</p>
 <p>{% endfor %}</p>
 <br/>
 <br/>
 <h3>Vacunas</h3>
 <hr />
 <p>{% for vacuna in vacunas %}</p>
-<p>{{ vacuna }}</p>
+<p>{{ vacuna|safe }}</p>
 <p>{% endfor %}</p>

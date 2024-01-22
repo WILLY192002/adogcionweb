@@ -204,12 +204,12 @@ def editAnimalAdoptionCenter(animal_id):
     else:
       return render_template('auth/no_authorized.html')
 
-@main.route('/view/animals/generate_report', methods = ['POST'])
-def generate_report():
+@main.route('/view/animals/generate_report/id=<fund_id>', methods = ['POST'])
+def generate_report(fund_id):
   animal_id = request.form['animal_id']
-  
+  fund_id = fund_id
   # animal info
-  animal_edit = AnimalService.getAnimalById(animal_id, current_user.get_id())
+  animal_edit = AnimalService.getAnimalById(animal_id, fund_id)
   breedAndSpecie = BreedService.getBreedsAndSpecieName(animal_edit.breed_id)
   
   # animal Operations

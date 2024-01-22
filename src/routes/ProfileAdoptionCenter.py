@@ -109,11 +109,10 @@ def viewProfileAdoptAnimals(id,name):
   else: 
     #PUBLICATIONS, CATEGORIES, ACTUALLY SECCION
     No_adopted_animals = AnimalService.getNoAdoptedAnimals(id)
-    print("Tamaño: ", len(No_adopted_animals))
     publications = []
     for animal in No_adopted_animals:
       description = "*.Raza: "+animal.breed_name+"\n"+"*.Edad: "+str(animal.age)+"\n"+"*.Tamaño: "+animal.size+"\n"
-      publications.append(Publication(None,topic_adopted_id, user_information.access_id, animal.photo, animal.name, description,None,True))
+      publications.append(Publication(animal.id,topic_adopted_id, user_information.access_id, animal.photo, animal.name, description,None,True))
     
     return render_template('User_Adoption_Center/profile_adoption_center.html',
                             user_information=user_information, 

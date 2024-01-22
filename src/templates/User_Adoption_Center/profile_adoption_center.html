@@ -240,9 +240,17 @@ Perfil
           <div class="miniaturaPublic">
             <img src="{{publication.photo}}" alt="" border="0" onerror="this.style.display='none'"/>
           </div>
+          {%if publication.topic_id == topic_adopted_id %}
+          <a href="/view/profile={{user_information.id}}/animal={{publication.id}}/{{publication.title}}" title="Perfil de {{publication.title}}">
+            <div class="tituloPublic">
+              <p><strong>{{publication.title}}</strong></p>
+            </div>
+          </a>
+          {% else %}
           <div class="tituloPublic">
             <p><strong>{{publication.title}}</strong></p>
           </div>
+          {%endif%}
           <div class = "descripcionPublic">
             <textarea rows = 5 readonly>{{publication.description}}</textarea>
           </div>

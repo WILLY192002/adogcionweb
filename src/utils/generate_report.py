@@ -13,9 +13,9 @@ def generar_reporte(animal, operaciones, enfermedades, vacunas, razayespecie):
         'animal_breed': razayespecie[0].name,
         'animal_weight': animal.weight,
         'animal_observation': animal.observation,
-        'operaciones': [f"{op.name}: {op.description}" for op in operaciones],
-        'enfermedades': [f"{enf.name}: {enf.description}" for enf in enfermedades],
-        'vacunas': [f"{vac.name}: {vac.description}" for vac in vacunas]
+        'operaciones': [f"<strong>{op.name}</strong>: {op.description}" for op in operaciones],
+        'enfermedades': [f"<strong>{enf.name}</strong>: {enf.description}" for enf in enfermedades],
+        'vacunas': [f"<strong>{vac.name}</strong>: {vac.description}" for vac in vacunas]
     }
     
     template_loader = jinja2.FileSystemLoader('./')
