@@ -15,35 +15,51 @@ Perfil
 <!-- unitest, nosetest -->
 {% block body %}
 <div class="container">
-  <div class="profile_container">
+  <form action="/view/profile={{user_information.id}}/natural_person/{{user_information.name}}" class="profile_container" method="POST">
     <!-- FOTOGRAFÍA Y NOMBRE -->
     <div class="container_photo_name">
       {%if user_information.photo == None%}
       <div class="container_photo">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjFkn9BNFAcHtEC_qqB6dgvYE3HXXTGooTv9m0lxXCMA&s"
+        <input type="hidden" id="hiddenField" name="hiddenField"><!--URL IMAGEN-->
+        <img id = "preview" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjFkn9BNFAcHtEC_qqB6dgvYE3HXXTGooTv9m0lxXCMA&s"
           alt="">
+      </div>
+      <div class = "uploadphoto">
+        <input type="file" id="upload_photo" name="foto">
       </div>
       {%else%}
       <div class="container_photo">
-        <img src="{{user_information.photo}}"
-          alt="">
+        <input type="hidden" id="hiddenField" name="hiddenField"><!--URL IMAGEN-->
+        <img id = "preview" src="{{user_information.photo}}" alt="">
+      </div>
+      <div class = "uploadphoto">
+        <input type="file" id="upload_photo" name="foto">
       </div>
       {%endif%}
       <div class="container_name">
-        <h2>{{user_information.name}}</h2>
+        <h4>{{user_information.name}}</h4>
       </div>
     </div>
     <!-- DESCRIPCION DE LA PERSONA  -->
     <div class="container_description">
       <div class="container_boton_label">
-        <h4>Sobre mi</h4>
-        <a href="#"><i id="icon_cog" class='bx bxs-cog'></i></a>
+        <div>
+          <h4>Sobre mi</h4>
+        </div>
+        
+        {% if current_user.is_authenticated and (current_user.id == user_information.id) %}
+        <div class="btns_edit_save">
+          <button id="btn_save" class="btn btn-personalized" style="display: none;">Guardar</button>
+          <button id="btn_edit" class="btn" onclick="toggleStyles(event)"><i id="icon_cog"
+              class='bx bxs-cog'></i></button>
+        </div>
+        {% endif %}
       </div>
       <div class="container_description_textarea">
-        <textarea name="" id="" cols="30" rows="10">{{user_information.description}}</textarea>
+        <textarea readonly name="naturalperson_description" id="person_description" cols="30" rows="10">{{user_information.description}}</textarea>
       </div>
     </div>
-  </div>
+  </form>
 
   <div class="container_publications">
     {%if publications%}
