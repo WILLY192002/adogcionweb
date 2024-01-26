@@ -1,0 +1,37 @@
+{% extends 'Profile_Animal/profile_animal.html' %}
+
+{%block visual_content%}
+    
+<h4>Aki van a ir los comentarios del animal</h4>
+{%if current_user.is_authenticated%}
+<div class="container-add-comment">
+  <div class="add-new-comment">
+    <h1><a href="#">+ Agregar comentario sobre esta raza</a></h1>
+  </div>
+</div>
+{%else%}
+<div class="container-register-message">
+  <div class="register-option">
+    <p>Recuerda que para agregar un comentario en esta seccion de razas, debes estar registrado. <a href="{{url_for('home_adoption_center.homeAdoptionCenter')}}">Registrate aqui</a></p>
+  </div>
+</div>
+{%endif%}
+
+<div class="container-animal-comments">
+  <div class="comment-animal-breed-publication">
+    <div class="comment-owner-photo">
+      <img src="https://static.wikia.nocookie.net/c9dde1fd-8d96-4288-97ea-6dca45a39891/scale-to-width/755" alt="">
+    </div>
+    <div class="container-name-description">
+      <div class="comment-owner-name">
+        <h4>Tengo ganas de kgar</h4>
+      </div>
+      <div class="comment-description">
+        <p>Penes grandes y sabrosos</p>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+{%endblock%}

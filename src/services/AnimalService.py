@@ -60,24 +60,24 @@ class AnimalService():
       # WHERE is_adopted = false AND adoptioncenter_id = {adoptioncenter_id}"""
 
       if filter_search != None:
-        sql += f" AND (animal.name LIKE '%{filter_search}%')"
+        sql += f" AND (a.name LIKE '%{filter_search}%')"
       if filter_specie != None:
         sql += f" AND species.id = '{filter_specie}'"
       if filter_Sex != None:
-        sql += f" AND animal.sex = '{filter_Sex}'"
+        sql += f" AND a.sex = '{filter_Sex}'"
       if filter_size != None:
-        sql += f" AND animal.size = '{filter_size}'"
+        sql += f" AND a.size = '{filter_size}'"
       if filter_age != None:
         if filter_age == "1":
-            sql += " AND animal.age BETWEEN 0 AND 3"
+            sql += " AND a.age BETWEEN 0 AND 3"
         elif filter_age == "2":
-            sql += " AND animal.age BETWEEN 4 AND 7"
+            sql += " AND a.age BETWEEN 4 AND 7"
         elif filter_age == "3":
-            sql += " AND animal.age BETWEEN 8 AND 11"
+            sql += " AND a.age BETWEEN 8 AND 11"
         elif filter_age == "4":
-            sql += " AND animal.age BETWEEN 12 AND 15"
+            sql += " AND a.age BETWEEN 12 AND 15"
         elif filter_age == "5":
-            sql += " AND animal.age > 16"
+            sql += " AND a.age > 16"
       sql += " ORDER BY id ASC"
       print(sql)
       cursor.execute(sql)
@@ -133,24 +133,24 @@ class AnimalService():
       # WHERE is_adopted = false AND adoptioncenter_id = {adoptioncenter_id}"""
 
       if filter_search != None:
-        sql += f" AND (animal.name LIKE '%{filter_search}%')"
+        sql += f" AND (a.name LIKE '%{filter_search}%')"
       if filter_specie != None:
         sql += f" AND species.id = '{filter_specie}'"
       if filter_Sex != None:
-        sql += f" AND animal.sex = '{filter_Sex}'"
+        sql += f" AND a.sex = '{filter_Sex}'"
       if filter_size != None:
-        sql += f" AND animal.size = '{filter_size}'"
+        sql += f" AND a.size = '{filter_size}'"
       if filter_age != None:
         if filter_age == "1":
-            sql += " AND animal.age BETWEEN 0 AND 3"
+            sql += " AND a.age BETWEEN 0 AND 3"
         elif filter_age == "2":
-            sql += " AND animal.age BETWEEN 4 AND 7"
+            sql += " AND a.age BETWEEN 4 AND 7"
         elif filter_age == "3":
-            sql += " AND animal.age BETWEEN 8 AND 11"
+            sql += " AND a.age BETWEEN 8 AND 11"
         elif filter_age == "4":
-            sql += " AND animal.age BETWEEN 12 AND 15"
+            sql += " AND a.age BETWEEN 12 AND 15"
         elif filter_age == "5":
-            sql += " AND animal.age > 16"
+            sql += " AND a.age > 16"
       sql += " ORDER BY id ASC"
       print(sql)
       cursor.execute(sql)

@@ -15,7 +15,7 @@ Perfil
 <!-- unitest, nosetest -->
 {% block body %}
 <div class="contenedor">
-  <form class="contPrincipal" action="/view/profile={{current_user.get_id()}}/adoption_center/{{current_user.name}}" method="POST">
+  <form class="contPrincipal" action="{{url_for('view_profile_adoption_center.viewProfileAdoptionCenter',id = current_user.id, name = current_user.name)}}" method="POST">
     <!-- Seccion 1 -->
     <div class="seccion1">
       <input type="hidden" name="form_id" value="edit_info">
@@ -98,7 +98,7 @@ Perfil
                 </div>
                 {% if current_user.is_authenticated and (current_user.id == user_information.id)  %}
                 <div id = "href_editP" class = "href_editP" style="display: none;">
-                  <a href="/edit_information/profile={{current_user.get_id()}}/adoption_center/{{current_user.name}}">Editar infomación completa</a>
+                  <a href="{{url_for('view_profile_adoption_center.editProfileAdoptionCenter',id = current_user.id, name = current_user.name)}}">Editar infomación completa</a>
                 </div>
                 {% endif%}
                 
@@ -131,19 +131,19 @@ Perfil
   <div class = contPublicacion>
     <div class = "contPestanas">
       <div class="pestana">
-        <a class="href-personalized" href="/view/profile={{user_information.id}}/adoption_center/{{user_information.name}}">
+        <a class="href-personalized" href="{{url_for('view_profile_adoption_center.viewProfileAdoptionCenter',id = user_information.id, name = user_information.name)}}">
           <strong>General</strong>
         </a>
       </div>
       <div class="pestana">
-        <a class="href-personalized" href="/view/profile={{user_information.id}}/adoption_center/{{user_information.name}}/adopt_animals">
+        <a class="href-personalized" href="{{url_for('view_profile_adoption_center.viewProfileAdoptAnimals',id = user_information.id, name = user_information.name)}}">
           <strong>Adoptar</strong>
         </a>
       </div>
       {%if categories%}
       {% for category in categories %}
         <div class="pestana">
-          <a class="href-personalized" href="/view/profile={{user_information.id}}/adoption_center/{{user_information.name}}/filterby={{category.id}}">
+          <a class="href-personalized" href="{{url_for('view_profile_adoption_center.viewProfileAdoptionCenterByCategory',id = user_information.id, name = user_information.name, category = category.id)}}">
             <strong>{{category.name}}</strong>
           </a>
         </div>
@@ -152,7 +152,7 @@ Perfil
     </div>
     <div class="vistaPublicacion">
       {%if actuallySeccion != "Adoptar" and actuallySeccion != "General" and topics%}
-      <form class = "contFiltro" action="/view/profile={{user_information.id}}/adoption_center/{{user_information.name}}/filterby={{actuallySeccion}}"  method="POST">
+      <form class = "contFiltro" action="{{url_for('view_profile_adoption_center.viewProfileAdoptionCenterByCategory',id = user_information.id, name = user_information.name, category = actuallySeccion)}}"  method="POST">
         <div class="row justify-content-md-center row-cols-6">
           <div class="col col-6 mt-3 mb-3">
             <input type="hidden" name="form_id" value="filter_animal"><!--IDENTIFICADOR FORM-->
@@ -241,7 +241,7 @@ Perfil
             <img src="{{publication.photo}}" alt="" border="0" onerror="this.style.display='none'"/>
           </div>
           {%if publication.topic_id == topic_adopted_id %}
-          <a href="/view/profile={{user_information.id}}/animal={{publication.id}}/{{publication.title}}" title="Perfil de {{publication.title}}">
+          <a href="{{url_for('view_profile_animal.viewProfileAnimal',fund_id = user_information.id , animal_id = publication.id, name = publication.title)}}" title="Perfil de {{publication.title}}">
             <div class="tituloPublic">
               <p><strong>{{publication.title}}</strong></p>
             </div>

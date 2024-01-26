@@ -12,7 +12,7 @@
 
 <div class="container text-center">
   <div class="filtrosVistasHome">
-    <form action='/home/adoption_center' method="POST" class="formfiltros">
+    <form action="{{url_for('home_adoption_center.homeAdoptionCenter')}}" method="POST" class="formfiltros">
       <div class="opcionFiltros">
         <div class="barraFiltro">
           <input type="hidden" name="form_id" value="filter_home"><!--IDENTIFICADOR FORM-->
@@ -72,12 +72,12 @@
         </button>
       </div> -->
       <div class="col col-md-4 d-grid gap-2">
-        <a class="btn btn-personalized" href="/home/adoption_center">
+        <a class="btn btn-personalized" href="{{url_for('home_adoption_center.homeAdoptionCenter')}}">
           <i class='bx bxs-home-heart'></i> Fundaciones
         </a>
       </div>
       <div class="col col-md-4 d-grid gap-2">
-        <a class="btn btn-personalized" href="/home/community">
+        <a class="btn btn-personalized" href="{{url_for('home_adoption_center.homeCommunity')}}">
           <i class='bx bxs-book-heart'></i> Comunidad
         </a>
       </div>
@@ -93,7 +93,7 @@
         </div>
         <div class="contenedorTituloAlb">
           <a
-            href="/view/profile={{publication.id_owner}}/adoption_center/{{publication.name_owner}}">{{publication.name_owner}}</a>
+            href="{{url_for('view_profile_adoption_center.viewProfileAdoptionCenter',id = publication.id_owner, name = publication.name_owner)}}">{{publication.name_owner}}</a>
         </div>
       </div>
       <div class="cuerpoHistoria">

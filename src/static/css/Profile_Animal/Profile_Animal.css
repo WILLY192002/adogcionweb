@@ -97,3 +97,79 @@ article {
     }
 }
 
+/*AGREGAR NUEVO COMENTARIO*/
+.container-add-comment, .container-register-message{
+    display: flex;
+    justify-content: center;
+    align-items:center ;
+    border: salmon solid;
+    
+}
+
+.add-new-comment, .register-option{
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items:center ;
+    border: solid;
+    margin: 1% 0 1% 0;
+}
+
+.add-new-comment a{
+    color: green;
+    text-decoration: none;
+}
+
+.register-option p{
+    font-family: 'Jua', sans-serif;
+    font-size: medium;
+}
+
+
+/* COMENTARIOS DE RAZAS ANIMAL */
+.container-animal-comments{
+    border: purple solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-animal-comments:hover{
+    background-color: #9df2e9;
+    transform: scale(1.05); /* Aumenta el tamaño en un 5% */
+}
+
+.comment-animal-breed-publication{
+    display: grid;
+    grid-template-columns: min-content auto; 
+    width: 70%;
+    height: 50%;
+    border: solid;
+}
+
+.comment-owner-photo{
+    border: green solid;
+    width: 100%;
+    height: 100%;
+}
+
+.comment-owner-photo img{
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 10%;
+
+}
+
+.container-name-description{
+    margin-left: 5%;
+    border: solid brown;
+}
+
+.comment-owner-name{
+    border: blue solid;
+}
+
+.comment-description{
+    border: solid red;
+}
+

@@ -12,7 +12,7 @@ Nuevo animal
 
 {% block body %}
 <div class="container">
-  <form class="animal_form" action="/upload_animal" method="POST">
+  <form class="animal_form" action="{{url_for('animals_adoption_center.uploadAnimalAdoptionCenter')}}" method="POST">
     <!-- Informacion basica del animal -->
     <div class="container_basic_information">
       <div class="container_animal_photo">

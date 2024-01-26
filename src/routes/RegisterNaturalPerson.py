@@ -50,7 +50,7 @@ def registerNaturalPerson():
     new_person = Person(person_id, person_first_name, person_middle_name, person_first_surname, 
                         person_second_lastname,person_identification_type, person_identification_number, person_contact,
                         person_city,person_department)
-    new_natural_person = NaturalPerson(naturalPerson_id, naturalPerson_access_id, naturalPerson_person_id, naturalPerson_photo,naturalPerson_name)
+    new_natural_person = NaturalPerson(naturalPerson_id, naturalPerson_person_id,naturalPerson_access_id, naturalPerson_photo,naturalPerson_name, None)
     
     
     #INSERT NEW ACCESS IN DATA BASE

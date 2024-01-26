@@ -15,7 +15,7 @@ Perfil
 <!-- unitest, nosetest -->
 {% block body %}
 <div class="container">
-  <form action="/view/profile={{user_information.id}}/natural_person/{{user_information.name}}" class="profile_container" method="POST">
+  <form action="{{url_for('view_profile_natural_person.viewProfileNaturalPerson',id = user_information.id, name = user_information.name)}}" class="profile_container" method="POST">
     <!-- FOTOGRAFÍA Y NOMBRE -->
     <div class="container_photo_name">
       {%if user_information.photo == None%}

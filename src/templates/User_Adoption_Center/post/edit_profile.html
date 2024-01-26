@@ -12,7 +12,7 @@ Editar perfil
 
 {% block body %}
 <div class="contenedor">
-  <form class="contPrincipal" action="/edit_information/profile={{current_user.get_id()}}/adoption_center/{{current_user.name}}"
+  <form class="contPrincipal" action="{{url_for('view_profile_adoption_center.editProfileAdoptionCenter', id = current_user.get_id(), name = current_user.name)}}"
     method="POST">
     <!-- Seccion 1 -->
     <div class="seccion1">

@@ -7,6 +7,24 @@ body{
   background-color: #FFF;
 }
 
+
+
+
+.container{
+  position: fixed;
+  top: 0;
+  height: 100%;
+  transform: translate(200px);
+  width: calc(100% - 200px); 
+  overflow: auto;
+}
+
+.container-modal{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .card-img-top {
   object-fit: cover;
   height: 300px; 

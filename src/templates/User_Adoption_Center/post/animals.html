@@ -4,79 +4,17 @@
 
 {% block customCSS %}
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href={{url_for('static', filename = 'css/User_Adoption_Center/post/animals.css')}} />
+<link rel="stylesheet" href={{url_for('static', filename='css/User_Adoption_Center/post/animals.css' )}} />
 {% endblock %}
 
 {% block body %}
 <div class="container text-center">
-  
-  <!-- <form action='#' method="POST">
-    <div class="row justify-content-md-center row-cols-3">
-      <div class="col-6 mt-3 mb-3">
-        <input type="hidden" name="form_id" value="filter_animal">
-        <input type="text" class="form-control" placeholder="Buscar animales" aria-label="Buscar animales" name="barraFilter" id="barraFilter">
-      </div>
-      <div class="col col-md-auto mt-3 mb-3">
-        <button id="botonFiltrar" class="btn btn-outline-personalized" type="button">
-          <i class='bx bx-filter'></i> Filtrar
-        </button>
-      </div>
-      <div class="col col-md-auto mt-3 mb-3">
-        <button class="btn btn-outline-personalized" type="submit">
-          <i class='bx bx-search'></i> Buscar
-        </button>
-      </div>
-    </div>
-    <div id="filter_animal_div" style="display: none;">
-      <div class="row justify-content-md-center">
-        <div class="col-8 text-start">
-          <p>Filtrar por:</p>
-        </div>
-      </div>
-      <div class="row justify-content-md-center">
-        <div class="col-2 mb-3">
-          <select class="form-select animalFilter" aria-label="Filtrar por especie" name="especieFilter">
-            <option selected value="">Especie</option>
-            <option value="Perro">Perro</option>
-            <option value="Gato">Gato</option>
-            <option value="Conejo">Conejo</option>
-            <option value="Hamster">Hamster</option>
-          </select>
-        </div>
-        <div class="col-2 mb-3">
-          <select class="form-select animalFilter" aria-label="Filtrar por sexo" name="sexoFilter">
-            <option selected value="">Sexo</option>
-            <option value="Macho">Macho</option>
-            <option value="Hembra">Hembra</option>
-          </select>
-        </div>
-        <div class="col-2 mb-3">
-          <select class="form-select animalFilter" aria-label="Filtrar por tamaño" name="tamanioFilter">
-            <option selected value="">Tamaño</option>
-            <option value="Pequeño">Pequeño (0-20cm)</option>
-            <option value="Mediano">Mediano (21-50cm)</option>
-            <option value="Grande">Grande (51-80cm)</option>
-            <option value="Gigante">Gigante (>81cm)</option>
-          </select>
-        </div>
-        <div class="col-2 mb-3">
-          <select class="form-select animalFilter" aria-label="Filtrar por edad" name="edadFilter">
-            <option selected value="">Edad</option>
-            <option value="1">0 - 3</option>
-            <option value="2">4 - 7</option>
-            <option value="3">8 - 11</option>
-            <option value="4">12 - 15</option>
-            <option value="5"> >16</option>
-          </select>
-        </div>
-      </div>
-    </div>
-  </form>     -->
-  <form action='/view/animals/filter' method="POST">
+  <form action="{{url_for('animals_adoption_center.viewAnimalsFilter')}}" method="POST">
     <div class="row justify-content-md-center row-cols-3">
       <div class="col-6 mt-3 mb-3">
         <input type="hidden" name="form_id" value="filter_adoption_seccion"><!--IDENTIFICADOR FORM-->
-        <input type="text" class="form-control" placeholder="Buscar animales" aria-label="Buscar animales" name="filter_search" id="barraFilter">
+        <input type="text" class="form-control" placeholder="Buscar animales" aria-label="Buscar animales"
+          name="filter_search" id="barraFilter">
       </div>
       <div class="col col-md-auto mt-3 mb-3">
         <button id="botonFiltrar" class="btn btn-outline-personalized" type="button">
@@ -132,15 +70,26 @@
         </div>
       </div>
     </div>
-  </form> 
+  </form>
   <div class="row justify-content-md-center">
     <div class="col-8 mb-3 d-grid gap-2">
-      <a class="btn btn-personalized" href="/upload_animal">
+      <a class="btn btn-personalized" href="{{url_for('animals_adoption_center.uploadAnimalAdoptionCenter')}}">
         <i class='bx bxs-dog'></i> Nuevo Animal
       </a>
     </div>
   </div>
 
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+  <br>
+  {% for message in messages %}
+  <div class="alert alert-primary alert-dismissible" role="alert">
+    <strong>{{ message }}</strong>
+    <button class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  {% endfor %}
+  {% endif %}
+  {% endwith%}
   <!--Card Animales Registrados-->
   <div class="row justify-content-md-center">
     {%if noAdoptedAnimals%}
@@ -155,21 +104,17 @@
           <p><strong>• Raza:</strong> {{animal.breed_name}}</p>
           <p><strong>• Edad:</strong> {{animal.age}} (años)</p>
           <p><strong>• Tamaño:</strong> {{animal.size}}</p>
-          
+
           <div class="card-body">
-            <button id="open-btn-{{animal.id}}" class="btn btn-personalized" type="button" data-bs-toggle="modal" data-bs-target="#Modal3"
-              data-idanimal="{{animal.id}}"
-              data-animal_photo="{{animal.photo}}"
-              data-animal_name="{{animal.name}}"
-              data-animal_age="{{animal.age}}"
-              data-animal_sex="{{animal.sex}}"
-              data-animal_breed_name="{{animal.breed_name}}"
-              data-animal_size="{{animal.size}}"
-              data-animal_weight="{{animal.weight}}"
-              data-animal_observation="{{animal.observation}}">
+            <button id="open-btn-{{animal.id}}" class="btn btn-personalized" type="button" data-bs-toggle="modal"
+              data-bs-target="#Modal3" data-idanimal="{{animal.id}}" data-animal_photo="{{animal.photo}}"
+              data-animal_name="{{animal.name}}" data-animal_age="{{animal.age}}" data-animal_sex="{{animal.sex}}"
+              data-animal_breed_name="{{animal.breed_name}}" data-animal_size="{{animal.size}}"
+              data-animal_weight="{{animal.weight}}" data-animal_observation="{{animal.observation}}">
               <i class='bx bx-book-open'></i> Abrir
             </button>
-            <form action="/view/animals/generate_report/id={{current_user.get_id()}}" method="POST">
+            <form action="{{url_for('animals_adoption_center.generate_report', fund_id = current_user.get_id())}}"
+              method="POST">
               <input type="hidden" name="animal_id" value="{{ animal.id }}">
               <button class="btn btn-personalized mt-2" type="submit" data-bs-toggle="modal">
                 <i class="bx bxs-info-circle"></i>Descargar Reporte
@@ -196,18 +141,13 @@
           <p><strong>• Raza:</strong> {{animal.breed_name}}</p>
           <p><strong>• Edad:</strong> {{animal.age}} (años)</p>
           <p><strong>• Tamaño:</strong> {{animal.size}}</p>
-          
+
           <div class="card-body">
-            <button id="open-btn-{{animal.id}}" class="btn btn-personalized" type="button" data-bs-toggle="modal" data-bs-target="#Modal3"
-              data-idanimal="{{animal.id}}"
-              data-animal_photo="{{animal.photo}}"
-              data-animal_name="{{animal.name}}"
-              data-animal_age="{{animal.age}}"
-              data-animal_sex="{{animal.sex}}"
-              data-animal_breed_name="{{animal.breed_name}}"
-              data-animal_size="{{animal.size}}"
-              data-animal_weight="{{animal.weight}}"
-              data-animal_observation="{{animal.observation}}">
+            <button id="open-btn-{{animal.id}}" class="btn btn-personalized" type="button" data-bs-toggle="modal"
+              data-bs-target="#Modal3" data-idanimal="{{animal.id}}" data-animal_photo="{{animal.photo}}"
+              data-animal_name="{{animal.name}}" data-animal_age="{{animal.age}}" data-animal_sex="{{animal.sex}}"
+              data-animal_breed_name="{{animal.breed_name}}" data-animal_size="{{animal.size}}"
+              data-animal_weight="{{animal.weight}}" data-animal_observation="{{animal.observation}}">
               <i class='bx bx-book-open'></i> Abrir
             </button>
           </div>
@@ -217,11 +157,11 @@
     {% endfor%}
     {%endif%}
   </div>
-</div>  
+</div>
 {% endblock %}
 
 {% block modal %}
-  {% include "User_Adoption_Center/modal.html" %}
+{% include "User_Adoption_Center/modal.html" %}
 {% endblock %}
 
 {% block customJS%}
