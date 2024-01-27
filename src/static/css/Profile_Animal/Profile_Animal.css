@@ -1,32 +1,33 @@
-.profile-info{
+.profile-info {
     position: fixed;
     top: 0;
     height: 100%;
     transform: translate(200px);
-    width: calc(100% - 200px); 
+    width: calc(100% - 200px);
     overflow: auto;
 }
-  
+
 .profile-top {
     position: relative;
     display: flex;
     margin: 2rem 0 0 0;
+    border-bottom: dashed black 1px;
 }
-  
+
 .profile-image {
     margin: 0.75rem;
     display: flex;
     align-items: center;
 }
-  
-.profile-image > img {
+
+.profile-image>img {
     width: 350px;
     height: 350px;
     border-radius: 50%;
     object-fit: cover;
 }
 
-.profile-data{
+.profile-data {
     margin: 4rem;
 }
 
@@ -37,7 +38,7 @@
     flex-direction: column;
     justify-content: space-around;
 }
-  
+
 article {
     display: flex;
     width: 10rem;
@@ -54,17 +55,17 @@ article {
     width: 100%;
 }
 
-.btn{
+.btn {
     margin: 0.5rem;
 }
 
 .btn-personalized {
     background-color: #1cb0ad;
-    color: #FFF; 
+    color: #FFF;
     font-family: 'Jua', sans-serif;
     font-size: medium;
 }
-  
+
 .btn-personalized:hover {
     background-color: #138e8e;
     color: #FFF;
@@ -72,104 +73,151 @@ article {
 
 
 @media only screen and (max-width: 1300px) {
-    
-    .profile-image > img {
+
+    .profile-image>img {
         width: 300px;
         height: 300px;
     }
 }
-  
+
 @media only screen and (max-width: 1139px) {
-    
-    .profile-image > img {
+
+    .profile-image>img {
         width: 250px;
         height: 250px;
     }
 }
-  
+
 @media only screen and (max-width: 670px) {
     .profile-top {
         flex-direction: column;
     }
-    .profile-image > img {
+
+    .profile-image>img {
         width: 200px;
         height: 200px;
     }
 }
 
-/*AGREGAR NUEVO COMENTARIO*/
-.container-add-comment, .container-register-message{
+/* NAVEGADOR FOTOGRAFÍAS - COMENTARIOS*/
+.navbar-animal-profile {
+    /* border: solid orange; */
     display: flex;
-    justify-content: center;
-    align-items:center ;
-    border: salmon solid;
-    
+    align-items: center;
+    justify-content: space-around;
+    margin: 2% 0 2% 0;
+
 }
 
-.add-new-comment, .register-option{
+.nav {
+    border-width: 1.5px;
+    border-color: #062b2d;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.href-personalized {
+    color: #1cb0ad;
+}
+
+.href-personalized strong {
+    font-family: 'Jua', sans-serif;
+    font-size: larger;
+}
+
+.href-personalized:hover {
+    color: #138e8e;
+}
+
+
+/*AGREGAR NUEVO COMENTARIO*/
+.container-add-comment,
+.container-register-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: salmon solid; */
+    border-top: dashed black 1px;
+
+}
+
+.add-new-comment,
+.register-option {
     width: 80%;
     display: flex;
     justify-content: center;
-    align-items:center ;
-    border: solid;
+    align-items: center;
+    /* border: solid; */
     margin: 1% 0 1% 0;
 }
 
-.add-new-comment a{
+.add-new-comment a {
     color: green;
     text-decoration: none;
 }
 
-.register-option p{
+.register-option p {
     font-family: 'Jua', sans-serif;
     font-size: medium;
 }
 
 
 /* COMENTARIOS DE RAZAS ANIMAL */
-.container-animal-comments{
-    border: purple solid;
+.container-animal-comments {
+    /* border: purple solid; */
+
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
-.container-animal-comments:hover{
+.comment-animal-breed-publication:hover {
     background-color: #9df2e9;
-    transform: scale(1.05); /* Aumenta el tamaño en un 5% */
+    transform: scale(1.05);
+    /* Aumenta el tamaño en un 5% */
 }
 
-.comment-animal-breed-publication{
+.comment-animal-breed-publication {
     display: grid;
-    grid-template-columns: min-content auto; 
-    width: 70%;
-    height: 50%;
-    border: solid;
-}
-
-.comment-owner-photo{
-    border: green solid;
-    width: 100%;
+    grid-template-columns: min-content auto;
+    width: 90%;
     height: 100%;
+    border: solid #48d1cc 1px;
+    margin: 2% 0 2% 0;
+    border-radius: 10px;
 }
 
-.comment-owner-photo img{
+.comment-owner-photo {
+    /* border: green solid; */
+    margin: 5%;
+    width: 100%;
+    height: 95%;
+}
+
+.comment-owner-photo img {
     max-width: 200px;
     max-height: 200px;
     border-radius: 10%;
-
 }
 
-.container-name-description{
+.container-name-description {
     margin-left: 5%;
-    border: solid brown;
+    
 }
 
-.comment-owner-name{
-    border: blue solid;
+.comment-owner-name {
+    /* border: blue solid; */
+    margin: 1% 0 1% 0;
 }
 
-.comment-description{
+.comment-owner-name h4 {
+    font-family: 'Jua', sans-serif;
+    font-weight: 300;
+    font-size: larger;
+}
+
+/* .comment-description {
     border: solid red;
-}
-
+} */

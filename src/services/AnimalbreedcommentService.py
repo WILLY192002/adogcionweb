@@ -17,7 +17,59 @@ class AnimalbreedcommentService():
       conexion.commit()
       return "A new animal breed comment has been successfully added"
     except Exception as ex:
-      message = f"Error when adding an animal breed comment center {ex}"
+      message = f"Error when adding an animal breed comment {ex}"
+      raise Exception(message)
+    finally:
+      conexion.close()
+  
+  @classmethod
+  def getAllAnimalBreedComment(self):
+    try:
+      conexion = get_connection()
+      cursor = conexion.cursor()
+      sql = f""" SELECT abc.id, abc.access_id, abc.breed_id, abc.description, abc.date, abc.is_active, 
+      COALESCE(np.name, ac.name) AS name, COALESCE(np.photo, ac.photo) AS photo
+      FROM animal_breed_comment abc
+      LEFT JOIN naturalperson np ON abc.access_id = np.access_id 
+      LEFT JOIN adoptioncenter ac ON abc.access_id = ac.access_id 
+      WHERE is_active = 1 ORDER BY date DESC;"""
+      cursor.execute(sql)
+      row = cursor.fetchall()
+      out_comments = []
+      if row != None:
+        for comment in row:
+          out_comments.append(AnimalBreedComment(comment[0],comment[1],comment[2],comment[3],comment[4],comment[5],comment[6],comment[7]))
+        return out_comments
+      else:
+        return False
+    except Exception as ex:
+      message = f"An error occurred while consulting all animal breed comment {ex}"
+      raise Exception(message)
+    finally:
+      conexion.close()
+
+  @classmethod
+  def getAllAnimalBreedCommentBybreed_id(self, breed_id):
+    try:
+      conexion = get_connection()
+      cursor = conexion.cursor()
+      sql = f""" SELECT abc.id, abc.access_id, abc.breed_id, abc.description, abc.date, abc.is_active, 
+      COALESCE(np.name, ac.name) AS name, COALESCE(np.photo, ac.photo) AS photo
+      FROM animal_breed_comment abc
+      LEFT JOIN naturalperson np ON abc.access_id = np.access_id 
+      LEFT JOIN adoptioncenter ac ON abc.access_id = ac.access_id 
+      WHERE is_active = 1 AND breed_id = {breed_id} ORDER BY date DESC;"""
+      cursor.execute(sql)
+      row = cursor.fetchall()
+      out_comments = []
+      if row != None:
+        for comment in row:
+          out_comments.append(AnimalBreedComment(comment[0],comment[1],comment[2],comment[3],comment[4],comment[5],comment[6],comment[7]))
+        return out_comments
+      else:
+        return False
+    except Exception as ex:
+      message = f"An error occurred while consulting all animal breed comment by animal breed{ex}"
       raise Exception(message)
     finally:
       conexion.close()

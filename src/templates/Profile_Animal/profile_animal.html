@@ -57,12 +57,12 @@ Perfil {{prName}}
             </form>
         </div>
     </div>
-    <nav>
-        <div>
-            <h4><a href="#">Fotografías</a></h4>
+    <nav class="navbar-animal-profile">
+        <div class="nav">
+            <a class="href-personalized" href="#"><strong>Fotografías</strong></a></strong>
         </div>
-        <div>
-            <h4><a href="/view/profile={{animal.adoptioncenter_id}}/animal={{animal.id}}/comments">Comunidad</a></h4>
+        <div class="nav">
+            <a class="href-personalized"href="{{url_for('view_profile_animal.profilecomments',fund_id = animal.adoptioncenter_id, animal_id = animal.id)}}"><strong>Comunidad</strong></a>
         </div>
     </nav>
     {%block visual_content%}

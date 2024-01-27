@@ -46,7 +46,7 @@ def viewProfileAnimal(fund_id, animal_id, name):
 def profilecomments(fund_id, animal_id):
     if request.method == 'POST':
         animal = AnimalService.getAnimalById(animal_id,fund_id)
-        animal_breed_comment = request.form['animal_breed_comment'].capitalized()
+        animal_breed_comment = request.form['animal_breed_comment'].capitalize()
         new_comment = AnimalBreedComment(None, int(current_user.access_id),animal.breed_id,animal_breed_comment,None,True)
         AnimalbreedcommentService.addNewAnimalBreedComment(new_comment)
         return redirect(request.referrer)
@@ -63,11 +63,15 @@ def profilecomments(fund_id, animal_id):
 
         #animal vaccine
         vaccines_recorded = Vaccine_AnimalService.getVaccineByAnimalId(animal_id)
+
+        #User_comments
+        user_comments = AnimalbreedcommentService.getAllAnimalBreedCommentBybreed_id(animal_info.breed_id)
         return render_template('Profile_Animal/animal_breed_comment.html',
                             prId = animal_id, 
                             prName = animal_info.name,
                             fund_id = fund_id,
                             animal = animal_info,
-                            breedAndSpecie = breedAndSpecie)
+                            breedAndSpecie = breedAndSpecie,
+                            user_comments = user_comments)
 
 
