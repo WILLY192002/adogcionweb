@@ -251,3 +251,17 @@ INSERT INTO adogcionweb.operation (id, name, description) VALUES (8, 'Cirugía d
 INSERT INTO adogcionweb.operation (id, name, description) VALUES (9, 'Cirugía de oído',	'Para tratar infecciones crónicas u otros problemas.');
 INSERT INTO adogcionweb.operation (id, name, description) VALUES (10, 'Cirugía neurológica',	'Para abordar problemas en el sistema nervioso.');
 INSERT INTO adogcionweb.operation (id, name, description) VALUES (11, 'Cirugía de extremidades',	'Para tratar problemas en extremidades del animal.');
+
+--------------- ULTIMAS COSAS AGREGADAS ---------------------------
+
+CREATE TABLE animal_breed_comment (
+    id int PRIMARY KEY AUTO_INCREMENT,
+    access_id INT,
+    breed_id INT,
+    description TEXT NOT NULL,
+    date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    is_active BOOLEAN
+);
+
+ALTER TABLE `animal_breed_comment` ADD FOREIGN KEY (`access_id`) REFERENCES `access` (`id`);
+ALTER TABLE `animal_breed_comment` ADD FOREIGN KEY (`breed_id`) REFERENCES `breed` (`id`);

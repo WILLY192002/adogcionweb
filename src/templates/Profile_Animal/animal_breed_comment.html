@@ -1,18 +1,22 @@
 {% extends 'Profile_Animal/profile_animal.html' %}
 
 {%block visual_content%}
-    
+
 <h4>Aki van a ir los comentarios del animal</h4>
 {%if current_user.is_authenticated%}
 <div class="container-add-comment">
   <div class="add-new-comment">
-    <h1><a href="#">+ Agregar comentario sobre esta raza</a></h1>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      + Agregar comentario sobre esta raza
+    </button>
   </div>
 </div>
 {%else%}
 <div class="container-register-message">
   <div class="register-option">
-    <p>Recuerda que para agregar un comentario en esta seccion de razas, debes estar registrado. <a href="{{url_for('home_adoption_center.homeAdoptionCenter')}}">Registrate aqui</a></p>
+    <p>Para agregar un comentario en esta seccion de razas, debes estar registrado. <a
+        href="{{url_for('home_adoption_center.homeAdoptionCenter')}}">Registrate</a> o <a href="{{url_for('login_user.loginUser')}}">Inicia sesion</a></p>
   </div>
 </div>
 {%endif%}
@@ -29,9 +33,15 @@
       <div class="comment-description">
         <p>Penes grandes y sabrosos</p>
       </div>
-      
+
     </div>
   </div>
 </div>
 
 {%endblock%}
+
+{% block modal %}
+{% include "User_Adoption_Center/modal.html" %}
+{% endblock %}
+
+
