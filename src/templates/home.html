@@ -91,10 +91,19 @@
         <div class="contenedorFotoAlb">
           <img id="preview" src="{{publication.photo_owner}}" alt="">
         </div>
+        {%if is_adoptioncenter%}
         <div class="contenedorTituloAlb">
           <a
-            href="{{url_for('view_profile_adoption_center.viewProfileAdoptionCenter',id = publication.id_owner, name = publication.name_owner)}}">{{publication.name_owner}}</a>
+            href="{{url_for('view_profile_adoption_center.viewProfileAdoptionCenter',id = publication.id_owner, name = publication.name_owner)}}">{{publication.name_owner}}
+          </a>
         </div>
+        {%else%}
+        <div class="contenedorTituloAlb">
+          <a
+            href="{{url_for('view_profile_natural_person.viewProfileNaturalPerson',id = publication.id_owner, name = publication.name_owner)}}">{{publication.name_owner}}
+          </a>
+        </div>
+        {%endif%}
       </div>
       <div class="cuerpoHistoria">
         <div class="contenedorFotoPublicacion">

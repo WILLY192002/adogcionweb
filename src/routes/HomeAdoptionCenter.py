@@ -84,4 +84,4 @@ def homeCommunity():
     My_categories = False
     My_topics = False
     My_publications = PublicationService.getAllPublicationByNaturalPerson()
-    return render_template('home.html',categories = My_categories,topics = My_topics, publications = My_publications)
+    return render_template('home.html',categories = My_categories,topics = My_topics, publications = My_publications, is_adoptioncenter = False)
