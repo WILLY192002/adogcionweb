@@ -5,7 +5,7 @@
 
 CREATE TABLE `access` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
-  `email` varchar(100) NOT NULL,
+  `email` varchar(100) UNIQUE NOT NULL ,
   `password` varchar(255) NOT NULL,
   `user_type_id` int NOT NULL,
   `is_activate` boolean NOT NULL
@@ -263,5 +263,15 @@ CREATE TABLE animal_breed_comment (
     is_active BOOLEAN
 );
 
+CREATE TABLE `animal_photo` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `animal_id` int,
+  `photo` varchar(255) NOT NULL,
+  `date_added` DATE DEFAULT CURRENT_DATE
+);
+
+
+
 ALTER TABLE `animal_breed_comment` ADD FOREIGN KEY (`access_id`) REFERENCES `access` (`id`);
 ALTER TABLE `animal_breed_comment` ADD FOREIGN KEY (`breed_id`) REFERENCES `breed` (`id`);
+ALTER TABLE `animal_photo` ADD FOREIGN KEY (`animal_id`) REFERENCES `animal` (`id`);
