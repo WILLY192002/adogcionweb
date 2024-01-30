@@ -94,7 +94,7 @@ def viewProfileAdoptAnimals(id,name):
     publications = []
     for animal in No_adopted_animals:
       description = "*.Raza: "+animal.breed_name+"\n"+"*.Edad: "+str(animal.age)+"\n"+"*.Tamaño: "+animal.size+"\n"
-      publications.append(Publication(None,topic_adopted_id, user_information.access_id, animal.photo, animal.name, description,None,True))
+      publications.append(Publication(animal.id,topic_adopted_id, user_information.access_id, animal.photo, animal.name, description,None,True))
 
     return render_template('User_Adoption_Center/profile_adoption_center.html',
                             user_information=user_information, 
@@ -261,17 +261,3 @@ def editProfileAdoptionCenter(id, name):
                             paymentOptions_NoRegistered = paymentOptions_NoRegistered)
     else:
       return render_template('auth/no_authorized.html')
-
-
-
-
-
-# form_id = request.form['form_id']
-#     if form_id == 'filter_adoption_seccion':
-#       barraFilter = request.form['filter_search']
-#       especieFilter = request.form['filter_specie']
-#       sexoFilter = request.form['filter_sex']
-#       tamanioFilter = request.form['filter_size']
-#       edadFilter = request.form['filter_age']
-      
-#       return 'xd'

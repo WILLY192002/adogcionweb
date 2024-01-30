@@ -266,7 +266,16 @@ body{
 /*  Publicaciones */
 .publicacion{
   /* border: solid purple; */
-  margin: 1%;
+  border: solid #48d1cc 1px;
+  background: #f1fcfb;
+  border-radius: 10px;
+  padding: 5%;
+  margin: 5%;
+}
+
+.publicacion:hover {
+  background-color: #9df2e9;
+  transform: scale(1.05); /* Aumenta el tamaño en un 5% */
 }
 
 .descripcionPublic{
@@ -274,7 +283,7 @@ body{
 }
 .secPublicaciones{
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   
 }
 

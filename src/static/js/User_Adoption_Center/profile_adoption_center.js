@@ -104,15 +104,21 @@ document.getElementById('subirFoto').addEventListener('change', function(e) {
 ///////MOSTRAR FILTRO EN ADOPTAR
 
 //Mostrar filtro
-document.getElementById('botonFiltrar').addEventListener('click', function() {
-  var divFiltro = document.getElementById('filter_animal_div');
-  console.log("hola");
-  if (divFiltro.style.display === 'none') {
-    divFiltro.style.display = 'block';
-  } else {
-    divFiltro.style.display = 'none';
-  }
-});
+var botonFiltrar = document.getElementById('botonFiltrar');
+
+if (botonFiltrar) {
+  document.getElementById('botonFiltrar').addEventListener('click', function() {
+    var divFiltro = document.getElementById('filter_animal_div');
+    console.log("hola");
+    if (divFiltro.style.display === 'none') {
+      divFiltro.style.display = 'block';
+    } else {
+      divFiltro.style.display = 'none';
+    }
+  });
+}
+
+
 
 //////MOSTRAR BOTON ADOPTAR
 
@@ -138,5 +144,28 @@ for (var i = 0; i < publicaciones.length; i++) {
   });
 }
 
+
+
+//ELIMINAR PUBLICACIONES
+$(document).ready(function(){
+  $(".delete-button").click(function(){
+      var post_id = $(this).data("id");
+
+      $.ajax({
+          url: url_delete_publication,
+          type: "POST",
+          data: { id: post_id },
+          success: function(response) {
+              if(response.status === 'success') {
+                $("#publicacion_" + post_id).fadeOut("slow", function(){
+                  $(this).remove();
+              });
+              } else {
+                  alert("Hubo un error al eliminar la publicación.");
+              }
+          }
+      });
+  });
+});
 
 

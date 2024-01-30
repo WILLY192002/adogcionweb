@@ -15,7 +15,9 @@ Perfil
 <!-- unitest, nosetest -->
 {% block body %}
 <div class="contenedor">
-  <form class="contPrincipal" action="{{url_for('view_profile_adoption_center.viewProfileAdoptionCenter',id = current_user.id, name = current_user.name)}}" method="POST">
+  <form class="contPrincipal"
+    action="{{url_for('view_profile_adoption_center.viewProfileAdoptionCenter',id = current_user.id, name = current_user.name)}}"
+    method="POST">
     <!-- Seccion 1 -->
     <div class="seccion1">
       <input type="hidden" name="form_id" value="edit_info">
@@ -23,15 +25,17 @@ Perfil
         <input type="hidden" id="hiddenField" name="hiddenField"><!--URL IMAGEN-->
         <img id="preview" src="{{user_information.photo}}" alt="">
       </div>
-      <div class = "uploadFoto">
+      <div class="uploadFoto">
         <input type="file" id="subirFoto" name="foto">
       </div>
       <div class="infoAlb">
         <div class="infoCampo">
-          <textarea readonly id="nombreAlb" class="form-control" name = "name" rows="1" oninput="this.style.height = '';this.style.height = this.scrollHeight + 'px'">{{user_information.name}}</textarea>
+          <textarea readonly id="nombreAlb" class="form-control" name="name" rows="1"
+            oninput="this.style.height = '';this.style.height = this.scrollHeight + 'px'">{{user_information.name}}</textarea>
         </div>
         <div class="infoCampo texto">
-          <textarea readonly id="descripAlb" class="form-control" name = "description" oninput="this.style.height = '';this.style.height = this.scrollHeight + 'px'">{{user_information.description}}</textarea>
+          <textarea readonly id="descripAlb" class="form-control" name="description"
+            oninput="this.style.height = '';this.style.height = this.scrollHeight + 'px'">{{user_information.description}}</textarea>
         </div>
       </div>
     </div>
@@ -44,9 +48,10 @@ Perfil
             <label>INFORMACION DEL ALBERGUE</label>
           </div>
           {% if current_user.is_authenticated and (current_user.id == user_information.id) %}
-          <div class = "btns">
+          <div class="btns">
             <button id="btn_guardar" class="btn btn-personalized" style="display: none;">Guardar</button>
-            <button id="btn_edit" class="btn" onclick="toggleStyles(event)"><i id="icon_cog" class='bx bxs-cog'></i></button>
+            <button id="btn_edit" class="btn" onclick="toggleStyles(event)"><i id="icon_cog"
+                class='bx bxs-cog'></i></button>
           </div>
           {% endif %}
         </div>
@@ -55,30 +60,34 @@ Perfil
             <div class="columnaIzq">
               <div class="infocampo">
                 <label>Departamento:</label>
-                <input readonly id="departAlb"  class="form-control" name = "department" type="text" value="{{user_information.department}}">
+                <input readonly id="departAlb" class="form-control" name="department" type="text"
+                  value="{{user_information.department}}">
               </div>
               <div class="infocampo">
                 <label>Llamanos:</label>
-                <input readonly id="contactoAlb" class="form-control" name = "contact"  type="text" value="{{user_information.contact}}">
+                <input readonly id="contactoAlb" class="form-control" name="contact" type="text"
+                  value="{{user_information.contact}}">
               </div>
               {%if user_information.address%}
               <div class="infocampo">
                 <label>Nos encuentras en: </label>
-                <input readonly id="direccionAlb" class="form-control" name = "address" type="text" value="{{user_information.address}}">
+                <input readonly id="direccionAlb" class="form-control" name="address" type="text"
+                  value="{{user_information.address}}">
               </div>
               {%endif%}
               {%if user_information.googlemaps%}
               <div class="infocampo">
                 <label>Ver en Google Maps: </label>
                 <a href="{{user_information.googlemaps}}" target="_blank">Ver en el mapa</a>
-                
+
               </div>
               {%endif%}
             </div>
             <div class="columnaDer">
               <div class="infocampo">
                 <label>Ciudad: </label>
-                <input readonly id="ciudadAlb" class="form-control" name = "city" type="text" value="{{user_information.city}}">
+                <input readonly id="ciudadAlb" class="form-control" name="city" type="text"
+                  value="{{user_information.city}}">
               </div>
               <div class="infocampo">
                 <label>Envianos un E-mail:</label>
@@ -86,22 +95,25 @@ Perfil
               </div>
               <div class="infocampo">
                 <label>Nit: </label>
-                <input readonly id="nitAlb" class="form-control" name = "nit" type="text" value="{{user_information.nit}}">
+                <input readonly id="nitAlb" class="form-control" name="nit" type="text"
+                  value="{{user_information.nit}}">
               </div>
             </div>
           </div>
           <div class="infGenDos">
-            <div class = "contInfDos">
+            <div class="contInfDos">
               <div class="encInfDos">
-                <div class = "encabezadoMedioAyuda">
+                <div class="encabezadoMedioAyuda">
                   <label>¿Como nos puedes ayudar?</label>
                 </div>
-                {% if current_user.is_authenticated and (current_user.id == user_information.id)  %}
-                <div id = "href_editP" class = "href_editP" style="display: none;">
-                  <a href="{{url_for('view_profile_adoption_center.editProfileAdoptionCenter',id = current_user.id, name = current_user.name)}}">Editar infomación completa</a>
+                {% if current_user.is_authenticated and (current_user.id == user_information.id) %}
+                <div id="href_editP" class="href_editP" style="display: none;">
+                  <a
+                    href="{{url_for('view_profile_adoption_center.editProfileAdoptionCenter',id = current_user.id, name = current_user.name)}}">Editar
+                    infomación completa</a>
                 </div>
                 {% endif%}
-                
+
               </div>
               {%if PaymentOptions%}
               <div class="infocampo">
@@ -120,44 +132,49 @@ Perfil
             </div>
           </div>
         </div>
-  
+
       </div>
     </div>
   </form>
 
-  
+
 
   <!-- PARTE DE LAS PUBLICACIONES -->
-  <div class = contPublicacion>
-    <div class = "contPestanas">
+  <div class=contPublicacion>
+    <div class="contPestanas">
       <div class="pestana">
-        <a class="href-personalized" href="{{url_for('view_profile_adoption_center.viewProfileAdoptionCenter',id = user_information.id, name = user_information.name)}}">
+        <a class="href-personalized"
+          href="{{url_for('view_profile_adoption_center.viewProfileAdoptionCenter',id = user_information.id, name = user_information.name)}}">
           <strong>General</strong>
         </a>
       </div>
       <div class="pestana">
-        <a class="href-personalized" href="{{url_for('view_profile_adoption_center.viewProfileAdoptAnimals',id = user_information.id, name = user_information.name)}}">
+        <a class="href-personalized"
+          href="{{url_for('view_profile_adoption_center.viewProfileAdoptAnimals',id = user_information.id, name = user_information.name)}}">
           <strong>Adoptar</strong>
         </a>
       </div>
       {%if categories%}
       {% for category in categories %}
-        <div class="pestana">
-          <a class="href-personalized" href="{{url_for('view_profile_adoption_center.viewProfileAdoptionCenterByCategory',id = user_information.id, name = user_information.name, category = category.id)}}">
-            <strong>{{category.name}}</strong>
-          </a>
-        </div>
+      <div class="pestana">
+        <a class="href-personalized"
+          href="{{url_for('view_profile_adoption_center.viewProfileAdoptionCenterByCategory',id = user_information.id, name = user_information.name, category = category.id)}}">
+          <strong>{{category.name}}</strong>
+        </a>
+      </div>
       {% endfor %}
       {%endif%}
     </div>
     <div class="vistaPublicacion">
       {%if actuallySeccion != "Adoptar" and actuallySeccion != "General" and topics%}
-      <form class = "contFiltro" action="{{url_for('view_profile_adoption_center.viewProfileAdoptionCenterByCategory',id = user_information.id, name = user_information.name, category = actuallySeccion)}}"  method="POST">
+      <form class="contFiltro"
+        action="{{url_for('view_profile_adoption_center.viewProfileAdoptionCenterByCategory',id = user_information.id, name = user_information.name, category = actuallySeccion)}}"
+        method="POST">
         <div class="row justify-content-md-center row-cols-6">
           <div class="col col-6 mt-3 mb-3">
             <input type="hidden" name="form_id" value="filter_animal"><!--IDENTIFICADOR FORM-->
             <select class="form-select" aria-label="Filtrar por tema" name="filter_topic">
-              <option disabled selected >Filtrar por Todo</option>
+              <option disabled selected>Filtrar por Todo</option>
               {%for topic in topics %}
               <option value={{topic.id}}>{{topic.name}}</option>
               {% endfor %}
@@ -171,11 +188,13 @@ Perfil
         </div>
       </form>
       {%elif actuallySeccion == "Adoptar"%}
-      <form ation='/view/profile={{user_information.id}}/adoption_center/{{user_information.name}}/adopt_animals' method="POST">
+      <form ation='/view/profile={{user_information.id}}/adoption_center/{{user_information.name}}/adopt_animals'
+        method="POST">
         <div class="row justify-content-md-center row-cols-3">
           <div class="col-6 mt-3 mb-3">
             <input type="hidden" name="form_id" value="filter_adoption_seccion"><!--IDENTIFICADOR FORM-->
-            <input type="text" class="form-control" placeholder="Buscar animales" aria-label="Buscar animales" name="filter_search" id="barraFilter">
+            <input type="text" class="form-control" placeholder="Buscar animales" aria-label="Buscar animales"
+              name="filter_search" id="barraFilter">
           </div>
           <div class="col col-md-auto mt-3 mb-3">
             <button id="botonFiltrar" class="btn btn-outline-personalized" type="button">
@@ -231,17 +250,19 @@ Perfil
             </div>
           </div>
         </div>
-      </form> 
+      </form>
       {%endif%}
-      <div class = "secPublicaciones">
+      <div class="secPublicaciones">
         {%if publications%}
         {%for publication in publications%}
-        <div id = "publicacion" class="publicacion">
+        <div id="publicacion_{{publication.id}}" class="publicacion">
+          <label for="">publicacion_{{publication.id}}</label>
           <div class="miniaturaPublic">
-            <img src="{{publication.photo}}" alt="" border="0" onerror="this.style.display='none'"/>
+            <img src="{{publication.photo}}" alt="" border="0" onerror="this.style.display='none'" />
           </div>
           {%if publication.topic_id == topic_adopted_id %}
-          <a href="{{url_for('view_profile_animal.viewProfileAnimal',fund_id = user_information.id , animal_id = publication.id, name = publication.title)}}" title="Perfil de {{publication.title}}">
+          <a href="{{url_for('view_profile_animal.viewProfileAnimal',fund_id = user_information.id , animal_id = publication.id, name = publication.title)}}"
+            title="Perfil de {{publication.title}}">
             <div class="tituloPublic">
               <p><strong>{{publication.title}}</strong></p>
             </div>
@@ -251,14 +272,20 @@ Perfil
             <p><strong>{{publication.title}}</strong></p>
           </div>
           {%endif%}
-          <div class = "descripcionPublic">
-            <textarea rows = 5 readonly>{{publication.description}}</textarea>
+          <div class="descripcionPublic">
+            <textarea rows=5 readonly>{{publication.description}}</textarea>
           </div>
           {%if publication.topic_id == topic_adopted_id %}
-          <div id = "cont-btn-adoptar" class="btn-adoptar btn-adoptar-ocultar" >
-            <a class="btn btn-personalized" target="_blank" href="mailto:{{user_information.email}}?subject=ADOPCION RESPONSABLE&body=Hola!, estoy interesado en adoptar a {{publication.title}}, que tiene las siguientes caracteristicas: {{publication.description}}. /// AGREGA MAS INFORMACION SOBRE TI /// ">
+          <div id="cont-btn-adoptar" class="btn-adoptar btn-adoptar-ocultar">
+            <a class="btn btn-personalized" target="_blank"
+              href="mailto:{{user_information.email}}?subject=ADOPCION RESPONSABLE&body=Hola!, estoy interesado en adoptar a {{publication.title}}, que tiene las siguientes caracteristicas: {{publication.description}}. /// AGREGA MAS INFORMACION SOBRE TI /// ">
               <i class='bx bxs-donate-heart'></i> Adoptar
             </a>
+          </div>
+          {%endif%}
+          {% if current_user.is_authenticated and (current_user.id == user_information.id) %}
+          <div id="post-1">
+            <button class="delete-button" data-id="{{publication.id}}">Eliminar</button>
           </div>
           {%endif%}
         </div>
@@ -273,4 +300,8 @@ Perfil
 
 {% block customJS%}
 <script src="/static/js/User_Adoption_Center/profile_adoption_center.js"></script>
+<script type="text/javascript">
+  var url_delete_publication = "{{ url_for('publication_adoption_center.deletePublication') }}";
+</script>
+
 {% endblock %}

@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template,request,flash,redirect, url_for
 from flask_login import current_user
+from flask import jsonify
 
 from src.services.UsertypeService import UsertypeService
 from src.services.TopicService import TopicService
@@ -41,3 +42,10 @@ def publicationAdoptionCenter():
       return render_template('publication.html', topics=topics, visible = visible)
     else:
       return render_template('auth/no_authorized.html')
+
+
+@main.route('/delete_publication', methods = ['POST'])
+def deletePublication():
+  print("Si entró por acá")
+  post_id = request.form.get('id')
+  return PublicationService.deletePublication(post_id)

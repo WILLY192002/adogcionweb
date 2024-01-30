@@ -1,6 +1,8 @@
 #Database
 from src.database.mysql_db import get_connection
 
+from flask import jsonify
+
 #Model's
 from src.models.Publication import Publication
 
@@ -144,5 +146,22 @@ class PublicationService():
     except Exception as ex:
       message = f"An error occurred while consulting publications by topic {ex}"
       raise Exception(message)
+    finally:
+      conexion.close()
+
+  @classmethod
+  def deletePublication(self, publication_id):
+    try:
+      conexion = get_connection()
+      cursor = conexion.cursor()
+      sql = f"DELETE FROM publication WHERE id = {publication_id};"
+      cursor.execute(sql)
+      conexion.commit()
+      return jsonify(status="success"), 200
+    except Exception as ex:
+      # message = f"An error occurred while deleting publications by topic {ex}"
+      return jsonify(status="error", message="An error occurred while deleting publications by topic"), 400
+      raise Exception(message)
+    
     finally:
       conexion.close()
