@@ -1,8 +1,8 @@
 from src.database.mysql_db import get_connection
 from src.models.Animalphoto import Animalphoto
-class AdoptioncenterService():
+class AnimalphotoService():
   @classmethod
-  def addNewAdoptionCenter(self, Animalphoto):
+  def addNewAnimalPhoto(self, Animalphoto):
     try:
       conexion = get_connection()
       cursor = conexion.cursor()
