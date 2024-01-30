@@ -1,0 +1,106 @@
+{% extends './lateral_base.html' %}
+
+
+{% block title %}
+Publicar
+{% endblock %}
+
+{% block customCSS%}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{{url_for('static', filename = 'css/publication.css')}}">
+{% endblock %}
+
+
+<!-- unitest, nosetest -->
+{% block body %}
+{%if publication%}
+<div class="contenedor">
+  <form class="contNuevaPub" method="POST">
+    <div class="encabezadoNuevaPub">
+      <div class="tituloNuevaPub">
+        <label for="validationCustom01" class="form-label">Editar tu publicación</label>
+      </div>
+    </div>
+    <div class="cuerpoNuevaPub">
+      <div class="contInfo">
+        <div class="contFoto">
+          <img id="preview" src="{{publication.photo}}" border="0" />
+          <div class="uploadFoto">
+            <input type="hidden" id="hiddenField" name="urlImage"><!--URL IMAGEN-->
+            <label id="jlSubirFoto" for="subirFoto" class="label-input">Seleccione una foto:</label>
+            <input type="file" id="subirFoto" name="subirFoto">
+          </div>
+        </div>
+
+        <div class="contcampos">
+          <div class="titulo">
+            <div class="TitlelabelCampo">
+              <label>Titulo</label>
+            </div>
+            <div class="inputCampo">
+              <input required type="text" name="publication_title" placeholder="Ejemplo: URGENCIA DE MEDICAMENTOS" value="{{publication.title}}">
+            </div>
+          </div>
+          <div class="descripcion">
+            <div class="DeslabelCampo">
+              <label>Descripcion</label>
+            </div>
+            <div class="inputTextA">
+              <textarea required name="publication_description"
+                placeholder="Ejemplo: Necesitamos medicamentos para este animal que fue encontraado">{{publication.description}}</textarea>
+            </div>
+          </div>
+          {%if visible and topics%}
+          <div class="filtros">
+            <div class="TemaLabel">
+              <label>Tema:</label>
+            </div>
+            <div class="cont_Inf_Temas">
+              <div class="infoTema">
+                <p>* A continuación escoja un tema relacionado a la publicación, esto con efectos de facilitar la
+                  busqueda de los usuarios *</p>
+              </div>
+              <div class="selectTemas">
+                <select class="form-select" aria-label="Filtrar por especie" name="publication_topic" id="temafilter">
+                  <option selected disabled>Tema</option>
+                  {% for topic in topics %}
+                  <option value={{topic.id}}>{{topic.name}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+
+          </div>
+          {%endif%}
+
+          {%if visible%}
+          <!-- <div class="contactos">
+            <div class="encabezadoContactos">
+              <label>¿Desea incluir sus medios por donde le pueden colaborar?</label>
+            </div>
+            <div class="checkcontactos">
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"
+                  name="payments_option">
+                <label class="form-check-label" for="flexSwitchCheckDefault">Incluir mis medios de ayuda</label>
+              </div>
+            </div>
+          </div> -->
+          {%endif%}
+
+          <div class="botones">
+            <button class="btn btn-personalized">
+              <i class='bx bxs-dog'></i> Aplicar cambios
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+{%endif%}
+{% endblock %}
+
+{% block customJS%}
+<script src="/static/js/publication.js"></script>
+{% endblock %}

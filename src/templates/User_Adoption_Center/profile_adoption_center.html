@@ -188,7 +188,7 @@ Perfil
         </div>
       </form>
       {%elif actuallySeccion == "Adoptar"%}
-      <form ation='/view/profile={{user_information.id}}/adoption_center/{{user_information.name}}/adopt_animals'
+      <form class="contFiltro" action='/view/profile={{user_information.id}}/adoption_center/{{user_information.name}}/adopt_animals'
         method="POST">
         <div class="row justify-content-md-center row-cols-3">
           <div class="col-6 mt-3 mb-3">
@@ -256,7 +256,18 @@ Perfil
         {%if publications%}
         {%for publication in publications%}
         <div id="publicacion_{{publication.id}}" class="publicacion">
-          <label for="">publicacion_{{publication.id}}</label>
+          {% if current_user.is_authenticated and (current_user.id == user_information.id) %}
+          <div id="post-1" style="align-items: end; display: flex; justify-content: end;">
+            <div class="dropdown">
+              <i class='bx bx-dots-vertical' id="icon_option_publication"></i>
+              <div class="dropdown-content">
+                <a href="{{url_for('publication_adoption_center.editPublication',publication_id = publication.id)}}" class="edit-button" data-id="" id="">Editar</a>
+                <a href="#" class="delete-button" data-id="{{publication.id}}" id="">Eliminar</a>
+              </div>
+            </div>
+          </div>
+
+          {%endif%}
           <div class="miniaturaPublic">
             <img src="{{publication.photo}}" alt="" border="0" onerror="this.style.display='none'" />
           </div>
@@ -283,11 +294,7 @@ Perfil
             </a>
           </div>
           {%endif%}
-          {% if current_user.is_authenticated and (current_user.id == user_information.id) %}
-          <div id="post-1">
-            <button class="delete-button" data-id="{{publication.id}}">Eliminar</button>
-          </div>
-          {%endif%}
+          
         </div>
         {% endfor %}
         {%endif%}

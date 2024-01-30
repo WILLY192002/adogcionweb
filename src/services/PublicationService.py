@@ -150,6 +150,24 @@ class PublicationService():
       conexion.close()
 
   @classmethod
+  def getPublicationByid(self, publication_id):
+    try:
+      conexion = get_connection()
+      cursor = conexion.cursor()
+      sql = f"SELECT p.id, p.topic_id, p.access_id, p.photo, p.title, p.description, p.date, p.is_activate FROM publication p WHERE id = {publication_id};"
+      cursor.execute(sql)
+      row = cursor.fetchone()
+      if row != None :
+        return Publication(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7])
+      else:
+        return None
+    except Exception as ex:
+      message = f"An error occurred while consulting publications by topic {ex}"
+      raise Exception(message)
+    finally:
+      conexion.close()
+
+  @classmethod
   def deletePublication(self, publication_id):
     try:
       conexion = get_connection()
@@ -163,5 +181,30 @@ class PublicationService():
       return jsonify(status="error", message="An error occurred while deleting publications by topic"), 400
       raise Exception(message)
     
+    finally:
+      conexion.close()
+
+  @classmethod
+  def updatePublication(self, publication_id, publication):
+    try:
+      conexion = get_connection()
+      cursor = conexion.cursor()
+      new_publication = publication.__dict__
+      new_publication.pop("id")
+      new_publication = {key: value for key, value in new_publication.items() if value is not None}
+      fields = []
+      for key, value in new_publication.items():
+          if isinstance(value, str):
+              fields.append(f'{key} = "{value}"')
+          else:
+              fields.append(f'{key} = {value}')
+      fieldsUpdate = ', '.join(fields)
+      sql = f"UPDATE publication SET {fieldsUpdate} WHERE id = {publication_id}"
+      cursor.execute(sql)
+      conexion.commit()
+      return "An update in adoption center has been successfully"
+    except Exception as ex:
+      message = f"Error when update a adoption center {ex}"
+      raise Exception(message)
     finally:
       conexion.close()
