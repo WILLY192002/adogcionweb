@@ -15,24 +15,27 @@ Perfil
 <!-- unitest, nosetest -->
 {% block body %}
 <div class="container">
-  <form action="{{url_for('view_profile_natural_person.viewProfileNaturalPerson',id = user_information.id, name = user_information.name)}}" class="profile_container" method="POST">
+  <form
+    action="{{url_for('view_profile_natural_person.viewProfileNaturalPerson',id = user_information.id, name = user_information.name)}}"
+    class="profile_container" method="POST">
     <!-- FOTOGRAFÍA Y NOMBRE -->
     <div class="container_photo_name">
       {%if user_information.photo == None%}
       <div class="container_photo">
         <input type="hidden" id="hiddenField" name="hiddenField"><!--URL IMAGEN-->
-        <img id = "preview" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjFkn9BNFAcHtEC_qqB6dgvYE3HXXTGooTv9m0lxXCMA&s"
+        <img id="preview"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjFkn9BNFAcHtEC_qqB6dgvYE3HXXTGooTv9m0lxXCMA&s"
           alt="">
       </div>
-      <div class = "uploadphoto">
+      <div class="uploadphoto">
         <input type="file" id="upload_photo" name="foto">
       </div>
       {%else%}
       <div class="container_photo">
         <input type="hidden" id="hiddenField" name="hiddenField"><!--URL IMAGEN-->
-        <img id = "preview" src="{{user_information.photo}}" alt="">
+        <img id="preview" src="{{user_information.photo}}" alt="">
       </div>
-      <div class = "uploadphoto">
+      <div class="uploadphoto">
         <input type="file" id="upload_photo" name="foto">
       </div>
       {%endif%}
@@ -46,7 +49,7 @@ Perfil
         <div>
           <h4>Sobre mi</h4>
         </div>
-        
+
         {% if current_user.is_authenticated and (current_user.id == user_information.id) %}
         <div class="btns_edit_save">
           <button id="btn_save" class="btn btn-personalized" style="display: none;">Guardar</button>
@@ -56,7 +59,8 @@ Perfil
         {% endif %}
       </div>
       <div class="container_description_textarea">
-        <textarea readonly name="naturalperson_description" id="person_description" cols="30" rows="10">{{user_information.description}}</textarea>
+        <textarea readonly name="naturalperson_description" id="person_description" cols="30"
+          rows="10">{{user_information.description}}</textarea>
       </div>
     </div>
   </form>
@@ -65,6 +69,19 @@ Perfil
     {%if publications%}
     {%for publication in publications%}
     <div id="publication_{{publication.id}}" class="type_publication">
+      {% if current_user.is_authenticated and (current_user.id == user_information.id)%}
+      <div id="post-1" style="align-items: end; display: flex; justify-content: end;">
+        <div class="dropdown">
+          <i class='bx bx-dots-vertical' id="icon_option_publication"></i>
+          <div class="dropdown-content">
+            <a href="{{url_for('publication_natural_person.editPublication',publication_id = publication.id)}}"
+              class="edit-button" data-id="" id="">Editar</a>
+            <a href="#" class="delete-button" data-id="{{publication.id}}" id="">Eliminar</a>
+          </div>
+        </div>
+      </div>
+
+      {%endif%}
       <div class="miniture_publication">
         <img src="{{publication.photo}}" alt="" border="0" onerror="this.style.display='none'" />
       </div>
@@ -85,4 +102,7 @@ Perfil
 
 {% block customJS%}
 <script src="/static/js/User_Natural_Person/profile_natural_person.js"></script>
+<script type="text/javascript">
+  var url_delete_publication = "{{ url_for('publication_natural_person.deletePublication') }}";
+</script>
 {% endblock %}

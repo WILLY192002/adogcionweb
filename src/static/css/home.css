@@ -256,20 +256,35 @@ body {
 .encabezadoPublicacion {
     /* border: solid black; */
     width: 100%;
+    display: flex;
 }
 
 .encabezadoPublicacion label {
+    margin-left: 5%;
     font-family: 'Jua', sans-serif;
     font-weight: 300;
     font-size: larger;
+    /* border: solid; */
 }
 
 .contenidoPublicacion {
     /* border: yellowgreen solid; */
+    display: flex;
+    align-items:start;
+    justify-content: start;
     width: 100%;
 }
 
-.contenedorHistorias:hover {
+.contenidoPublicacion textarea {
+    /* border: solid; */
+    margin: 0 5% 0 5%;
+    width: 100%;
+    border: none;
+    background: transparent;
+    overflow: auto;
+}
+
+.contenedorHistorias:hover  {
     background-color: #9df2e9;
     transform: scale(1.05); /* Aumenta el tamaño en un 5% */
 }

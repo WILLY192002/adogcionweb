@@ -78,3 +78,26 @@ document.getElementById('upload_photo').addEventListener('change', function(e) {
     }
   reader.readAsDataURL(e.target.files[0]);
 });
+
+
+//ELIMINAR PUBLICACIONES
+$(document).ready(function(){
+  $(".delete-button").click(function(){
+      var post_id = $(this).data("id");
+
+      $.ajax({
+          url: url_delete_publication,
+          type: "POST",
+          data: { id: post_id },
+          success: function(response) {
+              if(response.status === 'success') {
+                $("#publication_" + post_id).fadeOut("slow", function(){
+                  $(this).remove();
+              });
+              } else {
+                  alert("Hubo un error al eliminar la publicación.");
+              }
+          }
+      });
+  });
+});

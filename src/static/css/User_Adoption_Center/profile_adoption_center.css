@@ -330,10 +330,11 @@ body{
   /* display: none; */
 }
 
-
+/* Boton editar publicaciones */
 .dropdown {
   position: relative;
   display: inline-block;
+  cursor: pointer;
   /* border: solid purple; */
 }
 

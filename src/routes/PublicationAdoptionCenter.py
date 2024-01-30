@@ -59,15 +59,7 @@ def editPublication(publication_id):
     publication_topic = request.form.get('publication_topic')
     publication_title = request.form['publication_title'].capitalize() if request.form['publication_title'] != '' else None  
     publication_description = request.form['publication_description'].capitalize() if request.form['publication_description'] != '' else None 
-    add_payment_options = request.form.get('payments_option')
-
-
-    # if add_payment_options != None:
-    #   payments_option = Paymentoption_AdoptioncenterService.getPaymentOptionAdoptionCenter(current_user.get_id())
-    #   publication_description += ("\n\nNos puedes ayudar mediante: ")
-    #   for payment_option in payments_option:
-    #     publication_description += ("\n*. "+payment_option.name_paymentoption+": "+payment_option.number_payment)
-    
+  
     new_publication = Publication(None,publication_topic,current_user.access_id,publication_photo,
                                   publication_title,publication_description,None,True)
     PublicationService.updatePublication(publication_id,new_publication)

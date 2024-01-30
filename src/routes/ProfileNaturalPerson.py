@@ -5,6 +5,7 @@ from src.services.PublicationService import PublicationService
 from src.services.NaturalpersonService import NaturalpersonService
 from src.services.AccessService import AccessService
 from src.services.UsertypeService import UsertypeService
+from src.services.ImageService import ImageService
 
 from src.models.NaturalPerson import NaturalPerson
 
@@ -15,8 +16,12 @@ main = Blueprint('view_profile_natural_person',__name__)
 def viewProfileNaturalPerson(id,name):
   if request.method == 'POST':
     if current_user.is_authenticated and UsertypeService.verifyUserTypeNatrualPerson(current_user.user_type_id) and current_user.get_id() == id:
+      photo = request.form['hiddenField'] if request.form['hiddenField'] != '' else None
+      upload_photo = ImageService.upload_image_to_imgbb(photo)
+      naturalperson_photo = upload_photo['data']['url'] if photo else None
+
       naturalperson_description = request.form['naturalperson_description'].capitalize() if request.form['naturalperson_description'] != '' else 'Sin descripción'
-      new_natural_person = NaturalPerson(None,None,None,None,None,naturalperson_description)
+      new_natural_person = NaturalPerson(None,None,None,naturalperson_photo,None,naturalperson_description)
       NaturalpersonService.updateNaturalPerson(current_user.get_id(), new_natural_person)
       return redirect(request.referrer)
     else:
