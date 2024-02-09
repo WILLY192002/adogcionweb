@@ -155,8 +155,9 @@ window.onload = function() {
       var selectDepartamento = document.getElementById('person_department');
       for (var i = 0; i < data.length; i++) {
         var opcion = document.createElement('option');
-        opcion.value = data[i].id;
+        opcion.value = data[i].name;
         opcion.text = data[i].name;
+        opcion.setAttribute('data-id_department', data[i].id);
         selectDepartamento.add(opcion);
       }
       // Llama a cambiarCiudades para llenar las ciudades iniciales
@@ -166,7 +167,8 @@ window.onload = function() {
 
 // Función para cambiar las ciudades cuando se selecciona un nuevo departamento
 function changeCities() {
-  var departamentoId = document.getElementById('person_department').value;
+  var departamentoId = document.getElementById('person_department').options[document.getElementById('person_department').selectedIndex].getAttribute('data-id_department');
+  // var departamentoId = document.getElementById('person_department').value;
   fetch(urlApiDepartment + '/' + departamentoId + '/cities')
     .then(response => response.json())
     .then(data => {
@@ -176,7 +178,7 @@ function changeCities() {
       // Agrega las nuevas ciudades
       for (var i = 0; i < data.length; i++) {
         var opcion = document.createElement('option');
-        opcion.value = data[i].id;
+        opcion.value = data[i].name;
         opcion.text = data[i].name;
         selectCiudad.add(opcion);
       }
