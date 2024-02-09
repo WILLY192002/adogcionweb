@@ -22,6 +22,33 @@
   border-radius: 10px;
 }
 
+.user-photo-container{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border: violet solid; */
+}
+
+.user-photo-container img{
+
+  max-width: 200px;
+  width: 100%;
+  height: auto;
+  max-height: 200px;
+  border-radius: 10%;
+}
+
+.uploadphoto{
+  width: 100%;
+  display: none;
+}
+
+.uploadphoto input{
+  width: 100%;
+  display: none;
+}
+
 .profile-information-container{
   /* border: solid red; */
   padding: 4%;

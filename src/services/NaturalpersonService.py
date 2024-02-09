@@ -68,10 +68,12 @@ class NaturalpersonService():
       new_naturalPerson = {key: value for key, value in new_naturalPerson.items() if value is not None}
       fields = []
       for key, value in new_naturalPerson.items():
-          if isinstance(value, str):
-              fields.append(f'{key} = "{value}"')
+          if value == '':
+            fields.append(f'{key} = NULL')
+          elif isinstance(value, str):
+            fields.append(f'{key} = "{value}"')
           else:
-              fields.append(f'{key} = {value}')
+            fields.append(f'{key} = {value}')
       fieldsUpdate = ', '.join(fields)
       sql = f"UPDATE naturalperson SET {fieldsUpdate} WHERE id = {id}"
       cursor.execute(sql)
