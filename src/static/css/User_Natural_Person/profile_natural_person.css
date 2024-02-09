@@ -14,7 +14,7 @@ body{
   transform: translate(200px);
   width: calc(100% - 200px); 
   overflow: auto;
-  border: solid;
+  /* border: solid; */
 }
 
 .profile_container{
@@ -22,7 +22,8 @@ body{
   width: 100%;
   display: grid;
   grid-template-columns: 30% 70%;
-  border: red solid;
+  padding: 1%;
+  /* border: red solid; */
 }
 
 .container_photo_name{
@@ -32,7 +33,9 @@ body{
   display: grid;
   grid-template-rows: 80% 20%;
   grid-template-columns: auto;
-  border: blue solid;
+  border: solid 1px;
+  border-radius: 10px;
+  /* border: blue solid; */
 }
 
 .container_photo{
@@ -40,7 +43,7 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
-  border: violet solid;
+  /* border: violet solid; */
 }
 
 .container_photo img{
@@ -68,7 +71,8 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
-  border: purple solid;
+  border-top: solid 1px;
+  /* border: purple solid; */
 }
 
 .container_name h4{
@@ -84,11 +88,13 @@ body{
   width: 100%;
   display: grid;
   grid-template-rows: min-content max-content;
-  border: solid;
+  padding: 0 0 0 3%;
+  /* border: solid gray; */
 }
 
 .container_boton_label{
-  border: green solid;
+  border-bottom: solid 1px ;
+  /* border: green solid; */
   display: flex;
   justify-content: space-between;
 }
@@ -102,7 +108,7 @@ body{
 .container_boton_label button{
   width: 100px;
   margin: 0 1% 0 1%;
-  border: solid;
+  /* border: solid; */
 }
 
 .btns_edit_save{
@@ -131,7 +137,7 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
-  border: solid red;
+  /* border: solid red; */
 }
 
 .container_description_textarea textarea{
@@ -150,7 +156,9 @@ body{
 /* SECCION DE PUBLICACIONES */
 
 .container_publications{
-  border: solid;
+  /* border: solid pink; */
+  border-top: solid 1px;
+  margin-top: 3%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 }

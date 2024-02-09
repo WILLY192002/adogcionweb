@@ -63,7 +63,7 @@ class UsertypeService():
       conexion.close()
   
   @classmethod
-  def verifyUserTypeNatrualPerson(self, user_type_id):
+  def verifyUserTypeNaturalPerson(self, user_type_id):
     try:
       conexion = get_connection()
       cursor = conexion.cursor()

@@ -91,13 +91,25 @@
               <label for="floatingInput" id="jlContactoP">Telefono de contacto</label>
             </div>
 
-            <div class="form-floating campo">
+            <!-- <div class="form-floating campo">
               <input type="text" class="form-control" name="department" placeholder="Nombre1" id="departamento">
               <label for="floatingInput" id="jlDepartamento">Departamento</label>
             </div>
             <div class="form-floating campo">
               <input type="text" class="form-control" name="city" placeholder="Nombre1" id="ciudad">
               <label for="floatingInput" id="jlCiudad">Ciudad</label>
+            </div> -->
+
+            <div class="form-floating campo">
+              <select required class="form-select" id="person_department" name="person_department" onchange="changeCities('person_department','person_city')">
+                <option selected disabled>Departamento ...</option>
+              </select>
+            </div>
+      
+            <div class="form-floating campo">
+              <select required class="form-select" id="person_city" name="person_city" >
+                <option selected disabled>Ciudad ...</option>
+              </select>
             </div>
           </div>
 
@@ -132,7 +144,7 @@
               <input type="text" class="form-control" name="direccionAlb" placeholder="Nombre1" id="direccionAlb">
               <label for="floatingInput">Direccion</label>
             </div> -->
-            <div class="form-floating campo">
+            <!-- <div class="form-floating campo">
               <input type="text" class="form-control" name="adoptionCenter_department" placeholder="Nombre1"
                 id="departamentoAlb">
               <label for="floatingInput">Departamento</label>
@@ -140,6 +152,17 @@
             <div class="form-floating campo">
               <input type="text" class="form-control" name="adoptionCenter_city" placeholder="Nombre1" id="ciudadAlb">
               <label for="floatingInput">Ciudad</label>
+            </div> -->
+            <div class="form-floating campo">
+              <select required class="form-select" id="adoptionCenter_department" name="adoptionCenter_department" onchange="changeCities('adoptionCenter_department','adoptionCenter_city')">
+                <option selected disabled>Departamento ...</option>
+              </select>
+            </div>
+      
+            <div class="form-floating campo">
+              <select required class="form-select" id="adoptionCenter_city" name="adoptionCenter_city" >
+                <option selected disabled>Ciudad ...</option>
+              </select>
             </div>
 
           </div>

@@ -91,13 +91,24 @@
               <label for="floatingInput" id="jlContactoP">Telefono de contacto</label>
             </div>
 
-            <div class="form-floating campo">
+            <!-- <div class="form-floating campo">
               <input type="text" class="form-control" name="department" placeholder="Nombre1" id="departamento">
               <label for="floatingInput" id="jlDepartamento">Departamento</label>
             </div>
             <div class="form-floating campo">
               <input type="text" class="form-control" name="city" placeholder="Nombre1" id="ciudad">
               <label for="floatingInput" id="jlCiudad">Ciudad</label>
+            </div> -->
+            <div class="form-floating campo">
+              <select class="form-select" id="person_department" name="person_department" onchange="changeCities()">
+                <option selected disabled>Departamento ...</option>
+              </select>
+            </div>
+      
+            <div class="form-floating campo">
+              <select class="form-select" id="person_city" name="person_city">
+                <option selected disabled>Ciudad ...</option>
+              </select>
             </div>
           </div>
 

@@ -1,0 +1,99 @@
+{% extends 'lateral_base.html' %}
+
+
+{% block title %}
+Perfil
+{% endblock %}
+
+{% block customCSS%}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{{url_for('static', filename = 'css/User_Natural_Person/post/edit_information_person.css')}}">
+
+{% endblock %}
+
+
+<!-- unitest, nosetest -->
+{% block body %}
+<div class="container">
+  <div class="user-photo-container">
+    <img src="https://s3.getstickerpack.com/storage/uploads/sticker-pack/random-memes/tray_large.png?a7d8b8b61358d427d58d9820b697217b" alt="">
+  </div>
+  <div class="profile-information-container">
+    <div class="title-sección">
+      <h4>Información personal</h4>
+    </div>
+    <div class="person-information-container">
+      <div class="input">
+        <label for="">Primer Nombre (*)</label>
+        <input type="text" class="form-control" placeholder="Primer Nombre" aria-label="" name="animal_name"
+          value="">
+      </div>
+      <div class="input">
+        <label for="">Segundo Nombre</label>
+        <input type="text" class="form-control" placeholder="Opcional ..." aria-label="" name="animal_name"
+          value="">
+      </div>
+      <div class="input">
+        <label for="">Primer apellido (*)</label>
+        <input type="text" class="form-control" placeholder="Primer apellido" aria-label="" name="animal_name"
+          value="">
+      </div>
+      <div class="input">
+        <label for="">Segundo apellido</label>
+        <input type="text" class="form-control" placeholder="Opcional ..." aria-label="" name="animal_name"
+          value="">
+      </div>
+      <div class="input">
+        <label for="">Tipo de identificación (*)</label>
+        <input type="text" class="form-control" placeholder="Tipo de identificación" aria-label="" name="animal_name"
+          value="">
+      </div>
+      <div class="input">
+        <label for="">Numero de identificación (*)</label>
+        <input type="text" class="form-control" placeholder="Numero de identificación" aria-label="" name="animal_name"
+          value="">
+      </div>
+      <div class="input">
+        <label for="">Contacto</label>
+        <input type="text" class="form-control" placeholder="Opcional ..." aria-label="" name="animal_name"
+          value="">
+      </div>
+      
+      <div class="input">
+        <label for="department">Departamento (*)</label>
+        <select class="form-select" id="person_department" name="person_department" onchange="changeCities()">
+          <option selected disabled>Departamento ...</option>
+        </select>
+      </div>
+
+      <div class="input">
+        <label for="city">Ciudad (*)</label>
+        <select class="form-select" id="person_city" name="person_city">
+          <option selected disabled>Ciudad ...</option>
+        </select>
+      </div>
+
+    </div>
+    <div class="title-sección">
+      <h4>Información de perfil</h4>
+    </div>
+    <div class="naturalPerson-information-container">
+      <label for="city">Descripción</label>
+      <textarea readonly name="naturalperson_description" id="person_description" cols="30"
+          rows="10">Anaconda</textarea>
+    </div>
+
+  </div>
+  <div class="btn_send_form">
+    <button class="btn btn-personalized">
+      <i class='bx bx-save'></i> Guardar Cambios
+    </button>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block customJS%}
+<script src="/static/js/User_Natural_Person/post/edit_information_person.js"></script>
+
+{% endblock %}

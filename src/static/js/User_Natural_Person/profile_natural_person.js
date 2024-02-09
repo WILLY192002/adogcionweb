@@ -1,5 +1,6 @@
 const btn_edit = document.getElementById("btn_edit");
 const btn_save = document.getElementById("btn_save");
+const href_edit = document.getElementById("div_edit_information");
 const profile_photo = document.getElementById("preview");
 const change_photo = document.getElementById("upload_photo");
 const person_description = document.getElementById("person_description");
@@ -26,6 +27,7 @@ function applyEditStyles() {
   btn_edit.textContent = "Cancelar";
   btn_edit.classList.add("btn-personalized");
   btn_save.style.display = "block";
+  href_edit.style.display = "block";
   profile_photo.style.cursor = "pointer"
   profile_photo.addEventListener('click', imgClickHandler);
   addEditStyles();
@@ -36,6 +38,7 @@ function resetStyles() {
   btn_edit.innerHTML = "<i id='icon_cog' class='bx bxs-cog'></i>";
   btn_edit.classList.remove("btn-personalized");
   btn_save.style.display = "none";
+  href_edit.style.display = "none";
   change_photo.style.display = "none";
   profile_photo.style.cursor = "default"
   profile_photo.src = imagenAnterior;

@@ -26,7 +26,7 @@ def publicationNaturalPerson():
       PublicationService.addNewPublication(new_publication)
       return redirect(url_for('view_profile_natural_person.viewProfileNaturalPerson', name = current_user.name, id = current_user.get_id()))
   else:
-    if current_user.is_authenticated and UsertypeService.verifyUserTypeNatrualPerson(current_user.user_type_id):
+    if current_user.is_authenticated and UsertypeService.verifyUserTypeNaturalPerson(current_user.user_type_id):
       topics = False
       visible = False
       return render_template('publication.html', topics=topics, visible = visible)
@@ -55,7 +55,7 @@ def editPublication(publication_id):
     PublicationService.updatePublication(publication_id,new_publication)
     return redirect(url_for('view_profile_natural_person.viewProfileNaturalPerson', name = current_user.name, id = current_user.get_id()))
   else:
-    if current_user.is_authenticated and UsertypeService.verifyUserTypeNatrualPerson(current_user.user_type_id):
+    if current_user.is_authenticated and UsertypeService.verifyUserTypeNaturalPerson(current_user.user_type_id):
       topics = False
       publication = PublicationService.getPublicationByid(publication_id)
       visible = False

@@ -1,0 +1,106 @@
+.container{
+  position: fixed;
+  top: 0;
+  height: 100%;
+  transform: translate(200px);
+  width: calc(100% - 200px); 
+  overflow: auto;
+  /* border: solid; */
+}
+
+.user-photo-container{
+  /* border: solid blue; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-photo-container img{
+  width: 250px;
+  height: auto;
+  margin: 3%;
+  border-radius: 10px;
+}
+
+.profile-information-container{
+  /* border: solid red; */
+  padding: 4%;
+}
+
+/* Información de tabla person */
+.title-sección{
+  /* border: yellow solid; */
+  border-bottom: solid 1px;
+  margin: 2% 0 2% 0;
+}
+
+.title-sección h4{
+  font-family: 'Jua', sans-serif;
+  font-weight: 100;
+  font-size: xx-large ;
+}
+
+
+.person-information-container{
+  /* border: purple solid; */
+  padding: 2%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.input{
+  /* border: green solid; */
+  margin: 2%;
+  display: grid;
+  grid-template-columns: 30% 70%;
+  align-items: center;
+}
+
+.input label{
+  font-family: 'Jua', sans-serif;
+  font-weight: 300;
+  font-size: medium ;
+}
+
+/*INFORMACION DE PERFIL*/
+.naturalPerson-information-container{
+  /* border: orange solid; */
+  padding: 2%;
+  display: grid;
+  grid-template-rows: min-content min-content;
+}
+
+.naturalPerson-information-container label{
+  font-family: 'Jua', sans-serif;
+  font-weight: 300;
+  font-size: medium ;
+}
+
+
+/*Guardar cambios*/
+/* BOTON DE GUARDAR CAMBIOS */
+.btn_send_form{
+  display: flex;
+  justify-content: center;
+  /* border:  seagreen solid; */
+  padding: 3%;
+  /* border: violet solid 20px; */
+}
+
+
+.btn-personalized {
+  background-color: #1cb0ad; 
+  color: #FFF; 
+  font-family: 'Jua', sans-serif;
+  font-size: medium;
+}
+
+.btn-personalized:hover {
+  background-color: #138e8e;
+  color: #FFF;
+}
+
+.btn-personalized:disabled { 
+  background-color: #9df2e9;
+  color: #147071; 
+}
