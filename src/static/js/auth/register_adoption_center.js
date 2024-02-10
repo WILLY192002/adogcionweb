@@ -100,7 +100,7 @@ btn_adelante3.addEventListener('click', function (e) {
   var department_AdoptionCenter = document.getElementById("adoptionCenter_department");
   var city_AdoptionCenter = document.getElementById("adoptionCenter_city");
 
-  if (validarTexto(nombreAlb) && validarTexto(nitAdoptionCenter) && validate_select(department_AdoptionCenter) && validate_select(city_AdoptionCenter)) {
+  if (validarTexto(nombreAlb) && validate_select(department_AdoptionCenter) && validate_select(city_AdoptionCenter)) {
     movPag1.style.marginLeft = "-66%";
     numProgreso[cont - 1].classList.add("activate");
     cont += 1;
