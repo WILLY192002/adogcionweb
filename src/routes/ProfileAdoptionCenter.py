@@ -58,6 +58,7 @@ def viewProfileAdoptionCenter(id,name):
     actuallySeccion = "General"
     PaymentOptions = Paymentoption_AdoptioncenterService.getPaymentOptionAdoptionCenter(id)
     topic_adopted_id = 0
+
     return render_template('User_Adoption_Center/profile_adoption_center.html',
                            user_information=user_information, 
                            publications = publications, 
@@ -83,13 +84,12 @@ def viewProfileAdoptAnimals(id,name):
   PaymentOptions = Paymentoption_AdoptioncenterService.getPaymentOptionAdoptionCenter(id)
 
   if request.method == 'POST':
+
     filter_search = request.form.get('filter_search') if request.form.get('filter_search') != '' else None
     filter_specie = request.form.get('filter_specie') if request.form.get('filter_specie') != '' else None
     filter_sex = request.form.get('filter_sex') if request.form.get('filter_sex') != '' else None
     filter_size = request.form.get('filter_size') if request.form.get('filter_size') != '' else None
     filter_age = request.form.get('filter_age') if request.form.get('filter_age') != '' else None
-    print(filter_search,"--",filter_specie,"--",filter_sex,"--",filter_size,"--",filter_age,"--",)
-
     No_adopted_animals = AnimalService.getNoAdoptedAnimalsFilter(user_information.id,filter_search,filter_specie,filter_sex,filter_size,filter_age)
     publications = []
     for animal in No_adopted_animals:
@@ -133,6 +133,7 @@ def viewProfileAdoptionCenterByCategory(id, name, category):
     else:
       return redirect(request.referrer)
   else:
+
     #INFORMATION PROFILE
     user_information = AdoptioncenterService.getAdoptionCenterById(id)
     access_user_information = AccessService.getAccessById(user_information.access_id)
@@ -146,6 +147,7 @@ def viewProfileAdoptionCenterByCategory(id, name, category):
     actuallySeccion = category
     PaymentOptions = Paymentoption_AdoptioncenterService.getPaymentOptionAdoptionCenter(id)
     topic_adopted_id = 0
+
     return render_template('User_Adoption_Center/profile_adoption_center.html',
                            user_information=user_information, 
                            publications = publications, 
@@ -254,7 +256,7 @@ def editProfileAdoptionCenter(id, name):
 
       paymentOptions_registered = Paymentoption_AdoptioncenterService.getPaymentOptionAdoptionCenter(current_user.get_id())
       paymentOptions_NoRegistered = PaymentoptionService.getNoPaymentOptionAdoptionCenter(current_user.get_id())
-      print('XXDXDXDXD')
+      
       return render_template('User_Adoption_Center/post/edit_profile.html', 
                             user_information = user_information,
                             paymentOptions_registered = paymentOptions_registered,

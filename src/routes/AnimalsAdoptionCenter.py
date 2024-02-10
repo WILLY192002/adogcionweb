@@ -150,18 +150,13 @@ def editAnimalAdoptionCenter(animal_id):
       operationsDelete = request.form.getlist('deleted_operation')
       Operation_AnimalService.deleteOperation_Animal(animal_id,operationsDelete)
 
-
-
       #Animal Disease Selected
       diseasesAdded = request.form.getlist('disease_id')
       Disease_AnimalService.addNewDisease_Animal(animal_id,diseasesAdded)
-      print("Disease_Added: ",diseasesAdded)
       
       #Animal disease deleted
       diseasesDelete = request.form.getlist('deleted_disease')
       Disease_AnimalService.deleteDisease_Animal(animal_id,diseasesDelete)
-
-
 
       #Animal Vaccine Selected
       vaccinesAdded = request.form.getlist('vaccine_id')
@@ -172,6 +167,7 @@ def editAnimalAdoptionCenter(animal_id):
       Vaccine_AnimalService.deleteVaccine_Animal(animal_id,vaccinesDelete)
 
       return redirect(url_for('animals_adoption_center.animalsAdoptionCenter'))
+    
     else:
       return render_template('auth/no_authorized.html')
   else:

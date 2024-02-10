@@ -19,7 +19,6 @@ def homeAdoptionCenter():
     filter_topic = request.form.get('filter_topic') if request.form.get('filter_topic') != '' else False
     filter_search = request.form.get('filter_search') if request.form.get('filter_search') != '' else False
 
-    
     if filter_topic and filter_search:
       return redirect(url_for('home_adoption_center.homeAdoptionCenterAllFilter',category = filter_category, topic = filter_topic, search = filter_search))
     elif not filter_topic and (filter_category and filter_search):
