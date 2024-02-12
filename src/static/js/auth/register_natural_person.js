@@ -3,6 +3,7 @@ function validarTexto(texto) {
   if (texto.value == null || texto.value.length == 0 || /^\s+$/.test(texto.value)) {
 
     texto.style.border = '2px solid red';
+    alert('Verifique los campos en ROJO')
     return false;
   } else {
     texto.style.border = '2px solid green';
@@ -25,6 +26,7 @@ function validarNumero(limInf, limSup, numero) {
     return true;
   } else {
     numero.style.border = '2px solid red';
+    alert('Numero no válido')
     return false;
   }
 }
@@ -73,34 +75,9 @@ btn_adelante2.addEventListener('click', function (e) {
     movPag1.style.marginLeft = "-33%";
     numProgreso[cont - 1].classList.add("activate");
     cont += 1;
-  } else {
-    alert("Verifique que los campos en ROJO");
   }
 })
 
-// //PAGINA 2
-// const btn_adelante3 = document.querySelector(".sigPag3");
-// const btn_atras1 = document.querySelector(".antPag1");
-
-// btn_adelante3.addEventListener('click', function (e) {
-//   e.preventDefault();
-//   var nombreAlb = document.getElementById("nombreAlb");
-//   if (validarTexto(nombreAlb) ) {
-//     movPag1.style.marginLeft = "-66%";
-//     numProgreso[cont - 1].classList.add("activate");
-//     cont += 1;
-//   } else {
-//     alert("Verifique que los campos en ROJO");
-//   }
-
-// })
-
-// btn_atras1.addEventListener('click', function (e) {
-//   e.preventDefault();
-//   movPag1.style.marginLeft = "0%"
-//   numProgreso[cont - 2].classList.remove("activate");
-//   cont -= 1;
-// })
 
 //PAGINA 3
 const btn_fin = document.querySelector(".finalizar");
