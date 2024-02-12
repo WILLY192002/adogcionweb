@@ -23,7 +23,7 @@ CREATE TABLE `adoptioncenter` (
   `photo` varchar(255),
   `name` varchar(100) NOT NULL,
   `description` TEXT,
-  `nit` varchar(50) NOT NULL,
+  `nit` varchar(50),
   `contact` varchar(50),
   `address` varchar(100),
   `googlemaps` varchar(100),
@@ -94,59 +94,59 @@ CREATE TABLE `breed` (
 CREATE TABLE `operation` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(100) NOT NULL UNIQUE,
-  `description` TEXT
+  `description` TEXT NOT NULL
 );
 
 CREATE TABLE `disease` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(100),
-  `description` TEXT
+  `description` TEXT NOT NULL
 );
 
 CREATE TABLE `vaccine` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(100),
-  `description` TEXT
+  `description` TEXT NOT NULL
 );
 
 CREATE TABLE `operation_animal` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
-  `operation_id` int,
-  `animal_id` int
+  `operation_id` int NOT NULL,
+  `animal_id` int NOT NULL
 );
 
 CREATE TABLE `disease_animal` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
-  `disease_id` int,
-  `animal_id` int
+  `disease_id` int NOT NULL,
+  `animal_id` int NOT NULL
 );
 
 CREATE TABLE `vaccine_animal` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
-  `vaccine_id` int,
-  `animal_id` int
+  `vaccine_id` int ,
+  `animal_id` int NOT NULL
 );
 
 CREATE TABLE `publication` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `topic_id` int,
-  `access_id` int,
+  `access_id` int NOT NULL,
   `photo` varchar(255),
   `title` varchar(100),
   `description` TEXT,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `is_activate` boolean
+  `is_activate` boolean NOT NULL
 );
 
 CREATE TABLE `topic` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
-  `category_id` int,
-  `name` varchar(50)
+  `category_id` int NOT NULL,
+  `name` varchar(50) NOT NULL
 );
 
 CREATE TABLE `category` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
-  `name` varchar(50)
+  `name` varchar(50) NOT NULL
 );
 
 ALTER TABLE `access` ADD FOREIGN KEY (`user_type_id`) REFERENCES `usertype` (`id`);
@@ -187,8 +187,8 @@ ALTER TABLE `publication` ADD FOREIGN KEY (`topic_id`) REFERENCES `topic` (`id`)
 
 ALTER TABLE `topic` ADD FOREIGN KEY (`category_id`) REFERENCES `category` (`id`);
 
-INSERT INTO adogcionweb.usertype (name) VALUE ('UT-ADOPTION_CENTER')
-INSERT INTO adogcionweb.usertype (name) VALUE ('UT-NATURAL_PERSON')
+INSERT INTO adogcionweb.usertype (name) VALUES ('UT-ADOPTION_CENTER');
+INSERT INTO adogcionweb.usertype (name) VALUES ('UT-NATURAL_PERSON');
 
 INSERT INTO adogcionweb.species (name) VALUES ('Perro');
 INSERT INTO adogcionweb.species (name) VALUES ('Conejo');
@@ -252,20 +252,26 @@ INSERT INTO adogcionweb.operation (id, name, description) VALUES (9, 'Cirugía d
 INSERT INTO adogcionweb.operation (id, name, description) VALUES (10, 'Cirugía neurológica',	'Para abordar problemas en el sistema nervioso.');
 INSERT INTO adogcionweb.operation (id, name, description) VALUES (11, 'Cirugía de extremidades',	'Para tratar problemas en extremidades del animal.');
 
+INSERT INTO `adogcionweb`.`paymentoption` (`name`) VALUES ('Bancolombia');
+INSERT INTO `adogcionweb`.`paymentoption` (`name`) VALUES ('Nequi');
+INSERT INTO `adogcionweb`.`paymentoption` (`name`) VALUES ('Daviplata');
+INSERT INTO `adogcionweb`.`paymentoption` (`name`) VALUES ('Banco a la mano');
+INSERT INTO `adogcionweb`.`paymentoption` (`name`) VALUES ('Giro efecty');
+
 --------------- ULTIMAS COSAS AGREGADAS ---------------------------
 
 CREATE TABLE animal_breed_comment (
     id int PRIMARY KEY AUTO_INCREMENT,
-    access_id INT,
-    breed_id INT,
+    access_id INT NOT NULL,
+    breed_id INT NOT NULL,
     description TEXT NOT NULL,
     date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    is_active BOOLEAN
+    is_active BOOLEAN NOT NULL
 );
 
-CREATE TABLE `animal_photo` (
+CREATE TABLE `profile_animal_photo` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
-  `animal_id` int,
+  `animal_id` int NOT NULL,
   `photo` varchar(255) NOT NULL,
   `date_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
@@ -274,4 +280,4 @@ CREATE TABLE `animal_photo` (
 
 ALTER TABLE `animal_breed_comment` ADD FOREIGN KEY (`access_id`) REFERENCES `access` (`id`);
 ALTER TABLE `animal_breed_comment` ADD FOREIGN KEY (`breed_id`) REFERENCES `breed` (`id`);
-ALTER TABLE `animal_photo` ADD FOREIGN KEY (`animal_id`) REFERENCES `animal` (`id`);
+ALTER TABLE `profile_animal_photo` ADD FOREIGN KEY (`animal_id`) REFERENCES `animal` (`id`);

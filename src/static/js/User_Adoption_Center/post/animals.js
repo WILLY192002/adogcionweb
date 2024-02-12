@@ -72,7 +72,7 @@ $(document).ready(function() {
     $('#animal_breed_name').val($(this).data('animal_breed_name'));
     $('#animal_size').val($(this).data('animal_size'));
     $('#animal_weight').val($(this).data('animal_weight'));
-    $('#animal_diet').val($(this).data('animal_diet'));
+    $('#animal_observation').val($(this).data('animal_observation'));
   });
 });
 
