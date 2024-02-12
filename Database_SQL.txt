@@ -132,8 +132,8 @@ CREATE TABLE `publication` (
   `topic_id` int,
   `access_id` int NOT NULL,
   `photo` varchar(255),
-  `title` varchar(100),
-  `description` TEXT,
+  `title` varchar(100) NOT NULL,
+  `description` TEXT NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `is_activate` boolean NOT NULL
 );

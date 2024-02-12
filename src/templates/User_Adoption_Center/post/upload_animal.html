@@ -12,7 +12,7 @@ Nuevo animal
 
 {% block body %}
 <div class="container">
-  <form class="animal_form" action="{{url_for('animals_adoption_center.uploadAnimalAdoptionCenter')}}" method="POST">
+  <form id="upload_animal_form" class="animal_form" action="{{url_for('animals_adoption_center.uploadAnimalAdoptionCenter')}}" method="POST">
     <!-- Informacion basica del animal -->
     <div class="container_basic_information">
       <div class="container_animal_photo">
@@ -29,37 +29,37 @@ Nuevo animal
           <h1>Registrar nuevo animal</h1>
         </div>
         <div class="input">
-          <input type="text" class="form-control" placeholder="Nombre" aria-label="" name="animal_name">
+          <input required type="text" class="form-control" placeholder="Nombre" aria-label="" name="animal_name">
         </div>
         <div class="input">
           <input type="number" class="form-control" placeholder="Edad" aria-label="" name="animal_age">
         </div>
         <div class="input">
-          <select class="form-select" aria-label="" id="animal_specie"  name="animal_specie">
-            <option selected disabled>Seleccione especie ...</option>
+          <select required class="form-select" id="animal_specie"  name="animal_specie">
+            <option selected disabled value="">Seleccione especie ...</option>
             {%for specie in species %}
             <option value={{specie.id}}>{{specie.name}}</option>
             {% endfor %}
           </select>
         </div>
         <div class="input">
-          <select class="form-select" aria-label="" id="animal_breed" name="animal_breed" disabled>
-            <option selected disabled>Seleccione raza ...</option>
+          <select required class="form-select" aria-label="" id="animal_breed" name="animal_breed" disabled>
+            <option selected disabled value="">Seleccione raza ...</option>
             {%for breed in breeds %}
             <option value={{breed.id}} class="{{breed.species_id}}">{{breed.name}}</option>
             {% endfor %}
           </select>
         </div>
         <div class="input">
-          <select class="form-select" aria-label="" name="animal_sex">
-            <option selected disabled>Seleccione sexo ...</option>
+          <select required class="form-select" aria-label="" name="animal_sex">
+            <option disabled>Seleccione sexo ...</option>
             <option value="Macho">Macho</option>
             <option value="Hembra">Hembra</option>
           </select>
         </div>
         <div class="input">
-          <select class="form-select" aria-label="" name="animal_size">
-            <option selected disabled>Seleccione tamaño ...</option>
+          <select required class="form-select" aria-label="" name="animal_size" aria-placeholder="xd">
+            <option selected disabled value="">Seleccione tamaño ...</option>
             <option value="Pequeño">Pequeño (0-20cm)</option>
             <option value="Mediano">Mediano (21-50cm)</option>
             <option value="Grande">Grande (51-80cm)</option>
@@ -143,7 +143,7 @@ Nuevo animal
 
 
     <div class="btn_send_form">
-      <button class="btn btn-personalized">
+      <button class="btn btn-personalized" id="btn_save_changes"">
         <i class='bx bx-save'></i> Guardar Cambios
       </button>
     </div>

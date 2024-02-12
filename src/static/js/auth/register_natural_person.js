@@ -85,12 +85,19 @@ const btn_atras2 = document.querySelector(".antPag2");
 
 btn_fin.addEventListener('click', function (e) {
   //e.preventDefault();
+  let regex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
   var correo = document.getElementById("CorreoAlb")
   var correoConf = document.getElementById("correoConf")
   var contrasena = document.getElementById("contrasenaAlb")
   var contraConf = document.getElementById("contraConf")
   var formulario = document.getElementById("formRegister")
-  if (1 == 1) {
+
+  if(!regex.test(correo.value)){
+    e.preventDefault();
+    alert("No es un correo válido");
+    return false
+  };
+  if (correo.value == correoConf.value) {
     if (checkPassword(contrasena.value) && (contrasena.value == contraConf.value)) {
       numProgreso[cont - 2].classList.add("activate");
       cont += 1;

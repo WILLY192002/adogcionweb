@@ -96,5 +96,3 @@ function updateSelection(select_id, Container_id, type) {
   container.appendChild(divElement);
   
 }
-
-
