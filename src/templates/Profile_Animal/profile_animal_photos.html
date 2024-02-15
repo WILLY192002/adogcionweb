@@ -1,6 +1,17 @@
 {% extends 'Profile_Animal/profile_animal.html' %}
 
-{%block visual_content%}
-    
-<h4>Este mensaje está en profile_animal_photos.html, aki deben estar las fotos que se hayan subido del animal</h4>
-{%endblock%}
+{% block visual_content %}
+  <section class="container section-photo">
+    <div class="row justify-content-center">
+      {% for photo in animalPhotos %}
+        <div class="col-6 ">
+          <img src="{{ photo['photo'] }}" alt="Foto del animal" class="photo-animal">
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+{% endblock %}
+
+
+
+

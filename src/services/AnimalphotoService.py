@@ -20,3 +20,29 @@ class AnimalphotoService():
       raise Exception(message)
     finally:
       conexion.close()
+
+  @classmethod
+  def getAnimalPhotos(self, animal_id):
+    try:
+      conexion = get_connection()
+      cursor = conexion.cursor()
+      sql = f"""SELECT * FROM animal_photo WHERE animal_id = {animal_id} ORDER BY date_added DESC;"""
+      cursor.execute(sql)
+      rows = cursor.fetchall()
+      if rows:
+        photos = []
+        for row in rows:
+          photos.append({
+            'id': row[0],
+            'animal_id': row[1],
+            'photo': row[2],
+            'date_added': row[3]
+          })
+        return photos
+      else:
+        return False
+    except Exception as ex:
+      message = f"An error occurred while consulting the photos of the animal by id {ex}"
+      raise Exception(message)
+    finally:
+      conexion.close()

@@ -71,6 +71,24 @@ article {
     color: #FFF;
 }
 
+.photo-animal {
+    width: 540px;
+    height: 540px;
+    object-fit: cover;
+    margin: 10px;
+    border: 1px solid black;
+    border-radius: 10px; /* Ajusta este valor para cambiar el radio de las esquinas redondeadas */
+}
+
+.section-photo{
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    flex-wrap: wrap; 
+    height: 100vh;
+}
+  
+
 
 @media only screen and (max-width: 1300px) {
 

@@ -49,7 +49,7 @@ Perfil {{prName}}
         </div>
         <div class="profile-buttons">
             {% if current_user.is_authenticated and ( current_user.get_id() == fund_id) %}
-            <button class="btn btn-personalized btn-upload-photo">Subir foto </button>
+            <button class="btn btn-personalized btn-upload-photo" data-bs-toggle="modal" data-bs-target="#ModalPhoto">Subir foto </button>
             {% endif %}
             <form action="/view/animals/generate_report/id={{fund_id}}" method="POST">
                 <input type="hidden" name="animal_id" value="{{prId}}">
@@ -59,7 +59,7 @@ Perfil {{prName}}
     </div>
     <nav class="navbar-animal-profile">
         <div class="nav">
-            <a class="href-personalized" href="#"><strong>Fotografías</strong></a></strong>
+            <a class="href-personalized" href="{{url_for('view_profile_animal.viewProfileAnimal',fund_id = animal.adoptioncenter_id, animal_id = animal.id, name = animal.name)}}"><strong>Fotografías</strong></a></strong>
         </div>
         <div class="nav">
             <a class="href-personalized"href="{{url_for('view_profile_animal.profilecomments',fund_id = animal.adoptioncenter_id, animal_id = animal.id)}}"><strong>Comunidad</strong></a>
@@ -71,7 +71,37 @@ Perfil {{prName}}
 </section>
 
 {% endblock %}
+{% block modal %}
+<!-- Modal animal upload photo -->
+<div class="modal fade" id="ModalPhoto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  role="dialog" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Subir Foto</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form action="{{url_for('view_profile_animal.viewProfileAnimal',fund_id = animal.adoptioncenter_id, animal_id = animal.id, name = animal.name)}}" method="POST">
+        <div class="modal-body">
+          <div class="input-group mb-3">
+            <input type="file" id="foto_subida" name="foto">
+            <img id="preview" src="" alt="" style="width: 400px; height: 400px;">
+            <input type="hidden" id="hiddenField" name="urlImage"><!--URL IMAGEN-->
+            <label for="foto" class="label-input">Seleccione una foto:</label>
+                
+            <p><strong>Nota: </strong>No podra eliminar esta foto posteriormente <strong>¿Esta seguro</strong> de su acción y desea continuar?.</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-primary">Subir</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
 
 {% block customJS%}
-<script src="/static/js/User_Adoption_Center/profile_adoption_center.js"></script>
+<script src="/static/js/Profile_Animal/upload_animal_photo.js"></script>
 {% endblock %}
