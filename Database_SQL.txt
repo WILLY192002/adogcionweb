@@ -269,7 +269,7 @@ CREATE TABLE animal_breed_comment (
     is_active BOOLEAN NOT NULL
 );
 
-CREATE TABLE `profile_animal_photo` (
+CREATE TABLE `animal_photo` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `animal_id` int NOT NULL,
   `photo` varchar(255) NOT NULL,
@@ -280,4 +280,4 @@ CREATE TABLE `profile_animal_photo` (
 
 ALTER TABLE `animal_breed_comment` ADD FOREIGN KEY (`access_id`) REFERENCES `access` (`id`);
 ALTER TABLE `animal_breed_comment` ADD FOREIGN KEY (`breed_id`) REFERENCES `breed` (`id`);
-ALTER TABLE `profile_animal_photo` ADD FOREIGN KEY (`animal_id`) REFERENCES `animal` (`id`);
+ALTER TABLE `animal_photo` ADD FOREIGN KEY (`animal_id`) REFERENCES `animal` (`id`);

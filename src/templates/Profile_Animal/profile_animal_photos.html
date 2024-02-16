@@ -3,11 +3,13 @@
 {% block visual_content %}
   <section class="container section-photo">
     <div class="row justify-content-center">
+      {%if animalPhotos%}
       {% for photo in animalPhotos %}
         <div class="col-6 ">
           <img src="{{ photo['photo'] }}" alt="Foto del animal" class="photo-animal">
         </div>
       {% endfor %}
+      {%endif%}
     </div>
   </section>
 {% endblock %}

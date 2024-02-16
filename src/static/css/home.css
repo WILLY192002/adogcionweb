@@ -8,7 +8,7 @@ body {
     height: 100%;
     transform: translate(200px);
     width: calc(100% - 200px);
-    border: solid green;
+    /* border: solid green; */
     min-width: 500px;
     min-height: 500px;
     display: grid;
