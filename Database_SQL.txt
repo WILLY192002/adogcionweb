@@ -258,8 +258,6 @@ INSERT INTO `adogcionweb`.`paymentoption` (`name`) VALUES ('Daviplata');
 INSERT INTO `adogcionweb`.`paymentoption` (`name`) VALUES ('Banco a la mano');
 INSERT INTO `adogcionweb`.`paymentoption` (`name`) VALUES ('Giro efecty');
 
---------------- ULTIMAS COSAS AGREGADAS ---------------------------
-
 CREATE TABLE animal_breed_comment (
     id int PRIMARY KEY AUTO_INCREMENT,
     access_id INT NOT NULL,
@@ -281,3 +279,60 @@ CREATE TABLE `animal_photo` (
 ALTER TABLE `animal_breed_comment` ADD FOREIGN KEY (`access_id`) REFERENCES `access` (`id`);
 ALTER TABLE `animal_breed_comment` ADD FOREIGN KEY (`breed_id`) REFERENCES `breed` (`id`);
 ALTER TABLE `animal_photo` ADD FOREIGN KEY (`animal_id`) REFERENCES `animal` (`id`);
+
+<<->>-----------------------------ULTIMOS CAMBIOS----------------------------->>-<<
+
+use adogcionweb;
+
+-- Crear la tabla
+CREATE TABLE levels (
+    id INT AUTO_INCREMENT,
+    level_name VARCHAR(255),
+    score INT,
+    PRIMARY KEY(id)
+);
+
+-- Insertar niveles
+INSERT INTO levels (level_name, score) VALUES ('Payaso', -100);
+INSERT INTO levels (level_name, score) VALUES ('Primer aporte', 10);
+INSERT INTO levels (level_name, score) VALUES ('Cuidador novato', 50);
+INSERT INTO levels (level_name, score) VALUES ('Amigo de los caninos', 100);
+INSERT INTO levels (level_name, score) VALUES ('Entrenador en ascenso', 200);
+INSERT INTO levels (level_name, score) VALUES ('Experto en crianza', 500);
+INSERT INTO levels (level_name, score) VALUES ('Héroe de las fundaciones', 1000);
+INSERT INTO levels (level_name, score) VALUES ('Leyenda canina', 2000);
+
+-- Editar persona
+ALTER TABLE naturalperson
+ADD COLUMN score INT NOT NULL DEFAULT 0;
+
+-- Trigger
+DELIMITER //
+CREATE TRIGGER after_publication_insert
+AFTER INSERT ON publication
+FOR EACH ROW
+BEGIN
+    IF EXISTS (SELECT 1 FROM naturalperson WHERE access_id = NEW.access_id) THEN
+        UPDATE naturalperson
+        SET score = score + 10
+        WHERE access_id = NEW.access_id;
+    END IF;
+END; //
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER after_animal_breed_comment_insert
+AFTER INSERT ON animal_breed_comment
+FOR EACH ROW
+BEGIN
+    IF EXISTS (SELECT 1 FROM naturalperson WHERE access_id = NEW.access_id) THEN
+        UPDATE naturalperson
+        SET score = score + 20
+        WHERE access_id = NEW.access_id;
+    END IF;
+END; //
+DELIMITER ;
+
+
+
+

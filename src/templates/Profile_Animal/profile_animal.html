@@ -84,11 +84,12 @@ Perfil {{prName}}
       <form action="{{url_for('view_profile_animal.viewProfileAnimal',fund_id = animal.adoptioncenter_id, animal_id = animal.id, name = animal.name)}}" method="POST">
         <div class="modal-body">
           <div class="input-group mb-3">
-            <input type="file" id="foto_subida" name="foto">
-            <img id="preview" src="" alt="" style="width: 400px; height: 400px;">
-            <input type="hidden" id="hiddenField" name="urlImage"><!--URL IMAGEN-->
-            <label for="foto" class="label-input">Seleccione una foto:</label>
-                
+            <div class="container">
+              <input type="file" id="foto_subida" name="foto">
+              <img id="preview" src="" alt="">
+              <input type="hidden" id="hiddenField" name="urlImage"><!--URL IMAGEN-->
+              <label for="foto_subida" class="label-input">Seleccione una foto:</label>
+            </div>
             <p><strong>Nota: </strong>No podra eliminar esta foto posteriormente <strong>¿Esta seguro</strong> de su acción y desea continuar?.</p>
           </div>
         </div>
