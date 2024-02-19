@@ -14,7 +14,7 @@ body{
   transform: translate(200px);
   width: calc(100% - 200px); 
   overflow: auto;
-  border: green solid;
+  /* border: green solid; */
 }
 
 

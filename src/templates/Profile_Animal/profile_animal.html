@@ -100,6 +100,34 @@ Perfil {{prName}}
     </div>
   </div>
 </div>
+
+<!-- Modal animal breed comment -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  role="dialog" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Comentar sobre esta raza</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form action="{{url_for('view_profile_animal.profilecomments', fund_id = fund_id, animal_id = prId)}}" method="POST">
+        <div class="modal-body">
+          <div class="input-group mb-3">
+            <!-- <span class="input-group-text">Dieta</span> -->
+            <textarea required class="form-control" name="animal_breed_comment" placeholder="¿Que sabes sobre esta raza de animal?..." rows="7"></textarea>
+            <p><strong>Nota: </strong>Recuerda que esto será visto por cualquier usuario, 
+              es importante que tu comentario <strong>sea verídico</strong> y que no vaya a afectar negativamente a otras 
+              personas que decidan seguirlo.</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-primary">Subir</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 {% endblock %}
 
 {% block customJS%}
