@@ -77,7 +77,7 @@ article {
     object-fit: cover;
     margin: 10px;
     border: 1px solid black;
-    border-radius: 10px; /* Ajusta este valor para cambiar el radio de las esquinas redondeadas */
+    border-radius: 10px; 
 }
 
 .section-photo{
@@ -87,7 +87,24 @@ article {
     flex-wrap: wrap; 
     height: 100vh;
 }
-  
+
+#foto_subida {
+    display: none;
+}
+
+#preview {
+    display: none;
+    width: 400px;
+    height: 400px;
+}
+
+
+.container {
+    border: 2px dashed #1cb0ad;
+    text-align: center;
+    padding: 20px;
+}
+
 
 
 @media only screen and (max-width: 1300px) {
@@ -96,6 +113,15 @@ article {
         width: 300px;
         height: 300px;
     }
+
+    .photo-animal {
+        width: 350px;
+        height: 350px;
+        object-fit: cover;
+        margin: 8px;
+        border: 0.8px solid black;
+        border-radius: 8px; 
+    }
 }
 
 @media only screen and (max-width: 1139px) {
@@ -103,6 +129,15 @@ article {
     .profile-image>img {
         width: 250px;
         height: 250px;
+    }
+
+    .photo-animal {
+        width: 250px;
+        height: 250px;
+        object-fit: cover;
+        margin: 5px;
+        border: 0.5px solid black;
+        border-radius: 5px; 
     }
 }
 
@@ -114,6 +149,15 @@ article {
     .profile-image>img {
         width: 200px;
         height: 200px;
+    }
+
+    .photo-animal {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        margin: 3px;
+        border: 0.3px solid black;
+        border-radius: 3px; 
     }
 }
 
