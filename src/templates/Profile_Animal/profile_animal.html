@@ -48,7 +48,7 @@ Perfil {{prName}}
             </div>
         </div>
         <div class="profile-buttons">
-            {% if current_user.is_authenticated and ( current_user.get_id() == fund_id) %}
+            {% if current_user.is_authenticated and ( current_user.access_id == ownerinformation.access_id) %}
             <button class="btn btn-personalized btn-upload-photo" data-bs-toggle="modal" data-bs-target="#ModalPhoto">Subir foto </button>
             {% endif %}
             <form action="/view/animals/generate_report/id={{fund_id}}" method="POST">

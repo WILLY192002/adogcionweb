@@ -47,7 +47,7 @@ Perfil
           <div class="tituloSec">
             <label>INFORMACION DEL ALBERGUE</label>
           </div>
-          {% if current_user.is_authenticated and (current_user.id == user_information.id) %}
+          {% if current_user.is_authenticated and (current_user.access_id == user_information.access_id) %}
           <div class="btns">
             <button id="btn_guardar" class="btn btn-personalized" style="display: none;">Guardar</button>
             <button id="btn_edit" class="btn" onclick="toggleStyles(event)"><i id="icon_cog"
@@ -256,7 +256,7 @@ Perfil
         {%if publications%}
         {%for publication in publications%}
         <div id="publicacion_{{publication.id}}" class="publicacion">
-          {% if current_user.is_authenticated and (current_user.id == user_information.id) and publication.topic_id != topic_adopted_id%}
+          {% if current_user.is_authenticated and (current_user.access_id == user_information.access_id) and publication.topic_id != topic_adopted_id%}
           <div id="post-1" style="align-items: end; display: flex; justify-content: end;">
             <div class="dropdown">
               <i class='bx bx-dots-vertical' id="icon_option_publication"></i>

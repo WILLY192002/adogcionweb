@@ -15,6 +15,7 @@ from src.services.AnimalbreedcommentService import AnimalbreedcommentService
 from src.services.ImageService import ImageService
 from src.models.Animalphoto import Animalphoto
 from src.services.AnimalphotoService import AnimalphotoService
+from src.services.AdoptioncenterService import AdoptioncenterService
 
 
 
@@ -26,6 +27,7 @@ main = Blueprint('view_profile_animal',__name__)
 
 @main.route('/view/profile=<fund_id>/animal=<animal_id>/<name>', methods = ['GET', 'POST'])
 def viewProfileAnimal(fund_id, animal_id, name):
+    ownerinformation = AdoptioncenterService.getAdoptionCenterById(fund_id)
     profile_name = name
     # animal info
     animal_info = AnimalService.getAnimalById(animal_id, fund_id)
@@ -59,7 +61,8 @@ def viewProfileAnimal(fund_id, animal_id, name):
                             fund_id = fund_id,
                             animal = animal_info,
                             breedAndSpecie = breedAndSpecie,
-                            animalPhotos = animal_photos
+                            animalPhotos = animal_photos,
+                            ownerinformation = ownerinformation
                             )
 
 @main.route('/view/profile=<fund_id>/animal=<animal_id>/comments', methods = ['GET', 'POST'])

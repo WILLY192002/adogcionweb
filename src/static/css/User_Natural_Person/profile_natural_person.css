@@ -252,6 +252,6 @@ body{
   font-size: 25px;
 }
 
-.delete-button:hover, .edit-button:hover{
+.delete-button:hover, .edit-button:hover, .report-button:hover{
   background-color: #138e8e;
 }

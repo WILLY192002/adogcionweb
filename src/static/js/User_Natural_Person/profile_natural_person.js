@@ -104,3 +104,23 @@ $(document).ready(function(){
       });
   });
 });
+
+//REPORTAR PUBLICACIONES
+$(document).ready(function(){
+  $(".report-button").click(function(){
+      var post_id = $(this).data("id");
+
+      $.ajax({
+          url: url_reportPublication,
+          type: "POST",
+          data: { id: post_id },
+          success: function(response) {
+              if(response.status === 'success') {
+                alert("Gracias por tu reporte, lo revisaremos.");
+              } else {
+                alert("Hubo un error al reportar la publicación.");
+              }
+          }
+      });
+  });
+});

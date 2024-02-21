@@ -50,7 +50,7 @@ Perfil
           <h4>Sobre mi</h4>
         </div>
 
-        {% if current_user.is_authenticated and (current_user.id == user_information.id) %}
+        {% if current_user.is_authenticated and (current_user.access_id == user_information.access_id) %}
         <div class="btns_edit_save">
           <button id="btn_save" class="btn btn-personalized" style="display: none;">Guardar</button>
           <button id="btn_edit" class="btn" onclick="toggleStyles(event)"><i id="icon_cog"
@@ -74,7 +74,7 @@ Perfil
     {%if publications%}
     {%for publication in publications%}
     <div id="publication_{{publication.id}}" class="type_publication">
-      {% if current_user.is_authenticated and (current_user.id == user_information.id)%}
+      {% if current_user.is_authenticated and (current_user.access_id == user_information.access_id)%}
       <div id="post-1" style="align-items: end; display: flex; justify-content: end;">
         <div class="dropdown">
           <i class='bx bx-dots-vertical' id="icon_option_publication"></i>
@@ -85,7 +85,15 @@ Perfil
           </div>
         </div>
       </div>
-
+      {%else%}
+      <div class="options_section" id="post-1" style="align-items: end; display: flex; justify-content: end;">
+        <div class="dropdown">
+          <i class='bx bx-dots-vertical' id="icon_option_publication"></i>
+          <div class="dropdown-content">
+            <a href="#" class="report-button" data-id="{{publication.id}}" id="">Reportar</a>
+          </div>
+        </div>
+      </div>
       {%endif%}
       <div class="miniture_publication">
         <img src="{{publication.photo}}" alt="" border="0" onerror="this.style.display='none'" />
@@ -109,5 +117,6 @@ Perfil
 <script src="/static/js/User_Natural_Person/profile_natural_person.js"></script>
 <script type="text/javascript">
   var url_delete_publication = "{{ url_for('publication_natural_person.deletePublication') }}";
+  var url_reportPublication = "{{ url_for('publication_adoption_center.reportPublication') }}";
 </script>
 {% endblock %}
