@@ -266,7 +266,15 @@ Perfil
               </div>
             </div>
           </div>
-
+          {%elif actuallySeccion != "Adoptar"%}
+          <div class="options_section" id="post-1" style="align-items: end; display: flex; justify-content: end;">
+            <div class="dropdown">
+              <i class='bx bx-dots-vertical' id="icon_option_publication"></i>
+              <div class="dropdown-content">
+                <a href="#" class="report-button" data-id="{{publication.id}}" id="">Reportar</a>
+              </div>
+            </div>
+          </div>
           {%endif%}
           <div class="miniaturaPublic">
             <img src="{{publication.photo}}" alt="" border="0" onerror="this.style.display='none'" />
@@ -309,6 +317,7 @@ Perfil
 <script src="/static/js/User_Adoption_Center/profile_adoption_center.js"></script>
 <script type="text/javascript">
   var url_delete_publication = "{{ url_for('publication_adoption_center.deletePublication') }}";
+  var url_reportPublication = "{{ url_for('publication_adoption_center.reportPublication') }}";
 </script>
 
 {% endblock %}

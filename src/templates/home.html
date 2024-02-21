@@ -104,6 +104,14 @@
           </a>
         </div>
         {%endif%}
+        <div class="options_section" id="post-1" style="align-items: end; display: flex; justify-content: end;">
+          <div class="dropdown">
+            <i class='bx bx-dots-vertical' id="icon_option_publication"></i>
+            <div class="dropdown-content">
+              <a href="#" class="report-button" data-id="{{publication.id}}" id="">Reportar</a>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="cuerpoHistoria">
         <div class="contenedorFotoPublicacion">
@@ -133,4 +141,7 @@
 
 {% block customJS%}
 <script src="/static/js/home.js"></script>
+<script type="text/javascript">
+  var url_reportPublication = "{{ url_for('publication_adoption_center.reportPublication') }}";
+</script>
 {% endblock %}

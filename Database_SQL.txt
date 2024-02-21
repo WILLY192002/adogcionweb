@@ -62,7 +62,8 @@ CREATE TABLE `naturalperson`(
 `access_id` int NOT NULL,
 `photo` VARCHAR(255),
 `name` VARCHAR(100) NOT NULL,
-`description` TEXT);
+`description` TEXT,
+`score` INT NOT NULL DEFAULT 0);
 
 
 CREATE TABLE `animal` (
@@ -135,7 +136,8 @@ CREATE TABLE `publication` (
   `title` varchar(100) NOT NULL,
   `description` TEXT NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `is_activate` boolean NOT NULL
+  `is_activate` boolean NOT NULL,
+  `report` INT NOT NULL DEFAULT 0
 );
 
 CREATE TABLE `topic` (
@@ -147,6 +149,22 @@ CREATE TABLE `topic` (
 CREATE TABLE `category` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(50) NOT NULL
+);
+
+CREATE TABLE animal_breed_comment (
+    id int PRIMARY KEY AUTO_INCREMENT,
+    access_id INT NOT NULL,
+    breed_id INT NOT NULL,
+    description TEXT NOT NULL,
+    date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    is_active BOOLEAN NOT NULL
+);
+
+CREATE TABLE `animal_photo` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `animal_id` int NOT NULL,
+  `photo` varchar(255) NOT NULL,
+  `date_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 ALTER TABLE `access` ADD FOREIGN KEY (`user_type_id`) REFERENCES `usertype` (`id`);
@@ -186,6 +204,12 @@ ALTER TABLE `publication` ADD FOREIGN KEY (`access_id`) REFERENCES `access` (`id
 ALTER TABLE `publication` ADD FOREIGN KEY (`topic_id`) REFERENCES `topic` (`id`);
 
 ALTER TABLE `topic` ADD FOREIGN KEY (`category_id`) REFERENCES `category` (`id`);
+
+ALTER TABLE `animal_breed_comment` ADD FOREIGN KEY (`access_id`) REFERENCES `access` (`id`);
+
+ALTER TABLE `animal_breed_comment` ADD FOREIGN KEY (`breed_id`) REFERENCES `breed` (`id`);
+
+ALTER TABLE `animal_photo` ADD FOREIGN KEY (`animal_id`) REFERENCES `animal` (`id`);
 
 INSERT INTO adogcionweb.usertype (name) VALUES ('UT-ADOPTION_CENTER');
 INSERT INTO adogcionweb.usertype (name) VALUES ('UT-NATURAL_PERSON');
@@ -258,27 +282,6 @@ INSERT INTO `adogcionweb`.`paymentoption` (`name`) VALUES ('Daviplata');
 INSERT INTO `adogcionweb`.`paymentoption` (`name`) VALUES ('Banco a la mano');
 INSERT INTO `adogcionweb`.`paymentoption` (`name`) VALUES ('Giro efecty');
 
-CREATE TABLE animal_breed_comment (
-    id int PRIMARY KEY AUTO_INCREMENT,
-    access_id INT NOT NULL,
-    breed_id INT NOT NULL,
-    description TEXT NOT NULL,
-    date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    is_active BOOLEAN NOT NULL
-);
-
-CREATE TABLE `animal_photo` (
-  `id` int PRIMARY KEY AUTO_INCREMENT,
-  `animal_id` int NOT NULL,
-  `photo` varchar(255) NOT NULL,
-  `date_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
-
-
-
-ALTER TABLE `animal_breed_comment` ADD FOREIGN KEY (`access_id`) REFERENCES `access` (`id`);
-ALTER TABLE `animal_breed_comment` ADD FOREIGN KEY (`breed_id`) REFERENCES `breed` (`id`);
-ALTER TABLE `animal_photo` ADD FOREIGN KEY (`animal_id`) REFERENCES `animal` (`id`);
 
 <<->>-----------------------------ULTIMOS CAMBIOS----------------------------->>-<<
 
@@ -286,25 +289,21 @@ use adogcionweb;
 
 -- Crear la tabla
 CREATE TABLE levels (
-    id INT AUTO_INCREMENT,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     level_name VARCHAR(255),
-    score INT,
-    PRIMARY KEY(id)
+    score INT
 );
 
 -- Insertar niveles
-INSERT INTO levels (level_name, score) VALUES ('Payaso', -100);
-INSERT INTO levels (level_name, score) VALUES ('Primer aporte', 10);
-INSERT INTO levels (level_name, score) VALUES ('Cuidador novato', 50);
-INSERT INTO levels (level_name, score) VALUES ('Amigo de los caninos', 100);
-INSERT INTO levels (level_name, score) VALUES ('Entrenador en ascenso', 200);
-INSERT INTO levels (level_name, score) VALUES ('Experto en crianza', 500);
-INSERT INTO levels (level_name, score) VALUES ('Héroe de las fundaciones', 1000);
-INSERT INTO levels (level_name, score) VALUES ('Leyenda canina', 2000);
+INSERT INTO adogcionweb.levels (level_name, score) VALUES ('Payaso', -100);
+INSERT INTO adogcionweb.levels (level_name, score) VALUES ('Primer aporte', 10);
+INSERT INTO adogcionweb.levels (level_name, score) VALUES ('Cuidador novato', 50);
+INSERT INTO adogcionweb.levels (level_name, score) VALUES ('Amigo de los caninos', 100);
+INSERT INTO adogcionweb.levels (level_name, score) VALUES ('Entrenador en ascenso', 200);
+INSERT INTO adogcionweb.levels (level_name, score) VALUES ('Experto en crianza', 500);
+INSERT INTO adogcionweb.levels (level_name, score) VALUES ('Héroe de las fundaciones', 1000);
+INSERT INTO adogcionweb.levels (level_name, score) VALUES ('Leyenda canina', 2000);
 
--- Editar persona
-ALTER TABLE naturalperson
-ADD COLUMN score INT NOT NULL DEFAULT 0;
 
 -- Trigger
 DELIMITER //
@@ -334,5 +333,16 @@ END; //
 DELIMITER ;
 
 
+<<->>-----------------------------ULTIMOS CAMBIOS WILLIAM ----------------------------->>-<<
+
+CREATE TABLE users_levels (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    naturalperson_id INT NOT NULL,
+    level_id INT NOT NULL,
+    date_achieved timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
 
 
+ALTER TABLE `users_levels` ADD FOREIGN KEY (`naturalperson_id`) REFERENCES `naturalperson` (`id`);
+
+ALTER TABLE `users_levels` ADD FOREIGN KEY (`level_id`) REFERENCES `levels` (`id`);

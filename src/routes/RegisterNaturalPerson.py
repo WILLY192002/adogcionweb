@@ -36,8 +36,8 @@ def registerNaturalPerson():
     person_identification_type = request.form.get('identification_type')
     person_identification_number = request.form['identification_number']
     person_contact = request.form['contact'] if request.form['contact'] != '' else None
-    person_city = request.form.get('person_city').capitalize() if request.form.get('person_city') != '' else None
-    person_department = request.form.get('person_department').capitalize() if request.form.get('person_department') != '' else None
+    person_city = request.form.get('person_city') if request.form.get('person_city') != '' else None
+    person_department = request.form.get('person_department') if request.form.get('person_department') != '' else None
     
     #NATURAL PERSON INFORMATION
     naturalPerson_id = None

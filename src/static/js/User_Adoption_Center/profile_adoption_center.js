@@ -150,7 +150,6 @@ for (var i = 0; i < publicaciones.length; i++) {
 $(document).ready(function(){
   $(".delete-button").click(function(){
       var post_id = $(this).data("id");
-
       $.ajax({
           url: url_delete_publication,
           type: "POST",
@@ -162,6 +161,26 @@ $(document).ready(function(){
               });
               } else {
                   alert("Hubo un error al eliminar la publicación.");
+              }
+          }
+      });
+  });
+});
+
+//REPORTAR PUBLICACIONES
+$(document).ready(function(){
+  $(".report-button").click(function(){
+      var post_id = $(this).data("id");
+
+      $.ajax({
+          url: url_reportPublication,
+          type: "POST",
+          data: { id: post_id },
+          success: function(response) {
+              if(response.status === 'success') {
+                alert("Gracias por tu reporte, lo revisaremos.");
+              } else {
+                alert("Hubo un error al reportar la publicación.");
               }
           }
       });

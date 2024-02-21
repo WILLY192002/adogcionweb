@@ -49,6 +49,11 @@ def deletePublication():
   post_id = request.form.get('id')
   return PublicationService.deletePublication(post_id)
 
+@main.route('/report_publication', methods = ['POST'])
+def reportPublication():
+  post_id = request.form.get('id')
+  return PublicationService.reportPublication(post_id)
+
 @main.route('/adoption_center/publication/edit=<string:publication_id>', methods = ['GET','POST'])
 def editPublication(publication_id):
   if request.method == 'POST':
