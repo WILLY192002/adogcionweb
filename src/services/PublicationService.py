@@ -195,7 +195,7 @@ class PublicationService():
       return jsonify(status="success"), 200
     except Exception as ex:
       # message = f"An error occurred while deleting publications by topic {ex}"
-      return jsonify(status="error", message="An error occurred while reporting publications by topic"), 400
+      return jsonify(status="error", message="An error occurred while reporting publications"), 400
       raise Exception(message)
     finally:
       conexion.close()

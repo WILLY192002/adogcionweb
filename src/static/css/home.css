@@ -163,7 +163,7 @@ body {
     position: relative;
     display: inline-block;
     cursor: pointer;
-    border: solid purple;
+    /* border: solid purple; */
 }
 
 .dropdown-content {

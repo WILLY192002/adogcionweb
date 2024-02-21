@@ -1,5 +1,6 @@
 from src.database.mysql_db import get_connection
 from src.models.AnimalBreedComment import AnimalBreedComment
+from flask import jsonify
 class AnimalbreedcommentService():
   @classmethod
   def addNewAnimalBreedComment(self, AnimalBreedComment):
@@ -70,6 +71,23 @@ class AnimalbreedcommentService():
         return False
     except Exception as ex:
       message = f"An error occurred while consulting all animal breed comment by animal breed{ex}"
+      raise Exception(message)
+    finally:
+      conexion.close()
+
+
+  @classmethod
+  def reportComment(self, comment_id):
+    try:
+      conexion = get_connection()
+      cursor = conexion.cursor()
+      sql = f"UPDATE animal_breed_comment SET report = report + 1 WHERE id = {comment_id};"
+      cursor.execute(sql)
+      conexion.commit()
+      return jsonify(status="success"), 200
+    except Exception as ex:
+      # message = f"An error occurred while deleting publications by topic {ex}"
+      return jsonify(status="error", message="An error occurred while reporting comment from animal profile"), 400
       raise Exception(message)
     finally:
       conexion.close()

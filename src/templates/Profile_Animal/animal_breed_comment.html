@@ -14,31 +14,46 @@
 <div class="container-register-message">
   <div class="register-option">
     <p>Para agregar un comentario en esta seccion de razas, debes estar registrado. <a
-        href="{{url_for('home_adoption_center.homeAdoptionCenter')}}">Registrate</a> o <a href="{{url_for('login_user.loginUser')}}">Inicia sesion</a></p>
+        href="{{url_for('home_adoption_center.homeAdoptionCenter')}}">Registrate</a> o <a
+        href="{{url_for('login_user.loginUser')}}">Inicia sesion</a></p>
   </div>
 </div>
 {%endif%}
 
 <div class="container-animal-comments">
   {%if user_comments%}
-    {%for user_comment in user_comments%}
-      <div class="comment-animal-breed-publication">
-        <div class="comment-owner-photo">
-          <img src="{{user_comment.owner_photo}}" alt="">
-        </div>
-        <div class="container-name-description">
-          <div class="comment-owner-name">
-            <h4>{{user_comment.owner_name}}</h4>
+  {%for user_comment in user_comments%}
+  <div class="comment-animal-breed-publication">
+    
+      <div class="options_section" id="post-1" style="align-items: end; display: flex; justify-content: end;">
+        <div class="dropdown">
+          <i class='bx bx-dots-vertical' id="icon_option_publication"></i>
+          <div class="dropdown-content">
+            <a href="#" class="report-button" data-id="{{user_comment.id}}" id="">Reportar</a>
           </div>
-          <div class="comment-description">
-            <p>{{user_comment.description}}</p>
-          </div>
-
         </div>
       </div>
-    {%endfor%}
+    
+    
+    
+    <div class="publication_information">
+      <div class="comment-owner-photo">
+        <img src="{{user_comment.owner_photo}}" alt="">
+      </div>
+      <div class="container-name-description">
+        <div class="comment-owner-name">
+          <h4>{{user_comment.owner_name}}</h4>
+        </div>
+        <div class="comment-description">
+          <p>{{user_comment.description}}</p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+  {%endfor%}
   {%endif%}
 </div>
 
 {%endblock%}
-

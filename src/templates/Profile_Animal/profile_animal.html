@@ -133,4 +133,7 @@ Perfil {{prName}}
 
 {% block customJS%}
 <script src="/static/js/Profile_Animal/upload_animal_photo.js"></script>
+<script type="text/javascript">
+  var url_reportBreedComment = "{{ url_for('view_profile_animal.reportBreedComment') }}";
+</script>
 {% endblock %}

@@ -94,4 +94,7 @@ def profilecomments(fund_id, animal_id):
                             breedAndSpecie = breedAndSpecie,
                             user_comments = user_comments)
     
-
+@main.route('/report_breed_comment', methods = ['POST'])
+def reportBreedComment():
+  post_id = request.form.get('id')
+  return AnimalbreedcommentService.reportComment(post_id)

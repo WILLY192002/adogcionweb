@@ -157,7 +157,8 @@ CREATE TABLE animal_breed_comment (
     breed_id INT NOT NULL,
     description TEXT NOT NULL,
     date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    is_active BOOLEAN NOT NULL
+    is_active BOOLEAN NOT NULL,
+    report INT NOT NULL DEFAULT 0
 );
 
 CREATE TABLE `animal_photo` (
