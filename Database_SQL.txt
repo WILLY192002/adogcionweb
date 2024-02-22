@@ -8,7 +8,7 @@ CREATE TABLE `access` (
   `email` varchar(100) UNIQUE NOT NULL ,
   `password` varchar(255) NOT NULL,
   `user_type_id` int NOT NULL,
-  `is_activate` boolean NOT NULL
+  `status` boolean NOT NULL
 );
 
 CREATE TABLE `usertype` (
@@ -136,7 +136,7 @@ CREATE TABLE `publication` (
   `title` varchar(100) NOT NULL,
   `description` TEXT NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `is_activate` boolean NOT NULL,
+  `status` boolean NOT NULL,
   `report` INT NOT NULL DEFAULT 0
 );
 
@@ -157,7 +157,7 @@ CREATE TABLE animal_breed_comment (
     breed_id INT NOT NULL,
     description TEXT NOT NULL,
     date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    is_active BOOLEAN NOT NULL,
+    status BOOLEAN NOT NULL,
     report INT NOT NULL DEFAULT 0
 );
 
@@ -166,6 +166,20 @@ CREATE TABLE `animal_photo` (
   `animal_id` int NOT NULL,
   `photo` varchar(255) NOT NULL,
   `date_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE levels (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    level_name VARCHAR(255),
+    score INT
+);
+
+CREATE TABLE users_levels (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    naturalperson_id INT NOT NULL,
+    level_id INT NOT NULL,
+    date_achieved timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 ALTER TABLE `access` ADD FOREIGN KEY (`user_type_id`) REFERENCES `usertype` (`id`);
@@ -211,6 +225,10 @@ ALTER TABLE `animal_breed_comment` ADD FOREIGN KEY (`access_id`) REFERENCES `acc
 ALTER TABLE `animal_breed_comment` ADD FOREIGN KEY (`breed_id`) REFERENCES `breed` (`id`);
 
 ALTER TABLE `animal_photo` ADD FOREIGN KEY (`animal_id`) REFERENCES `animal` (`id`);
+
+ALTER TABLE `users_levels` ADD FOREIGN KEY (`naturalperson_id`) REFERENCES `naturalperson` (`id`);
+
+ALTER TABLE `users_levels` ADD FOREIGN KEY (`level_id`) REFERENCES `levels` (`id`);
 
 INSERT INTO adogcionweb.usertype (name) VALUES ('UT-ADOPTION_CENTER');
 INSERT INTO adogcionweb.usertype (name) VALUES ('UT-NATURAL_PERSON');
@@ -283,17 +301,6 @@ INSERT INTO `adogcionweb`.`paymentoption` (`name`) VALUES ('Daviplata');
 INSERT INTO `adogcionweb`.`paymentoption` (`name`) VALUES ('Banco a la mano');
 INSERT INTO `adogcionweb`.`paymentoption` (`name`) VALUES ('Giro efecty');
 
-
-use adogcionweb;
-
--- Crear la tabla
-CREATE TABLE levels (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    level_name VARCHAR(255),
-    score INT
-);
-
--- Insertar niveles
 INSERT INTO adogcionweb.levels (level_name, score) VALUES ('Payaso', -100);
 INSERT INTO adogcionweb.levels (level_name, score) VALUES ('Primer aporte', 10);
 INSERT INTO adogcionweb.levels (level_name, score) VALUES ('Cuidador novato', 50);
@@ -332,24 +339,6 @@ END; //
 DELIMITER ;
 
 
-CREATE TABLE users_levels (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    naturalperson_id INT NOT NULL,
-    level_id INT NOT NULL,
-    date_achieved timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
-
-
-ALTER TABLE `users_levels` ADD FOREIGN KEY (`naturalperson_id`) REFERENCES `naturalperson` (`id`);
-
-ALTER TABLE `users_levels` ADD FOREIGN KEY (`level_id`) REFERENCES `levels` (`id`);
-
-
-
-<<->>-----------------------------ULTIMOS CAMBIOS----------------------------->>-<<
-
-use adogcionweb;
-
 -- COMENTARIOS RAZA
 -- Restar score con cada reporte
 DELIMITER //
@@ -373,7 +362,7 @@ BEGIN
    SELECT report INTO report_count FROM animal_breed_comment WHERE id = comment_id;
    IF report_count = 100 THEN
       UPDATE animal_breed_comment
-      SET is_active = 0
+      SET status = 0
       WHERE id = comment_id;
    END IF;
 END;//
@@ -404,7 +393,7 @@ BEGIN
    SELECT report INTO report_count FROM publication WHERE id = comment_id;
    IF report_count = 100 THEN
       UPDATE publication
-      SET is_activate = 0
+      SET status = 0
       WHERE id = comment_id;
    END IF;
 END;//

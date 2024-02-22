@@ -28,12 +28,12 @@ class AnimalbreedcommentService():
     try:
       conexion = get_connection()
       cursor = conexion.cursor()
-      sql = f""" SELECT abc.id, abc.access_id, abc.breed_id, abc.description, abc.date, abc.is_active, 
+      sql = f""" SELECT abc.id, abc.access_id, abc.breed_id, abc.description, abc.date, abc.status, 
       COALESCE(np.name, ac.name) AS name, COALESCE(np.photo, ac.photo) AS photo
       FROM animal_breed_comment abc
       LEFT JOIN naturalperson np ON abc.access_id = np.access_id 
       LEFT JOIN adoptioncenter ac ON abc.access_id = ac.access_id 
-      WHERE is_active = 1 ORDER BY date DESC;"""
+      WHERE status = 1 ORDER BY date DESC;"""
       cursor.execute(sql)
       row = cursor.fetchall()
       out_comments = []
@@ -54,12 +54,12 @@ class AnimalbreedcommentService():
     try:
       conexion = get_connection()
       cursor = conexion.cursor()
-      sql = f""" SELECT abc.id, abc.access_id, abc.breed_id, abc.description, abc.date, abc.is_active, 
+      sql = f""" SELECT abc.id, abc.access_id, abc.breed_id, abc.description, abc.date, abc.status, 
       COALESCE(np.name, ac.name) AS name, COALESCE(np.photo, ac.photo) AS photo
       FROM animal_breed_comment abc
       LEFT JOIN naturalperson np ON abc.access_id = np.access_id 
       LEFT JOIN adoptioncenter ac ON abc.access_id = ac.access_id 
-      WHERE is_active = 1 AND breed_id = {breed_id} ORDER BY date DESC;"""
+      WHERE status = 1 AND breed_id = {breed_id} ORDER BY date DESC;"""
       cursor.execute(sql)
       row = cursor.fetchall()
       out_comments = []

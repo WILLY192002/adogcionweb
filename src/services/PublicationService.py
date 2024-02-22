@@ -32,10 +32,10 @@ class PublicationService():
     try:
       conexion = get_connection()
       cursor = conexion.cursor()
-      sql = """SELECT p.id, p.topic_id, p.access_id, p.photo, p.title, p.description, p.date, p.is_activate, 
+      sql = """SELECT p.id, p.topic_id, p.access_id, p.photo, p.title, p.description, p.date, p.status, 
       ac.photo, ac.name, ac.id FROM publication p
       JOIN adoptioncenter ac ON p.access_id = ac.access_id
-      WHERE p.is_activate = 1"""
+      WHERE p.status = 1"""
       if filter_search != None:
         sql += f" AND ac.name LIKE '%{filter_search}%'"
       if filter_topic != None:
@@ -66,9 +66,9 @@ class PublicationService():
     try:
       conexion = get_connection()
       cursor = conexion.cursor()
-      sql = """SELECT p.id, p.topic_id, p.access_id, p.photo, p.title, p.description, p.date, p.is_activate, np.photo, np.name, np.id FROM publication p 
+      sql = """SELECT p.id, p.topic_id, p.access_id, p.photo, p.title, p.description, p.date, p.status, np.photo, np.name, np.id FROM publication p 
       JOIN naturalperson np ON p.access_id = np.access_id 
-      WHERE p.is_activate = 1 ORDER BY date DESC;"""
+      WHERE p.status = 1 ORDER BY date DESC;"""
       cursor.execute(sql)
       row = cursor.fetchall()
       out_publication = []
@@ -89,7 +89,7 @@ class PublicationService():
     try:
       conexion = get_connection()
       cursor = conexion.cursor()
-      sql = f"SELECT p.id, p.topic_id, p.access_id, p.photo, p.title, p.description, p.date, p.is_activate FROM publication p WHERE access_id = {access_id} AND is_activate = 1 ORDER BY date DESC;"
+      sql = f"SELECT p.id, p.topic_id, p.access_id, p.photo, p.title, p.description, p.date, p.status FROM publication p WHERE access_id = {access_id} AND status = 1 ORDER BY date DESC;"
       cursor.execute(sql)
       row = cursor.fetchall()
       out_publication = []
@@ -110,7 +110,7 @@ class PublicationService():
     try:
       conexion = get_connection()
       cursor = conexion.cursor()
-      sql = f"SELECT p.id, p.topic_id, p.access_id, p.photo, p.title, p.description, p.date, p.is_activate FROM publication AS p JOIN topic ON p.topic_id = topic.id WHERE topic.category_id = {category_id}"
+      sql = f"SELECT p.id, p.topic_id, p.access_id, p.photo, p.title, p.description, p.date, p.status FROM publication AS p JOIN topic ON p.topic_id = topic.id WHERE topic.category_id = {category_id}"
       if access_id != None:
         sql += f" AND p.access_id = {access_id}"
       cursor.execute(sql)
@@ -133,7 +133,7 @@ class PublicationService():
     try:
       conexion = get_connection()
       cursor = conexion.cursor()
-      sql = f"SELECT p.id, p.topic_id, p.access_id, p.photo, p.title, p.description, p.date, p.is_activate FROM publication p WHERE access_id = {access_id} AND topic_id = {topic_id} AND is_activate = 1 ORDER BY date DESC;"
+      sql = f"SELECT p.id, p.topic_id, p.access_id, p.photo, p.title, p.description, p.date, p.status FROM publication p WHERE access_id = {access_id} AND topic_id = {topic_id} AND status = 1 ORDER BY date DESC;"
       cursor.execute(sql)
       row = cursor.fetchall()
       out_publication = []
@@ -154,7 +154,7 @@ class PublicationService():
     try:
       conexion = get_connection()
       cursor = conexion.cursor()
-      sql = f"SELECT p.id, p.topic_id, p.access_id, p.photo, p.title, p.description, p.date, p.is_activate FROM publication p WHERE id = {publication_id};"
+      sql = f"SELECT p.id, p.topic_id, p.access_id, p.photo, p.title, p.description, p.date, p.status FROM publication p WHERE id = {publication_id};"
       cursor.execute(sql)
       row = cursor.fetchone()
       if row != None :

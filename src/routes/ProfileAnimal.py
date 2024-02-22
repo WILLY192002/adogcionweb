@@ -74,6 +74,7 @@ def profilecomments(fund_id, animal_id):
         AnimalbreedcommentService.addNewAnimalBreedComment(new_comment)
         return redirect(request.referrer)
     else:
+        ownerinformation = AdoptioncenterService.getAdoptionCenterById(fund_id)
         # animal info
         animal_info = AnimalService.getAnimalById(animal_id, fund_id)
         breedAndSpecie = BreedService.getBreedsAndSpecieName(animal_info.breed_id)
@@ -95,7 +96,8 @@ def profilecomments(fund_id, animal_id):
                             fund_id = fund_id,
                             animal = animal_info,
                             breedAndSpecie = breedAndSpecie,
-                            user_comments = user_comments)
+                            user_comments = user_comments,
+                            ownerinformation = AdoptioncenterService.getAdoptionCenterById(fund_id))
     
 @main.route('/report_breed_comment', methods = ['POST'])
 def reportBreedComment():

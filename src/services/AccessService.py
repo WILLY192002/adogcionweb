@@ -34,7 +34,7 @@ class AccessService():
     try:
       conexion = get_connection()
       cursor = conexion.cursor()
-      sql = f"SELECT id, email, password, user_type_id, is_activate FROM access WHERE email = '{email}'"
+      sql = f"SELECT id, email, password, user_type_id, status FROM access WHERE email = '{email}'"
       cursor.execute(sql)
       row = cursor.fetchone()
       if row != None:
@@ -52,7 +52,7 @@ class AccessService():
     try:
       conexion = get_connection()
       cursor = conexion.cursor()
-      sql = f"SELECT id, email, password, user_type_id, is_activate FROM access WHERE id = {id}"
+      sql = f"SELECT id, email, password, user_type_id, status FROM access WHERE id = {id}"
       cursor.execute(sql)
       row = cursor.fetchone()
       if row != None:
@@ -70,7 +70,7 @@ class AccessService():
     try:
       conexion = get_connection()
       cursor = conexion.cursor()
-      sql = f"SELECT id, email, password, user_type_id, is_activate FROM access WHERE email = '{access.email}'"
+      sql = f"SELECT id, email, password, user_type_id, status FROM access WHERE email = '{access.email}'"
       cursor.execute(sql)
       row = cursor.fetchone()
       if row != None:
@@ -78,7 +78,7 @@ class AccessService():
           access.id = row[0]
           access.password = True
           access.user_type_id = row[3]
-          access.is_activate = row[4]
+          access.status = row[4]
           return access
         else:
           return False

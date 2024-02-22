@@ -24,7 +24,7 @@ def registerAdoptionCenter():
     access_email = request.form['access_email'].lower()
     access_password = request.form['access_password']
     access_user_type_id = UsertypeService.getUserTypeByName('UT-ADOPTION_CENTER').id
-    access_is_activate = True
+    access_status = True
     
     
     #PERSON INFORMATION
@@ -54,7 +54,7 @@ def registerAdoptionCenter():
     adoptionCenter_city = request.form.get('adoptionCenter_city').capitalize() if request.form.get('adoptionCenter_city') != None else None
     adoptionCenter_department = request.form.get('adoptionCenter_department').capitalize() if request.form.get('adoptionCenter_department') != None else None
 
-    new_access = Access(access_id, access_email, access_password, access_user_type_id, access_is_activate)
+    new_access = Access(access_id, access_email, access_password, access_user_type_id, access_status)
     new_person = Person(person_id, person_first_name, person_middle_name, person_first_surname, 
                         person_second_lastname,person_identification_type, person_identification_number, person_contact,
                         person_city,person_department)

@@ -40,12 +40,12 @@ def loginUser():
     email = request.form['email']
     password = request.form['password']
     user_type_id = None
-    is_activate = None
-    new_access = Access(id, email, password, user_type_id, is_activate)
+    status = None
+    new_access = Access(id, email, password, user_type_id, status)
 
     #Verify user
     if AccessService.verifyUser(new_access):
-      if not new_access.is_activate:
+      if not new_access.status:
         flash("Este usuario se encuentra inactivo")
         return redirect(request.referrer)
       else:

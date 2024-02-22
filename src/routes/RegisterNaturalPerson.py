@@ -24,7 +24,7 @@ def registerNaturalPerson():
     access_email = request.form['access_email'].lower()
     access_password = request.form['access_password']
     access_user_type_id = UsertypeService.getUserTypeByName('UT-NATURAL_PERSON').id
-    access_is_activate = True
+    access_status = True
     
     
     #PERSON INFORMATION
@@ -46,7 +46,7 @@ def registerNaturalPerson():
     naturalPerson_photo = None
     naturalPerson_name = person_first_name + " " +person_first_surname
 
-    new_access = Access(access_id, access_email, access_password, access_user_type_id, access_is_activate)
+    new_access = Access(access_id, access_email, access_password, access_user_type_id, access_status)
     new_person = Person(person_id, person_first_name, person_middle_name, person_first_surname, 
                         person_second_lastname,person_identification_type, person_identification_number, person_contact,
                         person_city,person_department)
