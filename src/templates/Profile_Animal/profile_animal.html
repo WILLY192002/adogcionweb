@@ -84,7 +84,7 @@ Perfil {{prName}}
       <form action="{{url_for('view_profile_animal.viewProfileAnimal',fund_id = animal.adoptioncenter_id, animal_id = animal.id, name = animal.name)}}" method="POST">
         <div class="modal-body">
           <div class="input-group mb-3">
-            <div class="container">
+            <div class="container photo-upload">
               <input type="file" id="foto_subida" name="foto">
               <img id="preview" src="" alt="">
               <input type="hidden" id="hiddenField" name="urlImage"><!--URL IMAGEN-->
