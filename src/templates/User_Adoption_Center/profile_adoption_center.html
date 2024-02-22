@@ -60,8 +60,12 @@ Perfil
             <div class="columnaIzq">
               <div class="infocampo">
                 <label>Departamento:</label>
-                <input readonly id="departAlb" class="form-control" name="department" type="text"
+                <input readonly id="departAlb" class="form-control" type="text"
                   value="{{user_information.department}}">
+                <select class="form-select" id="adoptioncenter_department" name="department" style="display: none;"
+                  onchange="changeCities('person_department','person_city')">
+                  <option selected disabled value="">Departamento ...</option>
+                </select>
               </div>
               <div class="infocampo">
                 <label>Llamanos:</label>
@@ -86,8 +90,11 @@ Perfil
             <div class="columnaDer">
               <div class="infocampo">
                 <label>Ciudad: </label>
-                <input readonly id="ciudadAlb" class="form-control" name="city" type="text"
+                <input readonly id="ciudadAlb" class="form-control" type="text"
                   value="{{user_information.city}}">
+                <select class="form-select" id="adoptioncenter_city" name="city" style="display: none;">
+                  <option selected disabled value="">Ciudad ...</option>
+                </select>
               </div>
               <div class="infocampo">
                 <label>Envianos un E-mail:</label>
@@ -188,7 +195,8 @@ Perfil
         </div>
       </form>
       {%elif actuallySeccion == "Adoptar"%}
-      <form class="contFiltro" action='/view/profile={{user_information.id}}/adoption_center/{{user_information.name}}/adopt_animals'
+      <form class="contFiltro"
+        action='/view/profile={{user_information.id}}/adoption_center/{{user_information.name}}/adopt_animals'
         method="POST">
         <div class="row justify-content-md-center row-cols-3">
           <div class="col-6 mt-3 mb-3">
@@ -256,12 +264,14 @@ Perfil
         {%if publications%}
         {%for publication in publications%}
         <div id="publicacion_{{publication.id}}" class="publicacion">
-          {% if current_user.is_authenticated and (current_user.access_id == user_information.access_id) and publication.topic_id != topic_adopted_id%}
+          {% if current_user.is_authenticated and (current_user.access_id == user_information.access_id) and
+          publication.topic_id != topic_adopted_id%}
           <div id="post-1" style="align-items: end; display: flex; justify-content: end;">
             <div class="dropdown">
               <i class='bx bx-dots-vertical' id="icon_option_publication"></i>
               <div class="dropdown-content">
-                <a href="{{url_for('publication_adoption_center.editPublication',publication_id = publication.id)}}" class="edit-button" data-id="" id="">Editar</a>
+                <a href="{{url_for('publication_adoption_center.editPublication',publication_id = publication.id)}}"
+                  class="edit-button" data-id="" id="">Editar</a>
                 <a href="#" class="delete-button" data-id="{{publication.id}}" id="">Eliminar</a>
               </div>
             </div>
@@ -302,7 +312,7 @@ Perfil
             </a>
           </div>
           {%endif%}
-          
+
         </div>
         {% endfor %}
         {%endif%}

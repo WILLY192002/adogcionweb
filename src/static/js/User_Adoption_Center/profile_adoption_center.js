@@ -4,10 +4,11 @@ const btn_guardar = document.getElementById("btn_guardar");
 const nombreAlb = document.getElementById("nombreAlb");
 const descripAlb = document.getElementById("descripAlb");
 const departAlb = document.getElementById("departAlb");
+const deparment_select = document.getElementById("adoptioncenter_department");
 const contactoAlb = document.getElementById("contactoAlb");
 const direccionAlb = document.getElementById("direccionAlb");
 const ciudadAlb = document.getElementById("ciudadAlb");
-// const MediosAyuda = document.getElementById("MediosAyuda");
+const city_select = document.getElementById("adoptioncenter_city");
 const cambiarFoto = document.getElementById("subirFoto");
 const fotoPerfil = document.getElementById("preview");
 
@@ -67,21 +68,29 @@ function resetStyles() {
 }
 
 function addEditStyles() {
-  [nombreAlb, descripAlb, departAlb, contactoAlb, ciudadAlb].forEach((element) => {
+  [nombreAlb, descripAlb, contactoAlb].forEach((element) => {
     element.style.background = "white";
     element.style.border = "1px solid #410002"
     element.style.cursor = "text";
     element.readOnly = false;
   });
+  departAlb.style.display = 'none';
+  ciudadAlb.style.display = 'none';
+  deparment_select.style.display = 'block';
+  city_select.style.display = 'block';
 }
 
 function removeEditStyles() {
-  [nombreAlb, descripAlb, departAlb, contactoAlb, ciudadAlb].forEach((element) => {
+  [nombreAlb, descripAlb, contactoAlb].forEach((element) => {
     element.style.background = "none";
     element.style.borderStyle = "none";
     element.style.cursor = "default";
     element.readOnly = true;
   });
+  departAlb.style.display = 'block';
+  ciudadAlb.style.display = 'block';
+  deparment_select.style.display = 'none';
+  city_select.style.display = 'none';
 }
 
 ///////////////////////////////////SECCION DE PUBLICACIONES
@@ -142,6 +151,46 @@ for (var i = 0; i < publicaciones.length; i++) {
     // Asigna la clase "ocultar" al div "cont-btn-adoptar"
     btnAdoptar.className = 'btn-adoptar btn-adoptar-ocultar';
   });
+}
+
+
+var urlApiDepartment = 'https://api-colombia.com/api/v1/Department';
+
+
+window.onload = function() {
+  fetch(urlApiDepartment)
+    .then(response => response.json())
+    .then(data => {
+      var selectDepartamento = document.getElementById('adoptioncenter_department');
+      for (var i = 0; i < data.length; i++) {
+        var opcion = document.createElement('option');
+        opcion.value = data[i].name;
+        opcion.text = data[i].name;
+        opcion.setAttribute('data-id_department', data[i].id);
+        selectDepartamento.add(opcion);
+      }
+      changeCities();
+    });
+};
+
+
+function changeCities() {
+  var departamentoId = document.getElementById('adoptioncenter_department').options[document.getElementById('adoptioncenter_department').selectedIndex].getAttribute('data-id_department');
+  // var departamentoId = document.getElementById('person_department').value;
+  fetch(urlApiDepartment + '/' + departamentoId + '/cities')
+    .then(response => response.json())
+    .then(data => {
+      var selectCiudad = document.getElementById('adoptioncenter_city');
+      // Limpia las opciones actuales
+      selectCiudad.innerHTML = '';
+      // Agrega las nuevas ciudades
+      for (var i = 0; i < data.length; i++) {
+        var opcion = document.createElement('option');
+        opcion.value = data[i].name;
+        opcion.text = data[i].name;
+        selectCiudad.add(opcion);
+      }
+    });
 }
 
 

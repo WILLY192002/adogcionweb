@@ -28,8 +28,8 @@ def viewProfileAdoptionCenter(id,name):
     if current_user.is_authenticated and current_user.get_id() == id and UsertypeService.verifyUserTypeAdoptionCenter(current_user.user_type_id):
       adoption_center_name = request.form['name'].capitalize() if request.form['name'] != '' else None
       adoption_center_description = request.form['description'].capitalize() if request.form['description'] != '' else None
-      adoption_center_department = request.form['department'].capitalize() if request.form['department'] != '' else None
-      adoption_center_city = request.form['city'].capitalize() if request.form['city'] != '' else None
+      adoption_center_department = request.form.get('department').capitalize() if request.form['department'] != '' else None
+      adoption_center_city = request.form.get('city').capitalize() if request.form['city'] != '' else None
       adoption_center_contact = request.form['contact'] if request.form['contact'] != '' else None
       
       photo = request.form['hiddenField'] if request.form['hiddenField'] != '' else None
@@ -188,8 +188,8 @@ def editProfileAdoptionCenter(id, name):
       #Adoption Center information
       adoption_center_name = request.form['name'].capitalize() if request.form['name'] != '' else None
       adoption_center_description = request.form['description'].capitalize() if request.form['description'] != '' else None
-      adoption_center_department = request.form['department'].capitalize() if request.form['department'] != '' else None
-      adoption_center_city = request.form['city'].capitalize() if request.form['city'] != '' else None
+      adoption_center_department = request.form.get('department').capitalize() if request.form['department'] != '' else None
+      adoption_center_city = request.form.get('city').capitalize() if request.form['city'] != '' else None
       adoption_center_contact = request.form['contact'] if request.form['contact'] != '' else None
 
       photo = request.form['hiddenField'] if request.form['hiddenField'] != '' else None

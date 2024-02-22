@@ -49,7 +49,11 @@ Editar perfil
             <div class="columnaIzq">
               <div class="infocampo">
                 <label>Departamento:</label>
-                <input id="departAlb" class="form-control" name="department" type="text" value="{{user_information.department}}">
+                <!-- <input id="departAlb" class="form-control" name="department" type="text" value="{{user_information.department}}"> -->
+                <select class="form-select" id="person_department" name="department"
+                  onchange="changeCities('person_department','person_city')">
+                  <option selected disabled value="">Departamento ...</option>
+                </select>
               </div>
               <div class="infocampo">
                 <label>Llamanos:</label>
@@ -71,7 +75,10 @@ Editar perfil
             <div class="columnaDer">
               <div class="infocampo">
                 <label>Ciudad: </label>
-                <input id="ciudadAlb" class="form-control" name="city" type="text" value="{{user_information.city}}">
+                <!-- <input id="ciudadAlb" class="form-control" name="city" type="text" value="{{user_information.city}}"> -->
+                <select class="form-select" id="person_city" name="city">
+                  <option selected disabled value="">Ciudad ...</option>
+                </select>
               </div>
               <div class="infocampo">
                 <label>Envianos un E-mail:</label>
