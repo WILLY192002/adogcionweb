@@ -82,7 +82,9 @@ class AnimalbreedcommentService():
       conexion = get_connection()
       cursor = conexion.cursor()
       sql = f"UPDATE animal_breed_comment SET report = report + 1 WHERE id = {comment_id};"
+      sql_call = f"CALL deactivate_comment_procedure({comment_id});"
       cursor.execute(sql)
+      cursor.execute(sql_call)
       conexion.commit()
       return jsonify(status="success"), 200
     except Exception as ex:

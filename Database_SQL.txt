@@ -284,8 +284,6 @@ INSERT INTO `adogcionweb`.`paymentoption` (`name`) VALUES ('Banco a la mano');
 INSERT INTO `adogcionweb`.`paymentoption` (`name`) VALUES ('Giro efecty');
 
 
-<<->>-----------------------------ULTIMOS CAMBIOS----------------------------->>-<<
-
 use adogcionweb;
 
 -- Crear la tabla
@@ -334,8 +332,6 @@ END; //
 DELIMITER ;
 
 
-<<->>-----------------------------ULTIMOS CAMBIOS WILLIAM ----------------------------->>-<<
-
 CREATE TABLE users_levels (
     id INT PRIMARY KEY AUTO_INCREMENT,
     naturalperson_id INT NOT NULL,
@@ -347,3 +343,75 @@ CREATE TABLE users_levels (
 ALTER TABLE `users_levels` ADD FOREIGN KEY (`naturalperson_id`) REFERENCES `naturalperson` (`id`);
 
 ALTER TABLE `users_levels` ADD FOREIGN KEY (`level_id`) REFERENCES `levels` (`id`);
+
+
+
+<<->>-----------------------------ULTIMOS CAMBIOS----------------------------->>-<<
+
+use adogcionweb;
+
+-- COMENTARIOS RAZA
+-- Restar score con cada reporte
+DELIMITER //
+CREATE TRIGGER update_score_by_report_in_comment
+AFTER UPDATE ON animal_breed_comment
+FOR EACH ROW
+BEGIN
+   IF NEW.report > OLD.report THEN
+      UPDATE naturalperson
+      SET score = score - 10
+      WHERE access_id = NEW.access_id;
+   END IF;
+END;//
+DELIMITER ;
+
+-- Desactivar comentario por reportes
+DELIMITER //
+CREATE PROCEDURE deactivate_comment_procedure (IN comment_id INT)
+BEGIN
+   DECLARE report_count INT;
+   SELECT report INTO report_count FROM animal_breed_comment WHERE id = comment_id;
+   IF report_count = 100 THEN
+      UPDATE animal_breed_comment
+      SET is_active = 0
+      WHERE id = comment_id;
+   END IF;
+END;//
+DELIMITER ;
+
+
+
+-- PUBLICACIONES
+-- Restar score con cada reporte
+DELIMITER //
+CREATE TRIGGER update_score_by_report_in_publication
+AFTER UPDATE ON publication
+FOR EACH ROW
+BEGIN
+   IF NEW.report > OLD.report THEN
+      UPDATE naturalperson 
+      SET score = score - 10
+      WHERE access_id = NEW.access_id;
+   END IF;
+END;//
+DELIMITER ;
+
+-- Desactivar publicación por reportes
+DELIMITER //
+CREATE PROCEDURE deactivate_publication_procedure (IN comment_id INT)
+BEGIN
+   DECLARE report_count INT;
+   SELECT report INTO report_count FROM publication WHERE id = comment_id;
+   IF report_count = 100 THEN
+      UPDATE publication
+      SET is_activate = 0
+      WHERE id = comment_id;
+   END IF;
+END;//
+DELIMITER ;
+
+
+
+
+
+

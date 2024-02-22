@@ -190,7 +190,9 @@ class PublicationService():
       conexion = get_connection()
       cursor = conexion.cursor()
       sql = f"UPDATE publication SET report = report + 1 WHERE id = {publication_id};"
+      sql_call = f"CALL deactivate_publication_procedure({publication_id})"
       cursor.execute(sql)
+      cursor.execute(sql_call)
       conexion.commit()
       return jsonify(status="success"), 200
     except Exception as ex:
