@@ -42,12 +42,28 @@ Perfil
       <div class="container_name">
         <h4>{{user_information.name}}</h4>
       </div>
+      <div class="container_name">
+        <select class="d-none form-select mt-1" id="title-select" name="usertitle">
+          <option disabled selected>Titulos</option>
+          {%if user_title_gain%}
+            {%for title in user_title_gain%}
+            <option value="{{title.level_id}}">{{title.levelname}}</option>
+            {%endfor%}
+          {%endif%}
+        </select>
+        {%if user_title%}
+        <h3 id="title-selected">{{user_title.levelname}}</h3>
+        {%endif%}
+      </div>
     </div>
     <!-- DESCRIPCION DE LA PERSONA  -->
     <div class="container_description">
       <div class="container_boton_label">
         <div>
           <h4>Sobre mi</h4>
+        </div>
+        <div>
+          <h4>Credibilidad: {{user_score}}</h4>
         </div>
 
         {% if current_user.is_authenticated and (current_user.access_id == user_information.access_id) %}

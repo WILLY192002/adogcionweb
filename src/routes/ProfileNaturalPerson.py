@@ -7,6 +7,7 @@ from src.services.AccessService import AccessService
 from src.services.UsertypeService import UsertypeService
 from src.services.ImageService import ImageService
 from src.services.PersonService import PersonService
+from src.services.Users_levelsService import Users_levelsService
 
 from src.models.NaturalPerson import NaturalPerson
 from src.models.Person import Person
@@ -17,10 +18,13 @@ main = Blueprint('view_profile_natural_person',__name__)
 def viewProfileNaturalPerson(id,name):
   if request.method == 'POST':
     if current_user.is_authenticated and UsertypeService.verifyUserTypeNaturalPerson(current_user.user_type_id) and current_user.get_id() == id:
+      user_title = request.form.get('usertitle') if request.form.get('usertitle') != '' else None
       photo = request.form['hiddenField'] if request.form['hiddenField'] != '' else None
       upload_photo = ImageService.upload_image_to_imgbb(photo)
       naturalperson_photo = upload_photo['data']['url'] if photo else None
-
+      
+      if user_title:
+        Users_levelsService.updateUserSetTitle(id,user_title)
       naturalperson_description = request.form['naturalperson_description'].capitalize() if request.form['naturalperson_description'] != '' else 'Sin descripción'
       new_natural_person = NaturalPerson(None,None,None,naturalperson_photo,None,naturalperson_description)
       NaturalpersonService.updateNaturalPerson(current_user.get_id(), new_natural_person)
@@ -29,13 +33,16 @@ def viewProfileNaturalPerson(id,name):
       return render_template('auth/no_authorized.html')
   else:
     #INFORMATION PROFILE
+    user_score = NaturalpersonService.getUserScore(id)   
+    user_title = Users_levelsService.getUserTitle(id)
+    user_title_gain = Users_levelsService.getalltitlegains(id)
     user_information = NaturalpersonService.getNaturalPersonById(id)
     access_user_information = AccessService.getAccessById(user_information.access_id)
     user_information.user_type_id = access_user_information.user_type_id
     user_information.email = access_user_information.email
 
     publications = PublicationService.getAllPublicationByAccessId(user_information.access_id)
-    return render_template('User_Natural_Person/profile_natural_person.html', user_information=user_information, publications = publications)
+    return render_template('User_Natural_Person/profile_natural_person.html', user_information=user_information, publications = publications, user_title = user_title, user_title_gain = user_title_gain, user_score = user_score)
 
 
 @main.route('/edit_information/profile=<id>/natural_person/<name>', methods = ['GET', 'POST'])

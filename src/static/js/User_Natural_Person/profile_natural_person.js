@@ -5,6 +5,8 @@ const profile_photo = document.getElementById("preview");
 const change_photo = document.getElementById("upload_photo");
 const person_description = document.getElementById("person_description");
 const imagenAnterior = document.getElementById("preview").src;
+const title_selector = document.getElementById("title-select")
+const title_selected = document.getElementById("title-selected")
 
 let changed = false;
 
@@ -29,6 +31,8 @@ function applyEditStyles() {
   btn_save.style.display = "block";
   href_edit.style.display = "block";
   profile_photo.style.cursor = "pointer"
+  title_selector.classList.remove("d-none");
+  title_selected.classList.add("d-none");
   profile_photo.addEventListener('click', imgClickHandler);
   addEditStyles();
 }
@@ -41,6 +45,8 @@ function resetStyles() {
   href_edit.style.display = "none";
   change_photo.style.display = "none";
   profile_photo.style.cursor = "default"
+  title_selector.classList.add("d-none");
+  title_selected.classList.remove("d-none");
   profile_photo.src = imagenAnterior;
   profile_photo.removeEventListener('click', imgClickHandler);
   removeEditStyles();

@@ -399,6 +399,12 @@ BEGIN
 END;//
 DELIMITER ;
 
+>>-<<---------------------------CAMBIOS----------------------------------->>--<<
+use adogcionweb;
+
+ALTER TABLE users_levels
+ADD COLUMN status INTEGER DEFAULT 0;
+
 
 
 

@@ -84,3 +84,22 @@ class NaturalpersonService():
       raise Exception(message)
     finally:
       conexion.close()
+
+  @classmethod
+  def getUserScore(self, naturalperson_id):
+      try:
+          conexion = get_connection()
+          cursor = conexion.cursor()
+          sql = f"SELECT score FROM naturalperson WHERE id = {naturalperson_id}"
+          cursor.execute(sql)
+          row = cursor.fetchone()
+          if row != None:
+              # Convertir el resultado a cadena de texto antes de retornarlo
+              return str(row[0])
+          else:
+              return "No se encontró un puntaje para el ID proporcionado."
+      except Exception as ex:
+          message = f"Ocurrió un error al consultar el puntaje del usuario por naturalperson_id {ex}"
+          raise Exception(message)
+      finally:
+          conexion.close()
