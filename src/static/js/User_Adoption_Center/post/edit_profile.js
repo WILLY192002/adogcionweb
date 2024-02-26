@@ -33,9 +33,12 @@ var checkboxesRegistrados = document.querySelectorAll('.check-input-mdr');
 checkboxesRegistrados.forEach(function (checkbox) {
   checkbox.addEventListener('change', function () {
     // Obtener el campo de entrada asociado mediante el atributo data-target
-    var targetId = this.getAttribute('data-target');
-    var input = document.getElementById(targetId);
-    input.disabled = !this.checked;
+    if(this.getAttribute('data-target') != null){
+      var targetId = this.getAttribute('data-target');
+      var input = document.getElementById(targetId);
+      input.disabled = !this.checked;
+    }
+    
   });
 });
 
@@ -66,8 +69,8 @@ InicioCuadra = document.getElementById('cuadraInicio')
 finCuadra= document.getElementById('cuadraFin')
 linkreferencia= document.getElementById('ref-link-generado')
 
-departamento = document.getElementById('departAlb')
-ciudad = document.getElementById('ciudadAlb')
+departamento = document.getElementById('person_department')
+ciudad = document.getElementById('person_city')
 
 contenedor_generar_link = document.getElementById('sec-link-google-maps')
 contenedor_alt_link = document.getElementById('sec-alt-link')
@@ -107,7 +110,7 @@ check_generar_link.addEventListener('change', function () {
     
     link += ","
     
-
+    alert(departamento.value)
     linkreferencia.textContent = "https://www.google.com/maps/search/?api=1&query="+link
     linkreferencia.href = "https://www.google.com/maps/search/?api=1&query="+link+"+"+ciudad.value+",+"+departamento.value
     input_link_ubicacion.value = "https://www.google.com/maps/search/?api=1&query="+link+"+"+ciudad.value+",+"+departamento.value
@@ -140,7 +143,7 @@ window.onload = function() {
         selectDepartamento.add(opcion);
       }
       // Llama a cambiarCiudades para llenar las ciudades iniciales
-      changeCities();
+      // changeCities();
     });
 };
 

@@ -169,7 +169,6 @@ window.onload = function() {
         opcion.setAttribute('data-id_department', data[i].id);
         selectDepartamento.add(opcion);
       }
-      changeCities();
     });
 };
 
