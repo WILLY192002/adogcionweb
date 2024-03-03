@@ -400,12 +400,85 @@ BEGIN
 END;//
 DELIMITER ;
 
->>-<<---------------------------CAMBIOS----------------------------------->>--<<
 use adogcionweb;
 
 ALTER TABLE users_levels
 ADD COLUMN status INTEGER DEFAULT 0;
 
+>>-<<---------------------------CAMBIOS----------------------------------->>--<<
+use adogcionweb;
+
+DROP TRIGGER IF EXISTS after_animal_breed_comment_insert;
+DROP TRIGGER IF EXISTS update_score_by_report_in_comment;
+DROP TRIGGER IF EXISTS after_publication_insert;
+DROP TRIGGER IF EXISTS update_score_by_report_in_publication;
+
+DELIMITER //
+CREATE PROCEDURE score_decrement_comment(IN comment_id INT)
+BEGIN
+    DECLARE person_id INT;
+    DECLARE person_score INT;
+    
+    -- Busca el access_id en la tabla animal_breed_comment
+    SELECT access_id INTO person_id FROM animal_breed_comment WHERE id = comment_id;
+    
+    -- Verifica si el access_id existe en la tabla naturalperson
+    IF EXISTS (SELECT 1 FROM naturalperson WHERE access_id = person_id) THEN
+        -- Obtiene el puntaje actual para el access_id
+        SELECT score INTO person_score FROM naturalperson WHERE access_id = person_id;
+        
+        -- Actualiza el puntaje restando 10
+        UPDATE naturalperson
+        SET score = person_score - 10
+        WHERE access_id = person_id;
+        
+    END IF;
+END;
+//
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE update_naturalperson_score(IN new_access_id INT, IN score_increment INT)
+BEGIN
+    DECLARE score_value INT;
+    
+    -- Verifica si el access_id existe en la tabla naturalperson
+    IF EXISTS (SELECT 1 FROM naturalperson WHERE access_id = new_access_id) THEN
+        -- Obtiene el puntaje actual para el access_id
+        SELECT score INTO score_value FROM naturalperson WHERE access_id = new_access_id;
+        
+        -- Actualiza el puntaje sumando el incremento proporcionado
+        UPDATE naturalperson
+        SET score = score_value + score_increment
+        WHERE access_id = new_access_id;
+    END IF;
+END;
+//
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE score_decrement(IN publication_id INT)
+BEGIN
+    DECLARE person_id INT;
+    DECLARE person_score INT;
+    
+    -- Busca el access_id en la tabla publication
+    SELECT access_id INTO person_id FROM publication WHERE id = publication_id;
+    
+    -- Verifica si el access_id existe en la tabla naturalperson
+    IF EXISTS (SELECT 1 FROM naturalperson WHERE access_id = person_id) THEN
+        -- Obtiene el puntaje actual para el access_id
+        SELECT score INTO person_score FROM naturalperson WHERE access_id = person_id;
+        
+        -- Actualiza el puntaje restando 10
+        UPDATE naturalperson
+        SET score = person_score - 10
+        WHERE access_id = person_id;
+        
+    END IF;
+END;
+//
+DELIMITER ;
 
 
 

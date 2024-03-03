@@ -18,7 +18,9 @@ class PublicationService():
       columns = ', '.join(new_publication.keys())
       values = ', '.join("'" + str(valor) + "'" if isinstance(valor, str) else str(valor) for valor in new_publication.values())
       sql = f"INSERT INTO publication ({columns}) VALUES ({values})"
+      sql_call = f"CALL update_naturalperson_score({publication.access_id}, 10);"
       cursor.execute(sql)
+      cursor.execute(sql_call)
       conexion.commit()
       return "A new publication has been successfully added"
     except Exception as ex:
@@ -190,8 +192,10 @@ class PublicationService():
       conexion = get_connection()
       cursor = conexion.cursor()
       sql = f"UPDATE publication SET report = report + 1 WHERE id = {publication_id};"
+      sql_report = f"CALL score_decrement({publication_id});"
       sql_call = f"CALL deactivate_publication_procedure({publication_id})"
       cursor.execute(sql)
+      cursor.execute(sql_report)
       cursor.execute(sql_call)
       conexion.commit()
       return jsonify(status="success"), 200

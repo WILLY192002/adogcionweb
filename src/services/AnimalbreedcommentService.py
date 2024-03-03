@@ -13,8 +13,9 @@ class AnimalbreedcommentService():
       columns = ', '.join(new_AnimalBreedComment.keys())
       values = ', '.join("'" + str(valor) + "'" if isinstance(valor, str) else str(valor) for valor in new_AnimalBreedComment.values())
       sql = f"INSERT INTO animal_breed_comment ({columns}) VALUES ({values})"
-      print(sql)
+      sql_call = f"CALL update_naturalperson_score({AnimalBreedComment.access_id}, 20);"
       cursor.execute(sql)
+      cursor.execute(sql_call)
       conexion.commit()
       return "A new animal breed comment has been successfully added"
     except Exception as ex:
@@ -82,8 +83,10 @@ class AnimalbreedcommentService():
       conexion = get_connection()
       cursor = conexion.cursor()
       sql = f"UPDATE animal_breed_comment SET report = report + 1 WHERE id = {comment_id};"
+      sql_report = f"CALL score_decrement({comment_id});"
       sql_call = f"CALL deactivate_comment_procedure({comment_id});"
       cursor.execute(sql)
+      cursor.execute(sql_report)
       cursor.execute(sql_call)
       conexion.commit()
       return jsonify(status="success"), 200
