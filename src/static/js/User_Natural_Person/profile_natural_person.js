@@ -32,7 +32,10 @@ function applyEditStyles() {
   href_edit.style.display = "block";
   profile_photo.style.cursor = "pointer"
   title_selector.classList.remove("d-none");
-  title_selected.classList.add("d-none");
+  if(title_selected != null){
+    title_selected.classList.add("d-none");
+  }
+  
   profile_photo.addEventListener('click', imgClickHandler);
   addEditStyles();
 }
@@ -46,7 +49,10 @@ function resetStyles() {
   change_photo.style.display = "none";
   profile_photo.style.cursor = "default"
   title_selector.classList.add("d-none");
-  title_selected.classList.remove("d-none");
+  if(title_selected != null){
+    title_selected.classList.remove("d-none");
+  }
+  
   profile_photo.src = imagenAnterior;
   profile_photo.removeEventListener('click', imgClickHandler);
   removeEditStyles();

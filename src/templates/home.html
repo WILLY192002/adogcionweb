@@ -11,19 +11,26 @@
 {% block body %}
 
 <div class="container text-center">
+
   <div class="filtrosVistasHome">
+     {%if is_adoptioncenter%}
     <form action="{{url_for('home_adoption_center.homeAdoptionCenter')}}" method="POST" class="formfiltros">
+    {%else%}
+    <form action="{{url_for('home_adoption_center.homeCommunity')}}" method="POST" class="formfiltros">
+    {%endif%}
       <div class="opcionFiltros">
         <div class="barraFiltro">
           <input type="hidden" name="form_id" value="filter_home"><!--IDENTIFICADOR FORM-->
           <input type="text" class="form-control" placeholder="Buscar" aria-label="Buscar" name="filter_search"
             id="barraBusquedaFilter">
         </div>
+
         <div class="filtro-btn">
           <button id="botonFiltrar" class="btn btn-outline-personalized" type="button">
             <i class='bx bx-filter'></i> Filtrar
           </button>
         </div>
+
         <div class="buscar-btn-filtros">
           <button class="btn btn-outline-personalized" type="submit">
             <i class='bx bx-search'></i> Buscar
@@ -31,7 +38,7 @@
         </div>
       </div>
       {%if categories%}
-      <div id="filter_animal_div" class="selectFiltros">
+      <div id="filter_animal_div" class="selectFiltros" style="display:none">
         <div class="filtros_Tema-categoria">
           <div class="labelFiltro">
             <label>Filtrar por:</label>
@@ -59,6 +66,7 @@
       {%endif%}
     </form>
   </div>
+
   <div class="filtros_Comunidad-fundacion">
     <div class="row justify-content-md-center row-cols-2">
       <!-- <div class="col col-md-4 d-grid gap-2">

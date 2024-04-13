@@ -1,8 +1,10 @@
-#Create database adogcionweb
+# PASO 1: CREA LA TABLA DE BASE DE DATOS (Si deseea cambiar el nombre, deberá cambiarlo )
+Create database adogcionweb
 
-#use adogcionweb
+#PASO 2: USA LA TABLA DE BASE DE DATOS POR DEFECTO
+use adogcionweb
 
-
+#PASO 3: REALIZA LA CREACIÓN E INSERCIÓN DE DATOS.
 CREATE TABLE `access` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `email` varchar(100) UNIQUE NOT NULL ,
@@ -82,7 +84,7 @@ CREATE TABLE `animal` (
 );
 
 CREATE TABLE `species` (
-  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `id` int PRIMARY KEY,
   `name` varchar(100) NOT NULL UNIQUE
 );
 
@@ -231,129 +233,96 @@ ALTER TABLE `users_levels` ADD FOREIGN KEY (`naturalperson_id`) REFERENCES `natu
 
 ALTER TABLE `users_levels` ADD FOREIGN KEY (`level_id`) REFERENCES `levels` (`id`);
 
-INSERT INTO adogcionweb.usertype (name) VALUES ('UT-ADOPTION_CENTER');
-INSERT INTO adogcionweb.usertype (name) VALUES ('UT-NATURAL_PERSON');
+INSERT INTO usertype (name) VALUES ('UT-ADOPTION_CENTER');
+INSERT INTO usertype (name) VALUES ('UT-NATURAL_PERSON');
 
-INSERT INTO adogcionweb.species (name) VALUES ('Perro');
-INSERT INTO adogcionweb.species (name) VALUES ('Conejo');
-INSERT INTO adogcionweb.species (name) VALUES ('Gato');
-INSERT INTO adogcionweb.species (name) VALUES ('Hamster');
+INSERT INTO species (id, name) VALUES (1,'Perro');
+INSERT INTO species (id, name) VALUES (2,'Conejo');
+INSERT INTO species (id, name) VALUES (3,'Gato');
+INSERT INTO species (id, name) VALUES (4,'Hamster');
 
-INSERT INTO adogcionweb.breed (name, species_id) values ('Siamés', 3);
-INSERT INTO adogcionweb.breed (name, species_id) values ('Ragdoll', 3);
-INSERT INTO adogcionweb.breed (name, species_id) values ('Poodle', 1);
-INSERT INTO adogcionweb.breed (name, species_id) values ('Persa', 3);
-INSERT INTO adogcionweb.breed (name, species_id) values ('Maine Coon', 3);
-INSERT INTO adogcionweb.breed (name, species_id) values ('Labrador Retriever', 1);
-INSERT INTO adogcionweb.breed (name, species_id) values ('German Shepherd', 1);
-INSERT INTO adogcionweb.breed (name, species_id) values ('Criollo', 1);
-INSERT INTO adogcionweb.breed (name, species_id) values ('Bulldog', 1);
-INSERT INTO adogcionweb.breed (name, species_id) values ('Bengalí', 3);
-INSERT INTO adogcionweb.breed (name, species_id) values ('Beagle', 1);
-
-INSERT INTO adogcionweb.category (name) values ('Ayudas');
-INSERT INTO adogcionweb.category (name) values ('Noticias');
-INSERT INTO adogcionweb.category (name) values ('Actividades');
-
-INSERT INTO adogcionweb.topic (category_id, name) VALUES (1, 'Comidas');
-INSERT INTO adogcionweb.topic (category_id, name) VALUES (1, 'Medicamentos');
-INSERT INTO adogcionweb.topic (category_id, name) VALUES (1, 'Apadrinamientos');
-INSERT INTO adogcionweb.topic (category_id, name) VALUES (2, 'Animales perdidos');
-INSERT INTO adogcionweb.topic (category_id, name) VALUES (2, 'Animales encontrados');
-INSERT INTO adogcionweb.topic (category_id, name) VALUES (3, 'Nuevos eventos');
-INSERT INTO adogcionweb.topic (category_id, name) VALUES (2, 'Nueva noticia');
-
-INSERT INTO adogcionweb.vaccine (id, name, description) VALUES (1,	'Vacuna contra el Moquillo',	'Protege contra el virus del moquillo canino.');
-INSERT INTO adogcionweb.vaccine (id, name, description) VALUES (2,	'Vacuna contra el Parvovirus Canino',	'Previene la infección por parvovirus en perros.');
-INSERT INTO adogcionweb.vaccine (id, name, description) VALUES (3,	'Vacuna contra la Hepatitis Canina',	'Brinda protección contra la hepatitis infecciosa canina.');
-INSERT INTO adogcionweb.vaccine (id, name, description) VALUES (4,	'Vacuna contra la Tos de las Perreras',	'Protege contra la traqueobronquitis canina.');
-INSERT INTO adogcionweb.vaccine (id, name, description) VALUES (5,	'Vacuna contra la Rabia',	'Prevención contra la rabia en perros.');
-INSERT INTO adogcionweb.vaccine (id, name, description) VALUES (6,	'Vacuna contra el Herpesvirus Felino',	'Protege contra el herpesvirus felino, una causa del resfriado en gatos.');
-INSERT INTO adogcionweb.vaccine (id, name, description) VALUES (7,	'Vacuna contra el Calicivirus Felino',	'Previene el calicivirus felino, otra causa del resfriado felino.');
-INSERT INTO adogcionweb.vaccine (id, name, description) VALUES (8,	'Vacuna contra la Panleucopenia Felina',	'Ofrece protección contra la panleucopenia felina, similar al parvovirus canino.');
-INSERT INTO adogcionweb.vaccine (id, name, description) VALUES (9,	'Vacuna contra la Leucemia Felina',	'Protege contra el virus de la leucemia felina en gatos que salen al exterior.');
-
-INSERT INTO adogcionweb.disease (id, name, description) VALUES (1, 'Parvovirus Canino', 'Enfermedad viral altamente contagiosa en cachorros.');
-INSERT INTO adogcionweb.disease (id, name, description) VALUES (2, 'Moquillo Canino', 'Enfermedad viral con síntomas respiratorios y neurológicos.');
-INSERT INTO adogcionweb.disease (id, name, description) VALUES (3, 'Enfermedad de Lyme', 'Enfermedad bacteriana transmitida por garrapatas.');
-INSERT INTO adogcionweb.disease (id, name, description) VALUES (4, 'Leptospirosis', 'Infección bacteriana que afecta los riñones y otros órganos.');
-INSERT INTO adogcionweb.disease (id, name, description) VALUES (5, 'Rinotraqueítis Felina', 'Infección viral respiratoria causada por herpesvirus felino.');
-INSERT INTO adogcionweb.disease (id, name, description) VALUES (6, 'Leucemia Felina', 'Enfermedad viral que afecta el sistema inmunológico.');
-INSERT INTO adogcionweb.disease (id, name, description) VALUES (7, 'Panleucopenia Felina', 'Enfermedad viral también conocida como parvovirus felino.');
-INSERT INTO adogcionweb.disease (id, name, description) VALUES (8, 'Síndrome del Hámster Húmedo', 'Enfermedad con hinchazón abdominal y pelaje mojado.');
-INSERT INTO adogcionweb.disease (id, name, description) VALUES (9, 'Tumor Mamario en Hámsters Hembra', 'Desarrollo de tumores mamarios en hámsters hembra.');
-INSERT INTO adogcionweb.disease (id, name, description) VALUES (10, 'Mixomatosis', 'Enfermedad viral en conejos con hinchazón facial y ocular.');
-
-INSERT INTO adogcionweb.operation (id, name, description) VALUES (1, 'Esterilización/esterilización',	'Cirugía para controlar la reproducción.');
-INSERT INTO adogcionweb.operation (id, name, description) VALUES (2, 'Cirugía de tejidos blandos',	'Incluye la extirpación de tumores o corrección de heridas.');
-INSERT INTO adogcionweb.operation (id, name, description) VALUES (3, 'Cirugía ortopédica',	'Para reparar huesos, articulaciones o ligamentos.');
-INSERT INTO adogcionweb.operation (id, name, description) VALUES (4, 'Cirugía dental',	'Extracciones de dientes, tratamiento de enfermedades periodontales, etc.');
-INSERT INTO adogcionweb.operation (id, name, description) VALUES (5, 'Cirugía de emergencia',	'Intervenciones quirúrgicas en casos de lesiones graves o emergencias médicas.');
-INSERT INTO adogcionweb.operation (id, name, description) VALUES (6, 'Cirugía oftálmica',	'Tratamiento de problemas oculares, como cataratas.');
-INSERT INTO adogcionweb.operation (id, name, description) VALUES (7, 'Cirugía reconstructiva',	'Para corregir malformaciones o lesiones.');
-INSERT INTO adogcionweb.operation (id, name, description) VALUES (8, 'Cirugía de las vías respiratorias',	'Para abordar problemas como las estenosis nasales.');
-INSERT INTO adogcionweb.operation (id, name, description) VALUES (9, 'Cirugía de oído',	'Para tratar infecciones crónicas u otros problemas.');
-INSERT INTO adogcionweb.operation (id, name, description) VALUES (10, 'Cirugía neurológica',	'Para abordar problemas en el sistema nervioso.');
-INSERT INTO adogcionweb.operation (id, name, description) VALUES (11, 'Cirugía de extremidades',	'Para tratar problemas en extremidades del animal.');
-
-INSERT INTO adogcionweb.paymentoption (`name`) VALUES ('Bancolombia');
-INSERT INTO adogcionweb.paymentoption (`name`) VALUES ('Nequi');
-INSERT INTO adogcionweb.paymentoption (`name`) VALUES ('Daviplata');
-INSERT INTO adogcionweb.paymentoption (`name`) VALUES ('Banco a la mano');
-INSERT INTO adogcionweb.paymentoption (`name`) VALUES ('Giro efecty');
-
-INSERT INTO adogcionweb.levels (level_name, score) VALUES ('Payaso', -100);
-INSERT INTO adogcionweb.levels (level_name, score) VALUES ('Primer aporte', 10);
-INSERT INTO adogcionweb.levels (level_name, score) VALUES ('Cuidador novato', 50);
-INSERT INTO adogcionweb.levels (level_name, score) VALUES ('Amigo de los caninos', 100);
-INSERT INTO adogcionweb.levels (level_name, score) VALUES ('Entrenador en ascenso', 200);
-INSERT INTO adogcionweb.levels (level_name, score) VALUES ('Experto en crianza', 500);
-INSERT INTO adogcionweb.levels (level_name, score) VALUES ('Héroe de las fundaciones', 1000);
-INSERT INTO adogcionweb.levels (level_name, score) VALUES ('Leyenda canina', 2000);
+INSERT INTO breed (name, species_id) values ('Siamés', 3);
+INSERT INTO breed (name, species_id) values ('Ragdoll', 3);
+INSERT INTO breed (name, species_id) values ('Poodle', 1);
+INSERT INTO breed (name, species_id) values ('Persa', 3);
+INSERT INTO breed (name, species_id) values ('Gato común', 3);
+INSERT INTO breed (name, species_id) values ('Maine Coon', 3);
+INSERT INTO breed (name, species_id) values ('Labrador Retriever', 1);
+INSERT INTO breed (name, species_id) values ('German Shepherd', 1);
+INSERT INTO breed (name, species_id) values ('Criollo', 1);
+INSERT INTO breed (name, species_id) values ('Bulldog', 1);
+INSERT INTO breed (name, species_id) values ('Bengalí', 3);
+INSERT INTO breed (name, species_id) values ('Beagle', 1);
+INSERT INTO breed (name, species_id) values ('Conejo común', 2);
+INSERT INTO breed (name, species_id) values ('Conejo holandés', 2);
+INSERT INTO breed (name, species_id) values ('Conejo californiano', 2);
+INSERT INTO breed (name, species_id) values ('Conejo blanco', 2);
+INSERT INTO breed (name, species_id) values ('Hamster ruso', 4);
+INSERT INTO breed (name, species_id) values ('Hamster Roborowski', 4);
+INSERT INTO breed (name, species_id) values ('Hamster dorado', 4);
+INSERT INTO breed (name, species_id) values ('Hamster chino', 4);
 
 
--- Trigger
-DELIMITER //
-CREATE TRIGGER after_publication_insert
-AFTER INSERT ON publication
-FOR EACH ROW
-BEGIN
-    IF EXISTS (SELECT 1 FROM naturalperson WHERE access_id = NEW.access_id) THEN
-        UPDATE naturalperson
-        SET score = score + 10
-        WHERE access_id = NEW.access_id;
-    END IF;
-END; //
-DELIMITER ;
+INSERT INTO category (id, name) values (1, 'Ayudas');
+INSERT INTO category (id, name) values (2, 'Noticias');
+INSERT INTO category (id, name) values (3, 'Actividades');
 
-DELIMITER //
-CREATE TRIGGER after_animal_breed_comment_insert
-AFTER INSERT ON animal_breed_comment
-FOR EACH ROW
-BEGIN
-    IF EXISTS (SELECT 1 FROM naturalperson WHERE access_id = NEW.access_id) THEN
-        UPDATE naturalperson
-        SET score = score + 20
-        WHERE access_id = NEW.access_id;
-    END IF;
-END; //
-DELIMITER ;
+INSERT INTO topic (category_id, name) VALUES (1, 'Comidas');
+INSERT INTO topic (category_id, name) VALUES (1, 'Medicamentos');
+INSERT INTO topic (category_id, name) VALUES (1, 'Apadrinamientos');
+INSERT INTO topic (category_id, name) VALUES (2, 'Animales perdidos');
+INSERT INTO topic (category_id, name) VALUES (2, 'Animales encontrados');
+INSERT INTO topic (category_id, name) VALUES (3, 'Nuevos eventos');
+INSERT INTO topic (category_id, name) VALUES (2, 'Nueva noticia');
+INSERT INTO topic (category_id, name) VALUES (3, 'Convocatoria comunidad');
 
+INSERT INTO vaccine (id, name, description) VALUES (1,	'Vacuna contra el Moquillo',	'Protege contra el virus del moquillo canino.');
+INSERT INTO vaccine (id, name, description) VALUES (2,	'Vacuna contra el Parvovirus Canino',	'Previene la infección por parvovirus en perros.');
+INSERT INTO vaccine (id, name, description) VALUES (3,	'Vacuna contra la Hepatitis Canina',	'Brinda protección contra la hepatitis infecciosa canina.');
+INSERT INTO vaccine (id, name, description) VALUES (4,	'Vacuna contra la Tos de las Perreras',	'Protege contra la traqueobronquitis canina.');
+INSERT INTO vaccine (id, name, description) VALUES (5,	'Vacuna contra la Rabia',	'Prevención contra la rabia en perros.');
+INSERT INTO vaccine (id, name, description) VALUES (6,	'Vacuna contra el Herpesvirus Felino',	'Protege contra el herpesvirus felino, una causa del resfriado en gatos.');
+INSERT INTO vaccine (id, name, description) VALUES (7,	'Vacuna contra el Calicivirus Felino',	'Previene el calicivirus felino, otra causa del resfriado felino.');
+INSERT INTO vaccine (id, name, description) VALUES (8,	'Vacuna contra la Panleucopenia Felina',	'Ofrece protección contra la panleucopenia felina, similar al parvovirus canino.');
+INSERT INTO vaccine (id, name, description) VALUES (9,	'Vacuna contra la Leucemia Felina',	'Protege contra el virus de la leucemia felina en gatos que salen al exterior.');
 
--- COMENTARIOS RAZA
--- Restar score con cada reporte
-DELIMITER //
-CREATE TRIGGER update_score_by_report_in_comment
-AFTER UPDATE ON animal_breed_comment
-FOR EACH ROW
-BEGIN
-   IF NEW.report > OLD.report THEN
-      UPDATE naturalperson
-      SET score = score - 10
-      WHERE access_id = NEW.access_id;
-   END IF;
-END;//
-DELIMITER ;
+INSERT INTO disease (id, name, description) VALUES (1, 'Parvovirus Canino', 'Enfermedad viral altamente contagiosa en cachorros.');
+INSERT INTO disease (id, name, description) VALUES (2, 'Moquillo Canino', 'Enfermedad viral con síntomas respiratorios y neurológicos.');
+INSERT INTO disease (id, name, description) VALUES (3, 'Enfermedad de Lyme', 'Enfermedad bacteriana transmitida por garrapatas.');
+INSERT INTO disease (id, name, description) VALUES (4, 'Leptospirosis', 'Infección bacteriana que afecta los riñones y otros órganos.');
+INSERT INTO disease (id, name, description) VALUES (5, 'Rinotraqueítis Felina', 'Infección viral respiratoria causada por herpesvirus felino.');
+INSERT INTO disease (id, name, description) VALUES (6, 'Leucemia Felina', 'Enfermedad viral que afecta el sistema inmunológico.');
+INSERT INTO disease (id, name, description) VALUES (7, 'Panleucopenia Felina', 'Enfermedad viral también conocida como parvovirus felino.');
+INSERT INTO disease (id, name, description) VALUES (8, 'Síndrome del Hámster Húmedo', 'Enfermedad con hinchazón abdominal y pelaje mojado.');
+INSERT INTO disease (id, name, description) VALUES (9, 'Tumor Mamario en Hámsters Hembra', 'Desarrollo de tumores mamarios en hámsters hembra.');
+INSERT INTO disease (id, name, description) VALUES (10, 'Mixomatosis', 'Enfermedad viral en conejos con hinchazón facial y ocular.');
+
+INSERT INTO operation (id, name, description) VALUES (1, 'Esterilización/esterilización',	'Cirugía para controlar la reproducción.');
+INSERT INTO operation (id, name, description) VALUES (2, 'Cirugía de tejidos blandos',	'Incluye la extirpación de tumores o corrección de heridas.');
+INSERT INTO operation (id, name, description) VALUES (3, 'Cirugía ortopédica',	'Para reparar huesos, articulaciones o ligamentos.');
+INSERT INTO operation (id, name, description) VALUES (4, 'Cirugía dental',	'Extracciones de dientes, tratamiento de enfermedades periodontales, etc.');
+INSERT INTO operation (id, name, description) VALUES (5, 'Cirugía de emergencia',	'Intervenciones quirúrgicas en casos de lesiones graves o emergencias médicas.');
+INSERT INTO operation (id, name, description) VALUES (6, 'Cirugía oftálmica',	'Tratamiento de problemas oculares, como cataratas.');
+INSERT INTO operation (id, name, description) VALUES (7, 'Cirugía reconstructiva',	'Para corregir malformaciones o lesiones.');
+INSERT INTO operation (id, name, description) VALUES (8, 'Cirugía de las vías respiratorias',	'Para abordar problemas como las estenosis nasales.');
+INSERT INTO operation (id, name, description) VALUES (9, 'Cirugía de oído',	'Para tratar infecciones crónicas u otros problemas.');
+INSERT INTO operation (id, name, description) VALUES (10, 'Cirugía neurológica',	'Para abordar problemas en el sistema nervioso.');
+INSERT INTO operation (id, name, description) VALUES (11, 'Cirugía de extremidades',	'Para tratar problemas en extremidades del animal.');
+
+INSERT INTO paymentoption (`name`) VALUES ('Bancolombia');
+INSERT INTO paymentoption (`name`) VALUES ('Nequi');
+INSERT INTO paymentoption (`name`) VALUES ('Daviplata');
+INSERT INTO paymentoption (`name`) VALUES ('Banco a la mano');
+INSERT INTO paymentoption (`name`) VALUES ('Giro efecty');
+
+INSERT INTO levels (level_name, score) VALUES ('Payaso', -100);
+INSERT INTO levels (level_name, score) VALUES ('Primer aporte', 10);
+INSERT INTO levels (level_name, score) VALUES ('Cuidador novato', 50);
+INSERT INTO levels (level_name, score) VALUES ('Amigo de los caninos', 100);
+INSERT INTO levels (level_name, score) VALUES ('Entrenador en ascenso', 200);
+INSERT INTO levels (level_name, score) VALUES ('Experto en crianza', 500);
+INSERT INTO levels (level_name, score) VALUES ('Héroe de las fundaciones', 1000);
+INSERT INTO levels (level_name, score) VALUES ('Leyenda canina', 2000);
 
 -- Desactivar comentario por reportes
 DELIMITER //
@@ -365,23 +334,6 @@ BEGIN
       UPDATE animal_breed_comment
       SET status = 0
       WHERE id = comment_id;
-   END IF;
-END;//
-DELIMITER ;
-
-
-
--- PUBLICACIONES
--- Restar score con cada reporte
-DELIMITER //
-CREATE TRIGGER update_score_by_report_in_publication
-AFTER UPDATE ON publication
-FOR EACH ROW
-BEGIN
-   IF NEW.report > OLD.report THEN
-      UPDATE naturalperson 
-      SET score = score - 10
-      WHERE access_id = NEW.access_id;
    END IF;
 END;//
 DELIMITER ;
@@ -399,19 +351,6 @@ BEGIN
    END IF;
 END;//
 DELIMITER ;
-
-use adogcionweb;
-
-ALTER TABLE users_levels
-ADD COLUMN status INTEGER DEFAULT 0;
-
->>-<<---------------------------CAMBIOS----------------------------------->>--<<
-use adogcionweb;
-
-DROP TRIGGER IF EXISTS after_animal_breed_comment_insert;
-DROP TRIGGER IF EXISTS update_score_by_report_in_comment;
-DROP TRIGGER IF EXISTS after_publication_insert;
-DROP TRIGGER IF EXISTS update_score_by_report_in_publication;
 
 DELIMITER //
 CREATE PROCEDURE score_decrement_comment(IN comment_id INT)
@@ -479,8 +418,3 @@ BEGIN
 END;
 //
 DELIMITER ;
-
-
-
-
-

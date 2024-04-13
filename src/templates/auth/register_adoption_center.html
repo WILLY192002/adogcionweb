@@ -79,6 +79,9 @@
               <select required class="form-select form" name="identification_type" id="tipoDoc">
                 <option disabled value="0">Seleccione tipo de documento*</option>
                 <option value="CEDULA DE CIUDADANIA">Cedula de ciudadania</option>
+                <option value="TARJETA DE IDENTIDAD">Tarjeta de identidad</option>
+                <option value="CEDULA EXTRANJERA">Cedula extranjería</option>
+                <option value="PASAPORTE">Pasaporte</option>
               </select>
             </div>
             <div class="form-floating campo">
@@ -96,7 +99,7 @@
                 <option selected disabled value="">Departamento ...</option>
               </select>
             </div>
-      
+
             <div class="form-floating campo">
               <select class="form-select" id="person_city" name="person_city" >
                 <option selected disabled value="">Ciudad ...</option>
@@ -131,13 +134,13 @@
                 id="contactoAlb">
               <label for="floatingInput">Numero de contacto</label>
             </div>
-            
+
             <div class="form-floating campo">
               <select required class="form-select" id="adoptionCenter_department" name="adoptionCenter_department" onchange="changeCities('adoptionCenter_department','adoptionCenter_city')">
                 <option selected disabled value="">Departamento ...</option>
               </select>
             </div>
-      
+
             <div class="form-floating campo">
               <select required class="form-select" id="adoptionCenter_city" name="adoptionCenter_city" >
                 <option selected disabled value="">Ciudad ...</option>
@@ -171,7 +174,7 @@
             </div>
             <div class="form-floating campo">
               <input type="password" class="form-control" name="access_password" placeholder="Nombre1" required
-                id="contrasenaAlb" value="123Lapopo">
+                id="contrasenaAlb" >
               <label for="floatingInput">Escriba una contraseña*</label>
               <div class="mostarContrasenia">
                 <input class="form-check-input" type="checkbox" id="flexCheckDefault">
@@ -182,10 +185,18 @@
             </div>
             <div class="form-floating campo">
               <input type="password" class="form-control" name="ConfirmContraseña" placeholder="Nombre1" id="contraConf"
-                required value="123Lapopo">
+                required >
               <label for="floatingInput">Confirme contraseña*</label>
             </div>
+            <div style="text-align: left; font-size:small">
+              <p>Nota: Recuerde que una contraseña segura debe incluir: </p>
+              <p>*. Al menos 1 letra mayúscula</p>
+              <p>*. Al menos 1 numero</p>
+              <p>*. Al menos 8 caracteres</p>
+            </div>
+
           </div>
+
           <div class="btns">
             <button class="btn btn-personalized w-100 py-2 antPag2">Volver</button>
             <button class="btn btn-personalized w-100 py-2 finalizar">Enviar</button>

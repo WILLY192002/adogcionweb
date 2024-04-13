@@ -2,6 +2,7 @@
 from flask import Blueprint, render_template,request,flash,redirect, url_for
 from flask_login import LoginManager, login_user
 
+
 #Table model's
 from src.models.Access import Access
 

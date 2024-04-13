@@ -1,5 +1,5 @@
 from flask import Blueprint,request,redirect, url_for
-
+from flask_login import logout_user
 
 main = Blueprint('index_route',__name__)
 

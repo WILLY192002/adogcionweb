@@ -12,7 +12,6 @@ class NaturalpersonService():
       columns = ', '.join(new_naturalPerson.keys())
       values = ', '.join("'" + str(valor) + "'" if isinstance(valor, str) else str(valor) for valor in new_naturalPerson.values())
       sql = f"INSERT INTO naturalperson ({columns}) VALUES ({values})"
-      print(sql)
       cursor.execute(sql)
       conexion.commit()
       return "A new natural person has been successfully added"

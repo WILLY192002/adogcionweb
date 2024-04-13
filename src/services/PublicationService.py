@@ -34,7 +34,7 @@ class PublicationService():
     try:
       conexion = get_connection()
       cursor = conexion.cursor()
-      sql = """SELECT p.id, p.topic_id, p.access_id, p.photo, p.title, p.description, p.date, p.status, 
+      sql = """SELECT p.id, p.topic_id, p.access_id, p.photo, p.title, p.description, p.date, p.status,
       ac.photo, ac.name, ac.id FROM publication p
       JOIN adoptioncenter ac ON p.access_id = ac.access_id
       WHERE p.status = 1"""
@@ -62,15 +62,18 @@ class PublicationService():
       raise Exception(message)
     finally:
       conexion.close()
-  
+
   @classmethod
-  def getAllPublicationByNaturalPerson(self):
+  def getAllPublicationByNaturalPerson(self, filter_search):
     try:
       conexion = get_connection()
       cursor = conexion.cursor()
-      sql = """SELECT p.id, p.topic_id, p.access_id, p.photo, p.title, p.description, p.date, p.status, np.photo, np.name, np.id FROM publication p 
-      JOIN naturalperson np ON p.access_id = np.access_id 
-      WHERE p.status = 1 ORDER BY date DESC;"""
+      sql = """SELECT p.id, p.topic_id, p.access_id, p.photo, p.title, p.description, p.date, p.status, np.photo, np.name, np.id FROM publication p
+      JOIN naturalperson np ON p.access_id = np.access_id
+      WHERE p.status = 1 """
+      if filter_search != None:
+        sql += f" AND np.name LIKE '%{filter_search}%'"
+      sql += ' ORDER BY p.date DESC;'
       cursor.execute(sql)
       row = cursor.fetchall()
       out_publication = []
@@ -106,7 +109,7 @@ class PublicationService():
       raise Exception(message)
     finally:
       conexion.close()
-    
+
   @classmethod
   def getAllPublicationByCategoryId(self, category_id, access_id):
     try:
@@ -129,7 +132,7 @@ class PublicationService():
       raise Exception(message)
     finally:
       conexion.close()
-  
+
   @classmethod
   def getAllPublicationByTopic(self, access_id, topic_id):
     try:
@@ -182,7 +185,7 @@ class PublicationService():
       # message = f"An error occurred while deleting publications by topic {ex}"
       return jsonify(status="error", message="An error occurred while deleting publications by topic"), 400
       raise Exception(message)
-    
+
     finally:
       conexion.close()
 

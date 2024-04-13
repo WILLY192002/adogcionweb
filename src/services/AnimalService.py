@@ -12,7 +12,6 @@ class AnimalService():
       columns = ', '.join(new_Animal.keys())
       values = ', '.join("'" + str(valor) + "'" if isinstance(valor, str) else str(valor) for valor in new_Animal.values())
       sql = f"INSERT INTO animal ({columns}) VALUES ({values})"
-      print(sql)
       cursor.execute(sql)
       conexion.commit()
       return "A new animal has been successfully added to adoption center"
@@ -79,7 +78,6 @@ class AnimalService():
         elif filter_age == "5":
             sql += " AND a.age > 16"
       sql += " ORDER BY id ASC"
-      print(sql)
       cursor.execute(sql)
       rows = cursor.fetchall()
       out_animals = []
@@ -152,7 +150,6 @@ class AnimalService():
         elif filter_age == "5":
             sql += " AND a.age > 16"
       sql += " ORDER BY id ASC"
-      print(sql)
       cursor.execute(sql)
       rows = cursor.fetchall()
       out_animals = []
@@ -184,7 +181,6 @@ class AnimalService():
               fields.append(f'{key} = {value}')
       fieldsUpdate = ', '.join(fields)
       sql = f"UPDATE animal SET {fieldsUpdate} WHERE id = {id_animal}"
-      print(sql)
       cursor.execute(sql)
       conexion.commit()
       return "An update in animal has been successfully"

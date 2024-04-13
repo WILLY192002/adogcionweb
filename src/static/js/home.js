@@ -8,7 +8,7 @@ if(categorias){
     if (categoriaSeleccionada) {
       var x = ""
       Array.from(temas.options).forEach(option => {
-        x = x + option.classList 
+        x = x + option.classList
         const temasSeleccionado = option.classList.contains(categoriaSeleccionada);
         option.style.display = temasSeleccionado ? "block" : "none";
       });
@@ -37,5 +37,16 @@ $(document).ready(function(){
           }
       });
   });
+});
+
+//Mostrar filtro
+document.getElementById('botonFiltrar').addEventListener('click', function() {
+  var divFiltro = document.getElementById('filter_animal_div');
+  console.log("hola");
+  if (divFiltro.style.display === 'none') {
+    divFiltro.style.display = 'block';
+  } else {
+    divFiltro.style.display = 'none';
+  }
 });
 
