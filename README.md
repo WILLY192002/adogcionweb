@@ -68,7 +68,8 @@ To download the project locally on your machine, follow these steps:
    git clone https://github.com/WILLY192002/adogcionweb.git
    ```
 2. **ConfigureMySQL Workbench** **Setup MySQLWorkbench**
-   - Open MySQL Workbench and execute the commands found in `Database_SQL.txt`. Note: These are divided into 3 steps to be performed sequentially.
+   - Open MySQL Workbench and execute the commands found in `Database_SQL.txt`.
+     > **Note:** These are divided into 3 steps to be performed sequentially.
    - Edit the MySQL Workbench connection in the `src/database/mysql_db.py` file, update the username and password according to your configuration. If you changed the database name, be sure to change it in this section as well.
 3. **Createthe virtual environment and install the dependencies**.
    ```
